@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>システム構成図</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <style>
+    @media print {
+      body { margin: 0; }
+      .no-print { display: none; }
+      .page-break { page-break-before: always; }
+    }
+    
+    body { 
+      font-family: 'Meiryo', 'Yu Gothic', sans-serif; 
+      margin: 2em; 
+      background: #f9f9f9; 
+      line-height: 1.6;
+    }
+    h1 { color: #2c3e50; }
+    .note { color: #e67e22; font-size: 0.95em; }
+    
+    .print-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    
+    .print-btn:hover {
+      background: #2980b9;
+    }
+    
+    .approval-section {
+      border: 2px solid #333;
+      padding: 20px;
+      margin: 30px 0;
+      background: #f9f9f9;
+    }
+    
+    .approval-section h3 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    
+    .approval-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    
+    .approval-item {
+      border: 1px solid #ccc;
+      padding: 15px;
+      background: white;
+    }
+    
+    .approval-item h4 {
+      margin: 0 0 10px 0;
+      color: #333;
+      font-size: 14px;
+    }
+    
+    .approval-field {
+      margin-bottom: 15px;
+    }
+    
+    .approval-field label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      font-size: 12px;
+    }
+    
+    .approval-field input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      font-size: 12px;
+    }
+    
+    .approval-field textarea {
+      width: 100%;
+      height: 60px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      resize: vertical;
+      font-size: 12px;
+    }
+    
+    @media (max-width: 768px) {
+      .approval-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="print-btn no-print" onclick="window.print()">
+    🖨️ 印刷
+  </button>
+
+  <h1>システム構成図</h1>
+  <div class="note">院内WiFiを利用した脳トレゲーム運用の全体イメージ</div>
+  <div class="mermaid">
+    graph TD;
+      サーバーPC[サーバーPC<br>（Node.js/ゲームデータ）]
+      WiFi[院内WiFiルーター]
+      利用者端末[利用者端末<br>（PC/タブレット/スマホ）]
+      管理者[管理者PC]
+      バックアップ[バックアップ保存先]
+      サーバーPC-->|LAN接続|WiFi
+      管理者-->|LAN/WiFi|WiFi
+      利用者端末-->|WiFi接続|WiFi
+      サーバーPC-->|管理画面/バックアップ|管理者
+      サーバーPC-->|自動/手動バックアップ|バックアップ
+  </div>
+  <p class="note">※実際のネットワーク構成や端末数は院内の状況により異なります。</p>
+
+  <div class="page-break"></div>
+  
+  <!-- 情報システム部様向け確認欄 -->
+  <div class="approval-section">
+    <h3>【情報システム部様向け確認欄】</h3>
+    <div class="approval-grid">
+      <div class="approval-item">
+        <h4>システム構成確認</h4>
+        <div class="approval-field">
+          <label>システム構成の技術的妥当性について確認</label>
+          <textarea placeholder="確認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>確認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>確認日</label>
+          <input type="date">
+        </div>
+      </div>
+      
+      <div class="approval-item">
+        <h4>ネットワーク構成確認</h4>
+        <div class="approval-field">
+          <label>ネットワーク構成・セキュリティ技術について確認</label>
+          <textarea placeholder="確認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>確認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>確認日</label>
+          <input type="date">
+        </div>
+      </div>
+    </div>
+    
+    <div class="approval-grid">
+      <div class="approval-item">
+        <h4>運用体制確認</h4>
+        <div class="approval-field">
+          <label>運用体制・技術的責任者について確認</label>
+          <textarea placeholder="確認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>確認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>確認日</label>
+          <input type="date">
+        </div>
+      </div>
+      
+      <div class="approval-item">
+        <h4>最終確認</h4>
+        <div class="approval-field">
+          <label>システム構成図の技術的確認</label>
+          <textarea placeholder="確認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>確認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>確認日</label>
+          <input type="date">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html> 

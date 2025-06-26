@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>危険探しゲーム</title>
+  <style>
+    body { font-family: 'Meiryo', sans-serif; background: #f0f2f5; text-align: center; }
+    .container { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px #b0c4de; max-width: 540px; margin: 40px auto; padding: 2.5em; }
+    .scene { font-size: 1.3em; margin: 1.7em 0 1.2em 0; color: #2574c7; font-weight: bold; }
+    .choices { margin-bottom: 1.5em; }
+    .choice-btn { background: #e67e22; color: #fff; border: none; border-radius: 10px; padding: 1em 2.5em; margin: 0.7em; font-size: 1.2em; cursor: pointer; letter-spacing: 0.1em; }
+    .choice-btn:hover { background: #b86b1b; }
+    .result { font-size: 1.3em; margin: 1.2em 0; color: #27ae60; }
+    .result.incorrect { color: #e67e22; }
+    .score { font-size: 2em; color: #2574c7; margin-top: 2em; font-weight: bold; }
+    .miss { font-size: 1.3em; color: #e74c3c; margin-top: 1em; font-weight: bold; }
+    .final-comment { font-size: 1.5em; margin-top: 1em; color: #2574c7; font-weight: bold; }
+    .next-btn { background: #43a047; color: #fff; border: none; border-radius: 10px; padding: 1em 2.5em; margin: 0.7em; font-size: 1.2em; cursor: pointer; letter-spacing: 0.1em; }
+    .next-btn:hover { background: #2e7031; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="quizArea">
+      <div class="scene" id="scene"></div>
+      <div class="choices" id="choices"></div>
+      <div class="result" id="result"></div>
+    </div>
+    <div class="score" id="score" style="display:none;"></div>
+    <button id="nextBtn" style="display:none;" class="next-btn">次の問題</button>
+  </div>
+  <script>
+    // サンプル問題（イラストや写真の代わりにテキストシナリオ）
+    const questions = [
+      {
+        scene: '家の中：玄関マットがめくれています。どこが危険？',
+        answer: '玄関マットがめくれている',
+        choices: ['玄関マットがめくれている', '靴がそろっていない', '傘が立てかけてある', 'スリッパがある']
+      },
+      {
+        scene: '浴室：床が濡れていて滑りやすくなっています。どこが危険？',
+        answer: '床が濡れている',
+        choices: ['床が濡れている', 'タオルがかかっている', '鏡がある', 'シャンプーが置いてある']
+      },
+      {
+        scene: '廊下：電気コードが通路に出ています。どこが危険？',
+        answer: '電気コードが通路に出ている',
+        choices: ['電気コードが通路に出ている', 'カレンダーがかかっている', '写真が飾ってある', '時計がある']
+      },
+      {
+        scene: '外出先：歩道の段差があります。どこが危険？',
+        answer: '歩道の段差',
+        choices: ['歩道の段差', '花壇がある', 'ベンチがある', '自転車が止まっている']
+      },
+      {
+        scene: '台所：ガスコンロの火がついたまま誰もいません。どこが危険？',
+        answer: '火がついたまま誰もいない',
+        choices: ['火がついたまま誰もいない', '鍋が置いてある', '窓が開いている', '時計がある']
+      },
+      {
+        scene: '階段：手すりを使わずに昇り降りしています。どこが危険？',
+        answer: '手すりを使わずに昇り降りしている',
+        choices: ['手すりを使わずに昇り降りしている', '階段に絵が飾ってある', '電気がついている', '窓がある']
+      },
+      {
+        scene: 'リビング：床に新聞や雑誌が散らばっています。どこが危険？',
+        answer: '床に新聞や雑誌が散らばっている',
+        choices: ['床に新聞や雑誌が散らばっている', 'テレビがついている', 'カーテンが開いている', '時計がある']
+      },
+      {
+        scene: 'ベランダ：物干し竿に洗濯物が偏ってかかっています。どこが危険？',
+        answer: '洗濯物が偏ってかかっている',
+        choices: ['洗濯物が偏ってかかっている', '植木鉢がある', '椅子がある', 'サンダルがある']
+      },
+      {
+        scene: '夜道：街灯が切れていて暗い場所があります。どこが危険？',
+        answer: '街灯が切れていて暗い',
+        choices: ['街灯が切れていて暗い', '自動販売機がある', 'ベンチがある', '花壇がある']
+      },
+      {
+        scene: '食卓：お茶が入ったコップがテーブルの端に置いてあります。どこが危険？',
+        answer: 'コップがテーブルの端にある',
+        choices: ['コップがテーブルの端にある', 'お皿が並んでいる', '箸が置いてある', 'ランチョンマットがある']
+      }
+    ];
+    let current = 0;
+    let score = 0;
+    let miss = 0;
+
+    function showQuestion() {
+      document.getElementById('result').textContent = '';
+      document.getElementById('nextBtn').style.display = 'none';
+      const q = questions[current];
+      document.getElementById('scene').textContent = q.scene;
+      const choicesDiv = document.getElementById('choices');
+      choicesDiv.innerHTML = '';
+      q.choices.forEach(choice => {
+        const btn = document.createElement('button');
+        btn.textContent = choice;
+        btn.className = 'choice-btn';
+        btn.onclick = () => checkAnswer(choice);
+        choicesDiv.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(choice) {
+      const q = questions[current];
+      if (choice === q.answer) {
+        document.getElementById('result').textContent = '正解です！安全に気をつけてくださいね。';
+        document.getElementById('result').className = 'result';
+        score++;
+      } else {
+        document.getElementById('result').textContent = `おしいです。正解は「${q.answer}」でした。転倒や事故に気をつけましょう。`;
+        document.getElementById('result').className = 'result incorrect';
+        miss++;
+      }
+      document.querySelectorAll('.choice-btn').forEach(btn => btn.disabled = true);
+      document.getElementById('nextBtn').style.display = 'inline-block';
+    }
+
+    document.getElementById('nextBtn').onclick = () => {
+      current++;
+      if (current < questions.length) {
+        showQuestion();
+      } else {
+        document.getElementById('quizArea').style.display = 'none';
+        let comment = '';
+        if (score === questions.length) {
+          comment = '満点です！すばらしいですね！';
+        } else if (score >= Math.floor(questions.length * 0.8)) {
+          comment = 'よくできました！この調子でがんばりましょう。';
+        } else if (score < Math.floor(questions.length * 0.5)) {
+          comment = '次もがんばりましょう！';
+        } else {
+          comment = 'あと少しで満点です。';
+        }
+        document.getElementById('score').innerHTML =
+          `あなたのスコア：${score} / ${questions.length}` +
+          `<div class='miss'>ミス回数：${miss}</div>` +
+          `<div class='final-comment'>${comment}</div>`;
+        document.getElementById('score').style.display = 'block';
+      }
+    };
+
+    // 初期表示
+    showQuestion();
+  </script>
+</body>
+</html> 

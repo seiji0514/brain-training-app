@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ブレーキ反応ゲーム</title>
+  <script src="js/auth_check.js" defer></script>
+  <style>
+    body { font-family: 'Meiryo', sans-serif; background: #f0f2f5; text-align: center; }
+    .container { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px #b0c4de; max-width: 420px; margin: 40px auto; padding: 2.5em; }
+    .scene { font-size: 2em; color: #e74c3c; font-weight: bold; margin: 2em 0; min-height: 2em; }
+    .info { font-size: 1.1em; color: #444; margin-bottom: 1.5em; }
+    .score { font-size: 1.5em; color: #2574c7; margin-top: 1em; font-weight: bold; }
+    .miss { font-size: 1.2em; color: #e74c3c; margin-top: 0.5em; font-weight: bold; }
+    .final-comment { font-size: 1.2em; margin-top: 1em; color: #2574c7; font-weight: bold; }
+    .start-btn, .restart-btn, .brake-btn { background: #1a73e8; color: #fff; border: none; border-radius: 10px; padding: 1.2em 2.5em; margin: 1em; font-size: 1.3em; cursor: pointer; letter-spacing: 0.1em; }
+    .start-btn:hover, .restart-btn:hover, .brake-btn:hover { background: #1557b0; }
+    .brake-btn:disabled { background: #aaa; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div style="font-size:1.5em; color:#2574c7; font-weight:bold; margin-bottom:0.5em;">ブレーキ反応ゲーム</div>
+    <div class="info">「止まれ」や障害物が出たら、できるだけ早く「ブレーキ」ボタンを押してください（10回計測）</div>
+    <div class="scene" id="scene"></div>
+    <div class="score" id="score" style="display:none;"></div>
+    <div class="miss" id="miss" style="display:none;"></div>
+    <div class="final-comment" id="comment" style="display:none;"></div>
+    <button id="startBtn" class="start-btn">スタート</button>
+    <button id="restartBtn" class="restart-btn" style="display:none;">もう一度</button>
+    <button id="brakeBtn" class="brake-btn" style="display:none;">ブレーキ</button>
+  </div>
+  <script>
+    const scenes = [
+      { text: '🛑 止まれ！', type: 'stop' },
+      { text: '🚧 障害物！', type: 'obstacle' },
+      { text: '👦 子ども飛び出し！', type: 'child' },
+      { text: '🚦 赤信号！', type: 'red' }
+    ];
+    let trial = 0, maxTrial = 10, times = [], miss = 0, waiting = false, timer = null, startTime = 0;
+    const sceneDiv = document.getElementById('scene');
+    const scoreDiv = document.getElementById('score');
+    const missDiv = document.getElementById('miss');
+    const commentDiv = document.getElementById('comment');
+    const startBtn = document.getElementById('startBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const brakeBtn = document.getElementById('brakeBtn');
+    function startGame() {
+      trial = 0; times = []; miss = 0;
+      scoreDiv.style.display = 'none';
+      missDiv.style.display = 'none';
+      commentDiv.style.display = 'none';
+      startBtn.style.display = 'none';
+      restartBtn.style.display = 'none';
+      brakeBtn.style.display = 'none';
+      nextTrial();
+    }
+    function nextTrial() {
+      sceneDiv.textContent = '';
+      brakeBtn.style.display = 'none';
+      waiting = true;
+      // ランダムな待ち時間（1.2～2.5秒）
+      const wait = 1200 + Math.random()*1300;
+      timer = setTimeout(() => {
+        const scene = scenes[Math.floor(Math.random()*scenes.length)];
+        sceneDiv.textContent = scene.text;
+        brakeBtn.disabled = false;
+        brakeBtn.style.display = 'inline-block';
+        startTime = Date.now();
+        waiting = false;
+      }, wait);
+    }
+    brakeBtn.onclick = () => {
+      if(waiting) {
+        // 早押しミス
+        miss++;
+        clearTimeout(timer);
+        sceneDiv.textContent = 'まだ出ていません！';
+        brakeBtn.disabled = true;
+        setTimeout(nextTrial, 900);
+        return;
+      }
+      const reaction = Date.now() - startTime;
+      times.push(reaction);
+      sceneDiv.textContent = `反応時間：${reaction} ms`;
+      brakeBtn.disabled = true;
+      setTimeout(() => {
+        trial++;
+        if(trial < maxTrial) nextTrial();
+        else endGame();
+      }, 900);
+    };
+    function endGame() {
+      sceneDiv.textContent = '';
+      brakeBtn.style.display = 'none';
+      startBtn.style.display = 'none';
+      restartBtn.style.display = 'inline-block';
+      const avg = times.length ? Math.round(times.reduce((a,b)=>a+b,0)/times.length) : 0;
+      scoreDiv.textContent = `平均反応時間：${avg} ms`;
+      missDiv.innerHTML = `<span class='miss'>早押しミス：${miss}</span>`;
+      let comment = '';
+      if(avg < 400 && miss === 0) comment = '素晴らしい反応速度です！安全運転を心がけましょう。';
+      else if(avg < 600) comment = 'よくできました！この調子でがんばりましょう。';
+      else comment = '落ち着いて確実に反応しましょう。';
+      scoreDiv.style.display = 'block';
+      missDiv.style.display = 'block';
+      commentDiv.textContent = comment;
+      commentDiv.style.display = 'block';
+    }
+    startBtn.onclick = startGame;
+    restartBtn.onclick = startGame;
+  </script>
+</body>
+</html> 

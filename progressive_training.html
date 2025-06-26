@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔄 段階的訓練 - 脳トレゲーム</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      color: white;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(255,255,255,0.9);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+
+    .back-button:hover {
+      background: white;
+    }
+
+    .training-content {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    .training-title {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #4a5568;
+    }
+
+    .training-description {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      background: #4299e1;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin: 10px;
+    }
+
+    .btn:hover {
+      background: #3182ce;
+    }
+  </style>
+</head>
+<body>
+  <button class="back-button" onclick="goBack()">← 戻る</button>
+
+  <div class="container">
+    <div class="header">
+      <h1>🔄 段階的訓練</h1>
+      <p>個人の能力に合わせて難易度を調整し、段階的な訓練プログラムを提供します</p>
+    </div>
+
+    <div class="training-content">
+      <div class="training-title">段階的訓練プログラム</div>
+      <div class="training-description">
+        個人の能力に合わせて最適化された訓練プログラムです。<br>
+        反応速度、記憶力、注意力、協調性を段階的に向上させます。
+      </div>
+      <div style="font-size: 3rem; margin: 20px 0;">🧠</div>
+      <div style="color: #666; margin-bottom: 30px;">
+        現在開発中です。近日公開予定です。
+      </div>
+      <button class="btn" onclick="goBack()">戻る</button>
+    </div>
+  </div>
+
+  <script>
+    // 利用履歴記録
+    if (typeof usageLogger !== 'undefined') {
+      usageLogger.logGameStart('段階的訓練', 'progressive_training');
+    }
+
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html> 

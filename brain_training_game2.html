@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>脳トレゲーム 生活面編</title>
+  <!-- 利用履歴記録ライブラリ -->
+  <script src="js/usage_logger.js"></script>
+  <style>
+    body {
+      background: #eef1f5;
+      font-family: 'Segoe UI', 'Meiryo', sans-serif;
+      margin: 0;
+    }
+    .header-memory {
+      width: 100%;
+      margin-top: 2em;
+    }
+    .header-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      gap: 24px;
+    }
+    .header-title {
+      font-size: 2.5em;
+      font-weight: bold;
+      color: #27ae60;
+      margin: 0;
+    }
+    .header-btns {
+      display: flex;
+      gap: 10px;
+    }
+    .header-btns button {
+      background: #27ae60;
+      color: white;
+      border: none;
+      padding: 0.7em 1.2em;
+      border-radius: 8px;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #c8e6c9;
+      transition: background 0.3s;
+    }
+    .header-btns button:last-child {
+      background: #e67e22;
+      box-shadow: 0 2px 8px #fbeee0;
+    }
+    .header-btns button:hover {
+      opacity: 0.85;
+    }
+    .header-underline {
+      border-bottom: 4px solid #e74c3c;
+      margin-top: 0.2em;
+      width: 100%;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2em;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2em 1em 3em 1em;
+    }
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 2px 12px #dbe6f3;
+      padding: 2em 1.5em 1.5em 1.5em;
+      text-align: center;
+      transition: transform 0.15s, box-shadow 0.15s;
+      cursor: pointer;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-decoration: none;
+      color: inherit;
+    }
+    .card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 8px 24px #b0c4de;
+    }
+    .card-title {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #16a085;
+      margin-bottom: 0.5em;
+    }
+    .card-desc {
+      color: #555;
+      font-size: 1.05em;
+      line-height: 1.5;
+    }
+    @media (max-width: 700px) {
+      .header-title { font-size: 1.3em; }
+      .card-grid { grid-template-columns: 1fr; }
+    }
+    .game-top, .result {
+      text-align: center;
+      margin: 2em auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px #b0c4de;
+      padding: 2.5em 1.5em;
+      max-width: 420px;
+    }
+    .game-title {
+      font-size: 2em;
+      color: #2574c7;
+      margin-bottom: 0.5em;
+    }
+    .game-desc {
+      color: #444;
+      font-size: 1.1em;
+      margin-bottom: 1.2em;
+    }
+    .game-preview {
+      width: 90%;
+      max-width: 320px;
+      border-radius: 10px;
+      margin-bottom: 1.5em;
+      box-shadow: 0 2px 8px #dbe6f3;
+    }
+    .start-btn, .restart-btn, .back-btn {
+      display: inline-block;
+      margin: 0.7em 0.5em 0 0.5em;
+      padding: 0.9em 2em;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .start-btn { background: #27ae60; color: #fff; }
+    .restart-btn { background: #f39c12; color: #fff; }
+    .back-btn { background: #3498db; color: #fff; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div style="text-align:center; margin-top:2em;">
+    <h1 style="font-size:2.5em; font-weight:bold; color:#27ae60; margin-bottom:0.5em;">脳トレゲーム　生活面編</h1>
+    <div style="margin-bottom:1.5em;">
+      <a href="brain_training_game.html"><button style="background: #3498db; color: white; border: none; padding: 0.7em 1.2em; border-radius: 8px; font-size: 1em; font-weight: bold; cursor: pointer; transition: background 0.3s;">脳トレゲームへ</button></a>
+    </div>
+  </div>
+  <div class="card-grid">
+    <a href="./shopping-simulation.html" class="card" onclick="logGameClick('買い物シミュレーション')">
+      <div style="font-size:2.2em; margin-bottom:0.5em;">🛒</div>
+      <div class="card-title">買い物シミュレーション</div>
+      <div class="card-desc">買い物体験で計算力や判断力を鍛える</div>
+    </a>
+    <a href="./daily_life_simulation.html" class="card" onclick="logGameClick('日常生活シミュレーション')">
+      <div style="font-size:2.2em; margin-bottom:0.5em;">🏠</div>
+      <div class="card-title">日常生活シミュレーション</div>
+      <div class="card-desc">家事や生活習慣のシミュレーションで実践力を鍛える</div>
+    </a>
+    <a href="./conversation_simulation.html" class="card" onclick="logGameClick('会話シミュレーション')">
+      <div style="font-size:2.2em; margin-bottom:0.5em;">💬</div>
+      <div class="card-title">会話シミュレーション</div>
+      <div class="card-desc">日常会話やコミュニケーション能力をトレーニング</div>
+    </a>
+    <a href="./manner_game.html" class="card" onclick="logGameClick('マナー・礼儀ゲーム')">
+      <div style="font-size:2.2em; margin-bottom:0.5em;">🤝</div>
+      <div class="card-title">マナー・礼儀ゲーム</div>
+      <div class="card-desc">社会でのマナーや礼儀作法を学ぶゲーム</div>
+    </a>
+    <a href="./life_wisdom_quiz.html" class="card" onclick="logGameClick('生活知恵クイズ')">
+      <div style="font-size:2.2em; margin-bottom:0.5em;">💡</div>
+      <div class="card-title">生活知恵クイズ</div>
+      <div class="card-desc">日常生活に役立つ知恵や知識をクイズ形式で学習</div>
+    </a>
+    <a href="./disaster_prevention_quiz.html" class="card" onclick="logGameClick('防災・安全クイズ')">
+      <div style="font-size:2.2em; margin-bottom:0.5em;">🚨</div>
+      <div class="card-title">防災・安全クイズ</div>
+      <div class="card-desc">災害時の対応や安全知識を学ぶクイズ</div>
+    </a>
+    <a href="./traffic_rule_quiz.html" class="card" onclick="logGameClick('交通ルールクイズ')">
+        <div style="font-size:2.2em; margin-bottom:0.5em;">🚦</div>
+        <div class="card-title">交通ルールクイズ</div>
+        <div class="card-desc">交通安全や交通ルールに関するクイズ</div>
+    </a>
+    <a href="./trouble_response_simulation.html" class="card" onclick="logGameClick('トラブル対応シミュレーション')">
+        <div style="font-size:2.2em; margin-bottom:0.5em;">⚠️</div>
+        <div class="card-title">トラブル対応シミュレーション</div>
+        <div class="card-desc">日常生活で起こりうるトラブルへの対応を練習</div>
+    </a>
+    <a href="./face_expression_quiz.html" class="card" onclick="logGameClick('表情読み取りクイズ')">
+        <div style="font-size:2.2em; margin-bottom:0.5em;">😊</div>
+        <div class="card-title">表情読み取りクイズ</div>
+        <div class="card-desc">表情から感情を読み取るクイズ</div>
+    </a>
+  </div>
+
+  <script>
+    // ゲーム設定
+    let gameSettings = {};
+    
+    // ゲーム設定の読み込み
+    async function loadGameSettings() {
+      try {
+        const response = await fetch('game_settings.json');
+        gameSettings = await response.json();
+        renderVisibleGames();
+      } catch (error) {
+        console.error('ゲーム設定の読み込みに失敗しました:', error);
+        // デフォルト設定で全ゲームを表示
+        renderAllGames();
+      }
+    }
+    
+    // 表示可能なゲームのみを表示
+    function renderVisibleGames() {
+      const cardGrid = document.querySelector('.card-grid');
+      cardGrid.innerHTML = '';
+      
+      if (gameSettings.life_games) {
+        Object.keys(gameSettings.life_games).forEach(gameKey => {
+          const game = gameSettings.life_games[gameKey];
+          if (game.visible) {
+            const gameCard = createGameCard(game, gameKey);
+            cardGrid.appendChild(gameCard);
+          }
+        });
+      }
+    }
+    
+    // 全ゲームを表示（フォールバック）
+    function renderAllGames() {
+      const cardGrid = document.querySelector('.card-grid');
+      cardGrid.innerHTML = `
+        <a href="./shopping-simulation.html" class="card" onclick="logGameClick('買い物シミュレーション')">
+          <div style="font-size:2.2em; margin-bottom:0.5em;">🛒</div>
+          <div class="card-title">買い物シミュレーション</div>
+          <div class="card-desc">買い物体験で計算力や判断力を鍛える</div>
+        </a>
+        <a href="./daily_life_simulation.html" class="card" onclick="logGameClick('日常生活シミュレーション')">
+          <div style="font-size:2.2em; margin-bottom:0.5em;">🏠</div>
+          <div class="card-title">日常生活シミュレーション</div>
+          <div class="card-desc">家事や生活習慣のシミュレーションで実践力を鍛える</div>
+        </a>
+        <a href="./conversation_simulation.html" class="card" onclick="logGameClick('会話シミュレーション')">
+          <div style="font-size:2.2em; margin-bottom:0.5em;">💬</div>
+          <div class="card-title">会話シミュレーション</div>
+          <div class="card-desc">日常会話やコミュニケーション能力をトレーニング</div>
+        </a>
+        <a href="./manner_game.html" class="card" onclick="logGameClick('マナー・礼儀ゲーム')">
+          <div style="font-size:2.2em; margin-bottom:0.5em;">🤝</div>
+          <div class="card-title">マナー・礼儀ゲーム</div>
+          <div class="card-desc">社会でのマナーや礼儀作法を学ぶゲーム</div>
+        </a>
+        <a href="./life_wisdom_quiz.html" class="card" onclick="logGameClick('生活知恵クイズ')">
+          <div style="font-size:2.2em; margin-bottom:0.5em;">💡</div>
+          <div class="card-title">生活知恵クイズ</div>
+          <div class="card-desc">日常生活に役立つ知恵や知識をクイズ形式で学習</div>
+        </a>
+        <a href="./disaster_prevention_quiz.html" class="card" onclick="logGameClick('防災・安全クイズ')">
+          <div style="font-size:2.2em; margin-bottom:0.5em;">🚨</div>
+          <div class="card-title">防災・安全クイズ</div>
+          <div class="card-desc">災害時の対応や安全知識を学ぶクイズ</div>
+        </a>
+        <a href="./traffic_rule_quiz.html" class="card" onclick="logGameClick('交通ルールクイズ')">
+            <div style="font-size:2.2em; margin-bottom:0.5em;">🚦</div>
+            <div class="card-title">交通ルールクイズ</div>
+            <div class="card-desc">交通安全や交通ルールに関するクイズ</div>
+        </a>
+        <a href="./trouble_response_simulation.html" class="card" onclick="logGameClick('トラブル対応シミュレーション')">
+            <div style="font-size:2.2em; margin-bottom:0.5em;">⚠️</div>
+            <div class="card-title">トラブル対応シミュレーション</div>
+            <div class="card-desc">日常生活で起こりうるトラブルへの対応を練習</div>
+        </a>
+        <a href="./face_expression_quiz.html" class="card" onclick="logGameClick('表情読み取りクイズ')">
+            <div style="font-size:2.2em; margin-bottom:0.5em;">😊</div>
+            <div class="card-title">表情読み取りクイズ</div>
+            <div class="card-desc">表情から感情を読み取るクイズ</div>
+        </a>
+      `;
+    }
+    
+    // ゲームカードの作成
+    function createGameCard(game, gameKey) {
+      const card = document.createElement('a');
+      card.href = `./${game.file}`;
+      card.className = 'card';
+      card.onclick = () => logGameClick(game.name);
+      
+      card.innerHTML = `
+        <div style="font-size:2.2em; margin-bottom:0.5em;">${game.icon}</div>
+        <div class="card-title">${game.name}</div>
+        <div class="card-desc">${game.description}</div>
+      `;
+      
+      return card;
+    }
+    
+    // ページ読み込み時に認証チェック
+    document.addEventListener('DOMContentLoaded', function() {
+      const isAuthenticated = localStorage.getItem("isAuthenticated");
+      if (!isAuthenticated || isAuthenticated !== "true") {
+        sessionStorage.setItem('returnUrl', window.location.href);
+        window.location.href = "pin_login.html";
+        return;
+      }
+
+      // ゲーム開始記録
+      if (usageLogger) {
+        usageLogger.logGameStart('脳トレゲーム 生活面編', 'brain_training_life');
+      }
+      
+      // ゲーム設定を読み込み
+      loadGameSettings();
+    });
+
+    // ゲームクリック時の記録
+    function logGameClick(gameName) {
+      if (usageLogger) {
+        usageLogger.logGameProgress('脳トレゲーム選択', `選択: ${gameName}`, 'game_selection');
+      }
+    }
+
+    // ページ離脱時の記録
+    window.addEventListener('beforeunload', function() {
+      if (usageLogger) {
+        usageLogger.logGameEnd('脳トレゲーム 生活面編', null, null, null, false);
+      }
+    });
+  </script>
+</body>
+</html> 

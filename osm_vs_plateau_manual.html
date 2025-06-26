@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>データソース比較: OSM vs 基盤地図情報</title>
+  <style>
+    body { font-family: 'Meiryo', sans-serif; margin: 0; padding: 20px; background: #f0f2f5; }
+    .container { max-width: 1000px; margin: 0 auto; background: white; border-radius: 15px; padding: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    h1 { color: #2c3e50; text-align: center; border-bottom: 3px solid #4a90e2; padding-bottom: 15px; }
+    .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px; }
+    .data-source-card { padding: 25px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    .data-source-card h2 { margin-top: 0; padding-bottom: 10px; border-bottom: 2px solid; }
+    .osm-card { background: #e8f5e9; border: 2px solid #4caf50; }
+    .osm-card h2 { color: #2e7d32; border-color: #a5d6a7; }
+    .plateau-card { background: #e3f2fd; border: 2px solid #2196f3; }
+    .plateau-card h2 { color: #1565c0; border-color: #90caf9; }
+    ul { list-style: none; padding-left: 0; }
+    li { position: relative; padding-left: 25px; margin-bottom: 12px; }
+    li::before { position: absolute; left: 0; top: 2px; font-weight: bold; }
+    .pros li::before { content: '✅'; color: #388e3c; }
+    .cons li::before { content: '❌'; color: #d32f2f; }
+    .comparison-table { width: 100%; border-collapse: collapse; margin: 30px 0; font-size: 14px; }
+    .comparison-table th, .comparison-table td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+    .comparison-table th { background: #34495e; color: white; text-align: center; }
+    .comparison-table tr:nth-child(even) { background: #f8f9fa; }
+    .comparison-table td:first-child { font-weight: bold; background: #ecf0f1; }
+    .summary { margin-top: 30px; padding: 20px; border-radius: 10px; background: #fffbe6; border: 1px solid #ffecb3; }
+    .summary h2 { color: #f57f17; border: none; padding: 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🗺️ データソース比較: OpenStreetMap vs 基盤地図情報</h1>
+    <p>運転技能評価システムの3D環境を生成するための主要なデータソース、OpenStreetMap (OSM)と基盤地図情報（Project PLATEAUなど）の特徴を比較します。</p>
+
+    <div class="comparison-grid">
+      <div class="data-source-card osm-card">
+        <h2>OpenStreetMap (OSM)</h2>
+        <div class="pros">
+          <h3>利点</h3>
+          <ul>
+            <li><strong>グローバルな網羅性:</strong> 全世界の地図データが利用可能。</li>
+            <li><strong>リアルタイム性:</strong> コミュニティによって日々データが更新される。</li>
+            <li><strong>容易なアクセス:</strong> Overpass APIなどを通じて、必要な範囲のデータを動的に取得可能。</li>
+            <li><strong>柔軟なライセンス:</strong> ODbLライセンスの下で、比較的自由に利用・改変・再配布が可能。</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h3>欠点</h3>
+          <ul>
+            <li><strong>精度のばらつき:</strong> 更新が活発でない地域では、データが古い、または不正確な場合がある。</li>
+            <li><strong>情報の不均一性:</strong> 地物の属性情報（建物の高さなど）が不足していることが多い。</li>
+            <li><strong>品質保証なし:</strong> コミュニティベースのため、公式な品質保証は存在しない。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="data-source-card plateau-card">
+        <h2>基盤地図情報 / PLATEAU</h2>
+        <div class="pros">
+          <h3>利点</h3>
+          <ul>
+            <li><strong>高い信頼性と精度:</strong> 国（国土地理院など）が整備した公式データのため、測量に基づいた高い精度を誇る。</li>
+            <li><strong>豊富な属性情報:</strong> 特にPLATEAUでは、建物の高さ、用途、建築年などの詳細な属性情報が含まれる。</li>
+            <li><strong>均質な品質:</strong> 整備されたエリア内では、データが均質な品質で提供される。</li>
+            <li><strong>法的安定性:</strong> 政府の定める利用規約に基づき、安定して利用可能。</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h3>欠点</h3>
+          <ul>
+            <li><strong>限定的な提供範囲:</strong> 主に日本国内、特に都市部にデータが集中している。</li>
+            <li><strong>静的なデータ:</strong> 更新は年度ごとなど定期的で、リアルタイムの変更は反映されない。</li>
+            <li><strong>ファイルベースの利用:</strong> データを利用するには、多くの場合、専用サイトからGML形式のファイルをダウンロード・展開する必要がある。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h2>📊 詳細比較表</h2>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>項目</th>
+          <th>OpenStreetMap (OSM)</th>
+          <th>基盤地図情報 / PLATEAU</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>データ提供者</td>
+          <td>ボランティアコミュニティ</td>
+          <td>国、地方公共団体 (国土地理院など)</td>
+        </tr>
+        <tr>
+          <td>対象範囲</td>
+          <td>全世界</td>
+          <td>主に日本国内</td>
+        </tr>
+        <tr>
+          <td>更新頻度</td>
+          <td>ほぼリアルタイム</td>
+          <td>定期的（年単位など）</td>
+        </tr>
+        <tr>
+          <td>精度</td>
+          <td>場所により変動</td>
+          <td>測量に基づき高精度</td>
+        </tr>
+        <tr>
+          <td>建物の高さ</td>
+          <td>含まれないことが多い</td>
+          <td>PLATEAUでは標準的に提供</td>
+        </tr>
+        <tr>
+          <td>利用方法</td>
+          <td>APIによる動的取得が主流</td>
+          <td>ファイルダウンロードが主流</td>
+        </tr>
+        <tr>
+          <td>ライセンス</td>
+          <td>ODbL (Open Database License)</td>
+          <td>政府標準利用規約（ほぼCC BY 4.0互換）</td>
+        </tr>
+        <tr>
+          <td>コスト</td>
+          <td>無料</td>
+          <td>無料</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="summary">
+      <h2>🎯 結論と推奨される使い分け</h2>
+      <p>どちらか一方が絶対的に優れているわけではなく、目的に応じて使い分ける、あるいは組み合わせることが最も効果的です。</p>
+      <ul>
+        <li><strong>手軽に素早く特定のエリアの環境を再現したい場合</strong> ➔ <strong>OSM</strong>
+          <br>APIで即座にデータを取得できるため、プロトタイピングや広域の再現に適しています。
+        </li>
+        <li><strong>特定の都市部で、高精度かつ詳細な評価を行いたい場合</strong> ➔ <strong>基盤地図情報 / PLATEAU</strong>
+          <br>正確な道路網や建物の高さに基づいた、リアルなシミュレーションと厳密な評価が可能です。
+        </li>
+      </ul>
+      <p>現在の「高度運転技能自動評価システム」では、両方のデータソースに対応することで、利用者が目的に合わせて最適なデータを選択できる、より柔軟で強力なツールとなります。</p>
+    </div>
+
+  </div>
+</body>
+</html> 

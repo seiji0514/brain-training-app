@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>脳トレゲームシステム 資料一覧 - 印刷版</title>
+    <style>
+        @media print {
+            body { margin: 0; }
+            .no-print { display: none; }
+            .page-break { page-break-before: always; }
+        }
+        
+        body {
+            font-family: "MS Gothic", "Yu Gothic", "Meiryo", sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: white;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #333;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        
+        .header .subtitle {
+            font-size: 14px;
+            color: #666;
+            margin: 0;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .section h2 {
+            font-size: 18px;
+            color: #333;
+            border-left: 5px solid #3498db;
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .section h3 {
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 15px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        th {
+            background: #f8f9fa;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .status-active {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .status-inactive {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .approval-section {
+            border: 2px solid #333;
+            padding: 20px;
+            margin: 30px 0;
+            background: #f9f9f9;
+        }
+        
+        .approval-section h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .approval-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .approval-item {
+            border: 1px solid #ccc;
+            padding: 15px;
+            background: white;
+        }
+        
+        .approval-item h4 {
+            margin: 0 0 10px 0;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .approval-field {
+            margin-bottom: 15px;
+        }
+        
+        .approval-field label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+        
+        .approval-field input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            font-size: 12px;
+        }
+        
+        .approval-field textarea {
+            width: 100%;
+            height: 60px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            resize: vertical;
+            font-size: 12px;
+        }
+        
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .print-btn:hover {
+            background: #2980b9;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .approval-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="print-btn no-print" onclick="window.print()">
+        🖨️ 印刷
+    </button>
+    
+    <div class="header">
+        <h1>脳トレゲームシステム 資料一覧</h1>
+        <p class="subtitle">システム概要・機能一覧・運用資料</p>
+        <p class="subtitle">作成日: 2024年1月15日 | 版数: 1.0</p>
+    </div>
+    
+    <div class="section">
+        <h2>1. システム概要</h2>
+        <table>
+            <tr>
+                <th>項目</th>
+                <th>内容</th>
+            </tr>
+            <tr>
+                <td>システム名</td>
+                <td>脳トレゲームシステム</td>
+            </tr>
+            <tr>
+                <td>目的</td>
+                <td>認知機能向上・脳トレーニング・生活技能向上</td>
+            </tr>
+            <tr>
+                <td>対象者</td>
+                <td>高齢者・認知症予防希望者・リハビリテーション利用者</td>
+            </tr>
+            <tr>
+                <td>認証方式</td>
+                <td>PIN認証（4桁）</td>
+            </tr>
+            <tr>
+                <td>管理者認証</td>
+                <td>PIN認証（管理者専用）</td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="section">
+        <h2>2. ゲーム機能一覧</h2>
+        
+        <h3>2.1 記憶編ゲーム</h3>
+        <table>
+            <tr>
+                <th>ゲーム名</th>
+                <th>ファイル名</th>
+                <th>機能概要</th>
+                <th>状態</th>
+            </tr>
+            <tr>
+                <td>記憶力ゲーム</td>
+                <td>memory_game.html</td>
+                <td>表示された内容を覚えて答える記憶力トレーニング</td>
+                <td class="status-active">稼働中</td>
+            </tr>
+            <tr>
+                <td>眼の訓練ゲーム一覧</td>
+                <td>eye_training_index.html</td>
+                <td>視力と眼の機能を鍛えるトレーニング</td>
+                <td class="status-active">稼働中</td>
+            </tr>
+            <tr>
+                <td>統合運転システム</td>
+                <td>integrated_driving_system.html</td>
+                <td>総合的な運転技術をトレーニング</td>
+                <td class="status-active">稼働中</td>
+            </tr>
+            <tr>
+                <td>神経衰弱ゲーム</td>
+                <td>concentration_game.html</td>
+                <td>同じ絵柄を揃えて記憶力を鍛える</td>
+                <td class="status-active">稼働中</td>
+            </tr>
+            <tr>
+                <td>指先運動・クリック練習ゲーム</td>
+                <td>click_training_game.html</td>
+                <td>クリック操作で指先の運動や反応速度を鍛える</td>
+                <td class="status-active">稼働中</td>
+            </tr>
+            <tr>
+                <td>数字順番探しゲーム</td>
+                <td>number-order.html</td>
+                <td>数字を正しい順番に並べるゲーム</td>
+                <td class="status-active">稼働中</td>
+            </tr>
+            <tr>
+                <td>日付・曜日クイズ</td>
+                <td>date-quiz.html</td>
+                <td>日付や曜日に関するクイズで脳を活性化</td>
+                <td class="status-active">稼働中</td>
+            </tr>
+            <tr>
+                <td>反応ゲーム</td>
+                <td>reaction_game.html</td>
+                <td>素早い反応で正解を選ぶ反射神経トレーニング</td>
+                <td class="status-active">稼働中</td>
+            </tr>
+            <tr>
+                <td>文字ゲーム</td>
+                <td>letter_game.html</td>
+                <td>文字を使った脳トレゲーム</td>
+                <td class="status-active">稼働中</td>
+            </tr>
+        </table>
+        
+        <h3>2.2 生活面編ゲーム</h3>
+        <table>
+            <tr>
+                <th>ゲーム名</th>
+                <th>ファイル名</th>
+                <th>機能概要</th>
+                <th>状態</th>
+            </tr>
+            <tr>
+                <td>買い物シミュレーション</td>
+                <td>shopping-simulation.html</td>
+                <td>買い物体験で計算力や判断力を鍛える</td>
+                <td class="status-active">稼働中</td>
+            </tr>
+            <tr>
+                <td>日常生活シミュレーション</td>
+                <td>daily_life_simulation.html</td>
+                <td>家事や生活習慣のシミュレーションで実践力を鍛える</td>
+                <td class="status-active">稼働中</td>
+            </tr>
+            <tr>
+                <td>会話シミュレーション</td>
+                <td>conversation_simulation.html</td>
+                <td>日常会話やコミュニケーション能力をトレーニング</td>
+                <td class="status-active">稼働中</td>
+            </tr>
+            <tr>
+                <td>マナー・礼儀ゲーム</td>
+                <td>manner_game.html</td>
+                <td>社会でのマナーや礼儀作法を学ぶゲーム</td>
+                <td class="status-active">稼働中</td>
+            </tr>
+            <tr>
+                <td>生活知恵クイズ</td>
+                <td>life_wisdom_quiz.html</td>
+                <td>日常生活に役立つ知恵や知識をクイズ形式で学習</td>
+                <td class="status-active">稼働中</td>
+            </tr>
+            <tr>
+                <td>防災・安全クイズ</td>
+                <td>disaster_prevention_quiz.html</td>
+                <td>災害時の対応や安全知識を学ぶクイズ</td>
+                <td class="status-active">稼働中</td>
+            </tr>
+            <tr>
+                <td>交通ルールクイズ</td>
+                <td>traffic_rule_quiz.html</td>
+                <td>交通安全や交通ルールに関するクイズ</td>
+                <td class="status-active">稼働中</td>
+            </tr>
+            <tr>
+                <td>トラブル対応シミュレーション</td>
+                <td>trouble_response_simulation.html</td>
+                <td>日常生活で起こりうるトラブルへの対応を練習</td>
+                <td class="status-active">稼働中</td>
+            </tr>
+            <tr>
+                <td>表情読み取りクイズ</td>
+                <td>face_expression_quiz.html</td>
+                <td>表情から感情を読み取るクイズ</td>
+                <td class="status-active">稼働中</td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="section">
+        <h2>3. 管理機能</h2>
+        <table>
+            <tr>
+                <th>機能名</th>
+                <th>ファイル名</th>
+                <th>機能概要</th>
+                <th>アクセス方法</th>
+            </tr>
+            <tr>
+                <td>統一管理画面</td>
+                <td>unified_admin.html</td>
+                <td>システム全体の統合管理機能</td>
+                <td>管理者ログイン後</td>
+            </tr>
+            <tr>
+                <td>管理者ログイン</td>
+                <td>admin_login.html</td>
+                <td>管理者認証（PIN認証）</td>
+                <td>直接アクセス</td>
+            </tr>
+            <tr>
+                <td>ゲーム管理</td>
+                <td>game_settings.json</td>
+                <td>ゲームの表示・非表示制御</td>
+                <td>管理画面から</td>
+            </tr>
+            <tr>
+                <td>メンテナンスページ</td>
+                <td>maintenance.html</td>
+                <td>メンテナンス中の専用ページ</td>
+                <td>メンテナンスモード時</td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="section">
+        <h2>4. 技術仕様</h2>
+        <table>
+            <tr>
+                <th>項目</th>
+                <th>仕様</th>
+            </tr>
+            <tr>
+                <td>開発言語</td>
+                <td>HTML5, CSS3, JavaScript (ES6+)</td>
+            </tr>
+            <tr>
+                <td>データ保存</td>
+                <td>localStorage, JSON形式</td>
+            </tr>
+            <tr>
+                <td>認証方式</td>
+                <td>PIN認証（4桁数字）</td>
+            </tr>
+            <tr>
+                <td>レスポンシブ対応</td>
+                <td>モバイル・タブレット・PC対応</td>
+            </tr>
+            <tr>
+                <td>ブラウザ対応</td>
+                <td>Chrome, Firefox, Safari, Edge</td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="section">
+        <h2>5. 運用・保守</h2>
+        <table>
+            <tr>
+                <th>項目</th>
+                <th>内容</th>
+            </tr>
+            <tr>
+                <td>バックアップ</td>
+                <td>自動バックアップ機能付き</td>
+            </tr>
+            <tr>
+                <td>ログ管理</td>
+                <td>ユーザーアクセス・ゲームプレイ記録</td>
+            </tr>
+            <tr>
+                <td>メンテナンス</td>
+                <td>個別ゲーム・システム全体のメンテナンス機能</td>
+            </tr>
+            <tr>
+                <td>トラブル対応</td>
+                <td>ゲーム非表示・システム停止機能</td>
+            </tr>
+            <tr>
+                <td>更新管理</td>
+                <td>設定ファイルによる動的更新</td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="page-break"></div>
+    
+    <!-- 課長様・承認者向け確認欄 -->
+    <div class="approval-section">
+        <h3>【課長様・承認者向け確認欄】</h3>
+        <div class="approval-grid">
+            <div class="approval-item">
+                <h4>システム概要確認</h4>
+                <div class="approval-field">
+                    <label>システムの目的・効果について確認</label>
+                    <textarea placeholder="確認内容を記入してください"></textarea>
+                </div>
+                <div class="approval-field">
+                    <label>承認者名</label>
+                    <input type="text" placeholder="氏名を記入">
+                </div>
+                <div class="approval-field">
+                    <label>承認日</label>
+                    <input type="date">
+                </div>
+            </div>
+            
+            <div class="approval-item">
+                <h4>運用体制確認</h4>
+                <div class="approval-field">
+                    <label>運用体制・責任者について確認</label>
+                    <textarea placeholder="確認内容を記入してください"></textarea>
+                </div>
+                <div class="approval-field">
+                    <label>承認者名</label>
+                    <input type="text" placeholder="氏名を記入">
+                </div>
+                <div class="approval-field">
+                    <label>承認日</label>
+                    <input type="date">
+                </div>
+            </div>
+        </div>
+        
+        <div class="approval-grid">
+            <div class="approval-item">
+                <h4>予算・コスト確認</h4>
+                <div class="approval-field">
+                    <label>運用コスト・予算について確認</label>
+                    <textarea placeholder="確認内容を記入してください"></textarea>
+                </div>
+                <div class="approval-field">
+                    <label>承認者名</label>
+                    <input type="text" placeholder="氏名を記入">
+                </div>
+                <div class="approval-field">
+                    <label>承認日</label>
+                    <input type="date">
+                </div>
+            </div>
+            
+            <div class="approval-item">
+                <h4>リスク管理確認</h4>
+                <div class="approval-field">
+                    <label>リスク・対策について確認</label>
+                    <textarea placeholder="確認内容を記入してください"></textarea>
+                </div>
+                <div class="approval-field">
+                    <label>承認者名</label>
+                    <input type="text" placeholder="氏名を記入">
+                </div>
+                <div class="approval-field">
+                    <label>承認日</label>
+                    <input type="date">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="page-break"></div>
+    
+    <!-- 情報システム部様向け確認欄 -->
+    <div class="approval-section">
+        <h3>【情報システム部様向け確認欄】</h3>
+        <div class="approval-grid">
+            <div class="approval-item">
+                <h4>技術仕様確認</h4>
+                <div class="approval-field">
+                    <label>技術仕様・アーキテクチャについて確認</label>
+                    <textarea placeholder="確認内容を記入してください"></textarea>
+                </div>
+                <div class="approval-field">
+                    <label>確認者名</label>
+                    <input type="text" placeholder="氏名を記入">
+                </div>
+                <div class="approval-field">
+                    <label>確認日</label>
+                    <input type="date">
+                </div>
+            </div>
+            
+            <div class="approval-item">
+                <h4>セキュリティ確認</h4>
+                <div class="approval-field">
+                    <label>セキュリティ対策について確認</label>
+                    <textarea placeholder="確認内容を記入してください"></textarea>
+                </div>
+                <div class="approval-field">
+                    <label>確認者名</label>
+                    <input type="text" placeholder="氏名を記入">
+                </div>
+                <div class="approval-field">
+                    <label>確認日</label>
+                    <input type="date">
+                </div>
+            </div>
+        </div>
+        
+        <div class="approval-grid">
+            <div class="approval-item">
+                <h4>運用・保守確認</h4>
+                <div class="approval-field">
+                    <label>運用・保守体制について確認</label>
+                    <textarea placeholder="確認内容を記入してください"></textarea>
+                </div>
+                <div class="approval-field">
+                    <label>確認者名</label>
+                    <input type="text" placeholder="氏名を記入">
+                </div>
+                <div class="approval-field">
+                    <label>確認日</label>
+                    <input type="date">
+                </div>
+            </div>
+            
+            <div class="approval-item">
+                <h4>トラブル対応確認</h4>
+                <div class="approval-field">
+                    <label>トラブル対応・復旧体制について確認</label>
+                    <textarea placeholder="確認内容を記入してください"></textarea>
+                </div>
+                <div class="approval-field">
+                    <label>確認者名</label>
+                    <input type="text" placeholder="氏名を記入">
+                </div>
+                <div class="approval-field">
+                    <label>確認日</label>
+                    <input type="date">
+                </div>
+            </div>
+        </div>
+        
+        <div class="approval-grid">
+            <div class="approval-item">
+                <h4>データ管理確認</h4>
+                <div class="approval-field">
+                    <label>データ管理・バックアップについて確認</label>
+                    <textarea placeholder="確認内容を記入してください"></textarea>
+                </div>
+                <div class="approval-field">
+                    <label>確認者名</label>
+                    <input type="text" placeholder="氏名を記入">
+                </div>
+                <div class="approval-field">
+                    <label>確認日</label>
+                    <input type="date">
+                </div>
+            </div>
+            
+            <div class="approval-item">
+                <h4>最終承認</h4>
+                <div class="approval-field">
+                    <label>システム導入の最終承認</label>
+                    <textarea placeholder="承認内容を記入してください"></textarea>
+                </div>
+                <div class="approval-field">
+                    <label>承認者名</label>
+                    <input type="text" placeholder="氏名を記入">
+                </div>
+                <div class="approval-field">
+                    <label>承認日</label>
+                    <input type="date">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>脳トレゲームシステム 資料一覧 | 作成: システム開発チーム | 最終更新: 2024年1月15日</p>
+        <p>この資料は印刷用に最適化されています。ブラウザの印刷機能をご利用ください。</p>
+    </div>
+</body>
+</html>

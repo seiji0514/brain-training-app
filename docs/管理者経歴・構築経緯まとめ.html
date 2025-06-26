@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>管理者経歴・構築経緯まとめ</title>
+  <style>
+    @media print {
+      body { margin: 0; }
+      .no-print { display: none; }
+      .page-break { page-break-before: always; }
+    }
+    
+    body { 
+      font-family: 'Meiryo', 'Yu Gothic', sans-serif; 
+      margin: 2em; 
+      background: #f9f9f9; 
+      line-height: 1.6;
+    }
+    h1, h2 { color: #2c3e50; }
+    ul, ol { margin-bottom: 1em; }
+    .section { margin-bottom: 2em; }
+    .note { color: #e67e22; font-size: 0.95em; }
+    
+    .print-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    
+    .print-btn:hover {
+      background: #2980b9;
+    }
+    
+    .approval-section {
+      border: 2px solid #333;
+      padding: 20px;
+      margin: 30px 0;
+      background: #f9f9f9;
+    }
+    
+    .approval-section h3 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    
+    .approval-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    
+    .approval-item {
+      border: 1px solid #ccc;
+      padding: 15px;
+      background: white;
+    }
+    
+    .approval-item h4 {
+      margin: 0 0 10px 0;
+      color: #333;
+      font-size: 14px;
+    }
+    
+    .approval-field {
+      margin-bottom: 15px;
+    }
+    
+    .approval-field label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      font-size: 12px;
+    }
+    
+    .approval-field input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      font-size: 12px;
+    }
+    
+    .approval-field textarea {
+      width: 100%;
+      height: 60px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      resize: vertical;
+      font-size: 12px;
+    }
+    
+    @media (max-width: 768px) {
+      .approval-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="print-btn no-print" onclick="window.print()">
+    🖨️ 印刷
+  </button>
+
+  <h1>管理者経歴・構築経緯まとめ</h1>
+
+  <div class="section">
+    <h2>1. 管理者</h2>
+    <ul>
+      <li>氏名：小川 清志</li>
+      <li>障害・就業形態：総合等級3級（両下肢3級、上肢6級）、完全在宅勤務（フルリモート）、パソコンスキルを活かした業務効率化</li>
+      <li>保有資格：
+        <ul>
+          <li>マイクロソフトオフィススペシャリスト（MOS）Excel2013</li>
+          <li>アクセシビリティ検査技術者検定レベル1～3（初級～上級）</li>
+        </ul>
+      </li>
+    </ul>
+    <p class="note">※実際の管理者情報に合わせてご記入ください。</p>
+  </div>
+
+  <div class="section">
+    <h2>2. システム構築経緯・目的</h2>
+    <ul>
+      <li>院内Wi-Fi限定でスタッフ・利用者が安全に利用できる脳トレゲームサイトを構築・運用</li>
+      <li>管理者・スタッフ・利用者のアカウント分離、管理画面からのゲーム内容編集を実現</li>
+      <li>本番運用・引き継ぎ・トラブル対応も見据えた設計・運用</li>
+      <li>現場の課題や要望をヒアリングし、バリアフリー・アクセシビリティ重視の設計</li>
+      <li>サーバー常時稼働、バックアップ・障害時復旧手順も整備</li>
+      <li>医療情報システムの安全管理措置、個人情報保護法・厚労省ガイドライン等の法令遵守</li>
+      <li>著作権・オープンソースライセンス遵守、労働基準法・バリアフリー法等も考慮</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>3. 制作動機・経緯（抜粋）</h2>
+    <ul>
+      <li>2025年5月、入院中にリハビリスタッフのiPadで脳トレゲームを体験し「自分にも作れるのでは」と開発を開始</li>
+      <li>スタッフの高評価・要望を受け、本格的にversion2を構築</li>
+      <li>2024年7月、再入院時に完全構築・提出書類の整備・申請を計画</li>
+      <li>医療法人 巨樹の会のリハビリスタッフ全員が活用できることを目指す</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>4. サイト構築・運用の特徴</h2>
+    <ul>
+      <li>AI・Web・アクセシビリティ技術を活用した多様なシステム開発経験</li>
+      <li>院内Wi-Fi限定の安全なWebシステム、DB連携による柔軟な運用</li>
+      <li>管理者・スタッフ・利用者のアカウント分離、管理画面からの柔軟な編集</li>
+      <li>サーバー常時稼働（PM2）、バックアップ・障害時復旧手順の整備</li>
+      <li>現場の声を反映したバリアフリー設計、継続的な改善・運用サポート</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>5. 法令遵守・運用計画の要点</h2>
+    <ul>
+      <li>個人情報保護法・医療情報システムガイドライン等の遵守</li>
+      <li>セキュリティ対策（パスワード管理、アクセス権限、2要素認証、IP制限等）</li>
+      <li>アクセシビリティ・バリアフリー法、障害者差別解消法の配慮</li>
+      <li>著作権法・オープンソースライセンス遵守</li>
+      <li>労働基準法・安全衛生管理の徹底</li>
+      <li>定期的なセキュリティチェック・運用レビュー・バックアップ取得</li>
+      <li>障害・インシデント発生時の対応手順・連絡体制の整備</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>6. 今後の計画・スケジュール</h2>
+    <ul>
+      <li>サーバー・ネットワーク準備、DB設計・初期化（6/10～6/12）</li>
+      <li>サーバーアプリ実装（API・認証・PM2）（6/13～6/16）</li>
+      <li>管理画面実装（編集UI・API連携）（6/17～6/20）</li>
+      <li>トップ画面・脳トレ改善版の動的化（6/21～6/24）</li>
+      <li>テスト・動作確認、バックアップ・復旧テスト（6/25～6/26）</li>
+      <li>ドキュメント整備（6/27～6/28）</li>
+      <li>最終確認・リリース準備（6/29～6/30）</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>7. 連絡先</h2>
+    <ul>
+      <li>Email: kaho052514@gmail.com</li>
+      <li>LINE: <a href="https://line.me/R/ti/p/@440cqgno" target="_blank">https://line.me/R/ti/p/@440cqgno</a></li>
+    </ul>
+  </div>
+
+  <div class="page-break"></div>
+  
+  <!-- 課長様・承認者向け確認欄 -->
+  <div class="approval-section">
+    <h3>【課長様・承認者向け確認欄】</h3>
+    <div class="approval-grid">
+      <div class="approval-item">
+        <h4>管理者経歴確認</h4>
+        <div class="approval-field">
+          <label>管理者の経歴・資格について確認</label>
+          <textarea placeholder="確認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>承認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>承認日</label>
+          <input type="date">
+        </div>
+      </div>
+      
+      <div class="approval-item">
+        <h4>構築経緯確認</h4>
+        <div class="approval-field">
+          <label>システム構築の経緯・目的について確認</label>
+          <textarea placeholder="確認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>承認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>承認日</label>
+          <input type="date">
+        </div>
+      </div>
+    </div>
+    
+    <div class="approval-grid">
+      <div class="approval-item">
+        <h4>法令遵守確認</h4>
+        <div class="approval-field">
+          <label>法令遵守・セキュリティ対策について確認</label>
+          <textarea placeholder="確認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>承認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>承認日</label>
+          <input type="date">
+        </div>
+      </div>
+      
+      <div class="approval-item">
+        <h4>運用計画確認</h4>
+        <div class="approval-field">
+          <label>運用計画・スケジュールについて確認</label>
+          <textarea placeholder="確認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>承認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>承認日</label>
+          <input type="date">
+        </div>
+      </div>
+    </div>
+    
+    <div class="approval-grid">
+      <div class="approval-item">
+        <h4>リスク管理確認</h4>
+        <div class="approval-field">
+          <label>リスク・対策について確認</label>
+          <textarea placeholder="確認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>承認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>承認日</label>
+          <input type="date">
+        </div>
+      </div>
+      
+      <div class="approval-item">
+        <h4>最終承認</h4>
+        <div class="approval-field">
+          <label>管理者経歴・構築経緯の最終承認</label>
+          <textarea placeholder="承認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>承認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>承認日</label>
+          <input type="date">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html> 

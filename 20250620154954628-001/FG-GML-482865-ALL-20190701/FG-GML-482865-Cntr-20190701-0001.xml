@@ -1,0 +1,4414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Dataset xsi:schemaLocation="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema FGD_GMLSchema.xsd"
+	xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema"
+	gml:id="Dataset1">
+  <gml:description>基盤地図情報メタデータ ID=fmdid:19-0701</gml:description>
+  <gml:name>基盤地図情報ダウンロードデータ（GML版）</gml:name>
+<Cntr gml:id="K3_4633211727_1">
+<fid>46332-11727-s-127</fid>
+<lfSpanFr gml:id="K3_4633211727_1-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633211727_1-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633211727_1-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579411944 128.708179167
+32.579581111 128.708332222
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633211727_2">
+<fid>46332-11727-s-128</fid>
+<lfSpanFr gml:id="K3_4633211727_2-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633211727_2-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633211727_2-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579581111 128.708332222
+32.579582583 128.708333333
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633211727_3">
+<fid>46332-11727-s-129</fid>
+<lfSpanFr gml:id="K3_4633211727_3-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633211727_3-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633211727_3-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579140444 128.708333333
+32.579259722 128.708192500
+32.579321944 128.708172500
+32.579411944 128.708179167
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_1">
+<fid>46335-11727-s-2437</fid>
+<lfSpanFr gml:id="K3_4633511727_1-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_1-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_1-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579582583 128.708333333
+32.579643333 128.708378889
+32.579767222 128.708538611
+32.579823611 128.708631667
+32.579925278 128.708878056
+32.580055000 128.709084167
+32.580094444 128.709184167
+32.580128333 128.709377222
+32.580150833 128.709410278
+32.580224167 128.709470278
+32.580393333 128.709583333
+32.580455278 128.709656667
+32.580562500 128.709829722
+32.580635833 128.709909444
+32.580731667 128.709956111
+32.580838611 128.710055556
+32.580895000 128.710135556
+32.580917778 128.710235278
+32.580928889 128.710561389
+32.580957222 128.710641111
+32.581019167 128.710721111
+32.581109444 128.710794167
+32.581391389 128.710987222
+32.581458889 128.711020556
+32.581588611 128.711020556
+32.581656389 128.710993889
+32.581712500 128.710993889
+32.581735000 128.711013889
+32.581757500 128.711080278
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_2">
+<fid>46335-11727-s-2438</fid>
+<lfSpanFr gml:id="K3_4633511727_2-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_2-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_2-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579571944 128.708385556
+32.579665833 128.708518611
+32.579778611 128.708718333
+32.579880000 128.708984444
+32.579992778 128.709177500
+32.580021111 128.709270556
+32.580032222 128.709456944
+32.580049167 128.709503611
+32.580077500 128.709536944
+32.580128333 128.709563333
+32.580263611 128.709590000
+32.580353889 128.709650000
+32.580523056 128.709882778
+32.580613056 128.709982778
+32.580714722 128.710048889
+32.580788056 128.710142222
+32.580827500 128.710241944
+32.580850000 128.710435000
+32.580883889 128.710581389
+32.580928889 128.710687778
+32.580979722 128.710747778
+32.581284167 128.710987222
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>20</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_3">
+<fid>46335-11727-s-2439</fid>
+<lfSpanFr gml:id="K3_4633511727_3-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_3-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_3-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578782222 128.708410556
+32.578910278 128.708412222
+32.579034167 128.708405556
+32.579124444 128.708352222
+32.579140444 128.708333333
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_4">
+<fid>46335-11727-s-2440</fid>
+<lfSpanFr gml:id="K3_4633511727_4-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_4-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_4-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579419889 128.708447389
+32.579355444 128.708437917
+32.579291000 128.708485306
+32.579270056 128.708527000
+32.579282944 128.708553528
+32.579389278 128.708636917
+32.579492389 128.708648278
+32.579539083 128.708604694
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>40</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_5">
+<fid>46335-11727-s-2441</fid>
+<lfSpanFr gml:id="K3_4633511727_5-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_5-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_5-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578831111 128.708485278
+32.578780833 128.708439167
+32.578782222 128.708410556
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_6">
+<fid>46335-11727-s-2442</fid>
+<lfSpanFr gml:id="K3_4633511727_6-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_6-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_6-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579539083 128.708604694
+32.579526194 128.708527000
+32.579469833 128.708466361
+32.579419889 128.708447389
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>40</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_7">
+<fid>46335-11727-s-2443</fid>
+<lfSpanFr gml:id="K3_4633511727_7-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_7-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_7-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579242778 128.708745000
+32.579171944 128.708701389
+32.579096389 128.708651667
+32.578960833 128.708551944
+32.578831111 128.708485278
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_8">
+<fid>46335-11727-s-2444</fid>
+<lfSpanFr gml:id="K3_4633511727_8-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_8-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_8-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579716667 128.709550000
+32.580026667 128.709709722
+32.580207222 128.709829722
+32.580607500 128.710221944
+32.580680833 128.710335000
+32.580748611 128.710534722
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>40</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_9">
+<fid>46335-11727-s-2445</fid>
+<lfSpanFr gml:id="K3_4633511727_9-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_9-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_9-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579975833 128.710341667
+32.579940833 128.710281111
+32.579870000 128.710254444
+32.579798889 128.710285278
+32.579634444 128.710326944
+32.579450556 128.710303889
+32.579333056 128.710007778
+32.579393056 128.709862500
+32.579505833 128.709421111
+32.579470278 128.708998611
+32.579393056 128.708850278
+32.579242778 128.708745000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_10">
+<fid>46335-11727-s-2446</fid>
+<lfSpanFr gml:id="K3_4633511727_10-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_10-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_10-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580224167 128.710388333
+32.580235278 128.710195278
+32.580195833 128.710075833
+32.580122500 128.709962778
+32.580122500 128.709929444
+32.580139444 128.709922778
+32.580212778 128.709969444
+32.580551111 128.710295278
+32.580579444 128.710335000
+32.580703333 128.710561389
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>50</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_11">
+<fid>46335-11727-s-2447</fid>
+<lfSpanFr gml:id="K3_4633511727_11-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_11-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_11-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580799167 128.710508056
+32.580776667 128.710361667
+32.580737222 128.710248611
+32.580624444 128.710102222
+32.580511667 128.710009167
+32.580320000 128.709783056
+32.580224167 128.709709722
+32.580105556 128.709690000
+32.580021111 128.709636667
+32.579981667 128.709590000
+32.579925278 128.709450278
+32.579908333 128.709204167
+32.579874444 128.709104167
+32.579773056 128.708931389
+32.579671389 128.708665000
+32.579615000 128.708558611
+32.579524722 128.708458889
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>30</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_12">
+<fid>46335-11727-s-2448</fid>
+<lfSpanFr gml:id="K3_4633511727_12-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_12-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_12-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580748611 128.710534722
+32.580832778 128.710777500
+32.580950278 128.710985556
+32.581259444 128.711091944
+32.581600278 128.711253889
+32.581639444 128.711346389
+32.581670556 128.711443333
+32.581690278 128.711705833
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>40</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_13">
+<fid>46335-11727-s-2449</fid>
+<lfSpanFr gml:id="K3_4633511727_13-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_13-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_13-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580703333 128.710561389
+32.580806667 128.710830000
+32.580939444 128.711025278
+32.581478889 128.711223611
+32.581603611 128.711297222
+32.581633333 128.711377222
+32.581622500 128.711447778
+32.581577500 128.711473056
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>50</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_14">
+<fid>46335-11727-s-2450</fid>
+<lfSpanFr gml:id="K3_4633511727_14-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_14-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_14-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580280556 128.710960556
+32.580201111 128.710684444
+32.580224167 128.710388333
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>50</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_15">
+<fid>46335-11727-s-2451</fid>
+<lfSpanFr gml:id="K3_4633511727_15-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_15-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_15-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581284167 128.710987222
+32.581549167 128.711119722
+32.581725278 128.711235278
+32.581799722 128.711420278
+32.581799722 128.711600556
+32.581858333 128.711882778
+32.581995278 128.712146389
+32.582193056 128.712328889
+32.582302778 128.712500000
+32.582338056 128.712745000
+32.582318333 128.713008611
+32.582291111 128.713115000
+32.582214444 128.713190000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>20</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_16">
+<fid>46335-11727-s-2452</fid>
+<lfSpanFr gml:id="K3_4633511727_16-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_16-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_16-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581757500 128.711080278
+32.581828889 128.711459444
+32.581899444 128.711801667
+32.582075556 128.712111667
+32.582318333 128.712379722
+32.582404444 128.712624722
+32.582400556 128.712860556
+32.582304722 128.713229722
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_17">
+<fid>46335-11727-s-2453</fid>
+<lfSpanFr gml:id="K3_4633511727_17-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_17-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_17-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581690278 128.711705833
+32.581678889 128.711945556
+32.581701389 128.712018611
+32.581757500 128.712105278
+32.582016944 128.712398056
+32.582175000 128.712531111
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>40</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_18">
+<fid>46335-11727-s-2454</fid>
+<lfSpanFr gml:id="K3_4633511727_18-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_18-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_18-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581735000 128.711752500
+32.581736944 128.711517500
+32.581713333 128.711364722
+32.581658889 128.711253889
+32.581459167 128.711138056
+32.581102778 128.710953333
+32.580934444 128.710842222
+32.580799167 128.710508056
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>30</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_19">
+<fid>46335-11727-s-2455</fid>
+<lfSpanFr gml:id="K3_4633511727_19-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_19-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_19-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580250278 128.711784167
+32.580224167 128.711725833
+32.580156389 128.711572778
+32.580111389 128.711506389
+32.580060556 128.711379722
+32.580049167 128.711326667
+32.580055000 128.711106944
+32.580026667 128.710953889
+32.579975833 128.710827500
+32.579942222 128.710661111
+32.579942222 128.710468056
+32.579975833 128.710341667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_20">
+<fid>46335-11727-s-2456</fid>
+<lfSpanFr gml:id="K3_4633511727_20-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_20-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_20-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580523056 128.711799167
+32.580382500 128.711542778
+32.580202222 128.710927778
+32.580159167 128.710340556
+32.580108333 128.710183611
+32.580014444 128.710086389
+32.579853889 128.710077222
+32.579693333 128.710183611
+32.579528889 128.710178889
+32.579481667 128.710058611
+32.579513056 128.709795278
+32.579630556 128.709573056
+32.579716667 128.709550000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>40</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_21">
+<fid>46335-11727-s-2457</fid>
+<lfSpanFr gml:id="K3_4633511727_21-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_21-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_21-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581988889 128.712245000
+32.581910000 128.712191667
+32.581847778 128.712118611
+32.581780278 128.712018611
+32.581740833 128.711925556
+32.581724167 128.711819167
+32.581735000 128.711752500
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>30</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_22">
+<fid>46335-11727-s-2458</fid>
+<lfSpanFr gml:id="K3_4633511727_22-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_22-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_22-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582175000 128.712531111
+32.582231389 128.712657500
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>40</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_23">
+<fid>46335-11727-s-2459</fid>
+<lfSpanFr gml:id="K3_4633511727_23-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_23-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_23-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582231389 128.712657500
+32.582203056 128.712770556
+32.582208611 128.712910556
+32.582186111 128.712956944
+32.581949444 128.713190000
+32.581729722 128.713349722
+32.581701389 128.713382778
+32.581690278 128.713429444
+32.581701389 128.713469444
+32.581752222 128.713529167
+32.581910000 128.713655833
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>40</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_24">
+<fid>46335-11727-s-2460</fid>
+<lfSpanFr gml:id="K3_4633511727_24-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_24-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_24-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582175000 128.713076667
+32.582267500 128.713059444
+32.582287222 128.712823611
+32.582271389 128.712555556
+32.582185278 128.712393611
+32.581988889 128.712245000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>30</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_25">
+<fid>46335-11727-s-2461</fid>
+<lfSpanFr gml:id="K3_4633511727_25-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_25-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_25-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582214444 128.713190000
+32.582079167 128.713369722
+32.582062222 128.713509444
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>20</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_26">
+<fid>46335-11727-s-2462</fid>
+<lfSpanFr gml:id="K3_4633511727_26-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_26-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_26-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580945833 128.713229722
+32.580934722 128.713096667
+32.580979722 128.712983611
+32.581086944 128.712797222
+32.581092500 128.712690833
+32.581019167 128.712531111
+32.580951389 128.712444722
+32.580816111 128.712391389
+32.580782222 128.712358056
+32.580748611 128.712304722
+32.580680833 128.712038611
+32.580618889 128.711912222
+32.580523056 128.711799167
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>40</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_27">
+<fid>46335-11727-s-2463</fid>
+<lfSpanFr gml:id="K3_4633511727_27-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_27-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_27-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582304722 128.713229722
+32.582298889 128.713276389
+32.582225556 128.713396111
+32.582214444 128.713442778
+32.582236944 128.713848611
+32.582214444 128.714008333
+32.582169167 128.714115000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_28">
+<fid>46335-11727-s-2464</fid>
+<lfSpanFr gml:id="K3_4633511727_28-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_28-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_28-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580686389 128.713442778
+32.580572500 128.713218611
+32.580540278 128.713036111
+32.580569167 128.712876111
+32.580585278 128.712758333
+32.580495000 128.712655556
+32.580401667 128.712602222
+32.580372778 128.712552778
+32.580375833 128.712472778
+32.580408056 128.712381389
+32.580359722 128.712073333
+32.580250278 128.711784167
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_29">
+<fid>46335-11727-s-2465</fid>
+<lfSpanFr gml:id="K3_4633511727_29-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_29-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_29-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581092500 128.713462778
+32.581086944 128.713349722
+32.581053056 128.713276389
+32.581030556 128.713163333
+32.581030556 128.713063611
+32.581064167 128.712956944
+32.581182778 128.712757500
+32.581182778 128.712677500
+32.581154444 128.712610833
+32.581024722 128.712431389
+32.580985278 128.712384722
+32.580827500 128.712285000
+32.580793611 128.712238333
+32.580771111 128.712151667
+32.580771111 128.712085278
+32.580438333 128.711426389
+32.580325556 128.711120278
+32.580303056 128.711073889
+32.580308611 128.711007222
+32.580280556 128.710960556
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>50</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_30">
+<fid>46335-11727-s-2466</fid>
+<lfSpanFr gml:id="K3_4633511727_30-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_30-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_30-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582062222 128.713509444
+32.582101111 128.713773889
+32.582054167 128.714042222
+32.581769167 128.714567222
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>20</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_31">
+<fid>46335-11727-s-2467</fid>
+<lfSpanFr gml:id="K3_4633511727_31-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_31-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_31-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581938056 128.713575833
+32.581904167 128.713522778
+32.581904167 128.713469444
+32.581960556 128.713363056
+32.582146667 128.713083333
+32.582175000 128.713076667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>30</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_32">
+<fid>46335-11727-s-2468</fid>
+<lfSpanFr gml:id="K3_4633511727_32-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_32-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_32-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581910000 128.713655833
+32.582003333 128.713755556
+32.581977500 128.713828889
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>40</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_33">
+<fid>46335-11727-s-2469</fid>
+<lfSpanFr gml:id="K3_4633511727_33-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_33-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_33-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580754167 128.713722222
+32.580810556 128.713715556
+32.580838611 128.713688889
+32.580821944 128.713622500
+32.580731667 128.713489444
+32.580686389 128.713442778
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_34">
+<fid>46335-11727-s-2470</fid>
+<lfSpanFr gml:id="K3_4633511727_34-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_34-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_34-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581977500 128.713828889
+32.581960556 128.713841944
+32.581949444 128.713921944
+32.581853889 128.714081667
+32.581656389 128.714527222
+32.581555000 128.714853333
+32.581487222 128.714979722
+32.581481667 128.715079444
+32.581498611 128.715265833
+32.581639444 128.716064444
+32.581678889 128.716177500
+32.581735278 128.716264167
+32.581876389 128.716390556
+32.581926944 128.716456944
+32.581949722 128.716516944
+32.581969194 128.716666667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>40</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_35">
+<fid>46335-11727-s-2471</fid>
+<lfSpanFr gml:id="K3_4633511727_35-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_35-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_35-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580714722 128.713941944
+32.580701389 128.713789444
+32.580730278 128.713755278
+32.580754167 128.713722222
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_36">
+<fid>46335-11727-s-2472</fid>
+<lfSpanFr gml:id="K3_4633511727_36-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_36-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_36-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581938056 128.714108333
+32.582046389 128.713894167
+32.582042500 128.713760000
+32.581938056 128.713575833
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>30</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_37">
+<fid>46335-11727-s-2473</fid>
+<lfSpanFr gml:id="K3_4633511727_37-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_37-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_37-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582169167 128.714115000
+32.582015000 128.714282500
+32.581820000 128.714600278
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_38">
+<fid>46335-11727-s-2474</fid>
+<lfSpanFr gml:id="K3_4633511727_38-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_38-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_38-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580765556 128.714135000
+32.580782222 128.714095000
+32.580782222 128.714048333
+32.580714722 128.713941944
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_39">
+<fid>46335-11727-s-2475</fid>
+<lfSpanFr gml:id="K3_4633511727_39-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_39-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_39-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581053056 128.714261389
+32.581021667 128.714083056
+32.581016667 128.713874444
+32.581092500 128.713462778
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>50</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_40">
+<fid>46335-11727-s-2476</fid>
+<lfSpanFr gml:id="K3_4633511727_40-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_40-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_40-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581024722 128.714367778
+32.580967778 128.714104722
+32.580981667 128.713679722
+32.581005833 128.713426389
+32.580945833 128.713229722
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>40</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_41">
+<fid>46335-11727-s-2477</fid>
+<lfSpanFr gml:id="K3_4633511727_41-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_41-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_41-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581769167 128.714567222
+32.581701389 128.714820000
+32.581600000 128.714979722
+32.581588611 128.715033056
+32.581600000 128.715119444
+32.581667778 128.715259167
+32.581707222 128.715398889
+32.581729722 128.715571944
+32.581729722 128.715951389
+32.581763611 128.716044444
+32.581797500 128.716077778
+32.581898889 128.716130833
+32.581966667 128.716190833
+32.582039444 128.716297222
+32.582084722 128.716417222
+32.582133417 128.716666667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>20</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_42">
+<fid>46335-11727-s-2478</fid>
+<lfSpanFr gml:id="K3_4633511727_42-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_42-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_42-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581820000 128.714600278
+32.581797500 128.714713611
+32.581831111 128.714806667
+32.581825556 128.714860000
+32.581786111 128.714913056
+32.581678889 128.714986389
+32.581678889 128.715033056
+32.581690278 128.715072778
+32.581808611 128.715345833
+32.581820000 128.715438889
+32.581797500 128.715884722
+32.581836944 128.715991111
+32.581898889 128.716057778
+32.582033889 128.716137500
+32.582090278 128.716210833
+32.582129722 128.716303889
+32.582169167 128.716496944
+32.582221889 128.716666667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_43">
+<fid>46335-11727-s-2479</fid>
+<lfSpanFr gml:id="K3_4633511727_43-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_43-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_43-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580951389 128.715272500
+32.580965833 128.715149444
+32.580942222 128.714890278
+32.580911111 128.714539167
+32.580840556 128.714432778
+32.580758333 128.714321944
+32.580765556 128.714135000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_44">
+<fid>46335-11727-s-2480</fid>
+<lfSpanFr gml:id="K3_4633511727_44-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_44-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_44-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581120556 128.715538611
+32.581148889 128.715518889
+32.581199722 128.715392222
+32.581216667 128.715305833
+32.581210833 128.715092778
+32.581188333 128.714966389
+32.581165833 128.714939722
+32.581165833 128.714913056
+32.581182778 128.714886667
+32.581193889 128.714786667
+32.581193889 128.714680278
+32.581171389 128.714567500
+32.581024722 128.714367778
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>40</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_45">
+<fid>46335-11727-s-2481</fid>
+<lfSpanFr gml:id="K3_4633511727_45-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_45-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_45-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580799167 128.715918056
+32.580821944 128.715811667
+32.580805000 128.715658611
+32.580816111 128.715545278
+32.580838611 128.715485556
+32.580928889 128.715392222
+32.580951389 128.715272500
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_46">
+<fid>46335-11727-s-2482</fid>
+<lfSpanFr gml:id="K3_4633511727_46-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_46-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_46-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581036111 128.715958056
+32.581043889 128.715714722
+32.581120556 128.715538611
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>40</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_47">
+<fid>46335-11727-s-2483</fid>
+<lfSpanFr gml:id="K3_4633511727_47-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_47-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_47-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580573611 128.716264167
+32.580648611 128.716046389
+32.580799167 128.715918056
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_48">
+<fid>46335-11727-s-2484</fid>
+<lfSpanFr gml:id="K3_4633511727_48-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_48-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_48-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580652778 128.716284167
+32.580613056 128.716430556
+32.580594250 128.716666667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>30</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_49">
+<fid>46335-11727-s-2485</fid>
+<lfSpanFr gml:id="K3_4633511727_49-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_49-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_49-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580834583 128.716666667
+32.580838611 128.716650000
+32.580878333 128.716576944
+32.581019167 128.716410556
+32.581120556 128.716323889
+32.581210833 128.716264167
+32.581295556 128.716230833
+32.581346111 128.716230833
+32.581436389 128.716303889
+32.581543611 128.716563611
+32.581626917 128.716666667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>70</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_50">
+<fid>46335-11727-s-2486</fid>
+<lfSpanFr gml:id="K3_4633511727_50-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_50-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_50-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581282806 128.716666667
+32.581261667 128.716630000
+32.581222222 128.716596667
+32.581160278 128.716596667
+32.581120556 128.716616667
+32.581086806 128.716666667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>90</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_51">
+<fid>46335-11727-s-2487</fid>
+<lfSpanFr gml:id="K3_4633511727_51-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_51-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_51-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582054472 128.716666667
+32.582051111 128.716656667
+32.582028611 128.716510278
+32.582000278 128.716443611
+32.581910278 128.716323889
+32.581729722 128.716150833
+32.581678889 128.716077778
+32.581661944 128.716011111
+32.581650833 128.715898056
+32.581656389 128.715645278
+32.581543611 128.715106111
+32.581560556 128.714973056
+32.581724167 128.714480556
+32.581769167 128.714427500
+32.581814167 128.714301111
+32.581898611 128.714135000
+32.581938056 128.714108333
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>30</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_52">
+<fid>46335-11727-s-2488</fid>
+<lfSpanFr gml:id="K3_4633511727_52-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_52-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_52-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580482389 128.716666667
+32.580483611 128.716663333
+32.580506111 128.716430556
+32.580528611 128.716350556
+32.580573611 128.716264167
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_53">
+<fid>46335-11727-s-2489</fid>
+<lfSpanFr gml:id="K3_4633511727_53-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_53-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_53-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580550444 128.716666667
+32.580562500 128.716610000
+32.580568056 128.716430556
+32.580596389 128.716284167
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>20</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_54">
+<fid>46335-11727-s-2490</fid>
+<lfSpanFr gml:id="K3_4633511727_54-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_54-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_54-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580646167 128.716666667
+32.580669444 128.716430556
+32.580714722 128.716330556
+32.580788056 128.716257500
+32.580934722 128.716210833
+32.580979722 128.716177500
+32.581041667 128.716091111
+32.581053056 128.716024444
+32.581053056 128.715977778
+32.581036111 128.715958056
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>40</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_55">
+<fid>46335-11727-s-2491</fid>
+<lfSpanFr gml:id="K3_4633511727_55-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_55-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_55-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580714722 128.716666667
+32.580714722 128.716503611
+32.580731667 128.716456944
+32.580782222 128.716403889
+32.581002222 128.716237500
+32.581081111 128.716144167
+32.581126389 128.716051111
+32.581154444 128.715938056
+32.581165833 128.715691667
+32.581289722 128.715305833
+32.581295556 128.715239167
+32.581261667 128.715053056
+32.581244722 128.714760000
+32.581210833 128.714487500
+32.581176944 128.714421111
+32.581053056 128.714261389
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>50</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_56">
+<fid>46335-11727-s-3095</fid>
+<lfSpanFr gml:id="K3_4633511727_56-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_56-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_56-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581070000 128.709184167
+32.580957222 128.709396944
+32.580866944 128.709483611
+32.580838611 128.709490278
+32.580821944 128.709463611
+32.580821944 128.709430278
+32.580844444 128.709377222
+32.581041667 128.709150833
+32.581070000 128.709184167
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_57">
+<fid>46335-11727-s-3096</fid>
+<lfSpanFr gml:id="K3_4633511727_57-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_57-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_57-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580596389 128.716284167
+32.580695556 128.716152778
+32.580840556 128.716018611
+32.580938333 128.715898611
+32.580965833 128.715755000
+32.581005000 128.715399167
+32.581012778 128.715200278
+32.580905000 128.714324167
+32.580905000 128.713991389
+32.580897222 128.713561111
+32.580877778 128.713427222
+32.580783611 128.713274444
+32.580705556 128.713158889
+32.580685833 128.712960000
+32.580768056 128.712826111
+32.580783611 128.712664167
+32.580678056 128.712520833
+32.580568333 128.712382222
+32.580272778 128.711598333
+32.580186667 128.711223611
+32.580123889 128.710927778
+32.580100556 128.710678056
+32.580057500 128.710437500
+32.580010278 128.710262222
+32.579924167 128.710183611
+32.579728333 128.710262222
+32.579626667 128.710280556
+32.579501389 128.710262222
+32.579458333 128.710174444
+32.579430833 128.710044722
+32.579434722 128.709920000
+32.579458333 128.709781389
+32.579577778 128.709353611
+32.579601111 128.709066944
+32.579499444 128.708877222
+32.579393611 128.708720000
+32.579291944 128.708692222
+32.579197778 128.708562778
+32.579209722 128.708438056
+32.579283889 128.708377778
+32.579417222 128.708363889
+32.579515000 128.708368611
+32.579571944 128.708385556
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>20</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_58">
+<fid>46335-11727-s-3097</fid>
+<lfSpanFr gml:id="K3_4633511727_58-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_58-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_58-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579716667 128.710075833
+32.579744722 128.709909444
+32.579739167 128.709862778
+32.579722222 128.709823056
+32.579705278 128.709803056
+32.579682778 128.709796389
+32.579620833 128.709843056
+32.579570000 128.709942778
+32.579558611 128.710035833
+32.579564444 128.710075833
+32.579598056 128.710115833
+32.579648889 128.710115833
+32.579716667 128.710075833
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>50</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_59">
+<fid>46335-11727-s-3098</fid>
+<lfSpanFr gml:id="K3_4633511727_59-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_59-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_59-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581165833 128.713522778
+32.581165833 128.713376111
+32.581115000 128.713170000
+32.581109444 128.713110000
+32.581120556 128.713043611
+32.581267222 128.712737500
+32.581273056 128.712630833
+32.581250278 128.712564444
+32.581193889 128.712477778
+32.581070000 128.712351389
+32.580906389 128.712245000
+32.580883889 128.712218333
+32.580866944 128.712178333
+32.580833056 128.711965556
+32.580810556 128.711905556
+32.580658333 128.711672778
+32.580455278 128.711280000
+32.580432778 128.711220278
+32.580331111 128.710701111
+32.580320000 128.710614444
+32.580325556 128.710474722
+32.580348056 128.710381667
+32.580365000 128.710355000
+32.580427222 128.710355000
+32.580460833 128.710375000
+32.580511667 128.710441667
+32.580669444 128.710920833
+32.580759722 128.711100278
+32.580855556 128.711213611
+32.580996667 128.711320000
+32.581239167 128.711453056
+32.581329444 128.711526389
+32.581374444 128.711579444
+32.581447778 128.711692500
+32.581515278 128.711839167
+32.581600000 128.712125278
+32.581645000 128.712211667
+32.581718333 128.712298333
+32.581773278 128.712345778
+32.581864722 128.712424722
+32.581960556 128.712524444
+32.582056389 128.712664167
+32.582056389 128.712744167
+32.582016944 128.712823889
+32.581949444 128.712863889
+32.581842222 128.712883889
+32.581538056 128.712910556
+32.581447778 128.712943611
+32.581413889 128.712963611
+32.581368889 128.713016944
+32.581340556 128.713096667
+32.581329444 128.713170000
+32.581323611 128.713329722
+32.581340556 128.713436111
+32.581380000 128.713549167
+32.581509722 128.713782222
+32.581555000 128.713895278
+32.581566111 128.713988333
+32.581566111 128.714194722
+32.581555000 128.714327778
+32.581442222 128.714780000
+32.581363056 128.714953056
+32.581329444 128.714959722
+32.581318056 128.714939722
+32.581295556 128.714806667
+32.581289722 128.714427778
+32.581267222 128.714374444
+32.581171389 128.714301111
+32.581137500 128.714248056
+32.581115000 128.714181389
+32.581115000 128.714115000
+32.581143333 128.713948611
+32.581165833 128.713522778
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>60</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_60">
+<fid>46335-11727-s-3099</fid>
+<lfSpanFr gml:id="K3_4633511727_60-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_60-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_60-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581419444 128.712105278
+32.581470278 128.712218333
+32.581695833 128.712471111
+32.581701389 128.712517778
+32.581684722 128.712544444
+32.581645000 128.712564444
+32.581588611 128.712564444
+32.581509722 128.712524444
+32.581402500 128.712451389
+32.581205278 128.712291667
+32.581126389 128.712218333
+32.581036111 128.712118611
+32.580951389 128.711958889
+32.580906389 128.711832500
+32.580838611 128.711699167
+32.580669444 128.711493056
+32.580663889 128.711446389
+32.580680833 128.711433056
+32.580737222 128.711433056
+32.581070000 128.711586111
+32.581143333 128.711639444
+32.581250278 128.711745833
+32.581335000 128.711892222
+32.581419444 128.712105278
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>80</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_61">
+<fid>46335-11727-s-3100</fid>
+<lfSpanFr gml:id="K3_4633511727_61-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_61-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_61-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581357500 128.712165000
+32.581357500 128.712198333
+32.581329444 128.712225000
+32.581222222 128.712198333
+32.581154444 128.712151667
+32.581120556 128.712111944
+32.581098056 128.712065278
+32.581092500 128.711992222
+32.581115000 128.711965556
+32.581137500 128.711952222
+32.581165833 128.711952222
+32.581233333 128.711985556
+32.581312500 128.712071944
+32.581357500 128.712165000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>90</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_62">
+<fid>46335-11727-s-3101</fid>
+<lfSpanFr gml:id="K3_4633511727_62-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_62-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_62-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581926667 128.712624167
+32.581926667 128.712677500
+32.581898611 128.712724167
+32.581836667 128.712750833
+32.581757778 128.712763889
+32.581667778 128.712763889
+32.581555000 128.712717500
+32.581464722 128.712650833
+32.581295556 128.712491111
+32.581115000 128.712285000
+32.580996667 128.712211667
+32.580957222 128.712165000
+32.580821944 128.711779167
+32.580782222 128.711705833
+32.580646944 128.711539444
+32.580483611 128.711226944
+32.580404444 128.710827500
+32.580404444 128.710747778
+32.580421389 128.710707778
+32.580455278 128.710707778
+32.580540000 128.710847500
+32.580646944 128.711093611
+32.580737222 128.711233333
+32.580805000 128.711313333
+32.581109444 128.711473056
+32.581273056 128.711592778
+32.581402500 128.711732500
+32.581487222 128.711885556
+32.581549167 128.712118611
+32.581628056 128.712285000
+32.581707222 128.712404722
+32.581847778 128.712511111
+32.581910000 128.712577778
+32.581926667 128.712624167
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>70</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_63">
+<fid>46335-11727-s-3102</fid>
+<lfSpanFr gml:id="K3_4633511727_63-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_63-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_63-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579524722 128.708458889
+32.579350000 128.708392222
+32.579242778 128.708471944
+32.579219444 128.708541944
+32.579258611 128.708611389
+32.579411389 128.708662222
+32.579544444 128.708759444
+32.579615000 128.708888889
+32.579642222 128.709147778
+32.579626667 128.709443611
+32.579606944 128.709559444
+32.579493611 128.709781389
+32.579458333 128.710077222
+32.579518889 128.710185833
+32.579573889 128.710222778
+32.579730278 128.710199722
+32.579890833 128.710121111
+32.579996667 128.710130278
+32.580106389 128.710255000
+32.580137778 128.710370556
+32.580149444 128.710837500
+32.580290278 128.711318611
+32.580390278 128.711658333
+32.580648611 128.712241111
+32.580801389 128.712532500
+32.580856111 128.712624722
+32.580887500 128.712712778
+32.580852222 128.712833056
+32.580758333 128.713013333
+32.580756389 128.713158889
+32.580885556 128.713297778
+32.580948333 128.713422500
+32.580932500 128.713773889
+32.580940278 128.714180833
+32.581022500 128.714698611
+32.581034444 128.714929722
+32.581051944 128.715417500
+32.580973611 128.715861389
+32.580915000 128.716069444
+32.580754444 128.716161944
+32.580652778 128.716284167
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>30</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_64">
+<fid>46335-11727-s-3103</fid>
+<lfSpanFr gml:id="K3_4633511727_64-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_64-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_64-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581504167 128.714068333
+32.581504167 128.714288056
+32.581481667 128.714480833
+32.581447778 128.714606944
+32.581413889 128.714673611
+32.581391389 128.714693611
+32.581363056 128.714673611
+32.581351944 128.714633611
+32.581351944 128.714507500
+32.581329444 128.714387778
+32.581289722 128.714307778
+32.581205278 128.714254722
+32.581182778 128.714208056
+32.581165833 128.714121667
+32.581193889 128.713915278
+32.581199722 128.713649167
+32.581216667 128.713589167
+32.581239167 128.713569167
+32.581273056 128.713582500
+32.581318056 128.713642500
+32.581374444 128.713788889
+32.581458889 128.713908611
+32.581504167 128.714068333
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>70</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_65">
+<fid>46335-11727-s-3104</fid>
+<lfSpanFr gml:id="K3_4633511727_65-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_65-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_65-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581453333 128.714221389
+32.581447778 128.714294444
+32.581425278 128.714327778
+32.581402500 128.714327778
+32.581357500 128.714288056
+32.581329444 128.714188056
+32.581273056 128.714095000
+32.581267222 128.714008333
+32.581284167 128.713995000
+32.581318056 128.714001667
+32.581396944 128.714081667
+32.581430833 128.714135000
+32.581453333 128.714221389
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>80</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_66">
+<fid>46335-11727-s-3105</fid>
+<lfSpanFr gml:id="K3_4633511727_66-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_66-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_66-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582513333 128.716117778
+32.582513333 128.716177500
+32.582490556 128.716204167
+32.582445556 128.716177500
+32.582423056 128.716104444
+32.582417500 128.716011111
+32.582434167 128.715977778
+32.582451111 128.715977778
+32.582479444 128.716004444
+32.582513333 128.716117778
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_67">
+<fid>46335-11727-s-3106</fid>
+<lfSpanFr gml:id="K3_4633511727_67-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_67-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_67-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581577500 128.711473056
+32.581532222 128.711513056
+32.581538056 128.711599444
+32.581616944 128.711765833
+32.581622500 128.711805833
+32.581611389 128.711978889
+32.581645000 128.712098611
+32.581673333 128.712151667
+32.581746667 128.712245000
+32.582135556 128.712610833
+32.582129722 128.712724167
+32.582084722 128.712883889
+32.582056389 128.712936944
+32.582033889 128.712963611
+32.581932500 128.713023611
+32.581678889 128.713116667
+32.581588611 128.713163333
+32.581532222 128.713216667
+32.581532222 128.713289722
+32.581560556 128.713369722
+32.581791667 128.713782222
+32.581820000 128.713855278
+32.581820000 128.713935278
+32.581605556 128.714387778
+32.581532222 128.714660278
+32.581425278 128.714926389
+32.581374444 128.715172778
+32.581374444 128.715239167
+32.581475833 128.715711667
+32.581498611 128.715911389
+32.581566111 128.716177500
+32.581600000 128.716277500
+32.581656389 128.716350556
+32.581814167 128.716463611
+32.581859444 128.716523611
+32.581876389 128.716563611
+32.581888528 128.716666667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>50</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_68">
+<fid>46335-11727-s-3107</fid>
+<lfSpanFr gml:id="K3_4633511727_68-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_68-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_68-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580765111 128.716666667
+32.580765556 128.716663333
+32.580788056 128.716583611
+32.580838611 128.716490278
+32.581053056 128.716297222
+32.581143333 128.716190833
+32.581193889 128.716097778
+32.581216667 128.716011111
+32.581222222 128.715818333
+32.581250278 128.715685000
+32.581289722 128.715585278
+32.581351944 128.715512222
+32.581374444 128.715531944
+32.581385833 128.715618611
+32.581368889 128.715884722
+32.581374444 128.715951389
+32.581402500 128.716057778
+32.581458889 128.716164167
+32.581560556 128.716323889
+32.581797500 128.716636667
+32.581808611 128.716666667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>60</alti>
+</Cntr>
+<Cntr gml:id="K3_4633511727_69">
+<fid>46335-11727-s-3108</fid>
+<lfSpanFr gml:id="K3_4633511727_69-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633511727_69-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633511727_69-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581427028 128.716666667
+32.581391389 128.716550278
+32.581335000 128.716450278
+32.581318056 128.716430556
+32.581273056 128.716430556
+32.581154444 128.716476944
+32.581098056 128.716516944
+32.581007778 128.716616667
+32.580978000 128.716666667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>80</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_1">
+<fid>46338-11727-s-1318</fid>
+<lfSpanFr gml:id="K3_4633811727_1-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_1-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_1-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582133417 128.716666667
+32.582169167 128.716849722
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>20</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_2">
+<fid>46338-11727-s-1319</fid>
+<lfSpanFr gml:id="K3_4633811727_2-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_2-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_2-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582221889 128.716666667
+32.582253889 128.716769722
+32.582253889 128.716843056
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_3">
+<fid>46338-11727-s-1320</fid>
+<lfSpanFr gml:id="K3_4633811727_3-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_3-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_3-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581888528 128.716666667
+32.581938333 128.717089167
+32.581977778 128.717235556
+32.582175000 128.717641667
+32.582203056 128.717728056
+32.582208611 128.717801389
+32.582186111 128.717914444
+32.582101944 128.718087500
+32.581994722 128.718260556
+32.581645000 128.718766111
+32.581583056 128.718839444
+32.581419444 128.718965833
+32.581346111 128.719012500
+32.581256111 128.719039167
+32.581205278 128.719072222
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>50</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_4">
+<fid>46338-11727-s-1321</fid>
+<lfSpanFr gml:id="K3_4633811727_4-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_4-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_4-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580594250 128.716666667
+32.580585000 128.716783056
+32.580551111 128.716922778
+32.580393333 128.717268889
+32.580353889 128.717408611
+32.580308611 128.717688056
+32.580291667 128.717894444
+32.580257778 128.717994167
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>30</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_5">
+<fid>46338-11727-s-1322</fid>
+<lfSpanFr gml:id="K3_4633811727_5-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_5-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_5-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580978000 128.716666667
+32.580940278 128.716730000
+32.580934722 128.716829722
+32.580968333 128.716969444
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>80</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_6">
+<fid>46338-11727-s-1323</fid>
+<lfSpanFr gml:id="K3_4633811727_6-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_6-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_6-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582253889 128.716843056
+32.582289722 128.717102778
+32.582377778 128.717328889
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_7">
+<fid>46338-11727-s-1324</fid>
+<lfSpanFr gml:id="K3_4633811727_7-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_7-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_7-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582169167 128.716849722
+32.582196389 128.717047222
+32.582321389 128.717355278
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>20</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_8">
+<fid>46338-11727-s-1325</fid>
+<lfSpanFr gml:id="K3_4633811727_8-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_8-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_8-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580968333 128.716969444
+32.581007500 128.717090278
+32.581002222 128.717202222
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>80</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_9">
+<fid>46338-11727-s-1326</fid>
+<lfSpanFr gml:id="K3_4633811727_9-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_9-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_9-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581092500 128.716989444
+32.581070000 128.717189167
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>90</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_10">
+<fid>46338-11727-s-1327</fid>
+<lfSpanFr gml:id="K3_4633811727_10-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_10-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_10-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581070000 128.717189167
+32.581070000 128.717348889
+32.581030556 128.717495278
+32.580872500 128.717934444
+32.580788056 128.718247222
+32.580759722 128.718400278
+32.580754167 128.718599722
+32.580765556 128.718699722
+32.580833056 128.718892500
+32.580878333 128.718932500
+32.580923333 128.718939167
+32.580962778 128.718919167
+32.581227778 128.718606389
+32.581425278 128.718426944
+32.581487222 128.718346944
+32.581583056 128.718187222
+32.581656389 128.717994167
+32.581707222 128.717754722
+32.581712778 128.717661667
+32.581701389 128.717595000
+32.581667778 128.717475278
+32.581475833 128.717036111
+32.581346111 128.716776389
+32.581282806 128.716666667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>90</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_11">
+<fid>46338-11727-s-1328</fid>
+<lfSpanFr gml:id="K3_4633811727_11-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_11-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_11-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581086806 128.716666667
+32.581075556 128.716683333
+32.581092500 128.716989444
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>90</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_12">
+<fid>46338-11727-s-1329</fid>
+<lfSpanFr gml:id="K3_4633811727_12-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_12-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_12-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581002222 128.717202222
+32.580945833 128.717501944
+32.580816111 128.718007500
+32.580771111 128.718133889
+32.580613056 128.718306944
+32.580568056 128.718386944
+32.580562500 128.718500000
+32.580590556 128.718593056
+32.580759722 128.718885833
+32.580810556 128.719039167
+32.580838611 128.719065556
+32.580883889 128.719065556
+32.580951389 128.719019167
+32.581047500 128.718892500
+32.581301111 128.718686389
+32.581425278 128.718560000
+32.581577500 128.718353611
+32.581780556 128.718000833
+32.581825556 128.717887778
+32.581848056 128.717788056
+32.581848056 128.717615000
+32.581825556 128.717528333
+32.581718333 128.717295556
+32.581538056 128.716962778
+32.581464722 128.716789722
+32.581427028 128.716666667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>80</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_13">
+<fid>46338-11727-s-1330</fid>
+<lfSpanFr gml:id="K3_4633811727_13-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_13-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_13-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582203056 128.717282222
+32.582146667 128.717228889
+32.582112778 128.717155833
+32.582084722 128.717029444
+32.582095833 128.716789722
+32.582054472 128.716666667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>30</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_14">
+<fid>46338-11727-s-1331</fid>
+<lfSpanFr gml:id="K3_4633811727_14-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_14-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_14-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582377778 128.717328889
+32.582490556 128.717428611
+32.582513333 128.717475278
+32.582541389 128.717595000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_15">
+<fid>46338-11727-s-1332</fid>
+<lfSpanFr gml:id="K3_4633811727_15-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_15-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_15-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582259444 128.717355278
+32.582203056 128.717282222
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>30</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_16">
+<fid>46338-11727-s-1333</fid>
+<lfSpanFr gml:id="K3_4633811727_16-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_16-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_16-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582321389 128.717355278
+32.582332778 128.717408611
+32.582434167 128.717508333
+32.582456944 128.717595000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>20</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_17">
+<fid>46338-11727-s-1334</fid>
+<lfSpanFr gml:id="K3_4633811727_17-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_17-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_17-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582456944 128.717595000
+32.582461667 128.717818056
+32.582406111 128.718054167
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>20</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_18">
+<fid>46338-11727-s-1335</fid>
+<lfSpanFr gml:id="K3_4633811727_18-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_18-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_18-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582541389 128.717595000
+32.582558333 128.718080833
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_19">
+<fid>46338-11727-s-1336</fid>
+<lfSpanFr gml:id="K3_4633811727_19-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_19-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_19-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582394722 128.717668056
+32.582332778 128.717595000
+32.582298889 128.717528333
+32.582259444 128.717355278
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>30</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_20">
+<fid>46338-11727-s-1337</fid>
+<lfSpanFr gml:id="K3_4633811727_20-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_20-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_20-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582374444 128.717772222
+32.582394722 128.717668056
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>30</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_21">
+<fid>46338-11727-s-1338</fid>
+<lfSpanFr gml:id="K3_4633811727_21-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_21-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_21-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582369444 128.717878056
+32.582374444 128.717772222
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>30</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_22">
+<fid>46338-11727-s-1339</fid>
+<lfSpanFr gml:id="K3_4633811727_22-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_22-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_22-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580105556 128.717934444
+32.580122500 128.717475278
+32.580161944 128.717208889
+32.580190278 128.717089167
+32.580263611 128.716909444
+32.580325556 128.716869722
+32.580466667 128.716710000
+32.580482389 128.716666667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_23">
+<fid>46338-11727-s-1340</fid>
+<lfSpanFr gml:id="K3_4633811727_23-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_23-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_23-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580195833 128.717934444
+32.580178889 128.717708056
+32.580184722 128.717508333
+32.580201389 128.717401944
+32.580257778 128.717235556
+32.580336944 128.717062500
+32.580534167 128.716743056
+32.580550444 128.716666667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>20</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_24">
+<fid>46338-11727-s-1341</fid>
+<lfSpanFr gml:id="K3_4633811727_24-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_24-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_24-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582344167 128.717974167
+32.582369444 128.717878056
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>30</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_25">
+<fid>46338-11727-s-1342</fid>
+<lfSpanFr gml:id="K3_4633811727_25-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_25-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_25-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580257778 128.717994167
+32.580194444 128.718413889
+32.580161944 128.718759444
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>30</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_26">
+<fid>46338-11727-s-1343</fid>
+<lfSpanFr gml:id="K3_4633811727_26-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_26-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_26-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582406111 128.718054167
+32.582406111 128.718133889
+32.582366667 128.718253889
+32.582293333 128.718400278
+32.582197500 128.718546667
+32.582045556 128.718733056
+32.581977778 128.718786111
+32.581791667 128.719025833
+32.581498611 128.719351389
+32.581368889 128.719551111
+32.581295556 128.719637778
+32.581148889 128.719750833
+32.580991111 128.719903889
+32.580799167 128.720150000
+32.580697778 128.720243333
+32.580562500 128.720323056
+32.580173333 128.720655833
+32.579784167 128.721061667
+32.579609444 128.721328056
+32.579581111 128.721361111
+32.579547500 128.721367778
+32.579536111 128.721354444
+32.579553056 128.721281389
+32.579615000 128.721148333
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>20</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_27">
+<fid>46338-11727-s-1344</fid>
+<lfSpanFr gml:id="K3_4633811727_27-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_27-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_27-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582558333 128.718080833
+32.582496389 128.718300278
+32.582440000 128.718433333
+32.582344167 128.718606389
+32.582236944 128.718766111
+32.581881944 128.719185278
+32.581786111 128.719265000
+32.581583056 128.719491389
+32.581256111 128.719923889
+32.581137500 128.720043611
+32.580601944 128.720396389
+32.580229722 128.720709167
+32.580083056 128.720842222
+32.579902778 128.721041667
+32.579710833 128.721334722
+32.579575556 128.721487778
+32.579440278 128.721607500
+32.579400833 128.721620833
+32.579355556 128.721620833
+32.579327500 128.721580833
+32.579344444 128.721487778
+32.579547500 128.721135000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_28">
+<fid>46338-11727-s-1345</fid>
+<lfSpanFr gml:id="K3_4633811727_28-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_28-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_28-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580009722 128.718733056
+32.580084722 128.718423333
+32.580105556 128.717934444
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_29">
+<fid>46338-11727-s-1346</fid>
+<lfSpanFr gml:id="K3_4633811727_29-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_29-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_29-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580105556 128.718752778
+32.580195833 128.717934444
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>20</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_30">
+<fid>46338-11727-s-1347</fid>
+<lfSpanFr gml:id="K3_4633811727_30-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_30-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_30-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580161944 128.718759444
+32.580156389 128.718992500
+32.580156389 128.719085556
+32.580167778 128.719178889
+32.580207222 128.719485000
+32.580218333 128.719498333
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>30</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_31">
+<fid>46338-11727-s-1348</fid>
+<lfSpanFr gml:id="K3_4633811727_31-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_31-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_31-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580286111 128.719032500
+32.580325556 128.718806111
+32.580325556 128.718453333
+32.580348056 128.718074167
+32.580376389 128.717980833
+32.580494722 128.717728056
+32.580562500 128.717541667
+32.580601944 128.717282222
+32.580613056 128.717002778
+32.580646167 128.716666667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>40</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_32">
+<fid>46338-11727-s-1349</fid>
+<lfSpanFr gml:id="K3_4633811727_32-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_32-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_32-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581182778 128.719039167
+32.581137500 128.719132222
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>60</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_33">
+<fid>46338-11727-s-1350</fid>
+<lfSpanFr gml:id="K3_4633811727_33-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_33-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_33-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581205278 128.719072222
+32.581188333 128.719192222
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>50</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_34">
+<fid>46338-11727-s-1351</fid>
+<lfSpanFr gml:id="K3_4633811727_34-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_34-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_34-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581137500 128.719132222
+32.581053056 128.719305278
+32.580850000 128.719544444
+32.580731667 128.719737500
+32.580534167 128.719990278
+32.580443889 128.720056944
+32.580387500 128.720056944
+32.580359444 128.720030278
+32.580353889 128.719983611
+32.580398889 128.719804167
+32.580517222 128.719498333
+32.580540000 128.719398333
+32.580551111 128.719311944
+32.580556667 128.719032500
+32.580540000 128.718852778
+32.580500278 128.718706389
+32.580477778 128.718393611
+32.580477778 128.718286944
+32.580517222 128.718153889
+32.580585000 128.718034167
+32.580703333 128.717874444
+32.580725833 128.717821111
+32.580765556 128.717655000
+32.580805000 128.717421944
+32.580810556 128.717228889
+32.580793611 128.717082500
+32.580754167 128.716942778
+32.580748611 128.716789722
+32.580765111 128.716666667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>60</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_35">
+<fid>46338-11727-s-1352</fid>
+<lfSpanFr gml:id="K3_4633811727_35-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_35-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_35-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581188333 128.719192222
+32.581131944 128.719318611
+32.581019167 128.719498056
+32.580618889 128.720010278
+32.580551111 128.720083611
+32.580263611 128.720309722
+32.579964722 128.720622500
+32.579930833 128.720629167
+32.579891389 128.720615833
+32.579874444 128.720595833
+32.579863056 128.720556111
+32.579863056 128.720509444
+32.579896944 128.720416389
+32.580026667 128.720236667
+32.580156389 128.719957222
+32.580342500 128.719651389
+32.580387500 128.719524722
+32.580387500 128.719425000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>50</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_36">
+<fid>46338-11727-s-1353</fid>
+<lfSpanFr gml:id="K3_4633811727_36-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_36-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_36-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580404444 128.719205278
+32.580427222 128.719192222
+32.580455278 128.719072222
+32.580455278 128.719019167
+32.580432778 128.718852778
+32.580365000 128.718613056
+32.580370556 128.718466667
+32.580421389 128.718187222
+32.580472222 128.718040833
+32.580545556 128.717921111
+32.580585000 128.717808056
+32.580613056 128.717535000
+32.580669444 128.717222222
+32.580658333 128.716982778
+32.580714722 128.716690000
+32.580714722 128.716666667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>50</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_37">
+<fid>46338-11727-s-1354</fid>
+<lfSpanFr gml:id="K3_4633811727_37-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_37-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_37-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581286667 128.719269722
+32.581266389 128.719360556
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>40</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_38">
+<fid>46338-11727-s-1355</fid>
+<lfSpanFr gml:id="K3_4633811727_38-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_38-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_38-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581266389 128.719360556
+32.581188333 128.719504444
+32.581098056 128.719604444
+32.580827500 128.719830556
+32.580771111 128.719903889
+32.580709167 128.720036944
+32.580618889 128.720136667
+32.580483611 128.720216667
+32.580241111 128.720403056
+32.580105556 128.720542778
+32.579953333 128.720728889
+32.579908333 128.720755556
+32.579863056 128.720755556
+32.579761667 128.720682500
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>40</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_39">
+<fid>46338-11727-s-1356</fid>
+<lfSpanFr gml:id="K3_4633811727_39-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_39-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_39-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580387500 128.719425000
+32.580385556 128.719301389
+32.580404444 128.719205278
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>50</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_40">
+<fid>46338-11727-s-1357</fid>
+<lfSpanFr gml:id="K3_4633811727_40-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_40-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_40-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580156389 128.719465000
+32.580083056 128.719218611
+32.580071944 128.719145556
+32.580105556 128.718752778
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>20</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_41">
+<fid>46338-11727-s-1358</fid>
+<lfSpanFr gml:id="K3_4633811727_41-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_41-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_41-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580218333 128.719498333
+32.580105556 128.719751111
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>30</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_42">
+<fid>46338-11727-s-1359</fid>
+<lfSpanFr gml:id="K3_4633811727_42-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_42-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_42-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580286111 128.719551389
+32.580311944 128.719269444
+32.580286111 128.719032500
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>40</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_43">
+<fid>46338-11727-s-1360</fid>
+<lfSpanFr gml:id="K3_4633811727_43-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_43-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_43-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580075278 128.719691667
+32.580163056 128.719570000
+32.580156389 128.719465000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>20</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_44">
+<fid>46338-11727-s-1361</fid>
+<lfSpanFr gml:id="K3_4633811727_44-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_44-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_44-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580105556 128.719751111
+32.579925278 128.719996944
+32.579784167 128.720283056
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>30</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_45">
+<fid>46338-11727-s-1362</fid>
+<lfSpanFr gml:id="K3_4633811727_45-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_45-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_45-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579716667 128.720216667
+32.579722222 128.720023889
+32.579756111 128.719950833
+32.579964722 128.719724444
+32.580004167 128.719651389
+32.580004167 128.719578056
+32.579992778 128.719504722
+32.579930833 128.719251944
+32.579930833 128.719172222
+32.579942222 128.719098889
+32.579987222 128.718919167
+32.579998611 128.718746111
+32.580009722 128.718733056
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_46">
+<fid>46338-11727-s-1363</fid>
+<lfSpanFr gml:id="K3_4633811727_46-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_46-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_46-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579744722 128.720250000
+32.579801111 128.720023611
+32.579851944 128.719937500
+32.580032222 128.719746944
+32.580075278 128.719691667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>20</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_47">
+<fid>46338-11727-s-1364</fid>
+<lfSpanFr gml:id="K3_4633811727_47-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_47-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_47-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579784167 128.720283056
+32.579685278 128.720550000
+32.579681389 128.720758056
+32.579733611 128.720888611
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>30</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_48">
+<fid>46338-11727-s-1365</fid>
+<lfSpanFr gml:id="K3_4633811727_48-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_48-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_48-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579835000 128.720369722
+32.579880000 128.720349722
+32.579919444 128.720303056
+32.579959167 128.720223333
+32.580004167 128.720056944
+32.580038056 128.720003611
+32.580133889 128.719903889
+32.580190278 128.719817500
+32.580291667 128.719591389
+32.580286111 128.719551389
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>40</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_49">
+<fid>46338-11727-s-1366</fid>
+<lfSpanFr gml:id="K3_4633811727_49-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_49-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_49-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579761667 128.720682500
+32.579724444 128.720559444
+32.579744167 128.720476111
+32.579835000 128.720369722
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>40</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_50">
+<fid>46338-11727-s-1367</fid>
+<lfSpanFr gml:id="K3_4633811727_50-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_50-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_50-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579733611 128.720888611
+32.579823611 128.720895278
+32.579885833 128.720855556
+32.580483611 128.720296389
+32.580590556 128.720216667
+32.580720278 128.720150000
+32.580776667 128.720083611
+32.580855556 128.719917222
+32.581007778 128.719750833
+32.581233333 128.719591111
+32.581343611 128.719456944
+32.581391389 128.719358056
+32.581475833 128.719218611
+32.581555000 128.719132222
+32.581656389 128.719052222
+32.581729722 128.718965833
+32.581842500 128.718786111
+32.581955278 128.718713056
+32.582045556 128.718606389
+32.582180556 128.718426944
+32.582242500 128.718313611
+32.582293333 128.718173889
+32.582315833 128.717994167
+32.582344167 128.717974167
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>30</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_51">
+<fid>46338-11727-s-1368</fid>
+<lfSpanFr gml:id="K3_4633811727_51-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_51-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_51-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579547500 128.721135000
+32.579575833 128.720869167
+32.579603056 128.720490000
+32.579716667 128.720216667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_52">
+<fid>46338-11727-s-1369</fid>
+<lfSpanFr gml:id="K3_4633811727_52-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_52-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_52-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579615000 128.721148333
+32.579630556 128.721007778
+32.579626667 128.720702778
+32.579744722 128.720250000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>20</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_53">
+<fid>46338-11727-s-1629</fid>
+<lfSpanFr gml:id="K3_4633811727_53-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_53-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_53-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581577500 128.717601667
+32.581577500 128.717854444
+32.581549167 128.718027500
+32.581521111 128.718120556
+32.581464722 128.718227222
+32.581047500 128.718739444
+32.581007778 128.718766111
+32.580917778 128.718772778
+32.580883889 128.718739444
+32.580866944 128.718706389
+32.580855556 128.718659722
+32.580855556 128.718513333
+32.580883889 128.718147222
+32.581013611 128.717827778
+32.581120556 128.717401944
+32.581182778 128.716982778
+32.581216667 128.716883056
+32.581244722 128.716856389
+32.581273056 128.716863056
+32.581312500 128.716902778
+32.581458889 128.717149167
+32.581543611 128.717401944
+32.581577500 128.717601667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>100</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_54">
+<fid>46338-11727-s-1630</fid>
+<lfSpanFr gml:id="K3_4633811727_54-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_54-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_54-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581626917 128.716666667
+32.581661944 128.716710000
+32.581763611 128.716876389
+32.581814167 128.716982778
+32.581848056 128.717115833
+32.581887500 128.717381944
+32.581983333 128.717655000
+32.582006111 128.717761389
+32.582006111 128.717841111
+32.581943889 128.718007500
+32.581825556 128.718220556
+32.581577500 128.718580000
+32.581526667 128.718639722
+32.581447778 128.718693056
+32.581289722 128.718759444
+32.581210833 128.718839444
+32.581092500 128.719065556
+32.580917778 128.719298611
+32.580771111 128.719458333
+32.580714722 128.719498333
+32.580663889 128.719498333
+32.580624444 128.719471667
+32.580601944 128.719431667
+32.580596389 128.719318611
+32.580641389 128.718972500
+32.580635833 128.718866111
+32.580601944 128.718719722
+32.580545556 128.718606389
+32.580517222 128.718500000
+32.580506111 128.718373611
+32.580517222 128.718293611
+32.580551111 128.718227222
+32.580680833 128.718107500
+32.580709167 128.718074167
+32.580754167 128.717967500
+32.580799167 128.717814722
+32.580833056 128.717641667
+32.580866944 128.717262222
+32.580816111 128.716789722
+32.580816111 128.716743056
+32.580834583 128.716666667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>70</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_55">
+<fid>46338-11727-s-1631</fid>
+<lfSpanFr gml:id="K3_4633811727_55-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_55-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_55-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581453333 128.717768056
+32.581442222 128.717894444
+32.581413889 128.717980833
+32.581380000 128.718047500
+32.581312500 128.718114167
+32.581216667 128.718133889
+32.581165833 128.718107500
+32.581154444 128.718094167
+32.581137500 128.717887778
+32.581165833 128.717681389
+32.581199722 128.717581667
+32.581239167 128.717255556
+32.581261667 128.717189167
+32.581284167 128.717155833
+32.581335000 128.717129167
+32.581374444 128.717149167
+32.581396944 128.717175833
+32.581425278 128.717262222
+32.581442222 128.717388611
+32.581453333 128.717768056
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>110</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_56">
+<fid>46338-11727-s-1632</fid>
+<lfSpanFr gml:id="K3_4633811727_56-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_56-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_56-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581808611 128.716666667
+32.581836944 128.716743056
+32.581921389 128.717268889
+32.581960833 128.717428611
+32.581994722 128.717521667
+32.582085000 128.717655000
+32.582113056 128.717748056
+32.582118889 128.717874444
+32.582090556 128.717974167
+32.582051111 128.718060833
+32.581910278 128.718227222
+32.581752222 128.718520000
+32.581633889 128.718686389
+32.581515278 128.718826111
+32.581442222 128.718879444
+32.581289722 128.718912500
+32.581244722 128.718932500
+32.581199722 128.718985833
+32.581182778 128.719039167
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>60</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_57">
+<fid>46338-11727-s-1633</fid>
+<lfSpanFr gml:id="K3_4633811727_57-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_57-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_57-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581969194 128.716666667
+32.581972222 128.716690000
+32.582017222 128.716829722
+32.582011667 128.717029444
+32.582045556 128.717215556
+32.582085000 128.717328889
+32.582107222 128.717375278
+32.582208611 128.717488611
+32.582259444 128.717595000
+32.582276389 128.717648333
+32.582276389 128.717801389
+32.582231389 128.718107500
+32.582220000 128.718153889
+32.582180556 128.718233889
+32.581994722 128.718520000
+32.581656389 128.718925833
+32.581475833 128.719085556
+32.581402500 128.719125556
+32.581286667 128.719269722
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>40</alti>
+</Cntr>
+<Cntr gml:id="K3_4633811727_58">
+<fid>46338-11727-s-1695</fid>
+<lfSpanFr gml:id="K3_4633811727_58-1">
+<gml:timePosition>2019-06-04</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4633811727_58-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4633811727_58-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579327500 128.722080000
+32.579321944 128.722139722
+32.579282500 128.722199722
+32.579254167 128.722213056
+32.579220278 128.722213056
+32.579203333 128.722166389
+32.579209167 128.722126389
+32.579265556 128.722053333
+32.579282500 128.722040000
+32.579310556 128.722040000
+32.579327500 128.722080000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4634111727_1">
+<fid>46341-11727-s-240</fid>
+<lfSpanFr gml:id="K3_4634111727_1-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4634111727_1-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4634111727_1-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578504444 128.726065833
+32.578441944 128.726006389
+32.578387778 128.726042500
+32.578350556 128.726166389
+32.578377778 128.726302222
+32.578411667 128.726370278
+32.578506389 128.726406111
+32.578538333 128.726331944
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>20</alti>
+</Cntr>
+<Cntr gml:id="K3_4634111727_2">
+<fid>46341-11727-s-241</fid>
+<lfSpanFr gml:id="K3_4634111727_2-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4634111727_2-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4634111727_2-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578791667 128.726218889
+32.578834444 128.726298333
+32.578807500 128.726382222
+32.578753333 128.726434167
+32.578688889 128.726422222
+32.578667778 128.726385278
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>20</alti>
+</Cntr>
+<Cntr gml:id="K3_4634111727_3">
+<fid>46341-11727-s-242</fid>
+<lfSpanFr gml:id="K3_4634111727_3-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4634111727_3-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4634111727_3-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578538333 128.726331944
+32.578549444 128.726172222
+32.578504444 128.726065833
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>20</alti>
+</Cntr>
+<Cntr gml:id="K3_4634111727_4">
+<fid>46341-11727-s-243</fid>
+<lfSpanFr gml:id="K3_4634111727_4-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4634111727_4-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4634111727_4-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578667778 128.726385278
+32.578650833 128.726258611
+32.578673333 128.726205556
+32.578701667 128.726178889
+32.578718333 128.726178889
+32.578791667 128.726218889
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>20</alti>
+</Cntr>
+<Cntr gml:id="K3_4634111727_5">
+<fid>46341-11727-s-322</fid>
+<lfSpanFr gml:id="K3_4634111727_5-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4634111727_5-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4634111727_5-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578949722 128.725573333
+32.578881944 128.725706389
+32.578859444 128.725706389
+32.578842500 128.725693056
+32.578831111 128.725666389
+32.578836944 128.725600000
+32.578876389 128.725513333
+32.578910278 128.725480000
+32.578938333 128.725500000
+32.578949722 128.725573333
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4634111727_6">
+<fid>46341-11727-s-323</fid>
+<lfSpanFr gml:id="K3_4634111727_6-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4634111727_6-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4634111727_6-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578307222 128.725779722
+32.578301389 128.725806111
+32.578256389 128.725832778
+32.578194444 128.725839444
+32.578126667 128.725799444
+32.578098333 128.725766389
+32.578087222 128.725739722
+32.578087222 128.725706389
+32.578109722 128.725666389
+32.578138056 128.725659722
+32.578256389 128.725699722
+32.578284444 128.725726389
+32.578307222 128.725779722
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+</Dataset>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Three.js画像表示テスト</title>
+  <style>body { margin: 0; }</style>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    const loader = new THREE.TextureLoader();
+    loader.load('localmap_vector.png', function(texture) {
+      const geometry = new THREE.PlaneGeometry(800, 800);
+      const material = new THREE.MeshBasicMaterial({ map: texture });
+      const plane = new THREE.Mesh(geometry, material);
+      scene.add(plane);
+      camera.position.set(0, 0, 900);
+      camera.lookAt(0, 0, 0);
+      renderer.render(scene, camera);
+    });
+  </script>
+</body>
+</html>

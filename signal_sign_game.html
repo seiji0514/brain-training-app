@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>信号＋標識同時認知ゲーム</title>
+  <style>
+    body { font-family: 'Meiryo', sans-serif; background: #f0f2f5; text-align: center; }
+    .container { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px #b0c4de; max-width: 520px; margin: 40px auto; padding: 2.5em; }
+    .scene { font-size: 1.3em; margin: 1.5em 0 1.2em 0; color: #2574c7; font-weight: bold; }
+    .signal { display: inline-block; width: 38px; height: 38px; border-radius: 50%; margin: 0 10px; vertical-align: middle; border: 2px solid #aaa; }
+    .signal.red { background: #e74c3c; border-color: #e74c3c; }
+    .signal.yellow { background: #f9d923; border-color: #f9d923; }
+    .signal.blue { background: #3fa7f5; border-color: #3fa7f5; }
+    .sign { display: inline-block; font-size: 2em; margin: 0 10px; vertical-align: middle; }
+    .choices { margin-bottom: 1.5em; }
+    .choice-btn { background: #1a73e8; color: #fff; border: none; border-radius: 10px; padding: 1em 2.5em; margin: 0.7em; font-size: 1.2em; cursor: pointer; letter-spacing: 0.1em; }
+    .choice-btn:hover { background: #1557b0; }
+    .result { font-size: 1.3em; margin: 1.2em 0; color: #27ae60; }
+    .result.incorrect { color: #e67e22; }
+    .score { font-size: 2em; color: #2574c7; margin-top: 2em; font-weight: bold; }
+    .miss { font-size: 1.3em; color: #e74c3c; margin-top: 1em; font-weight: bold; }
+    .final-comment { font-size: 1.5em; margin-top: 1em; color: #2574c7; font-weight: bold; }
+    .next-btn { background: #43a047; color: #fff; border: none; border-radius: 10px; padding: 1em 2.5em; margin: 0.7em; font-size: 1.2em; cursor: pointer; letter-spacing: 0.1em; }
+    .next-btn:hover { background: #2e7031; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div style="font-size:1.5em; color:#2574c7; font-weight:bold; margin-bottom:0.5em;">信号＋標識同時認知ゲーム</div>
+    <div style="font-size:1.1em; color:#444; margin-bottom:1.5em;">信号の色と標識を見て、正しい行動を選んでください</div>
+    <div id="quizArea">
+      <div class="scene" id="scene"></div>
+      <div class="choices" id="choices"></div>
+      <div class="result" id="result"></div>
+      <button id="nextBtn" style="display:none;" class="next-btn">次の問題</button>
+    </div>
+    <div class="score" id="score" style="display:none;"></div>
+  </div>
+  <script>
+    // 信号と標識の組み合わせ問題
+    const questions = [
+      { signal: 'red', sign: '🛑', signLabel: '止まれ', choices: ['止まる', '進む', '注意して進む', '徐行'], answer: 0 },
+      { signal: 'blue', sign: '⬆️', signLabel: '進行可', choices: ['進む', '止まる', '注意して進む', '徐行'], answer: 0 },
+      { signal: 'yellow', sign: '⚠️', signLabel: '注意', choices: ['注意して進む', '止まる', '進む', '徐行'], answer: 0 },
+      { signal: 'red', sign: '🚫', signLabel: '進入禁止', choices: ['止まる', '進む', '注意して進む', '徐行'], answer: 0 },
+      { signal: 'blue', sign: '🅿️', signLabel: '駐車可', choices: ['進む', '止まる', '注意して進む', '徐行'], answer: 0 },
+      { signal: 'yellow', sign: '⛔', signLabel: '車両進入禁止', choices: ['止まる', '進む', '注意して進む', '徐行'], answer: 0 },
+      { signal: 'red', sign: '⚠️', signLabel: '注意', choices: ['止まる', '進む', '注意して進む', '徐行'], answer: 0 },
+      { signal: 'blue', sign: '🚫', signLabel: '進入禁止', choices: ['止まる', '進む', '注意して進む', '徐行'], answer: 0 },
+      { signal: 'yellow', sign: '🛑', signLabel: '止まれ', choices: ['止まる', '進む', '注意して進む', '徐行'], answer: 0 },
+      { signal: 'red', sign: '🅿️', signLabel: '駐車可', choices: ['進む', '止まる', '注意して進む', '徐行'], answer: 1 }
+    ];
+    let current = 0, score = 0, miss = 0;
+    function showQuestion() {
+      document.getElementById('result').textContent = '';
+      document.getElementById('result').className = 'result';
+      document.getElementById('nextBtn').style.display = 'none';
+      const q = questions[current];
+      // 信号と標識を表示
+      document.getElementById('scene').innerHTML =
+        `<span class="signal ${q.signal}"></span> <span class="sign">${q.sign}</span> <span style='font-size:1em;color:#444;'>(${q.signLabel})</span>`;
+      const choicesDiv = document.getElementById('choices');
+      choicesDiv.innerHTML = '';
+      q.choices.forEach((choice, idx) => {
+        const btn = document.createElement('button');
+        btn.textContent = choice;
+        btn.className = 'choice-btn';
+        btn.onclick = () => checkAnswer(idx, q);
+        choicesDiv.appendChild(btn);
+      });
+    }
+    function checkAnswer(idx, q) {
+      document.querySelectorAll('.choice-btn').forEach(btn => btn.disabled = true);
+      if(idx === q.answer) {
+        document.getElementById('result').textContent = '正解！よく認知できました。';
+        document.getElementById('result').className = 'result';
+        score++;
+      } else {
+        document.getElementById('result').textContent = '不正解… 信号と標識の両方に注意しましょう。';
+        document.getElementById('result').className = 'result incorrect';
+        miss++;
+      }
+      document.getElementById('nextBtn').style.display = 'inline-block';
+    }
+    document.getElementById('nextBtn').onclick = () => {
+      current++;
+      if(current < questions.length) {
+        showQuestion();
+      } else {
+        document.getElementById('quizArea').style.display = 'none';
+        let comment = '';
+        if (score === questions.length) {
+          comment = '満点です！すばらしいですね！';
+        } else if (score >= Math.floor(questions.length * 0.8)) {
+          comment = 'よくできました！この調子でがんばりましょう。';
+        } else if (score < Math.floor(questions.length * 0.5)) {
+          comment = '次もがんばりましょう！';
+        } else {
+          comment = 'あと少しで満点です。';
+        }
+        document.getElementById('score').innerHTML =
+          `あなたのスコア：${score} / ${questions.length}` +
+          `<div class='miss'>ミス回数：${miss}</div>` +
+          `<div class='final-comment'>${comment}</div>`;
+        document.getElementById('score').style.display = 'block';
+      }
+    };
+    // 初期表示
+    showQuestion();
+  </script>
+</body>
+</html> 

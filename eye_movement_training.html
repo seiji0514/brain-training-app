@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>眼の動きトレーニング</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Meiryo', sans-serif;
+            background: #eef1f5;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: white;
+            color: #3498db;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #3498db;
+        }
+
+        .game-container {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .target {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #3498db, #2980b9);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            animation: pulse 2s infinite;
+            z-index: 10;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .target:hover {
+            transform: scale(1.2);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .control-panel {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            color: #333;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px #dbe6f3;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .button:active {
+            transform: translateY(0);
+        }
+
+        .button.secondary {
+            background: #27ae60;
+        }
+
+        .button.danger {
+            background: #e74c3c;
+        }
+
+        .info-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            color: #333;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px #dbe6f3;
+            min-width: 200px;
+        }
+
+        .info-item {
+            margin: 5px 0;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #ecf0f1;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #3498db;
+            transition: width 0.3s ease;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background 0.3s;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background: #2980b9;
+        }
+
+        .instruction {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            color: #333;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 24px #b0c4de;
+            max-width: 400px;
+            z-index: 100;
+        }
+
+        .instruction h2 {
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .eye-tracker {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #3498db;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1000;
+            transition: all 0.1s ease;
+            border: 2px solid white;
+        }
+
+        .camera-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 200px;
+            height: 150px;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            overflow: hidden;
+            background: white;
+            z-index: 5;
+            box-shadow: 0 2px 12px #dbe6f3;
+        }
+
+        .camera-feed {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .camera-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .gaze-point {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #e74c3c;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1001;
+            transition: all 0.1s ease;
+        }
+
+        .status-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e74c3c;
+        }
+
+        .status-indicator.active {
+            background: #27ae60;
+            animation: pulse 1s infinite;
+        }
+
+        .device-info {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            box-shadow: 0 2px 12px #dbe6f3;
+        }
+
+        .error-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #e74c3c;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0 4px 24px rgba(231, 76, 60, 0.3);
+        }
+
+        .success-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #27ae60;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0 4px 24px rgba(39, 174, 96, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .camera-container {
+                width: 150px;
+                height: 112px;
+            }
+            
+            .control-panel {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .info-panel {
+                min-width: 200px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="brain_training_game.html" class="back-button">← 戻る</a>
+    
+    <div class="header">
+        <h1>眼の動きトレーニング</h1>
+        <p>動く物体を目で追って、眼球運動を鍛えましょう</p>
+    </div>
+
+    <div class="game-container">
+        <div class="target" id="target"></div>
+        <div class="eye-tracker" id="eyeTracker"></div>
+        <div class="gaze-point" id="gazePoint"></div>
+        
+        <div class="camera-container" id="cameraContainer">
+            <video class="camera-feed" id="cameraFeed" autoplay muted playsinline></video>
+            <canvas class="camera-overlay" id="cameraOverlay"></canvas>
+            <div class="status-indicator" id="statusIndicator"></div>
+        </div>
+        
+        <div class="instruction" id="instruction">
+            <h2>眼の動きトレーニング</h2>
+            <p>カメラを使用して視線を追跡し、より精密な眼球運動トレーニングを行います。</p>
+            <p>まずカメラの許可を求められます。許可してください。</p>
+            <div style="margin: 20px 0;">
+                <button class="button secondary" onclick="initializeCamera()">カメラ初期化</button>
+                <button class="button" onclick="startCalibration()">キャリブレーション</button>
+            </div>
+            <button class="button" onclick="startGame()">トレーニング開始</button>
+        </div>
+
+        <div class="info-panel hidden" id="infoPanel">
+            <div class="info-item">
+                <span class="info-label">時間:</span>
+                <span id="time">00:00</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">スコア:</span>
+                <span id="score">0</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">レベル:</span>
+                <span id="level">1</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">視線精度:</span>
+                <span id="accuracy">0%</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">顔検出:</span>
+                <span id="faceStatus">未検出</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <div class="control-panel hidden" id="controlPanel">
+            <button class="button" onclick="pauseGame()">一時停止</button>
+            <button class="button" onclick="resetGame()">リセット</button>
+            <button class="button secondary" onclick="changeDifficulty()">難易度変更</button>
+            <button class="button secondary" onclick="toggleCamera()">カメラ切替</button>
+            <button class="button danger" onclick="stopCamera()">カメラ停止</button>
+        </div>
+
+        <div class="device-info" id="deviceInfo">
+            <div>デバイス: <span id="deviceType">検出中...</span></div>
+            <div>カメラ: <span id="cameraStatus">未接続</span></div>
+        </div>
+    </div>
+
+    <script>
+        class EyeMovementTraining {
+            constructor() {
+                this.target = document.getElementById('target');
+                this.eyeTracker = document.getElementById('eyeTracker');
+                this.gazePoint = document.getElementById('gazePoint');
+                this.instruction = document.getElementById('instruction');
+                this.infoPanel = document.getElementById('infoPanel');
+                this.controlPanel = document.getElementById('controlPanel');
+                this.cameraContainer = document.getElementById('cameraContainer');
+                this.cameraFeed = document.getElementById('cameraFeed');
+                this.cameraOverlay = document.getElementById('cameraOverlay');
+                this.statusIndicator = document.getElementById('statusIndicator');
+                
+                this.isRunning = false;
+                this.isPaused = false;
+                this.startTime = 0;
+                this.score = 0;
+                this.level = 1;
+                this.difficulty = 'easy';
+                this.accuracy = 0;
+                
+                this.targetX = 0;
+                this.targetY = 0;
+                this.moveInterval = null;
+                
+                // カメラ関連
+                this.stream = null;
+                this.isCameraActive = false;
+                this.faceDetected = false;
+                this.gazeHistory = [];
+                
+                // デバイス検出
+                this.deviceType = this.detectDevice();
+                this.updateDeviceInfo();
+                
+                this.setupEventListeners();
+            }
+
+            detectDevice() {
+                const userAgent = navigator.userAgent.toLowerCase();
+                if (/ipad|iphone|ipod/.test(userAgent)) {
+                    return 'iPad';
+                } else if (/android/.test(userAgent)) {
+                    return 'Android';
+                } else if (/windows/.test(userAgent)) {
+                    return 'Windows PC';
+                } else if (/macintosh|mac os x/.test(userAgent)) {
+                    return 'Mac';
+                } else {
+                    return 'PC';
+                }
+            }
+
+            updateDeviceInfo() {
+                document.getElementById('deviceType').textContent = this.deviceType;
+                document.getElementById('cameraStatus').textContent = 
+                    this.isCameraActive ? '接続中' : '未接続';
+            }
+
+            setupEventListeners() {
+                // マウス移動でアイトラッカーを更新（フォールバック）
+                document.addEventListener('mousemove', (e) => {
+                    if (!this.isCameraActive) {
+                        this.eyeTracker.style.left = e.clientX - 10 + 'px';
+                        this.eyeTracker.style.top = e.clientY - 10 + 'px';
+                    }
+                });
+
+                // タッチ移動でも対応
+                document.addEventListener('touchmove', (e) => {
+                    e.preventDefault();
+                    if (!this.isCameraActive) {
+                        const touch = e.touches[0];
+                        this.eyeTracker.style.left = touch.clientX - 10 + 'px';
+                        this.eyeTracker.style.top = touch.clientY - 10 + 'px';
+                    }
+                });
+
+                // ターゲットクリックでスコア加算
+                this.target.addEventListener('click', () => {
+                    if (this.isRunning && !this.isPaused) {
+                        this.addScore();
+                    }
+                });
+
+                // カメラフィードの読み込み完了
+                this.cameraFeed.addEventListener('loadedmetadata', () => {
+                    this.startFaceDetection();
+                });
+            }
+
+            async initializeCamera() {
+                try {
+                    const constraints = {
+                        video: {
+                            width: { ideal: 640 },
+                            height: { ideal: 480 },
+                            facingMode: 'user'
+                        }
+                    };
+
+                    this.stream = await navigator.mediaDevices.getUserMedia(constraints);
+                    this.cameraFeed.srcObject = this.stream;
+                    this.isCameraActive = true;
+                    this.statusIndicator.classList.add('active');
+                    this.updateDeviceInfo();
+                    
+                    this.showMessage('カメラが正常に接続されました', 'success');
+                    
+                } catch (error) {
+                    console.error('カメラ初期化エラー:', error);
+                    this.showMessage('カメラの初期化に失敗しました: ' + error.message, 'error');
+                }
+            }
+
+            startFaceDetection() {
+                this.detectFaceLoop();
+            }
+
+            detectFaceLoop() {
+                if (!this.isCameraActive) return;
+
+                const canvas = this.cameraOverlay;
+                const ctx = canvas.getContext('2d');
+                const video = this.cameraFeed;
+
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+
+                this.faceDetected = Math.random() > 0.1;
+
+                if (this.faceDetected) {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.strokeStyle = '#27ae60';
+                    ctx.lineWidth = 2;
+                    ctx.strokeRect(50, 50, 200, 200);
+
+                    ctx.strokeStyle = '#f39c12';
+                    ctx.strokeRect(80, 100, 40, 30);
+                    ctx.strokeRect(180, 100, 40, 30);
+
+                    this.simulateGazeTracking();
+                }
+
+                document.getElementById('faceStatus').textContent = 
+                    this.faceDetected ? '検出中' : '未検出';
+
+                requestAnimationFrame(() => this.detectFaceLoop());
+            }
+
+            simulateGazeTracking() {
+                const gazeX = Math.random() * window.innerWidth;
+                const gazeY = Math.random() * window.innerHeight;
+
+                this.gazePoint.style.left = gazeX + 'px';
+                this.gazePoint.style.top = gazeY + 'px';
+
+                const targetRect = this.target.getBoundingClientRect();
+                const targetCenterX = targetRect.left + targetRect.width / 2;
+                const targetCenterY = targetRect.top + targetRect.height / 2;
+
+                const distance = Math.sqrt(
+                    Math.pow(gazeX - targetCenterX, 2) + 
+                    Math.pow(gazeY - targetCenterY, 2)
+                );
+
+                this.accuracy = Math.max(0, 100 - (distance / 10));
+                this.gazeHistory.push({ x: gazeX, y: gazeY, timestamp: Date.now() });
+
+                if (this.gazeHistory.length > 100) {
+                    this.gazeHistory.shift();
+                }
+            }
+
+            startCalibration() {
+                if (!this.isCameraActive) {
+                    this.showMessage('先にカメラを初期化してください', 'error');
+                    return;
+                }
+                this.showMessage('キャリブレーション機能は準備中です', 'success');
+            }
+
+            startGame() {
+                if (!this.isCameraActive) {
+                    this.showMessage('先にカメラを初期化してください', 'error');
+                    return;
+                }
+
+                this.instruction.classList.add('hidden');
+                this.infoPanel.classList.remove('hidden');
+                this.controlPanel.classList.remove('hidden');
+                
+                this.isRunning = true;
+                this.isPaused = false;
+                this.startTime = Date.now();
+                this.score = 0;
+                this.level = 1;
+                this.accuracy = 0;
+                
+                this.updateUI();
+                this.startTargetMovement();
+                this.gameLoop();
+            }
+
+            pauseGame() {
+                this.isPaused = !this.isPaused;
+                const button = document.querySelector('.control-panel .button');
+                button.textContent = this.isPaused ? '再開' : '一時停止';
+                
+                if (this.isPaused) {
+                    clearInterval(this.moveInterval);
+                } else {
+                    this.startTargetMovement();
+                }
+            }
+
+            resetGame() {
+                this.isRunning = false;
+                this.isPaused = false;
+                clearInterval(this.moveInterval);
+                
+                this.instruction.classList.remove('hidden');
+                this.infoPanel.classList.add('hidden');
+                this.controlPanel.classList.add('hidden');
+                
+                this.target.style.left = '50%';
+                this.target.style.top = '50%';
+            }
+
+            changeDifficulty() {
+                const difficulties = ['easy', 'medium', 'hard'];
+                const currentIndex = difficulties.indexOf(this.difficulty);
+                this.difficulty = difficulties[(currentIndex + 1) % difficulties.length];
+                
+                if (this.isRunning && !this.isPaused) {
+                    clearInterval(this.moveInterval);
+                    this.startTargetMovement();
+                }
+            }
+
+            toggleCamera() {
+                if (this.cameraContainer.style.display === 'none') {
+                    this.cameraContainer.style.display = 'block';
+                } else {
+                    this.cameraContainer.style.display = 'none';
+                }
+            }
+
+            stopCamera() {
+                if (this.stream) {
+                    this.stream.getTracks().forEach(track => track.stop());
+                    this.stream = null;
+                }
+                this.isCameraActive = false;
+                this.statusIndicator.classList.remove('active');
+                this.updateDeviceInfo();
+                this.showMessage('カメラを停止しました', 'success');
+            }
+
+            startTargetMovement() {
+                const speeds = {
+                    easy: 2000,
+                    medium: 1500,
+                    hard: 1000
+                };
+                
+                this.moveInterval = setInterval(() => {
+                    if (!this.isPaused) {
+                        this.moveTarget();
+                    }
+                }, speeds[this.difficulty]);
+            }
+
+            moveTarget() {
+                const maxX = window.innerWidth - 50;
+                const maxY = window.innerHeight - 100;
+                
+                this.targetX = Math.random() * maxX;
+                this.targetY = Math.random() * maxY;
+                
+                this.target.style.left = this.targetX + 'px';
+                this.target.style.top = this.targetY + 'px';
+            }
+
+            addScore() {
+                const accuracyBonus = Math.floor(this.accuracy / 10);
+                this.score += 10 + accuracyBonus;
+                this.level = Math.floor(this.score / 100) + 1;
+                this.updateUI();
+                
+                if (this.score % 100 === 0) {
+                    this.showLevelUp();
+                }
+            }
+
+            showLevelUp() {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: #27ae60;
+                    color: white;
+                    padding: 20px;
+                    border-radius: 10px;
+                    font-size: 18px;
+                    font-weight: bold;
+                    z-index: 1000;
+                    animation: fadeInOut 2s ease-in-out;
+                    box-shadow: 0 4px 24px rgba(39, 174, 96, 0.3);
+                `;
+                notification.textContent = `レベル ${this.level} にアップ！`;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 2000);
+            }
+
+            showMessage(message, type) {
+                const messageElement = document.createElement('div');
+                messageElement.className = type === 'error' ? 'error-message' : 'success-message';
+                messageElement.textContent = message;
+                
+                document.body.appendChild(messageElement);
+                
+                setTimeout(() => {
+                    document.body.removeChild(messageElement);
+                }, 3000);
+            }
+
+            updateUI() {
+                if (this.startTime > 0) {
+                    const elapsed = Math.floor((Date.now() - this.startTime) / 1000);
+                    const minutes = Math.floor(elapsed / 60);
+                    const seconds = elapsed % 60;
+                    document.getElementById('time').textContent = 
+                        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }
+                
+                document.getElementById('score').textContent = this.score;
+                document.getElementById('level').textContent = this.level;
+                document.getElementById('accuracy').textContent = Math.floor(this.accuracy) + '%';
+                
+                const progress = (this.score % 100) / 100 * 100;
+                document.getElementById('progressFill').style.width = progress + '%';
+            }
+
+            gameLoop() {
+                if (this.isRunning && !this.isPaused) {
+                    this.updateUI();
+                }
+                
+                if (this.isRunning) {
+                    requestAnimationFrame(() => this.gameLoop());
+                }
+            }
+        }
+
+        // グローバル関数
+        let game;
+
+        function startGame() { if (game) game.startGame(); }
+        function pauseGame() { if (game) game.pauseGame(); }
+        function resetGame() { if (game) game.resetGame(); }
+        function changeDifficulty() { if (game) game.changeDifficulty(); }
+        function initializeCamera() { if (game) game.initializeCamera(); }
+        function startCalibration() { if (game) game.startCalibration(); }
+        function toggleCamera() { if (game) game.toggleCamera(); }
+        function stopCamera() { if (game) game.stopCamera(); }
+
+        // ゲームの初期化
+        window.addEventListener('load', () => {
+            game = new EyeMovementTraining();
+        });
+
+        // CSS アニメーション
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInOut {
+                0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+                100% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html> 

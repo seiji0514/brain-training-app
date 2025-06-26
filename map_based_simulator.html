@@ -1,0 +1,287 @@
+function runSimulator() {
+    let camera, scene, renderer, world, vehicle, trafficLights = [], rain;
+    const carModel = new THREE.Group();
+    const wheelMeshes = [];
+
+    // アニメーションループを開始する前に、初期化処理を完了させる
+    init();
+
+    function init() {
+        // 物理エンジンとシーンの基本設定
+        world = new CANNON.World({ gravity: new CANNON.Vec3(0, -9.82, 0) });
+        world.broadphase = new CANNON.SAPBroadphase(world);
+        world.solver.iterations = 10;
+        
+        const groundMaterial = new CANNON.Material("ground");
+        const wheelMaterial = new CANNON.Material("wheel");
+        const buildingMaterial = new CANNON.Material("building");
+
+        world.addContactMaterial(new CANNON.ContactMaterial(wheelMaterial, groundMaterial, {
+            friction: 0.3, restitution: 0, contactEquationStiffness: 1000,
+        }));
+        world.addContactMaterial(new CANNON.ContactMaterial(buildingMaterial, wheelMaterial, {
+            friction: 0.0, restitution: 0.5
+        }));
+        world.addContactMaterial(new CANNON.ContactMaterial(buildingMaterial, groundMaterial, {
+            friction: 0.9, restitution: 0.1
+        }));
+
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(4, 2, 10);
+        scene = new THREE.Scene();
+
+        // 天候: 曇り空を設定
+        scene.background = new THREE.Color(0x555566);
+
+        // 外部の地図データを読み込む
+        fetch('map_data.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('ネットワーク応答が正常ではありませんでした。');
+                }
+                return response.json();
+            })
+            .then(mapData => {
+                loaderElement.innerHTML = '地図を生成中...';
+                
+                // 地図データを元に環境を生成
+                generateMap(mapData, groundMaterial, buildingMaterial);
+
+                // 車両をセットアップ
+                setupVehicle(wheelMaterial);
+
+                // 信号機をセットアップ
+                setupTrafficLights();
+                
+                // 天候: 雨を生成
+                createRain();
+
+                // レンダラーをセットアップ
+                setupRenderer();
+                
+                // イベントリスナーをセットアップ
+                setupEventListeners();
+
+                loaderElement.style.display = 'none';
+
+                // すべての準備が完了してからアニメーションループを開始
+                animate();
+            })
+            .catch(error => {
+                console.error('地図データの読み込みに失敗しました:', error);
+                loaderElement.innerHTML = 'エラー: 地図データを読み込めませんでした。';
+                loaderElement.style.color = 'red';
+            });
+    }
+
+    function generateMap(data, groundMat, buildingMat) {
+        // 天候: 濡れた路面
+        const roadMaterial = new THREE.MeshStandardMaterial({ color: 0x444444, metalness: 0.8, roughness: 0.4 });
+        data.roads.forEach(r => {
+            const roadMesh = new THREE.Mesh(new THREE.PlaneGeometry(r.width, r.depth), roadMaterial);
+            roadMesh.rotation.x = -Math.PI / 2;
+            roadMesh.position.set(r.x, 0.01, r.z);
+            scene.add(roadMesh);
+        });
+        const groundBody = new CANNON.Body({ mass: 0, material: groundMat, shape: new CANNON.Plane() });
+        groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
+        world.addBody(groundBody);
+
+        const buildingMeshMaterial = new THREE.MeshStandardMaterial({ color: 0x888888, metalness: 0.6, roughness: 0.4 });
+        data.buildings.forEach(b => {
+            const halfExtents = new CANNON.Vec3(b.w / 2, b.h / 2, b.d / 2);
+            const boxGeo = new THREE.BoxGeometry(b.w, b.h, b.d);
+            const boxMesh = new THREE.Mesh(boxGeo, buildingMeshMaterial);
+            boxMesh.position.set(b.x, b.h / 2, b.z);
+            scene.add(boxMesh);
+            
+            const boxBody = new CANNON.Body({ mass: 0, material: buildingMat, shape: new CANNON.Box(halfExtents) });
+            boxBody.position.set(b.x, b.h / 2, b.z);
+            world.addBody(boxBody);
+        });
+    }
+
+    function setupTrafficLights() {
+        const lightPositions = [
+            { x: -7, z: -7, rotation: Math.PI / 2 },
+            { x: 7, z: 7, rotation: -Math.PI / 2 },
+            { x: -7, z: 7, rotation: 0 },
+            { x: 7, z: -7, rotation: Math.PI }
+        ];
+
+        const lightGeo = new THREE.CylinderGeometry(0.2, 0.2, 3, 16);
+        const postMat = new THREE.MeshStandardMaterial({ color: 0x555555 });
+
+        lightPositions.forEach(pos => {
+            const postMesh = new THREE.Mesh(lightGeo, postMat);
+            postMesh.position.set(pos.x, 1.5, pos.z);
+            scene.add(postMesh);
+
+            const lightBox = new THREE.Mesh(
+                new THREE.BoxGeometry(0.5, 1.5, 0.5),
+                new THREE.MeshStandardMaterial({ color: 0x333333 })
+            );
+            lightBox.position.set(pos.x, 2.5, pos.z);
+            lightBox.rotation.y = pos.rotation;
+            
+            const redLight = new THREE.Mesh(new THREE.CircleGeometry(0.2, 16), new THREE.MeshBasicMaterial({ color: 0xff0000 }));
+            const yellowLight = new THREE.Mesh(new THREE.CircleGeometry(0.2, 16), new THREE.MeshBasicMaterial({ color: 0x888800 }));
+            const greenLight = new THREE.Mesh(new THREE.CircleGeometry(0.2, 16), new THREE.MeshBasicMaterial({ color: 0x008800 }));
+            
+            redLight.position.set(0, 0.5, 0.3);
+            yellowLight.position.set(0, 0, 0.3);
+            greenLight.position.set(0, -0.5, 0.3);
+
+            lightBox.add(redLight, yellowLight, greenLight);
+            scene.add(lightBox);
+            trafficLights.push({ box: lightBox, red: redLight, yellow: yellowLight, green: greenLight, state: 'green' });
+        });
+
+        // 初期状態を設定
+        updateTrafficLights(0);
+    }
+
+    function updateTrafficLights(time) {
+        const cycle = 14; // 14秒サイクル
+        const phase = (time / 1000) % cycle;
+
+        let newState;
+        // North-South Green: 0-5s, Yellow: 5-6s, Red: 6-14s
+        // East-West Red: 0-7s, Green: 7-12s, Yellow: 12-13s
+        
+        // Lights 0 & 1 (North-South)
+        if (phase < 5) newState = 'green';
+        else if (phase < 6) newState = 'yellow';
+        else newState = 'red';
+        
+        if (trafficLights.length > 1 && trafficLights[0].state !== newState) {
+            trafficLights[0].state = newState;
+            trafficLights[1].state = newState;
+        }
+
+        // Lights 2 & 3 (East-West)
+        if (phase < 7) newState = 'red';
+        else if (phase < 12) newState = 'green';
+        else if (phase < 13) newState = 'yellow';
+        else newState = 'red';
+
+         if (trafficLights.length > 3 && trafficLights[2].state !== newState) {
+            trafficLights[2].state = newState;
+            trafficLights[3].state = newState;
+        }
+
+        trafficLights.forEach(light => {
+            light.red.material.color.set(light.state === 'red' ? 0xff0000 : 0x440000);
+            light.yellow.material.color.set(light.state === 'yellow' ? 0xffff00 : 0x444400);
+            light.green.material.color.set(light.state === 'green' ? 0x00ff00 : 0x004400);
+        });
+    }
+
+    function createRain() {
+        const vertices = [];
+        for (let i = 0; i < 10000; i++) {
+            const x = THREE.MathUtils.randFloatSpread(400);
+            const y = THREE.MathUtils.randFloat(0, 100);
+            const z = THREE.MathUtils.randFloatSpread(400);
+            vertices.push(x, y, z);
+        }
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+        const material = new THREE.PointsMaterial({ color: 0xaaaaee, size: 0.2, transparent: true, opacity: 0.8 });
+        rain = new THREE.Points(geometry, material);
+        scene.add(rain);
+    }
+
+    function setupVehicle(wheelMaterial) {
+        const chassisBody = new CANNON.Body({ mass: 150, shape: new CANNON.Box(new CANNON.Vec3(1, 0.3, 2)) });
+        chassisBody.position.set(0, 1, 5);
+        vehicle = new CANNON.RaycastVehicle({ chassisBody: chassisBody });
+
+        const wheelOptions = {
+            radius: 0.35, directionLocal: new CANNON.Vec3(0, -1, 0), suspensionStiffness: 30,
+            suspensionRestLength: 0.3, frictionSlip: 5, maxSuspensionTravel: 0.3, material: wheelMaterial
+        };
+        const wheelPositions = [
+            new CANNON.Vec3(-1, 0, 1.7), new CANNON.Vec3(1, 0, 1.7),
+            new CANNON.Vec3(-1, 0, -1.7), new CANNON.Vec3(1, 0, -1.7)
+        ];
+        wheelPositions.forEach(pos => vehicle.addWheel({ ...wheelOptions, chassisConnectionPointLocal: pos }));
+        vehicle.addToWorld(world);
+
+        const chassisMesh = new THREE.Mesh(new THREE.BoxGeometry(2, 0.6, 4), new THREE.MeshStandardMaterial({ color: 0xcc0000, metalness: 0.9, roughness: 0.2 }));
+        carModel.add(chassisMesh);
+        const cabinMesh = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.8, 2), new THREE.MeshStandardMaterial({ color: 0x333333, metalness: 0.9, roughness: 0.2 }));
+        cabinMesh.position.set(0, 0.7, -0.5);
+        carModel.add(cabinMesh);
+        scene.add(carModel);
+
+        const wheelGeo = new THREE.CylinderGeometry(wheelOptions.radius, wheelOptions.radius, 0.3, 26);
+        const wheelMat = new THREE.MeshStandardMaterial({ color: 0x222222, metalness: 0.5, roughness: 0.5 });
+        vehicle.wheelInfos.forEach(() => {
+            const wheelMesh = new THREE.Mesh(wheelGeo, wheelMat);
+            wheelMeshes.push(wheelMesh);
+            scene.add(wheelMesh);
+        });
+    }
+
+    function setupRenderer() {
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+    }
+    
+    function setupEventListeners() {
+        const maxSteerVal = 0.5, maxForce = 800;
+
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'w': case 'ArrowUp': vehicle.applyEngineForce(-maxForce, 2); vehicle.applyEngineForce(-maxForce, 3); break;
+                case 's': case 'ArrowDown': vehicle.applyEngineForce(maxForce, 2); vehicle.applyEngineForce(maxForce, 3); break;
+                case 'a': case 'ArrowLeft': vehicle.setSteeringValue(maxSteerVal, 0); vehicle.setSteeringValue(maxSteerVal, 1); break;
+                case 'd': case 'ArrowRight': vehicle.setSteeringValue(-maxSteerVal, 0); vehicle.setSteeringValue(-maxSteerVal, 1); break;
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+             switch(e.key) {
+                case 'w': case 'ArrowUp': case 's': case 'ArrowDown': vehicle.applyEngineForce(0, 2); vehicle.applyEngineForce(0, 3); break;
+                case 'a': case 'ArrowLeft': case 'd': case 'ArrowRight': vehicle.setSteeringValue(0, 0); vehicle.setSteeringValue(0, 1); break;
+            }
+        });
+
+        window.addEventListener('resize', onWindowResize);
+    }
+
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        world.step(1 / 60);
+
+        updateTrafficLights(performance.now());
+        
+        if(rain) rain.position.y -= 0.3;
+        if(rain && rain.position.y < -50) rain.position.y = 50;
+
+        carModel.position.copy(vehicle.chassisBody.position);
+        carModel.quaternion.copy(vehicle.chassisBody.quaternion);
+        
+        vehicle.wheelInfos.forEach((wheel, i) => {
+            vehicle.updateWheelTransform(i);
+            const t = wheel.worldTransform;
+            wheelMeshes[i].position.copy(t.position);
+            wheelMeshes[i].quaternion.copy(t.quaternion);
+        });
+
+        const cameraOffset = carModel.localToWorld(new THREE.Vector3(0, 4, 9));
+        camera.position.lerp(cameraOffset, 0.1);
+        camera.lookAt(carModel.position);
+        
+        renderer.render(scene, camera);
+    }
+}

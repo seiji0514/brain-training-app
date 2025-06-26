@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字順番探しゲーム</title>
+    <style>
+        body {
+            font-family: "Hiragino Kaku Gothic Pro", "メイリオ", sans-serif;
+            background-color: #f0f8ff;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .number-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 20px auto;
+            max-width: 400px;
+        }
+        .number-cell {
+            background: #3498db;
+            color: white;
+            font-size: 2em;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .number-cell:hover {
+            background: #2980b9;
+            transform: scale(1.05);
+        }
+        .number-cell.correct {
+            background: #27ae60;
+        }
+        .number-cell.wrong {
+            background: #e74c3c;
+            animation: shake 0.5s;
+        }
+        .score {
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+        .message {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .back-button:hover {
+            background-color: #2980b9;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        .red { color: #e74c3c; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>数字順番探しゲーム</h1>
+        <div class="number-grid" id="numberGrid"></div>
+        <div class="score">スコア: <span id="gameScore">0</span></div>
+        <div class="message" id="gameMessage"></div>
+        <a href="index.html" class="back-button">トップページに戻る</a>
+    </div>
+
+    <div id="gameResult" style="display:none; text-align:center;">
+        <h2>お疲れ様でした！</h2>
+        <div>正解数：<span id="correctCount"></span> / <span id="totalCount"></span></div>
+        <div>ミス回数：<span id="missCount" class="red"></span></div>
+        <button onclick="restartGame()">もう一度挑戦</button>
+        <a href="brain_training_game.html">トップ画面へ</a>
+    </div>
+
+    <div class="modal" id="main-content">
+    </div>
+
+    <script src="game_result.js"></script>
+    <script>
+        let isGameActive = false;
+        let score = 0;
+        let startTime = 0;
+        let comboCount = 0;
+        let correctCount = 0;
+        let incorrectCount = 0;
+        let questionCount = 16;
+        let currentNumber = 1;
+        let numbers = [];
+
+        // ゲーム設定を取得
+        const gameSettings = getGameSettings('numberorder');
+        const difficultySettings = getDifficultySettings('numberorder');
+
+        function startGame() {
+            isGameActive = true;
+            score = 0;
+            correctCount = 0;
+            incorrectCount = 0;
+            comboCount = 0;
+            startTime = Date.now();
+            questionCount = 16;
+            currentNumber = 1;
+            numbers = Array.from({length: questionCount}, (_, i) => i + 1);
+            numbers.sort(() => Math.random() - 0.5);
+            renderNumbers();
+            updateStats();
+            document.getElementById('gameMessage').textContent = '数字を順番にクリックしてください';
+        }
+
+        function renderNumbers() {
+            const numberGrid = document.getElementById('numberGrid');
+            numberGrid.innerHTML = '';
+            
+            // グリッドの列数を調整
+            const cols = 4;
+            numberGrid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+            
+            numbers.forEach(number => {
+                const div = document.createElement('div');
+                div.className = 'number-cell';
+                div.textContent = number;
+                div.onclick = function() {
+                    if (!isGameActive) return;
+                    if (parseInt(this.textContent) === currentNumber) {
+                        this.classList.add('correct');
+                        score += 10;
+                        correctCount++;
+                        comboCount++;
+                        document.getElementById('gameScore').textContent = score;
+                        document.getElementById('gameMessage').textContent = '正解！';
+                        currentNumber++;
+                        updateStats();
+                        if (currentNumber > questionCount) {
+                            isGameActive = false;
+                            showPreview();
+                        }
+                    } else {
+                        this.classList.add('wrong');
+                        incorrectCount++;
+                        comboCount = 0;
+                        document.getElementById('gameMessage').textContent = '違います...';
+                        setTimeout(() => {
+                            this.classList.remove('wrong');
+                        }, 500);
+                        updateStats();
+                    }
+                };
+                numberGrid.appendChild(div);
+            });
+        }
+
+        function updateStats() {
+            document.getElementById('gameScore').textContent = score;
+        }
+
+        function showPreview() {
+            document.getElementById('gameResult').style.display = 'block';
+            document.querySelector('.container').style.display = 'none';
+            document.getElementById('correctCount').textContent = correctCount;
+            document.getElementById('totalCount').textContent = questionCount;
+            document.getElementById('missCount').textContent = incorrectCount;
+            showGameResult(correctCount, questionCount, incorrectCount);
+        }
+
+        function restartGame() {
+            document.getElementById('gameResult').style.display = 'none';
+            document.querySelector('.container').style.display = 'block';
+            startGame();
+        }
+
+        // 初期化
+        startGame();
+    </script>
+</body>
+</html> 

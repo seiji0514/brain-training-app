@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Dataset xsi:schemaLocation="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema FGD_GMLSchema.xsd"
+	xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema"
+	gml:id="Dataset1">
+  <gml:description>基盤地図情報メタデータ ID=fmdid:16-0101</gml:description>
+  <gml:name>基盤地図情報ダウンロードデータ（GML版）</gml:name>
+<GCP gml:id="K1_472872_1">
+<fid>10-00100-0-1512-193979</fid>
+<lfSpanFr gml:id="K1_472872_1-1">
+<gml:timePosition>2015-12-15</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K1_472872_1-2">
+<gml:timePosition>2015-12-21</gml:timePosition>
+</devDate>
+<orgGILvl>KJ14</orgGILvl>
+<vis>表示</vis>
+<pos>
+<gml:Point gml:id="K1_472872_1-g" srsName="fguuid:jgd2011.bl">
+<gml:pos>31.992489444 128.350217667</gml:pos>
+</gml:Point>
+</pos>
+<orgName>国土地理院</orgName>
+<type>三角点</type>
+<gcpClass>四等三角点</gcpClass>
+<gcpCode>TR44728729801</gcpCode>
+<name>女島灯台</name>
+<B>115172.962</B>
+<L>462060.7836</L>
+<alti>108.44</alti>
+<altiAcc>2</altiAcc>
+</GCP>
+</Dataset>

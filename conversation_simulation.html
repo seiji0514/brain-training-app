@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>会話シミュレーション</title>
+  <style>
+    body { font-family: 'Meiryo', sans-serif; background: #f0f2f5; text-align: center; }
+    .container { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px #b0c4de; max-width: 520px; margin: 40px auto; padding: 2.5em; }
+    .situation { font-size: 1.3em; margin: 1.7em 0 1.2em 0; color: #2574c7; font-weight: bold; }
+    .choices { margin-bottom: 1.5em; }
+    .choice-btn { background: #1a73e8; color: #fff; border: none; border-radius: 10px; padding: 1em 2.5em; margin: 0.7em; font-size: 1.2em; cursor: pointer; letter-spacing: 0.1em; }
+    .choice-btn:hover { background: #1557b0; }
+    .result { font-size: 1.3em; margin: 1.2em 0; color: #27ae60; }
+    .result.incorrect { color: #e67e22; }
+    .score { font-size: 2em; color: #2574c7; margin-top: 2em; font-weight: bold; }
+    .miss { font-size: 1.3em; color: #e74c3c; margin-top: 1em; font-weight: bold; }
+    .final-comment { font-size: 1.5em; margin-top: 1em; color: #2574c7; font-weight: bold; }
+    .next-btn { background: #43a047; color: #fff; border: none; border-radius: 10px; padding: 1em 2.5em; margin: 0.7em; font-size: 1.2em; cursor: pointer; letter-spacing: 0.1em; }
+    .next-btn:hover { background: #2e7031; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="quizArea">
+      <div class="situation" id="situation"></div>
+      <div class="choices" id="choices"></div>
+      <div class="result" id="result"></div>
+    </div>
+    <div class="score" id="score" style="display:none;"></div>
+    <button id="nextBtn" style="display:none;" class="next-btn">次の問題</button>
+  </div>
+  <script>
+    // サンプル問題
+    const questions = [
+      {
+        situation: '朝、近所の方に会いました。どう声をかけますか？',
+        answer: 'おはようございます。今日も元気ですね。',
+        choices: ['おはようございます。今日も元気ですね。', 'どこ行くの？', '……', 'さようなら']
+      },
+      {
+        situation: '病院の受付で順番を待っています。どうしますか？',
+        answer: '静かに順番を待つ',
+        choices: ['静かに順番を待つ', '大きな声で話す', '順番を抜かす', '席を立つ']
+      },
+      {
+        situation: 'スーパーでレジの方にお釣りをもらいました。何と言いますか？',
+        answer: 'ありがとうございます',
+        choices: ['ありがとうございます', '早くして', '何も言わない', 'おつり少ないよ']
+      },
+      {
+        situation: '道に迷っている人に声をかけられました。どう返しますか？',
+        answer: 'できるだけ丁寧に教える',
+        choices: ['できるだけ丁寧に教える', '無視する', '怒る', 'わからないと言う']
+      },
+      {
+        situation: '友人が新しい服を着てきました。どう声をかけますか？',
+        answer: 'とても似合っていますね。',
+        choices: ['とても似合っていますね。', '変だね', '何も言わない', '笑う']
+      },
+      {
+        situation: 'お孫さんが遊びに来ました。どう声をかけますか？',
+        answer: 'よく来たね、うれしいよ。',
+        choices: ['よく来たね、うれしいよ。', '何しに来たの？', '……', '帰りなさい']
+      },
+      {
+        situation: 'ご近所の方が引っ越すことになりました。何と言いますか？',
+        answer: 'お世話になりました。お元気で。',
+        choices: ['お世話になりました。お元気で。', 'さようなら', '何も言わない', '早く引っ越して']
+      },
+      {
+        situation: '友人が体調を崩しています。どう声をかけますか？',
+        answer: 'お大事にしてください。',
+        choices: ['お大事にしてください。', '大丈夫？', '何も言わない', '気にしない']
+      },
+      {
+        situation: '集まりで初めて会う人がいます。どうしますか？',
+        answer: '自己紹介をする',
+        choices: ['自己紹介をする', '何も言わない', '無視する', '笑う']
+      },
+      {
+        situation: 'お祝い事があったとき、どう声をかけますか？',
+        answer: 'おめでとうございます',
+        choices: ['おめでとうございます', '何も言わない', 'うらやましい', '笑う']
+      }
+    ];
+    let current = 0;
+    let score = 0;
+    let miss = 0;
+
+    function showQuestion() {
+      document.getElementById('result').textContent = '';
+      document.getElementById('nextBtn').style.display = 'none';
+      const q = questions[current];
+      document.getElementById('situation').textContent = q.situation;
+      const choicesDiv = document.getElementById('choices');
+      choicesDiv.innerHTML = '';
+      q.choices.forEach(choice => {
+        const btn = document.createElement('button');
+        btn.textContent = choice;
+        btn.className = 'choice-btn';
+        btn.onclick = () => checkAnswer(choice);
+        choicesDiv.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(choice) {
+      const q = questions[current];
+      if (choice === q.answer) {
+        document.getElementById('result').textContent = '正解です！とても良い対応ですね。';
+        document.getElementById('result').className = 'result';
+        score++;
+      } else {
+        document.getElementById('result').textContent = `おしいです。正解は「${q.answer}」でした。やさしい気持ちを大切にしましょう。`;
+        document.getElementById('result').className = 'result incorrect';
+        miss++;
+      }
+      document.querySelectorAll('.choice-btn').forEach(btn => btn.disabled = true);
+      document.getElementById('nextBtn').style.display = 'inline-block';
+    }
+
+    document.getElementById('nextBtn').onclick = () => {
+      current++;
+      if (current < questions.length) {
+        showQuestion();
+      } else {
+        document.getElementById('quizArea').style.display = 'none';
+        let comment = '';
+        if (score === questions.length) {
+          comment = '満点です！すばらしいですね！';
+        } else if (score >= Math.floor(questions.length * 0.8)) {
+          comment = 'よくできました！この調子でがんばりましょう。';
+        } else if (score < Math.floor(questions.length * 0.5)) {
+          comment = '次もがんばりましょう！';
+        } else {
+          comment = 'あと少しで満点です。';
+        }
+        document.getElementById('score').innerHTML =
+          `あなたのスコア：${score} / ${questions.length}` +
+          `<div class='miss'>ミス回数：${miss}</div>` +
+          `<div class='final-comment'>${comment}</div>`;
+        document.getElementById('score').style.display = 'block';
+      }
+    };
+
+    // 初期表示
+    showQuestion();
+  </script>
+</body>
+</html> 

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>PLATEAU CityGML データビューア</title>
+    <style>
+        body { margin: 0; font-family: 'Meiryo', sans-serif; background-color: #f0f2f5; }
+        #canvas-container { width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; }
+        #info-panel { position: absolute; top: 10px; left: 10px; background: rgba(255,255,255,0.9); padding: 15px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); max-width: 320px; max-height: 95vh; overflow-y: auto; }
+        #legend { position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 15px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        .legend-item { display: flex; align-items: center; margin-bottom: 5px; }
+        .legend-color { width: 20px; height: 20px; margin-right: 10px; border: 1px solid #ccc; }
+        h2 { margin-top: 0; font-size: 1.2em; }
+        #file-input-label { display: block; background: #007bff; color: white; padding: 10px 15px; border-radius: 5px; text-align: center; cursor: pointer; margin-bottom: 10px; }
+        #file-input { display: none; }
+        #object-info { margin-top: 15px; }
+        #object-info h3 { margin-top: 0; font-size: 1.1em; color: #0056b3; }
+        #object-info p { margin: 5px 0; font-size: 0.9em; }
+        #object-info span { font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div id="canvas-container"></div>
+    <div id="info-panel">
+        <h2>PLATEAUビューア</h2>
+        <label for="file-input" id="file-input-label">CityGML/ZIP ファイルを選択</label>
+        <input type="file" id="file-input" accept=".zip,.xml,.gml">
+        <div id="status">ファイルを選択してください。</div>
+        <div id="object-info" style="display:none;">
+            <h3>選択した建物の情報</h3>
+            <p>ID: <span id="info-id"></span></p>
+            <p>名称: <span id="info-name"></span></p>
+            <p>用途: <span id="info-usage"></span></p>
+            <p>高さ: <span id="info-height"></span> m</p>
+            <p>階数: <span id="info-floors"></span> 階</p>
+        </div>
+    </div>
+    <div id="legend"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script>
+        let scene, camera, renderer, controls, raycaster, mouse;
+        const buildings = [];
+        let selectedObject = null;
+
+        const USAGE_COLORS = {
+            "住宅": 0x4fc3f7, // 水色
+            "商業施設": 0xffd54f, // 黄色
+            "業務施設": 0xef5350, // 赤色
+            "工業施設": 0x7e57c2, // 紫色
+            "公共施設": 0x66bb6a, // 緑色
+            "不明": 0xbdbdbd, // 灰色
+        };
+        const USAGE_MAP = {
+            "3": "住宅", "4": "商業施設", "5": "業務施設", 
+            "6": "工業施設", "11": "公共施設"
+        };
+        
+        init();
+
+        function init() {
+            setupScene();
+            setupFileInput();
+            setupInteraction();
+            animate();
+            updateLegend();
+        }
+
+        function setupScene() {
+            const container = document.getElementById('canvas-container');
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0xf0f2f5);
+            scene.fog = new THREE.Fog(0xf0f2f5, 1000, 5000);
+
+            camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 10000);
+            camera.position.set(200, 200, 200);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            container.appendChild(renderer.domElement);
+
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            
+            const ambient = new THREE.AmbientLight(0xaaaaaa, 0.8);
+            scene.add(ambient);
+
+            const directional = new THREE.DirectionalLight(0xffffff, 0.8);
+            directional.position.set(200, 300, 200);
+            scene.add(directional);
+
+            window.addEventListener('resize', onWindowResize);
+        }
+
+        function onWindowResize() {
+            const container = document.getElementById('canvas-container');
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        }
+        
+        function updateLegend() {
+            const legendDiv = document.getElementById('legend');
+            legendDiv.innerHTML = '<h3>凡例</h3>';
+            for (const usage in USAGE_COLORS) {
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+                item.innerHTML = `<div class="legend-color" style="background-color: #${USAGE_COLORS[usage].toString(16)};"></div><span>${usage}</span>`;
+                legendDiv.appendChild(item);
+            }
+        }
+
+        function setupFileInput() {
+            const fileInput = document.getElementById('file-input');
+            fileInput.addEventListener('change', handleFileSelect, false);
+        }
+        
+        function setupInteraction() {
+            raycaster = new THREE.Raycaster();
+            mouse = new THREE.Vector2();
+            window.addEventListener('click', onMouseClick);
+        }
+
+        async function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            resetScene();
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = 'ファイルを処理中...';
+
+            try {
+                let gmlText;
+                if (file.name.toLowerCase().endsWith('.zip')) {
+                    statusDiv.textContent = 'ZIPファイルを展開中...';
+                    const zip = await JSZip.loadAsync(file);
+                    for (const fileName in zip.files) {
+                        if (fileName.toLowerCase().endsWith('.gml') || fileName.toLowerCase().endsWith('.xml')) {
+                            gmlText = await zip.files[fileName].async('text');
+                            break; 
+                        }
+                    }
+                } else {
+                    gmlText = await file.text();
+                }
+
+                if (!gmlText) throw new Error('ZIP内にGML/XMLファイルが見つかりません。');
+                
+                statusDiv.textContent = 'CityGMLを解析中...';
+                await parseAndBuild(gmlText);
+
+                statusDiv.textContent = `建物を ${buildings.length} 件ロードしました。`;
+            } catch (error) {
+                statusDiv.textContent = `エラー: ${error.message}`;
+                console.error(error);
+            }
+        }
+        
+        function resetScene() {
+             buildings.forEach(b => scene.remove(b));
+             buildings.length = 0;
+             document.getElementById('object-info').style.display = 'none';
+        }
+
+        async function parseAndBuild(gmlText) {
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(gmlText, "text/xml");
+            
+            const cityObjectMembers = xmlDoc.getElementsByTagName('core:CityObjectMember');
+            if (cityObjectMembers.length === 0) throw new Error('有効なCityObjectMemberが見つかりません。');
+
+            const allCoords = [];
+            Array.from(cityObjectMembers).forEach(member => {
+                const building = member.getElementsByTagName('bldg:Building')[0];
+                if (!building) return;
+
+                const userData = { id: building.getAttribute('gml:id') };
+                userData.name = building.getElementsByTagName('gml:name')[0]?.textContent || 'N/A';
+                
+                const usageCode = building.getElementsByTagName('bldg:usage')[0]?.textContent;
+                userData.usage = USAGE_MAP[usageCode] || '不明';
+
+                userData.floors = building.getElementsByTagName('bldg:storeysAboveGround')[0]?.textContent || 'N/A';
+
+                const lod0FootPrint = building.getElementsByTagName('gml:lod0FootPrint')[0] || building.getElementsByTagName('gml:lod1Solid')[0];
+                if (!lod0FootPrint) return;
+
+                const posList = lod0FootPrint.getElementsByTagName('gml:posList')[0];
+                const measuredHeight = building.getElementsByTagName('bldg:measuredHeight')[0];
+                userData.height = measuredHeight ? parseFloat(measuredHeight.textContent).toFixed(2) : (parseFloat(userData.floors) || 3) * 3.5;
+
+                if (!posList) return;
+                
+                const coordsText = posList.textContent.trim().split(/\s+/);
+                const points = [];
+                for (let i = 0; i < coordsText.length; i += 3) {
+                    const x = parseFloat(coordsText[i]);
+                    const y = parseFloat(coordsText[i+1]);
+                    const z = parseFloat(coordsText[i+2]);
+                    points.push({x, y, z});
+                    allCoords.push(x, y, z);
+                }
+
+                const shapePoints = points.map(p => new THREE.Vector2(p.x, p.y));
+                const shape = new THREE.Shape(shapePoints);
+                const extrudeSettings = { depth: userData.height, bevelEnabled: false };
+                const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+                geometry.translate(0, 0, -points[0].z); // 地面の高さに合わせる
+
+                const color = USAGE_COLORS[userData.usage] || USAGE_COLORS['不明'];
+                const material = new THREE.MeshLambertMaterial({ color: color, side: THREE.DoubleSide });
+
+                const mesh = new THREE.Mesh(geometry, material);
+                mesh.userData = userData;
+                mesh.rotation.x = -Math.PI / 2; // XZ平面からXY平面への回転
+                buildings.push(mesh);
+                scene.add(mesh);
+            });
+
+            if (allCoords.length > 0) {
+                 const boundingBox = new THREE.Box3().setFromArray(allCoords);
+                 const center = new THREE.Vector3();
+                 boundingBox.getCenter(center);
+                 
+                 // 全ての建物を中心に移動
+                 buildings.forEach(b => {
+                     b.position.x -= center.x;
+                     b.position.z -= center.y; // z in world is y in data
+                     b.position.y -= center.z;
+                 });
+                 
+                 controls.target.set(0, 0, 0); // カメラの中心もリセット
+                 controls.update();
+            }
+        }
+        
+        function onMouseClick(event) {
+            const container = document.getElementById('canvas-container');
+            mouse.x = (event.clientX / container.clientWidth) * 2 - 1;
+            mouse.y = -(event.clientY / container.clientHeight) * 2 + 1;
+
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(buildings);
+
+            if (intersects.length > 0) {
+                if (selectedObject) {
+                    selectedObject.material.emissive.setHex(0x000000);
+                }
+                selectedObject = intersects[0].object;
+                selectedObject.material.emissive.setHex(0x555555);
+
+                const data = selectedObject.userData;
+                document.getElementById('info-id').textContent = data.id || 'N/A';
+                document.getElementById('info-name').textContent = data.name || 'N/A';
+                document.getElementById('info-usage').textContent = data.usage || 'N/A';
+                document.getElementById('info-height').textContent = data.height || 'N/A';
+                document.getElementById('info-floors').textContent = data.floors || 'N/A';
+                document.getElementById('object-info').style.display = 'block';
+            } else {
+                 if (selectedObject) {
+                    selectedObject.material.emissive.setHex(0x000000);
+                }
+                selectedObject = null;
+                document.getElementById('object-info').style.display = 'none';
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+    </script>
+</body>
+</html> 

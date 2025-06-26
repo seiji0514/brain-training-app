@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>動き予測ゲーム（歩行者・自転車・車）</title>
+  <style>
+    body { font-family: 'Meiryo', sans-serif; background: #f0f2f5; text-align: center; }
+    .container { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px #b0c4de; max-width: 520px; margin: 40px auto; padding: 2.5em; }
+    .scene { font-size: 1.2em; margin: 1.5em 0 1.2em 0; color: #2574c7; font-weight: bold; white-space: pre-line; }
+    .choices { margin-bottom: 1.5em; }
+    .choice-btn { background: #1a73e8; color: #fff; border: none; border-radius: 10px; padding: 1em 2.5em; margin: 0.7em; font-size: 1.2em; cursor: pointer; letter-spacing: 0.1em; }
+    .choice-btn:hover { background: #1557b0; }
+    .result { font-size: 1.3em; margin: 1.2em 0; color: #27ae60; }
+    .result.incorrect { color: #e67e22; }
+    .score { font-size: 2em; color: #2574c7; margin-top: 2em; font-weight: bold; }
+    .miss { font-size: 1.3em; color: #e74c3c; margin-top: 1em; font-weight: bold; }
+    .final-comment { font-size: 1.5em; margin-top: 1em; color: #2574c7; font-weight: bold; }
+    .next-btn { background: #43a047; color: #fff; border: none; border-radius: 10px; padding: 1em 2.5em; margin: 0.7em; font-size: 1.2em; cursor: pointer; letter-spacing: 0.1em; }
+    .next-btn:hover { background: #2e7031; }
+    .start-btn { background: #43a047; color: #fff; border: none; border-radius: 10px; padding: 1em 2.5em; margin: 0.7em; font-size: 1.2em; cursor: pointer; letter-spacing: 0.1em; }
+    .start-btn:hover { background: #2e7031; }
+    .restart-btn { background: #43a047; color: #fff; border: none; border-radius: 10px; padding: 1em 2.5em; margin: 0.7em; font-size: 1.2em; cursor: pointer; letter-spacing: 0.1em; }
+    .restart-btn:hover { background: #2e7031; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div style="font-size:1.5em; color:#2574c7; font-weight:bold; margin-bottom:0.5em;">動き予測ゲーム（歩行者・自転車・車）</div>
+    <div style="font-size:1.1em; color:#444; margin-bottom:1.5em;">シーンを見て、どこから歩行者・自転車・車が現れるか、どこに注意すべきかを選んでください</div>
+    <button id="startBtn" class="start-btn">スタート</button>
+    <button id="restartBtn" class="restart-btn" style="display:none;">もう一度</button>
+    <div id="quizArea" style="display:none;">
+      <div class="scene" id="scene"></div>
+      <div class="choices" id="choices"></div>
+      <div class="result" id="result"></div>
+      <button id="nextBtn" style="display:none;" class="next-btn">次の問題</button>
+    </div>
+    <div class="score" id="score" style="display:none;"></div>
+  </div>
+  <script>
+    // シンプルなシーンと選択肢例
+    const questions = [
+      { scene: '交差点の左側に自転車、右側に歩行者が立っている。\nどちらが先に動き出す可能性が高い？', choices: ['左側の自転車', '右側の歩行者', 'どちらも動かない', '後方の車'], answer: 0 },
+      { scene: '前方の横断歩道、右側の植え込みの陰に子どもがいる。\nどこから飛び出す可能性が高い？', choices: ['右側の植え込み', '左側の電柱', '前方の横断歩道中央', '後方'], answer: 0 },
+      { scene: '信号待ちの交差点、左側に自転車、右側に車が止まっている。\n青信号になったとき、どちらに注意？', choices: ['左側の自転車の急な発進', '右側の車の発進', '後方の車', '歩道の歩行者'], answer: 0 },
+      { scene: '見通しの悪いT字路、右側の路地に車が止まっている。\nどこから車が出てくる可能性が高い？', choices: ['右側の路地', '左側の路地', '正面', '後方'], answer: 0 },
+      { scene: '夜間、前方の横断歩道に歩行者が立っている。\nどこに特に注意？', choices: ['横断歩道の歩行者', '後方の車', '左側の自転車', '右側のバイク'], answer: 0 },
+      { scene: '住宅街で高齢者がゆっくり歩いている。\nどこに注意？', choices: ['高齢者の動き', '後方の車', '左側の自転車', '右側のバイク'], answer: 0 },
+      { scene: '自転車が車道をふらふら走っている。\nどこに注意？', choices: ['自転車の急な進路変更', '後方の車', '歩道の歩行者', '右側のバイク'], answer: 0 },
+      { scene: '交差点で右折しようとしたら、対向車がスピードを上げてきた。\nどこに注意？', choices: ['対向車の動き', '歩道の歩行者', '後方の車', '左側の自転車'], answer: 0 },
+      { scene: '小学校の前で子どもたちが集団で歩いている。\nどこに注意？', choices: ['子どもの急な動き', '後方の車', '左側の自転車', '右側のバイク'], answer: 0 },
+      { scene: '見通しの悪い交差点で自転車が止まっている。\nどこに注意？', choices: ['自転車の動き', '後方の車', '歩道の歩行者', '右側のバイク'], answer: 0 }
+    ];
+    const maxQuestions = 10;
+    let currentQuestion = 0, score = 0, miss = 0;
+    function showQuestion() {
+      document.getElementById('result').textContent = '';
+      document.getElementById('result').className = 'result';
+      document.getElementById('nextBtn').style.display = 'none';
+      const q = questions[currentQuestion];
+      document.getElementById('scene').textContent = q.scene;
+      const choicesDiv = document.getElementById('choices');
+      choicesDiv.innerHTML = '';
+      q.choices.forEach((choice, idx) => {
+        const btn = document.createElement('button');
+        btn.textContent = choice;
+        btn.className = 'choice-btn';
+        btn.onclick = () => checkAnswer(idx, q);
+        choicesDiv.appendChild(btn);
+      });
+    }
+    function checkAnswer(idx, q) {
+      document.querySelectorAll('.choice-btn').forEach(btn => btn.disabled = true);
+      if(idx === q.answer) {
+        document.getElementById('result').textContent = '正解！よく予測できました。';
+        document.getElementById('result').className = 'result';
+        score++;
+      } else {
+        document.getElementById('result').textContent = '不正解… 周囲の動きに注意しましょう。';
+        document.getElementById('result').className = 'result incorrect';
+        miss++;
+      }
+      document.getElementById('nextBtn').style.display = 'inline-block';
+    }
+    const startBtn = document.getElementById('startBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    function startGame() {
+      currentQuestion = 0; score = 0; miss = 0;
+      document.getElementById('score').style.display = 'none';
+      startBtn.style.display = 'none';
+      restartBtn.style.display = 'none';
+      document.getElementById('quizArea').style.display = 'block';
+      showQuestion();
+    }
+    startBtn.onclick = startGame;
+    restartBtn.onclick = startGame;
+    document.getElementById('nextBtn').onclick = () => {
+      currentQuestion++;
+      if(currentQuestion < questions.length) {
+        showQuestion();
+      } else {
+        document.getElementById('quizArea').style.display = 'none';
+        endGame();
+      }
+    };
+    function endGame() {
+      document.getElementById('question').style.display = 'none';
+      document.getElementById('choices').style.display = 'none';
+      document.getElementById('nextBtn').style.display = 'none';
+      document.getElementById('score').textContent = `スコア：${score}`;
+      document.getElementById('miss').innerHTML = `<span style='color:red'>ミス：${miss}</span>`;
+      let comment = '';
+      if(score >= 9) comment = '動き予測バッチリです！';
+      else if(score >= 7) comment = 'よくできました！この調子でがんばりましょう。';
+      else comment = '次もがんばりましょう！';
+      document.getElementById('score').style.display = 'block';
+      document.getElementById('miss').style.display = 'block';
+      document.getElementById('comment').style.display = 'block';
+    }
+  </script>
+</body>
+</html> 

@@ -1,0 +1,16 @@
+{
+  "usageLogging": {
+    "enabled": true,
+    "retentionDays": 90,
+    "backupInterval": "daily",
+    "cleanupInterval": "weekly"
+  },
+  "faceAuth": {
+    "sessionTimeout": 24,
+    "maxLoginAttempts": 5
+  },
+  "server": {
+    "port": 3000,
+    "host": "0.0.0.0"
+  }
+}

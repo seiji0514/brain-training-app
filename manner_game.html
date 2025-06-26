@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>マナーゲーム</title>
+  <style>
+    body { font-family: 'Meiryo', sans-serif; background: #f0f2f5; text-align: center; }
+    .container { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px #b0c4de; max-width: 520px; margin: 40px auto; padding: 2.5em; }
+    .question { font-size: 1.3em; margin: 1.7em 0 1.2em 0; color: #2574c7; font-weight: bold; }
+    .choices { margin-bottom: 1.5em; }
+    .choice-btn { background: #1a73e8; color: #fff; border: none; border-radius: 10px; padding: 1em 2.5em; margin: 0.7em; font-size: 1.2em; cursor: pointer; letter-spacing: 0.1em; }
+    .choice-btn:hover { background: #1557b0; }
+    .result { font-size: 1.3em; margin: 1.2em 0; color: #27ae60; }
+    .result.incorrect { color: #e67e22; }
+    .score { font-size: 2em; color: #2574c7; margin-top: 2em; font-weight: bold; }
+    .miss { font-size: 1.3em; color: #e74c3c; margin-top: 1em; font-weight: bold; }
+    .final-comment { font-size: 1.5em; margin-top: 1em; color: #2574c7; font-weight: bold; }
+    .next-btn { background: #43a047; color: #fff; border: none; border-radius: 10px; padding: 1em 2.5em; margin: 0.7em; font-size: 1.2em; cursor: pointer; letter-spacing: 0.1em; }
+    .next-btn:hover { background: #2e7031; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="quizArea">
+      <div class="question" id="question"></div>
+      <div class="choices" id="choices"></div>
+      <div class="result" id="result"></div>
+    </div>
+    <div class="score" id="score" style="display:none;"></div>
+    <button id="nextBtn" style="display:none;" class="next-btn">次の問題</button>
+  </div>
+  <script>
+    // サンプル問題
+    const questions = [
+      {
+        q: '電車の中で電話がかかってきました。どうしますか？',
+        answer: 'マナーモードにして電話に出ない',
+        choices: ['マナーモードにして電話に出ない', '大きな声で話す', 'その場で電話に出る', '音楽を流す']
+      },
+      {
+        q: 'エレベーターで先に乗った人がいます。どうしますか？',
+        answer: '「開」ボタンを押して待つ',
+        choices: ['「開」ボタンを押して待つ', 'すぐ閉める', '何も言わずに乗る', '順番を抜かす']
+      },
+      {
+        q: 'レストランで食事中に大きな声で話すのは？',
+        answer: '周りの迷惑になるので控える',
+        choices: ['周りの迷惑になるので控える', '気にせず大声で話す', '歌を歌う', '立ち歩く']
+      },
+      {
+        q: 'ゴミが落ちているのを見つけたら？',
+        answer: '拾ってゴミ箱に捨てる',
+        choices: ['拾ってゴミ箱に捨てる', '見て見ぬふりをする', '他人のせいにする', 'そのままにする']
+      },
+      {
+        q: 'バスや電車でお年寄りが立っています。どうしますか？',
+        answer: '席を譲る',
+        choices: ['席を譲る', '知らないふりをする', '自分が座る', '大きな声で話す']
+      },
+      {
+        q: '病院の待合室で順番を待つとき、どうしますか？',
+        answer: '静かに順番を待つ',
+        choices: ['静かに順番を待つ', '大きな声で話す', '順番を抜かす', '席を立つ']
+      },
+      {
+        q: 'スーパーのレジで前の人がもたついています。どうしますか？',
+        answer: '落ち着いて待つ',
+        choices: ['落ち着いて待つ', '急かす', 'ため息をつく', '文句を言う']
+      },
+      {
+        q: '友人の家を訪問したとき、玄関でどうしますか？',
+        answer: '「おじゃまします」と声をかける',
+        choices: ['「おじゃまします」と声をかける', '何も言わずに入る', '大きな声で入る', '靴を脱がずに上がる']
+      },
+      {
+        q: '食事の前に何と言いますか？',
+        answer: '「いただきます」と言う',
+        choices: ['「いただきます」と言う', '何も言わない', '大きな声で話す', '立ち上がる']
+      },
+      {
+        q: '公共の場でくしゃみや咳をするとき、どうしますか？',
+        answer: 'ハンカチやマスクで口をおさえる',
+        choices: ['ハンカチやマスクで口をおさえる', 'そのままする', '大きな声でする', '手でふさがない']
+      }
+    ];
+    let current = 0;
+    let score = 0;
+    let miss = 0;
+
+    function showQuestion() {
+      document.getElementById('result').textContent = '';
+      document.getElementById('nextBtn').style.display = 'none';
+      const q = questions[current];
+      document.getElementById('question').textContent = q.q;
+      const choicesDiv = document.getElementById('choices');
+      choicesDiv.innerHTML = '';
+      q.choices.forEach(choice => {
+        const btn = document.createElement('button');
+        btn.textContent = choice;
+        btn.className = 'choice-btn';
+        btn.onclick = () => checkAnswer(choice);
+        choicesDiv.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(choice) {
+      const q = questions[current];
+      if (choice === q.answer) {
+        document.getElementById('result').textContent = '正解です！とても良いマナーですね。';
+        document.getElementById('result').className = 'result';
+        score++;
+      } else {
+        document.getElementById('result').textContent = `おしいです。正解は「${q.answer}」でした。みんなが気持ちよく過ごせるようにしましょう。`;
+        document.getElementById('result').className = 'result incorrect';
+        miss++;
+      }
+      document.querySelectorAll('.choice-btn').forEach(btn => btn.disabled = true);
+      document.getElementById('nextBtn').style.display = 'inline-block';
+    }
+
+    document.getElementById('nextBtn').onclick = () => {
+      current++;
+      if (current < questions.length) {
+        showQuestion();
+      } else {
+        document.getElementById('quizArea').style.display = 'none';
+        let comment = '';
+        if (score === questions.length) {
+          comment = '満点です！すばらしいですね！';
+        } else if (score >= Math.floor(questions.length * 0.8)) {
+          comment = 'よくできました！この調子でがんばりましょう。';
+        } else if (score < Math.floor(questions.length * 0.5)) {
+          comment = '次もがんばりましょう！';
+        } else {
+          comment = 'あと少しで満点です。';
+        }
+        document.getElementById('score').innerHTML =
+          `あなたのスコア：${score} / ${questions.length}` +
+          `<div class='miss'>ミス回数：${miss}</div>` +
+          `<div class='final-comment'>${comment}</div>`;
+        document.getElementById('score').style.display = 'block';
+      }
+    };
+
+    // 初期表示
+    showQuestion();
+  </script>
+</body>
+</html> 

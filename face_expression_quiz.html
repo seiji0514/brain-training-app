@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>表情読み取りクイズ</title>
+  <style>
+    body { font-family: 'Meiryo', sans-serif; background: #f0f2f5; text-align: center; }
+    .container { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px #b0c4de; max-width: 520px; margin: 40px auto; padding: 2.5em; }
+    .emoji { font-size: 4em; margin: 1.2em 0; }
+    .question { font-size: 1.3em; margin-bottom: 1.2em; color: #2574c7; font-weight: bold; }
+    .choices { margin-bottom: 1.5em; }
+    .choice-btn { background: #1a73e8; color: #fff; border: none; border-radius: 10px; padding: 1em 2.5em; margin: 0.7em; font-size: 1.2em; cursor: pointer; letter-spacing: 0.1em; }
+    .choice-btn:hover { background: #1557b0; }
+    .result { font-size: 1.3em; margin: 1.2em 0; color: #27ae60; }
+    .result.incorrect { color: #e67e22; }
+    .score { font-size: 2em; color: #2574c7; margin-top: 2em; font-weight: bold; }
+    .miss { font-size: 1.3em; color: #e74c3c; margin-top: 1em; font-weight: bold; }
+    .final-comment { font-size: 1.5em; margin-top: 1em; color: #2574c7; font-weight: bold; }
+    .next-btn { background: #43a047; color: #fff; border: none; border-radius: 10px; padding: 1em 2.5em; margin: 0.7em; font-size: 1.2em; cursor: pointer; letter-spacing: 0.1em; }
+    .next-btn:hover { background: #2e7031; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="quizArea">
+      <div class="emoji" id="emoji"></div>
+      <div class="question">この表情は？</div>
+      <div class="choices" id="choices"></div>
+      <div class="result" id="result"></div>
+    </div>
+    <div class="score" id="score" style="display:none;"></div>
+    <button id="nextBtn" style="display:none;" class="next-btn">次の問題</button>
+  </div>
+  <script>
+    const questions = [
+      { emoji: '😊', answer: 'うれしい', choices: ['うれしい', 'かなしい', '困っている', '怒っている'] },
+      { emoji: '😢', answer: 'かなしい', choices: ['うれしい', 'かなしい', '困っている', '怒っている'] },
+      { emoji: '😠', answer: '怒っている', choices: ['うれしい', 'かなしい', '困っている', '怒っている'] }
+    ];
+    let current = 0;
+    let score = 0;
+    let miss = 0;
+
+    function showQuestion() {
+      document.getElementById('result').textContent = '';
+      document.getElementById('result').className = 'result';
+      document.getElementById('nextBtn').style.display = 'none';
+      const q = questions[current];
+      document.getElementById('emoji').textContent = q.emoji;
+      const choicesDiv = document.getElementById('choices');
+      choicesDiv.innerHTML = '';
+      q.choices.forEach(choice => {
+        const btn = document.createElement('button');
+        btn.textContent = choice;
+        btn.className = 'choice-btn';
+        btn.onclick = () => checkAnswer(choice);
+        choicesDiv.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(choice) {
+      const q = questions[current];
+      if (choice === q.answer) {
+        document.getElementById('result').textContent = '正解！よくできました。';
+        document.getElementById('result').className = 'result';
+        score++;
+      } else {
+        document.getElementById('result').textContent = `不正解… 正解は「${q.answer}」です。`;
+        document.getElementById('result').className = 'result incorrect';
+        miss++;
+      }
+      document.querySelectorAll('.choice-btn').forEach(btn => btn.disabled = true);
+      document.getElementById('nextBtn').style.display = 'inline-block';
+    }
+
+    document.getElementById('nextBtn').onclick = () => {
+      current++;
+      if (current < questions.length) {
+        showQuestion();
+      } else {
+        document.getElementById('quizArea').style.display = 'none';
+        let comment = '';
+        if (score === questions.length) {
+          comment = '満点です！すばらしいですね！';
+        } else if (score >= 2) {
+          comment = 'よくできました！この調子でがんばりましょう。';
+        } else if (score < 1) {
+          comment = '次もがんばりましょう！';
+        } else {
+          comment = 'あと少しで満点です。';
+        }
+        document.getElementById('score').innerHTML = `あなたのスコア：${score} / ${questions.length}` + `<div class='miss'>ミス回数：${miss}</div>` + `<div class='final-comment'>${comment}</div>`;
+        document.getElementById('score').style.display = 'block';
+      }
+    };
+
+    // 初期表示
+    showQuestion();
+  </script>
+</body>
+</html> 

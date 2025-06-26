@@ -1,0 +1,13 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1750386784
+README.md::TextFile/TextFile::-1::1750385672::0::1::::<><><>0<>0<><>::
+::res://docs/::1750385788
+セットアップ手順.md::TextFile/TextFile::-1::1750386018::0::1::::<><><>0<>0<><>::
+::res://scenes/::1750385716
+MainMenu.tscn::PackedScene::3558222913518072707::1750386787::0::1::::<><><>0<>0<><>::uid://dyrqilpntqsdy::::res://scripts/MainMenu.gd
+::res://scripts/::1750386740
+AccessibilitySettings.gd::GDScript/GDScript::4042573119760692491::1750386005::0::1::::<>Control<><>0<>0<><>::
+CarController.gd::GDScript/GDScript::8182831016467753021::1750385678::0::1::::<>VehicleBody3D<><>0<>0<><>::
+DrivingEvaluator.gd::GDScript/GDScript::6988489219947742776::1750385684::0::1::::<>Node<><>0<>0<><>::
+MainMenu.gd::GDScript/GDScript::8879875079992217686::1750386013::0::1::::<>Control<><>0<>0<><>::
+TrafficSystem.gd::GDScript/GDScript::5735407315464346375::1750385681::0::1::::<>Node3D<><>0<>0<><>::

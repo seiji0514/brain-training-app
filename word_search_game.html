@@ -1,0 +1,75 @@
+<script src="game_result.js"></script>
+<script>
+    let isGameActive = false;
+    let score = 0;
+    let startTime = 0;
+    let comboCount = 0;
+    let correctCount = 0;
+    let incorrectCount = 0;
+    let foundWords = new Set();
+
+    // ゲーム設定を取得
+    const gameSettings = getGameSettings('wordsearch');
+    const difficultySettings = getDifficultySettings('wordsearch');
+
+    function startGame() {
+        isGameActive = true;
+        score = 0;
+        correctCount = 0;
+        incorrectCount = 0;
+        comboCount = 0;
+        startTime = Date.now();
+        foundWords.clear();
+        
+        // 難易度設定に基づいて問題数を設定
+        questionCount = difficultySettings.totalQuestions;
+        
+        updateStats();
+        document.getElementById('gameMessage').textContent = '単語を探してください';
+        document.getElementById('wordInput').value = '';
+        document.getElementById('wordInput').focus();
+    }
+
+    function submitWord() {
+        if (!isGameActive) return;
+        
+        const input = document.getElementById('wordInput').value;
+        const timeUsed = (Date.now() - startTime) / 1000;
+        
+        if (isValidWord(input) && !foundWords.has(input)) {
+            correctCount++;
+            comboCount++;
+            document.getElementById('gameMessage').textContent = '正解！';
+            score = calculateScore(correctCount, questionCount, timeUsed, comboCount);
+            foundWords.add(input);
+        } else {
+            incorrectCount++;
+            comboCount = 0;
+            document.getElementById('gameMessage').textContent = '不正解...';
+        }
+        
+        questionCount--;
+        updateStats();
+        
+        if (questionCount <= 0) {
+            isGameActive = false;
+            showPreview();
+        } else {
+            document.getElementById('wordInput').value = '';
+            document.getElementById('wordInput').focus();
+        }
+    }
+
+    function updateStats() {
+        document.getElementById('questionCount').textContent = questionCount;
+        document.getElementById('score').textContent = score;
+    }
+
+    function showPreview() {
+        const gameArea = document.getElementById('gameArea');
+        gameArea.innerHTML = '';
+        showGameResult(correctCount, gameSettings.totalQuestions, incorrectCount);
+    }
+</script>
+</body>
+</html> 

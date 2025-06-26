@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>バックアップ・復元手順書</title>
+  <style>
+    @media print {
+      body { margin: 0; }
+      .no-print { display: none; }
+      .page-break { page-break-before: always; }
+    }
+    
+    body { 
+      font-family: 'Meiryo', 'Yu Gothic', sans-serif; 
+      margin: 2em; 
+      background: #f9f9f9; 
+      line-height: 1.6;
+    }
+    h1, h2 { color: #2c3e50; }
+    ul, ol { margin-bottom: 1em; }
+    .note { color: #e67e22; font-size: 0.95em; }
+    
+    .print-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    
+    .print-btn:hover {
+      background: #2980b9;
+    }
+    
+    .approval-section {
+      border: 2px solid #333;
+      padding: 20px;
+      margin: 30px 0;
+      background: #f9f9f9;
+    }
+    
+    .approval-section h3 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    
+    .approval-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    
+    .approval-item {
+      border: 1px solid #ccc;
+      padding: 15px;
+      background: white;
+    }
+    
+    .approval-item h4 {
+      margin: 0 0 10px 0;
+      color: #333;
+      font-size: 14px;
+    }
+    
+    .approval-field {
+      margin-bottom: 15px;
+    }
+    
+    .approval-field label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      font-size: 12px;
+    }
+    
+    .approval-field input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      font-size: 12px;
+    }
+    
+    .approval-field textarea {
+      width: 100%;
+      height: 60px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      resize: vertical;
+      font-size: 12px;
+    }
+    
+    @media (max-width: 768px) {
+      .approval-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="print-btn no-print" onclick="window.print()">
+    🖨️ 印刷
+  </button>
+
+  <h1>バックアップ・復元手順書</h1>
+  <h2>1. バックアップの取得方法</h2>
+  <ol>
+    <li>管理画面にログインします。</li>
+    <li>「バックアップ管理」メニューを選択します。</li>
+    <li>「バックアップ作成」ボタンをクリックします。</li>
+    <li>バックアップファイルが自動で保存されます（保存先：version2/backup_日付/）。</li>
+  </ol>
+  <h2>2. 復元方法</h2>
+  <ol>
+    <li>管理画面の「バックアップ管理」を開きます。</li>
+    <li>復元したいバックアップの「復元」ボタンをクリックします。</li>
+    <li>確認メッセージが表示されたら「OK」を押します。</li>
+    <li>復元が完了したら、システムを再起動してください。</li>
+  </ol>
+  <h2>3. 注意事項</h2>
+  <ul>
+    <li>定期的にバックアップを取得してください。</li>
+    <li>重要なデータは外部メディアにも保存しておくと安心です。</li>
+    <li>復元操作は管理者のみが行ってください。</li>
+  </ul>
+  <p class="note">バックアップ・復元に不安がある場合は、システム担当者にご相談ください。</p>
+
+  <div class="page-break"></div>
+  
+  <!-- 情報システム部様向け確認欄 -->
+  <div class="approval-section">
+    <h3>【情報システム部様向け確認欄】</h3>
+    <div class="approval-grid">
+      <div class="approval-item">
+        <h4>バックアップ手順確認</h4>
+        <div class="approval-field">
+          <label>バックアップ手順の技術的妥当性について確認</label>
+          <textarea placeholder="確認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>確認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>確認日</label>
+          <input type="date">
+        </div>
+      </div>
+      
+      <div class="approval-item">
+        <h4>復元手順確認</h4>
+        <div class="approval-field">
+          <label>復元手順の技術的妥当性について確認</label>
+          <textarea placeholder="確認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>確認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>確認日</label>
+          <input type="date">
+        </div>
+      </div>
+    </div>
+    
+    <div class="approval-grid">
+      <div class="approval-item">
+        <h4>データ保護確認</h4>
+        <div class="approval-field">
+          <label>データ保護・セキュリティ技術について確認</label>
+          <textarea placeholder="確認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>確認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>確認日</label>
+          <input type="date">
+        </div>
+      </div>
+      
+      <div class="approval-item">
+        <h4>最終確認</h4>
+        <div class="approval-field">
+          <label>バックアップ・復元手順書の技術的確認</label>
+          <textarea placeholder="確認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>確認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>確認日</label>
+          <input type="date">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html> 

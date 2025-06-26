@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PINログイン</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Meiryo', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #6e8efb 0%, #a777e3 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .header {
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #2574c7;
+        }
+        
+        p {
+            margin-bottom: 2rem;
+            color: #666;
+        }
+        
+        .pin-input {
+            width: 80%;
+            padding: 1rem;
+            font-size: 1.5rem;
+            text-align: center;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5em;
+            font-family: 'Courier New', monospace;
+            -webkit-text-security: disc;
+            -moz-text-security: disc;
+            text-security: disc;
+            transition: border-color 0.3s ease;
+        }
+        
+        .pin-input:focus {
+            outline: none;
+            border-color: #2574c7;
+        }
+        
+        .pin-input.error {
+            border-color: #e74c3c;
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .btn {
+            width: 85%;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #3498db;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .btn:hover:not(:disabled) {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-success {
+            background: #27ae60;
+        }
+        
+        .btn-success:hover {
+            background: #229954;
+        }
+        
+        .register-link {
+            display: block;
+            margin-top: 1rem;
+            color: #555;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .register-link:hover {
+            text-decoration: underline;
+            color: #2574c7;
+        }
+        
+        #status {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+        
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .status-warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .status-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .security-info {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: #1565c0;
+        }
+        
+        .attempt-counter {
+            font-size: 0.9rem;
+            color: #e74c3c;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+        
+        .lock-timer {
+            font-size: 1rem;
+            color: #e74c3c;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔐 PINログイン</h1>
+            <p>登録したPINコードを入力してください</p>
+        </div>
+        
+        <div class="security-info">
+            <strong>🔒 セキュリティ機能</strong><br>
+            • 試行回数制限: 5回まで<br>
+            • アカウントロック: 30分間<br>
+            • 自動ログアウト: 30分間
+        </div>
+        
+        <div id="status"></div>
+        
+        <input type="password" id="pin" class="pin-input" 
+               placeholder="PINを入力" maxlength="12" autocomplete="off">
+        
+        <button class="btn" onclick="login()" id="loginBtn">ログイン</button>
+        
+        <div id="attemptCounter" class="attempt-counter" style="display: none;"></div>
+        <div id="lockTimer" class="lock-timer" style="display: none;"></div>
+        
+        <a href="pin_register.html" class="register-link">初めての方はこちら（新規登録）</a>
+    </div>
+
+    <script>
+        let loginAttempts = 0;
+        let isAccountLocked = false;
+        let lockEndTime = null;
+        
+        // ページ読み込み時の処理
+        document.addEventListener('DOMContentLoaded', () => {
+            // 既存の認証情報をチェック
+            if (!localStorage.getItem('registeredPin')) {
+                window.location.href = 'pin_register.html';
+                return;
+            }
+            
+            // ロック状態をチェック
+            checkAccountLock();
+            
+            // PIN入力フィールドにフォーカス
+            document.getElementById('pin').focus();
+            
+            // Enterキーでログイン
+            document.getElementById('pin').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    login();
+                }
+            });
+        });
+        
+        // アカウントロック状態チェック
+        function checkAccountLock() {
+            const lockTime = localStorage.getItem('lockEndTime');
+            if (lockTime) {
+                const now = Date.now();
+                const lockEnd = parseInt(lockTime);
+                
+                if (now < lockEnd) {
+                    // まだロック中
+                    isAccountLocked = true;
+                    lockEndTime = lockEnd;
+                    updateLockTimer();
+                    showStatus('アカウントがロックされています。しばらくお待ちください。', 'warning');
+                    document.getElementById('loginBtn').disabled = true;
+                    document.getElementById('pin').disabled = true;
+                } else {
+                    // ロック解除
+                    localStorage.removeItem('lockEndTime');
+                    localStorage.removeItem('loginAttempts');
+                    isAccountLocked = false;
+                    loginAttempts = 0;
+                }
+            } else {
+                loginAttempts = parseInt(localStorage.getItem('loginAttempts') || '0');
+                updateAttemptCounter();
+            }
+        }
+        
+        // ロックタイマー更新
+        function updateLockTimer() {
+            if (!isAccountLocked || !lockEndTime) return;
+            
+            const now = Date.now();
+            const remaining = Math.max(0, lockEndTime - now);
+            
+            if (remaining > 0) {
+                const minutes = Math.floor(remaining / 60000);
+                const seconds = Math.floor((remaining % 60000) / 1000);
+                document.getElementById('lockTimer').textContent = 
+                    `ロック解除まで: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+                document.getElementById('lockTimer').style.display = 'block';
+                
+                setTimeout(updateLockTimer, 1000);
+            } else {
+                // ロック解除
+                isAccountLocked = false;
+                document.getElementById('lockTimer').style.display = 'none';
+                document.getElementById('loginBtn').disabled = false;
+                document.getElementById('pin').disabled = false;
+                document.getElementById('pin').focus();
+                showStatus('ロックが解除されました。再度ログインしてください。', 'info');
+            }
+        }
+        
+        // 試行回数カウンター更新
+        function updateAttemptCounter() {
+            const remaining = Math.max(0, 5 - loginAttempts);
+            if (remaining < 5) {
+                document.getElementById('attemptCounter').textContent = 
+                    `残り試行回数: ${remaining}回`;
+                document.getElementById('attemptCounter').style.display = 'block';
+            } else {
+                document.getElementById('attemptCounter').style.display = 'none';
+            }
+        }
+        
+        // ログイン処理
+        function login() {
+            if (isAccountLocked) {
+                showStatus('アカウントがロックされています。', 'error');
+                return;
+            }
+            
+            const pinInput = document.getElementById('pin');
+            const enteredPin = pinInput.value;
+            
+            if (!enteredPin) {
+                showStatus('PINコードを入力してください。', 'error');
+                return;
+            }
+            
+            const registeredPin = localStorage.getItem('registeredPin');
+            
+            if (!registeredPin) {
+                showStatus('登録情報が見つかりません。新規登録をしてください。', 'error');
+                setTimeout(() => { window.location.href = 'pin_register.html'; }, 2000);
+                return;
+            }
+            
+            if (registeredPin === enteredPin) {
+                // ログイン成功
+                localStorage.setItem('isAuthenticated', 'true');
+                localStorage.setItem('lastLoginTime', Date.now().toString());
+                localStorage.removeItem('loginAttempts');
+                localStorage.removeItem('lockEndTime');
+                
+                showStatus('ログインしました！脳トレゲーム（記憶編）に移動します。', 'success');
+                
+                setTimeout(() => {
+                    const returnUrl = sessionStorage.getItem('returnUrl') || 'brain_training_game.html';
+                    sessionStorage.removeItem('returnUrl');
+                    window.location.href = returnUrl;
+                }, 2000);
+            } else {
+                // ログイン失敗
+                loginAttempts++;
+                localStorage.setItem('loginAttempts', loginAttempts.toString());
+                localStorage.setItem('lastLoginAttempt', Date.now().toString());
+                
+                pinInput.value = '';
+                pinInput.classList.add('error');
+                setTimeout(() => pinInput.classList.remove('error'), 500);
+                
+                updateAttemptCounter();
+                
+                if (loginAttempts >= 5) {
+                    // アカウントロック
+                    const lockEndTime = Date.now() + (30 * 60 * 1000); // 30分
+                    localStorage.setItem('lockEndTime', lockEndTime.toString());
+                    isAccountLocked = true;
+                    lockEndTime = lockEndTime;
+                    
+                    document.getElementById('loginBtn').disabled = true;
+                    pinInput.disabled = true;
+                    
+                    showStatus('5回の試行失敗によりアカウントがロックされました。30分後に再試行してください。', 'error');
+                    updateLockTimer();
+                } else {
+                    showStatus(`PINコードが正しくありません。残り${5 - loginAttempts}回`, 'error');
+                }
+            }
+        }
+        
+        // ステータス表示
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = message;
+            statusDiv.className = `status status-${type}`;
+            statusDiv.style.display = 'block';
+            
+            if (type !== 'success') {
+                setTimeout(() => {
+                    statusDiv.style.display = 'none';
+                }, 5000);
+            }
+        }
+        
+        // セッション管理（30分で自動ログアウト）
+        setInterval(() => {
+            const lastLoginTime = localStorage.getItem('lastLoginTime');
+            if (lastLoginTime) {
+                const now = Date.now();
+                const timeDiff = now - parseInt(lastLoginTime);
+                const thirtyMinutes = 30 * 60 * 1000;
+                
+                if (timeDiff > thirtyMinutes) {
+                    localStorage.removeItem('isAuthenticated');
+                    localStorage.removeItem('lastLoginTime');
+                    showStatus('セッションが期限切れです。再度ログインしてください。', 'warning');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 3000);
+                }
+            }
+        }, 60000); // 1分ごとにチェック
+    </script>
+</body>
+</html>

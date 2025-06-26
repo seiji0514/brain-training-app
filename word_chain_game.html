@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>言葉しりとり・連想ゲーム - 脳トレゲームversion2</title>
+    <style>
+        body {
+            font-family: 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .game-frame {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header {
+            margin-bottom: 20px;
+        }
+        .title {
+            color: #1a73e8;
+            font-size: 1.8em;
+            margin: 0 0 10px 0;
+        }
+        .mode-selector {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        .mode-btn {
+            background-color: #e8eaed;
+            color: #333;
+            border: 2px solid #dadce0;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+        .mode-btn.active {
+            background-color: #1a73e8;
+            color: white;
+            border-color: #1a73e8;
+        }
+        .mode-btn:hover {
+            background-color: #1557b0;
+            color: white;
+            border-color: #1557b0;
+        }
+        .controls {
+            margin: 15px 0;
+        }
+        .btn {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+        .btn:hover {
+            background-color: #1557b0;
+        }
+        .btn:disabled {
+            background-color: #dadce0;
+            cursor: not-allowed;
+        }
+        .content-area {
+            min-height: 300px;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        .message {
+            font-size: 1.1em;
+            margin: 10px 0;
+            color: #666;
+        }
+        .input-area {
+            margin: 20px 0;
+        }
+        .word-input {
+            font-size: 1.2em;
+            padding: 10px;
+            width: 200px;
+            border: 2px solid #1a73e8;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .word-input:disabled {
+            background-color: #f5f5f5;
+            border-color: #dadce0;
+        }
+        .demo-controls {
+            margin: 15px 0;
+        }
+        .demo-speed {
+            margin: 10px 0;
+        }
+        .speed-slider {
+            width: 200px;
+            margin: 0 10px;
+        }
+        .word-chain {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: white;
+            border-radius: 5px;
+            max-height: 200px;
+            overflow-y: auto;
+            text-align: left;
+        }
+        .word-item {
+            display: inline-block;
+            margin: 5px;
+            padding: 5px 10px;
+            background-color: #e3f2fd;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+        .word-item.current {
+            background-color: #1a73e8;
+            color: white;
+        }
+        .footer {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .stat-item {
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .stat-label {
+            font-size: 1em;
+            color: #666;
+        }
+        .stat-value {
+            font-size: 1.3em;
+            color: #1a73e8;
+            font-weight: bold;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+        }
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .game-result {
+            margin-top: 20px;
+        }
+        .correct-count,
+        .total-count,
+        .miss-count {
+            margin-bottom: 10px;
+        }
+        .correct-label,
+        .total-label,
+        .miss-label {
+            font-weight: bold;
+        }
+        .game-result button {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+        }
+        .game-result button:hover {
+            background-color: #1557b0;
+        }
+        .result-summary {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .result-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .result-stat {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .result-stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #1a73e8;
+            margin-bottom: 5px;
+        }
+        .result-stat-label {
+            font-size: 0.9em;
+            color: #666;
+        }
+        .word-chain-result {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .word-chain-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #1a73e8;
+        }
+        .result-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .result-actions button {
+            margin: 0 5px;
+        }
+        .accuracy-high {
+            color: #28a745;
+        }
+        .accuracy-medium {
+            color: #ffc107;
+        }
+        .accuracy-low {
+            color: #dc3545;
+        }
+        .demo-retry-options {
+            text-align: center;
+            padding: 20px;
+        }
+        .demo-retry-options h3 {
+            color: #1a73e8;
+            margin-bottom: 20px;
+        }
+        .retry-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .retry-buttons .btn {
+            padding: 15px 20px;
+            font-size: 1.1em;
+        }
+        .demo-info {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .demo-info p {
+            margin: 5px 0;
+            color: #666;
+        }
+        .auto-retry-countdown {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .auto-retry-countdown h3 {
+            color: #1a73e8;
+            margin-bottom: 20px;
+        }
+        .countdown-timer {
+            font-size: 4em;
+            font-weight: bold;
+            color: #1a73e8;
+            margin: 20px 0;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .speed-change-dialog {
+            text-align: center;
+            padding: 20px;
+        }
+        .speed-change-dialog h3 {
+            color: #1a73e8;
+            margin-bottom: 20px;
+        }
+        .speed-controls {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .speed-controls label {
+            display: block;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .speed-buttons {
+            margin-top: 20px;
+        }
+        .speed-buttons .btn {
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="game-frame">
+            <div class="header">
+                <h1 class="title">言葉しりとり・連想ゲーム</h1>
+                <p class="message">前の言葉の最後の文字から始まる言葉を入力してください</p>
+            </div>
+
+            <div class="mode-selector">
+                <button class="mode-btn active" onclick="switchMode('normal')">通常モード</button>
+                <button class="mode-btn" onclick="switchMode('demo')">デモモード</button>
+            </div>
+
+            <div class="controls">
+                <button class="btn" onclick="startGame()">ゲーム開始</button>
+                <button class="btn" onclick="resetGame()">リセット</button>
+            </div>
+
+            <div class="demo-controls" id="demoControls" style="display: none;">
+                <div class="demo-speed">
+                    <label>速度: <span id="speedValue">2</span>秒</label>
+                    <input type="range" class="speed-slider" id="speedSlider" min="1" max="5" value="2">
+                </div>
+                <button class="btn" onclick="toggleDemo()" id="demoToggleBtn">デモ開始</button>
+            </div>
+
+            <div class="content-area" id="gameArea">
+                <div class="word-chain" id="wordChain"></div>
+                <div class="input-area">
+                    <input type="text" class="word-input" id="wordInput" placeholder="言葉を入力">
+                    <button class="btn" onclick="submitWord()" id="submitBtn">送信</button>
+                </div>
+                <p class="message" id="gameMessage">「ゲーム開始」を押してください</p>
+            </div>
+
+            <div class="footer">
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-label">残り問題数</div>
+                        <div class="stat-value" id="questionCount">10</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">スコア</div>
+                        <div class="stat-value" id="score">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="index.html" class="back-link">← トップページに戻る</a>
+    </div>
+
+    <div class="modal" id="main-content">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="game-result">
+                <h2>🎉 ゲーム終了！</h2>
+                
+                <div class="result-summary">
+                    <div class="result-stats">
+                        <div class="result-stat">
+                            <div class="result-stat-value" id="finalScore">0</div>
+                            <div class="result-stat-label">最終スコア</div>
+                        </div>
+                        <div class="result-stat">
+                            <div class="result-stat-value" id="accuracyRate">0%</div>
+                            <div class="result-stat-label">正解率</div>
+                        </div>
+                        <div class="result-stat">
+                            <div class="result-stat-value" id="totalTime">0秒</div>
+                            <div class="result-stat-label">総時間</div>
+                        </div>
+                        <div class="result-stat">
+                            <div class="result-stat-value" id="maxCombo">0</div>
+                            <div class="result-stat-label">最大コンボ</div>
+                        </div>
+                    </div>
+                    
+                    <div class="word-chain-result">
+                        <div class="word-chain-title">完成した言葉チェーン</div>
+                        <div id="finalWordChain"></div>
+                </div>
+                </div>
+                
+                <div class="result-actions">
+                    <button class="btn" onclick="resetGame()">もう一度挑戦</button>
+                    <button class="btn" onclick="closeResult()" id="closeResultBtn">閉じる</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game_result.js"></script>
+    <script>
+        let isGameActive = false;
+        let isDemoMode = false;
+        let isDemoRunning = false;
+        let score = 0;
+        let startTime = 0;
+        let comboCount = 0;
+        let maxComboCount = 0;
+        let correctCount = 0;
+        let incorrectCount = 0;
+        let lastWord = '';
+        let questionCount = 10;
+        let demoInterval = null;
+        let wordChain = [];
+        let gameEndTime = 0;
+
+        // デモ用の言葉データベース
+        const demoWords = {
+            'あ': ['あめ', 'あか', 'あお', 'あたま', 'あし', 'あめ', 'あさ', 'あゆ', 'あかね', 'あじさい'],
+            'い': ['いぬ', 'いちご', 'いす', 'いえ', 'いけ', 'いし', 'いと', 'いぬ', 'いち', 'いり'],
+            'う': ['うみ', 'うま', 'うし', 'うた', 'うで', 'うなぎ', 'うさぎ', 'うま', 'うみ', 'うた'],
+            'え': ['えんぴつ', 'えき', 'えだ', 'えほん', 'えいご', 'えき', 'えだ', 'えほん', 'えいご', 'えんぴつ'],
+            'お': ['おか', 'おに', 'おはな', 'おと', 'おかね', 'おに', 'おはな', 'おと', 'おかね', 'おか'],
+            'か': ['かみ', 'かさ', 'かばん', 'かみ', 'かさ', 'かばん', 'かみ', 'かさ', 'かばん', 'かみ'],
+            'き': ['きく', 'きつね', 'きもち', 'きく', 'きつね', 'きもち', 'きく', 'きつね', 'きもち', 'きく'],
+            'く': ['くも', 'くつ', 'くま', 'くも', 'くつ', 'くま', 'くも', 'くつ', 'くま', 'くも'],
+            'け': ['けしごむ', 'けん', 'けんか', 'けしごむ', 'けん', 'けんか', 'けしごむ', 'けん', 'けんか', 'けしごむ'],
+            'こ': ['ことり', 'こま', 'こおり', 'ことり', 'こま', 'こおり', 'ことり', 'こま', 'こおり', 'ことり'],
+            'さ': ['さくら', 'さかな', 'さとう', 'さくら', 'さかな', 'さとう', 'さくら', 'さかな', 'さとう', 'さくら'],
+            'し': ['しま', 'しんぶん', 'しゃしん', 'しま', 'しんぶん', 'しゃしん', 'しま', 'しんぶん', 'しゃしん', 'しま'],
+            'す': ['すいか', 'すずめ', 'すみ', 'すいか', 'すずめ', 'すみ', 'すいか', 'すずめ', 'すみ', 'すいか'],
+            'せ': ['せんせい', 'せかい', 'せんたく', 'せんせい', 'せかい', 'せんたく', 'せんせい', 'せかい', 'せんたく', 'せんせい'],
+            'そ': ['そら', 'そば', 'そふと', 'そら', 'そば', 'そふと', 'そら', 'そば', 'そふと', 'そら'],
+            'た': ['たまご', 'たから', 'たべもの', 'たまご', 'たから', 'たべもの', 'たまご', 'たから', 'たべもの', 'たまご'],
+            'ち': ['ちず', 'ちょうちょ', 'ちかてつ', 'ちず', 'ちょうちょ', 'ちかてつ', 'ちず', 'ちょうちょ', 'ちかてつ', 'ちず'],
+            'つ': ['つくえ', 'つき', 'つり', 'つくえ', 'つき', 'つり', 'つくえ', 'つき', 'つり', 'つくえ'],
+            'て': ['てがみ', 'てんき', 'てんぷら', 'てがみ', 'てんき', 'てんぷら', 'てがみ', 'てんき', 'てんぷら', 'てがみ'],
+            'と': ['とけい', 'とり', 'とけい', 'とり', 'とけい', 'とり', 'とけい', 'とり', 'とけい', 'とり'],
+            'な': ['なつ', 'なまえ', 'なか', 'なつ', 'なまえ', 'なか', 'なつ', 'なまえ', 'なか', 'なつ'],
+            'に': ['にほん', 'にわ', 'にほん', 'にわ', 'にほん', 'にわ', 'にほん', 'にわ', 'にほん', 'にわ'],
+            'ぬ': ['ぬいぐるみ', 'ぬりえ', 'ぬいぐるみ', 'ぬりえ', 'ぬいぐるみ', 'ぬりえ', 'ぬいぐるみ', 'ぬりえ', 'ぬいぐるみ', 'ぬりえ'],
+            'ね': ['ねこ', 'ねずみ', 'ねこ', 'ねずみ', 'ねこ', 'ねずみ', 'ねこ', 'ねずみ', 'ねこ', 'ねずみ'],
+            'の': ['のり', 'のう', 'のり', 'のう', 'のり', 'のう', 'のり', 'のう', 'のり', 'のう'],
+            'は': ['はな', 'はし', 'はな', 'はし', 'はな', 'はし', 'はな', 'はし', 'はな', 'はし'],
+            'ひ': ['ひこうき', 'ひまわり', 'ひこうき', 'ひまわり', 'ひこうき', 'ひまわり', 'ひこうき', 'ひまわり', 'ひこうき', 'ひまわり'],
+            'ふ': ['ふね', 'ふく', 'ふね', 'ふく', 'ふね', 'ふく', 'ふね', 'ふく', 'ふね', 'ふく'],
+            'へ': ['へや', 'へいわ', 'へや', 'へいわ', 'へや', 'へいわ', 'へや', 'へいわ', 'へや', 'へいわ'],
+            'ほ': ['ほし', 'ほん', 'ほし', 'ほん', 'ほし', 'ほん', 'ほし', 'ほん', 'ほし', 'ほん'],
+            'ま': ['まくら', 'まつり', 'まくら', 'まつり', 'まくら', 'まつり', 'まくら', 'まつり', 'まくら', 'まつり'],
+            'み': ['みず', 'みかん', 'みず', 'みかん', 'みず', 'みかん', 'みず', 'みかん', 'みず', 'みかん'],
+            'む': ['むし', 'むら', 'むし', 'むら', 'むし', 'むら', 'むし', 'むら', 'むし', 'むら'],
+            'め': ['めがね', 'めだか', 'めがね', 'めだか', 'めがね', 'めだか', 'めがね', 'めだか', 'めがね', 'めだか'],
+            'も': ['もも', 'もり', 'もも', 'もり', 'もも', 'もり', 'もも', 'もり', 'もも', 'もり'],
+            'や': ['やさい', 'やま', 'やさい', 'やま', 'やさい', 'やま', 'やさい', 'やま', 'やさい', 'やま'],
+            'ゆ': ['ゆき', 'ゆめ', 'ゆき', 'ゆめ', 'ゆき', 'ゆめ', 'ゆき', 'ゆめ', 'ゆき', 'ゆめ'],
+            'よ': ['よる', 'よみもの', 'よる', 'よみもの', 'よる', 'よみもの', 'よる', 'よみもの', 'よる', 'よみもの'],
+            'ら': ['らくだ', 'らん', 'らくだ', 'らん', 'らくだ', 'らん', 'らくだ', 'らん', 'らくだ', 'らん'],
+            'り': ['りんご', 'りす', 'りんご', 'りす', 'りんご', 'りす', 'りんご', 'りす', 'りんご', 'りす'],
+            'る': ['るすばん', 'るすばん', 'るすばん', 'るすばん', 'るすばん', 'るすばん', 'るすばん', 'るすばん', 'るすばん', 'るすばん'],
+            'れ': ['れいぞうこ', 'れいぞうこ', 'れいぞうこ', 'れいぞうこ', 'れいぞうこ', 'れいぞうこ', 'れいぞうこ', 'れいぞうこ', 'れいぞうこ', 'れいぞうこ'],
+            'ろ': ['ろく', 'ろく', 'ろく', 'ろく', 'ろく', 'ろく', 'ろく', 'ろく', 'ろく', 'ろく'],
+            'わ': ['わに', 'わかめ', 'わに', 'わかめ', 'わに', 'わかめ', 'わに', 'わかめ', 'わに', 'わかめ'],
+            'を': ['を', 'を', 'を', 'を', 'を', 'を', 'を', 'を', 'を', 'を'],
+            'ん': ['ん', 'ん', 'ん', 'ん', 'ん', 'ん', 'ん', 'ん', 'ん', 'ん'],
+            'ご': ['ごりら', 'ごま', 'ごはん', 'ごみ', 'ごうかく'],
+        };
+
+        // ゲーム設定を取得
+        const gameSettings = getGameSettings('wordchain');
+        const difficultySettings = getDifficultySettings('wordchain');
+
+        function switchMode(mode) {
+            isDemoMode = (mode === 'demo');
+            
+            // ボタンの見た目を更新
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // デモコントロールの表示/非表示
+            document.getElementById('demoControls').style.display = isDemoMode ? 'block' : 'none';
+            
+            // 入力エリアの有効/無効
+            document.getElementById('wordInput').disabled = isDemoMode;
+            document.getElementById('submitBtn').disabled = isDemoMode;
+            
+            // デモが実行中の場合は停止
+            if (isDemoRunning) {
+                stopDemo();
+            }
+            
+            resetGame();
+        }
+
+        function startGame() {
+            isGameActive = true;
+            score = 0;
+            correctCount = 0;
+            incorrectCount = 0;
+            comboCount = 0;
+            maxComboCount = 0;
+            startTime = Date.now();
+            gameEndTime = 0;
+            lastWord = 'りんご';
+            wordChain = [lastWord];
+            
+            // 難易度設定に基づいて問題数を設定
+            questionCount = difficultySettings.totalQuestions;
+            
+            updateStats();
+            updateWordChain();
+            
+            if (isDemoMode) {
+                document.getElementById('gameMessage').textContent = 'デモモード: 自動で言葉を生成します';
+                startDemo();
+            } else {
+            document.getElementById('gameMessage').textContent = `最初の言葉: ${lastWord}`;
+            document.getElementById('wordInput').value = '';
+            document.getElementById('wordInput').focus();
+            }
+        }
+
+        function resetGame() {
+            isGameActive = false;
+            score = 0;
+            correctCount = 0;
+            incorrectCount = 0;
+            comboCount = 0;
+            maxComboCount = 0;
+            startTime = 0;
+            gameEndTime = 0;
+            questionCount = 10;
+            lastWord = '';
+            wordChain = [];
+            
+            if (isDemoRunning) {
+                stopDemo();
+            }
+            
+            updateStats();
+            updateWordChain();
+            
+            // ゲームエリアを元の状態に復元
+            const gameArea = document.getElementById('gameArea');
+            gameArea.innerHTML = `
+                <div class="word-chain" id="wordChain"></div>
+                <div class="input-area">
+                    <input type="text" class="word-input" id="wordInput" placeholder="言葉を入力">
+                    <button class="btn" onclick="submitWord()" id="submitBtn">送信</button>
+                </div>
+                <p class="message" id="gameMessage">「ゲーム開始」を押してください</p>
+            `;
+            
+            // 入力エリアの有効/無効を設定
+            if (isDemoMode) {
+                document.getElementById('wordInput').disabled = true;
+                document.getElementById('submitBtn').disabled = true;
+            } else {
+                document.getElementById('wordInput').disabled = false;
+                document.getElementById('submitBtn').disabled = false;
+            }
+            
+            // Enterキーイベントを再設定
+            const wordInput = document.getElementById('wordInput');
+            if (wordInput) {
+                wordInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        submitWord();
+                    }
+                });
+            }
+            
+            // モーダルを閉じる
+            document.getElementById('main-content').style.display = 'none';
+        }
+
+        function submitWord() {
+            if (!isGameActive || isDemoMode) return;
+            
+            const input = document.getElementById('wordInput').value.trim();
+            if (!input) return;
+            
+            const timeUsed = (Date.now() - startTime) / 1000;
+            
+            if (isValidWord(input, lastWord)) {
+                correctCount++;
+                comboCount++;
+                maxComboCount = Math.max(maxComboCount, comboCount);
+                document.getElementById('gameMessage').textContent = '正解！';
+                score = calculateScore(correctCount, questionCount, timeUsed, comboCount);
+                lastWord = input;
+                wordChain.push(input);
+            } else {
+                incorrectCount++;
+                comboCount = 0;
+                document.getElementById('gameMessage').textContent = '不正解...';
+            }
+            
+            questionCount--;
+            updateStats();
+            updateWordChain();
+            
+            if (questionCount <= 0) {
+                isGameActive = false;
+                gameEndTime = Date.now();
+                showDetailedResult();
+            } else {
+                document.getElementById('wordInput').value = '';
+                document.getElementById('wordInput').focus();
+            }
+        }
+
+        function startDemo() {
+            if (!isGameActive || !isDemoMode) return;
+            
+            isDemoRunning = true;
+            document.getElementById('demoToggleBtn').textContent = 'デモ停止';
+            
+            const speed = document.getElementById('speedSlider').value * 1000;
+            demoInterval = setInterval(() => {
+                if (!isGameActive || questionCount <= 0) {
+                    stopDemo();
+                    return;
+                }
+                
+                generateDemoWord();
+            }, speed);
+        }
+
+        function stopDemo() {
+            isDemoRunning = false;
+            document.getElementById('demoToggleBtn').textContent = 'デモ開始';
+            if (demoInterval) {
+                clearInterval(demoInterval);
+                demoInterval = null;
+            }
+        }
+
+        function toggleDemo() {
+            if (isDemoRunning) {
+                stopDemo();
+            } else {
+                startDemo();
+            }
+        }
+
+        function generateDemoWord() {
+            if (!isGameActive || questionCount <= 0) return;
+            
+            const lastChar = lastWord.slice(-1);
+            const availableWords = demoWords[lastChar] || [];
+            
+            if (availableWords.length > 0) {
+                const randomWord = availableWords[Math.floor(Math.random() * availableWords.length)];
+                const timeUsed = (Date.now() - startTime) / 1000;
+                
+                correctCount++;
+                comboCount++;
+                maxComboCount = Math.max(maxComboCount, comboCount);
+                score = calculateScore(correctCount, questionCount, timeUsed, comboCount);
+                lastWord = randomWord;
+                wordChain.push(randomWord);
+                
+                questionCount--;
+                updateStats();
+                updateWordChain();
+                
+                if (questionCount <= 0) {
+                    isGameActive = false;
+                    gameEndTime = Date.now();
+                    stopDemo();
+                    showDetailedResult();
+                }
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('questionCount').textContent = questionCount;
+            document.getElementById('score').textContent = score;
+        }
+
+        function updateWordChain() {
+            const wordChainElement = document.getElementById('wordChain');
+            wordChainElement.innerHTML = '';
+            
+            wordChain.forEach((word, index) => {
+                const wordElement = document.createElement('span');
+                wordElement.className = 'word-item';
+                if (index === wordChain.length - 1) {
+                    wordElement.classList.add('current');
+                }
+                wordElement.textContent = word;
+                wordChainElement.appendChild(wordElement);
+            });
+        }
+
+        function isValidWord(input, lastWord) {
+            if (!input || !lastWord) return false;
+            
+            const lastChar = lastWord.slice(-1);
+            const firstChar = input.charAt(0);
+            
+            return lastChar === firstChar && input.length >= 2;
+        }
+
+        // 速度スライダーのイベント
+        document.getElementById('speedSlider').addEventListener('input', function() {
+            document.getElementById('speedValue').textContent = this.value;
+            if (isDemoRunning) {
+                stopDemo();
+                startDemo();
+        }
+        });
+
+        // Enterキーで送信
+        document.getElementById('wordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                submitWord();
+            }
+        });
+
+        // モーダル閉じるボタン
+        const closeButton = document.querySelector('.close');
+        if (closeButton) {
+            closeButton.addEventListener('click', function() {
+                closeResult();
+            });
+        }
+
+        // モーダル外クリックで閉じる
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('main-content');
+            if (event.target === modal) {
+                closeResult();
+            }
+        });
+
+        function showDetailedResult() {
+            const totalTime = gameEndTime > 0 ? Math.round((gameEndTime - startTime) / 1000) : 0;
+            const totalQuestions = difficultySettings.totalQuestions;
+            const accuracyRate = totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0;
+            
+            // 結果を表示
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('accuracyRate').textContent = accuracyRate + '%';
+            document.getElementById('totalTime').textContent = totalTime + '秒';
+            document.getElementById('maxCombo').textContent = maxComboCount;
+            
+            // 正解率に応じて色を変更
+            const accuracyElement = document.getElementById('accuracyRate');
+            accuracyElement.className = 'result-stat-value';
+            if (accuracyRate >= 80) {
+                accuracyElement.classList.add('accuracy-high');
+            } else if (accuracyRate >= 60) {
+                accuracyElement.classList.add('accuracy-medium');
+            } else {
+                accuracyElement.classList.add('accuracy-low');
+            }
+            
+            // 完成した言葉チェーンを表示
+            const finalWordChainElement = document.getElementById('finalWordChain');
+            finalWordChainElement.innerHTML = '';
+            wordChain.forEach((word, index) => {
+                const wordElement = document.createElement('span');
+                wordElement.className = 'word-item';
+                wordElement.textContent = word;
+                finalWordChainElement.appendChild(wordElement);
+                
+                // 最後の言葉以外に矢印を追加
+                if (index < wordChain.length - 1) {
+                    const arrow = document.createElement('span');
+                    arrow.textContent = ' → ';
+                    arrow.style.color = '#666';
+                    arrow.style.margin = '0 5px';
+                    finalWordChainElement.appendChild(arrow);
+                }
+            });
+            
+            // デモモードの場合、「閉じる」ボタンのテキストを変更
+            if (isDemoMode) {
+                document.getElementById('closeResultBtn').textContent = '結果を閉じる';
+            } else {
+                document.getElementById('closeResultBtn').textContent = '閉じる';
+            }
+            
+            // モーダルを表示
+            document.getElementById('main-content').style.display = 'block';
+        }
+
+        function closeResult() {
+                document.getElementById('main-content').style.display = 'none';
+            // デモモード時もresetGame()は呼ばず、画面はそのまま維持
+        }
+
+        function showDemoRetryOptions() {
+            const gameArea = document.getElementById('gameArea');
+            gameArea.innerHTML = `
+                <div class="demo-retry-options">
+                    <h3>🎮 デモモード - 次のアクション</h3>
+                    <div class="retry-buttons">
+                        <button class="btn" onclick="autoRetryDemo()">🔄 自動リトライ</button>
+                        <button class="btn" onclick="manualRetryDemo()">✏️ 手動リトライ</button>
+                        <button class="btn" onclick="changeDemoSpeed()">⚙️ 速度変更</button>
+                        <button class="btn" onclick="backToMenu()">🏠 メニューに戻る</button>
+                    </div>
+                    <div class="demo-info">
+                        <p>📊 前回の結果: スコア ${score}点 / 正解率 ${Math.round((correctCount / difficultySettings.totalQuestions) * 100)}%</p>
+                        <p>⏱️ プレイ時間: ${Math.round((gameEndTime - startTime) / 1000)}秒</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function autoRetryDemo() {
+            // 3秒後に自動でリトライ
+            const gameArea = document.getElementById('gameArea');
+            gameArea.innerHTML = `
+                <div class="auto-retry-countdown">
+                    <h3>🔄 自動リトライ準備中...</h3>
+                    <div class="countdown-timer" id="countdownTimer">3</div>
+                    <p>新しいゲームが自動で開始されます</p>
+                    <button class="btn" onclick="cancelAutoRetry()">キャンセル</button>
+                </div>
+            `;
+            
+            let countdown = 3;
+            const countdownInterval = setInterval(() => {
+                countdown--;
+                document.getElementById('countdownTimer').textContent = countdown;
+                
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval);
+                    startGame();
+                }
+            }, 1000);
+            
+            // グローバル変数でキャンセル用のインターバルを保存
+            window.autoRetryInterval = countdownInterval;
+        }
+
+        function cancelAutoRetry() {
+            if (window.autoRetryInterval) {
+                clearInterval(window.autoRetryInterval);
+                window.autoRetryInterval = null;
+            }
+            showDemoRetryOptions();
+        }
+
+        function manualRetryDemo() {
+            // 手動でリトライ（通常のゲーム開始）
+            resetGame();
+            startGame();
+        }
+
+        function changeDemoSpeed() {
+            // 速度変更ダイアログを表示
+            const gameArea = document.getElementById('gameArea');
+            gameArea.innerHTML = `
+                <div class="speed-change-dialog">
+                    <h3>⚙️ デモ速度変更</h3>
+                    <div class="speed-controls">
+                        <label>現在の速度: <span id="currentSpeed">${document.getElementById('speedSlider').value}</span>秒</label>
+                        <input type="range" class="speed-slider" id="newSpeedSlider" min="1" max="5" value="${document.getElementById('speedSlider').value}">
+                        <div class="speed-buttons">
+                            <button class="btn" onclick="applySpeedChange()">適用</button>
+                            <button class="btn" onclick="showDemoRetryOptions()">キャンセル</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // 新しいスライダーのイベント
+            document.getElementById('newSpeedSlider').addEventListener('input', function() {
+                document.getElementById('currentSpeed').textContent = this.value;
+            });
+        }
+
+        function applySpeedChange() {
+            const newSpeed = document.getElementById('newSpeedSlider').value;
+            document.getElementById('speedSlider').value = newSpeed;
+            document.getElementById('speedValue').textContent = newSpeed;
+            showDemoRetryOptions();
+        }
+
+        function backToMenu() {
+            // メニューに戻る（リセットして初期状態に）
+            resetGame();
+            document.getElementById('gameMessage').textContent = '「ゲーム開始」を押してください';
+        }
+    </script>
+</body>
+</html> 

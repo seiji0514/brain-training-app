@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Dataset xsi:schemaLocation="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema FGD_GMLSchema.xsd"
+	xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema"
+	gml:id="Dataset1">
+  <gml:description>基盤地図情報メタデータ ID=fmdid:23-1001</gml:description>
+  <gml:name>基盤地図情報ダウンロードデータ（GML版）</gml:name>
+<WStrA gml:id="K28_4639511730_1">
+<fid>20230921-46398-11757-s-222</fid>
+<lfSpanFr gml:id="K28_4639511730_1-1">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K28_4639511730_1-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<vis>表示</vis>
+<area>
+<gml:Surface gml:id="K28_4639511730_1-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K28_4639511730_1-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.660109397 128.884537132
+32.660095821 128.884716612
+32.659788972 128.885238367
+32.659801876 128.885258448
+32.659490211 128.885764017
+32.659443127 128.885798709
+32.659429314 128.88577906
+32.659386519 128.885811079
+32.659031177 128.886943867
+32.658388944 128.887839551
+32.658446481 128.887895574
+32.659090376 128.887003983
+32.659463642 128.88584652
+32.65953673 128.885788901
+32.660168906 128.884724821
+32.660176562 128.88452793
+32.660109397 128.884537132
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>防波堤</type>
+</WStrA>
+<WStrA gml:id="K28_4639511730_2">
+<fid>20230921-46398-11754-s-1183</fid>
+<lfSpanFr gml:id="K28_4639511730_2-1">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K28_4639511730_2-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<vis>表示</vis>
+<area>
+<gml:Surface gml:id="K28_4639511730_2-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K28_4639511730_2-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.656632904 128.885799516
+32.656579571 128.885753349
+32.656532415 128.885712512
+32.656514454 128.88574436
+32.656496314 128.88577655
+32.65814243 128.887196733
+32.658177932 128.887137262
+32.6579583 128.886947086
+32.65793172 128.88692407
+32.657082495 128.886188784
+32.656632904 128.885799516
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>防波堤</type>
+</WStrA>
+<WStrA gml:id="K28_4639511730_3">
+<fid>20230921-46398-11757-s-221</fid>
+<lfSpanFr gml:id="K28_4639511730_3-1">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K28_4639511730_3-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<vis>表示</vis>
+<area>
+<gml:Surface gml:id="K28_4639511730_3-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K28_4639511730_3-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.660127185 128.889562396
+32.66008374 128.889461149
+32.659450911 128.889840586
+32.659494355 128.889941833
+32.660127185 128.889562396
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>防波堤</type>
+</WStrA>
+</Dataset>

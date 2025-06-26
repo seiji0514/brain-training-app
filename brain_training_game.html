@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>脳トレゲーム トップ　記憶編　</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- 利用履歴記録ライブラリ -->
+  <script src="js/usage_logger.js"></script>
+  <script src="js/session_timer.js"></script>
+  <style>
+    body {
+      background: #eef1f5;
+      font-family: 'Segoe UI', 'Meiryo', sans-serif;
+      margin: 0;
+    }
+    .header {
+        background: white;
+        padding: 0.8em 1.5em;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+    .header h1 {
+        margin: 0;
+        font-size: 1.5em;
+        color: #3498db;
+        flex-grow: 1;
+        text-align: center;
+        margin-right: -40px;
+    }
+    .header-controls {
+        display: flex;
+        align-items: center;
+    }
+    .menu-btn {
+        background: none;
+        border: none;
+        font-size: 1.6em;
+        cursor: pointer;
+        margin-left: 1em;
+        color: #555;
+    }
+    .header-memory {
+      width: 100%;
+      margin-top: 2em;
+    }
+    .header-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      gap: 24px;
+    }
+    .header-title {
+      font-size: 2.5em;
+      font-weight: bold;
+      color: #3498db;
+      margin: 0;
+    }
+    .header-btns {
+      display: flex;
+      gap: 10px;
+    }
+    .header-btns button {
+      background: #27ae60;
+      color: white;
+      border: none;
+      padding: 0.7em 1.2em;
+      border-radius: 8px;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #c8e6c9;
+      transition: background 0.3s;
+    }
+    .header-btns button:last-child {
+      background: #e67e22;
+      box-shadow: 0 2px 8px #fbeee0;
+    }
+    .header-btns button:hover {
+      opacity: 0.85;
+    }
+    .header-underline {
+      border-bottom: 4px solid #e74c3c;
+      margin-top: 0.2em;
+      width: 100%;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2em;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2em 1em 3em 1em;
+    }
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 2px 12px #dbe6f3;
+      padding: 2em 1.5em 1.5em 1.5em;
+      text-align: center;
+      transition: transform 0.15s, box-shadow 0.15s;
+      cursor: pointer;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-decoration: none;
+      color: inherit;
+    }
+    .card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 8px 24px #b0c4de;
+    }
+    .card-title {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #2574c7;
+      margin-bottom: 0.5em;
+    }
+    .card-desc {
+      color: #555;
+      font-size: 1.05em;
+      line-height: 1.5;
+    }
+    @media (max-width: 700px) {
+      .header-title { font-size: 1.3em; }
+      .card-grid { grid-template-columns: 1fr; }
+    }
+    .game-top, .result {
+      text-align: center;
+      margin: 2em auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px #b0c4de;
+      padding: 2.5em 1.5em;
+      max-width: 420px;
+    }
+    .game-title {
+      font-size: 2em;
+      color: #2574c7;
+      margin-bottom: 0.5em;
+    }
+    .game-desc {
+      color: #444;
+      font-size: 1.1em;
+      margin-bottom: 1.2em;
+    }
+    .game-preview {
+      width: 90%;
+      max-width: 320px;
+      border-radius: 10px;
+      margin-bottom: 1.5em;
+      box-shadow: 0 2px 8px #dbe6f3;
+    }
+    .start-btn, .restart-btn, .back-btn {
+      display: inline-block;
+      margin: 0.7em 0.5em 0 0.5em;
+      padding: 0.9em 2em;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .start-btn { background: #27ae60; color: #fff; }
+    .restart-btn { background: #f39c12; color: #fff; }
+    .back-btn { background: #3498db; color: #fff; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>脳トレゲーム 記憶編</h1>
+    <div class="header-controls">
+        <button class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+    </div>
+  </header>
+
+  <div style="text-align:center; margin-top:2em;">
+    <div style="margin-bottom:1.5em;">
+      <a href="brain_training_game2.html"><button style="background: #27ae60; color: white; border: none; padding: 0.7em 1.2em; border-radius: 8px; font-size: 1em; font-weight: bold; cursor: pointer; box-shadow: 0 2px 8px #c8e6c9; transition: background 0.3s;">脳トレゲーム（生活面編）へ</button></a>
+    </div>
+    <div style="margin-bottom:1.5em;">
+      <span style="font-weight:bold; font-size:1.1em;">稼働時間：</span>
+      <span id="session-timer" style="font-size:1.3em; color:#2c3e50;">00:00</span>
+      <button onclick="sessionTimer.startSession()" style="margin-left:1em; background:#27ae60; color:white; border:none; border-radius:6px; padding:0.5em 1em; font-weight:bold;">開始</button>
+      <button onclick="sessionTimer.endSession()" style="margin-left:0.5em; background:#e74c3c; color:white; border:none; border-radius:6px; padding:0.5em 1em; font-weight:bold;">終了</button>
+    </div>
+  </div>
+  <div class="card-grid">
+    <!-- ゲームカードはJavaScriptによって動的に挿入されます -->
+    <div class="game-card">
+        <div class="game-icon"></div>
+        <h3>眼の動きトレーニング</h3>
+        <p>動く物体を眼で追って、眼球運動を鍛えます。視覚機能の向上に効果的です。</p>
+        <a href="eye_movement_training.html" class="game-button">開始</a>
+    </div>
+
+    <div class="game-card">
+        <div class="game-icon">✨</div>
+        <h3>眼の動きトレーニング - 高度版</h3>
+        <p>複数モード対応・詳細分析機能付きの高度な眼球運動トレーニングです。</p>
+        <a href="eye_movement_training_advanced.html" class="game-button">開始</a>
+    </div>
+
+    <div class="game-card">
+        <div class="game-icon">🧘</div>
+        <h3>ストレス軽減・感情コントロール</h3>
+        <p>呼吸法、瞑想、音楽療法でストレスを軽減し、感情を適切にコントロールします。</p>
+        <a href="stress_relief_emotion_control.html" class="game-button">開始</a>
+    </div>
+  </div>
+
+  <script>
+    // ゲーム設定
+    let gameSettings = {};
+    
+    // ゲーム設定の読み込み
+    async function loadGameSettings() {
+      try {
+        const response = await fetch('game_settings.json');
+        gameSettings = await response.json();
+        renderVisibleGames();
+      } catch (error) {
+        console.error('ゲーム設定の読み込みに失敗しました:', error);
+        // デフォルト設定で全ゲームを表示
+        renderAllGames();
+      }
+    }
+    
+    // 表示可能なゲームのみを表示
+    function renderVisibleGames() {
+      const cardGrid = document.querySelector('.card-grid');
+      cardGrid.innerHTML = '';
+      
+      if (gameSettings.memory_games) {
+        Object.keys(gameSettings.memory_games).forEach(gameKey => {
+          const game = gameSettings.memory_games[gameKey];
+          if (game.visible) {
+            const gameCard = createGameCard(game);
+            cardGrid.appendChild(gameCard);
+          }
+        });
+      }
+    }
+    
+    // 全ゲームを表示（フォールバック）
+    function renderAllGames() {
+      const cardGrid = document.querySelector('.card-grid');
+      cardGrid.innerHTML = ''; // Clear existing content
+
+      const defaultGames = [
+        { file: 'memory_game.html', icon: '🧠', name: '記憶力ゲーム', description: '表示された内容を覚えて答える<br>記憶力トレーニング' },
+        { file: 'eye_training_index.html', icon: '🔍', name: '眼の訓練ゲーム一覧', description: '視力と眼の機能を鍛えるトレーニング' },
+        { file: 'integrated_driving_system.html', icon: '🚗', name: '統合運転システム', description: '総合的な運転技術をトレーニング' },
+        { file: 'concentration_game.html', icon: '🃏', name: '神経衰弱ゲーム', description: '同じ絵柄を揃えて記憶力を鍛える' },
+        { file: 'click_training_game.html', icon: '🖱️', name: '指先運動・クリック練習ゲーム', description: 'クリック操作で指先の運動や反応速度を鍛える' },
+        { file: 'number-order.html', icon: '🔢', name: '数字順番探しゲーム', description: '数字を正しい順番に並べるゲーム' },
+        { file: 'date-quiz.html', icon: '📅', name: '日付・曜日クイズ', description: '日付や曜日に関するクイズで脳を活性化' },
+        { file: 'reaction_game.html', icon: '⚡', name: '反応ゲーム', description: '素早い反応で正解を選ぶ<br>反射神経トレーニング' },
+        { file: 'letter_game.html', icon: '🔤', name: '文字ゲーム', description: '文字を使った脳トレゲーム' }
+      ];
+
+      defaultGames.forEach(game => {
+        const gameCard = createGameCard(game);
+        cardGrid.appendChild(gameCard);
+      });
+    }
+    
+    // ゲームカードの作成
+    function createGameCard(game) {
+      const card = document.createElement('a');
+      card.href = `./${game.file}`;
+      card.className = 'card';
+      card.onclick = () => logGameClick(game.name);
+      
+      card.innerHTML = `
+        <div style="font-size:2.2em; margin-bottom:0.5em;">${game.icon}</div>
+        <div class="card-title">${game.name}</div>
+        <div class="card-desc">${game.description}</div>
+      `;
+      
+      return card;
+    }
+    
+    // ページ読み込み時に認証チェック
+    document.addEventListener('DOMContentLoaded', function() {
+      // 開発・テスト用：認証チェックを一時的に無効化
+      // const isAuthenticated = localStorage.getItem("isAuthenticated");
+      // if (!isAuthenticated || isAuthenticated !== "true") {
+      //   // ログインページにリダイレクト
+      //   sessionStorage.setItem('returnUrl', window.location.href);
+      //   window.location.href = "pin_login.html";
+      //   return; // リダイレクトされるため、以降の処理は実行しない
+      // }
+
+      // 開発用：認証状態を自動設定
+      localStorage.setItem("isAuthenticated", "true");
+      
+      // 開発用：デフォルトユーザー情報を設定
+      if (!localStorage.getItem('currentUser')) {
+        const defaultUser = {
+          username: 'テストユーザー',
+          role: 'user',
+          id: 'test_user_001'
+        };
+        localStorage.setItem('currentUser', JSON.stringify(defaultUser));
+      }
+
+      // ゲーム開始記録（エラーハンドリング付き）
+      try {
+        if (typeof usageLogger !== 'undefined' && usageLogger) {
+          usageLogger.logGameStart('脳トレゲーム 記憶編', 'brain_training_memory');
+        }
+      } catch (error) {
+        console.warn('利用履歴記録でエラーが発生しました:', error);
+      }
+      
+      // ゲーム設定を読み込み
+      loadGameSettings();
+    });
+
+    // ゲームクリック時の記録
+    function logGameClick(gameName) {
+      if (usageLogger) {
+        usageLogger.logGameProgress('脳トレゲーム選択', `選択: ${gameName}`, 'game_selection');
+      }
+    }
+
+    // ページ離脱時の記録
+    window.addEventListener('beforeunload', function() {
+      if (usageLogger) {
+        usageLogger.logGameEnd('脳トレゲーム 記憶編', null, null, null, false);
+      }
+    });
+
+    // --- メニュー機能 ---
+    function logout() {
+        localStorage.removeItem("isAuthenticated");
+        localStorage.removeItem("userData");
+        sessionStorage.clear();
+        window.location.href = 'pin_login.html';
+    }
+
+    function toggleMenu() {
+        const menuId = 'side-menu-container';
+        const existingMenu = document.getElementById(menuId);
+
+        if (existingMenu) {
+            existingMenu.remove();
+            return;
+        }
+
+        const menu = document.createElement('div');
+        menu.id = menuId;
+        menu.style.position = 'fixed';
+        menu.style.top = '60px';
+        menu.style.right = '20px';
+        menu.style.background = 'white';
+        menu.style.border = '1px solid #ccc';
+        menu.style.borderRadius = '8px';
+        menu.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+        menu.style.padding = '10px';
+        menu.style.zIndex = '1001';
+        menu.innerHTML = `
+            <ul style="list-style: none; padding: 0; margin: 0; width: 220px;">
+                <li style="margin-bottom: 10px;">
+                    <a href="settings.html" style="text-decoration: none; color: #333; display: block; padding: 8px 12px; border-radius: 5px; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#f0f0f0'" onmouseout="this.style.backgroundColor='transparent'">
+                        <i class="fas fa-cog"></i> 設定
+                    </a>
+                </li>
+                <li style="margin-bottom: 10px;">
+                    <a href="https://line.me/R/ti/p/@440cqgno" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #333; display: block; padding: 8px 12px; border-radius: 5px; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#f0f0f0'" onmouseout="this.style.backgroundColor='transparent'">
+                        <i class="fab fa-line"></i> お問い合わせ (LINE)
+                    </a>
+                </li>
+                <li style="border-top: 1px solid #eee; margin: 10px 0; padding-top: 10px;">
+                    <button onclick="logout()" style="background: #e74c3c; color: white; border: none; border-radius: 5px; padding: 8px 12px; width: 100%; text-align: left; cursor: pointer; font-size: 1em;">
+                        <i class="fas fa-sign-out-alt"></i> ログアウト
+                    </button>
+                </li>
+            </ul>
+        `;
+        document.body.appendChild(menu);
+    }
+  </script>
+</body>
+</html> 

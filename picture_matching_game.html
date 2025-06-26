@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>絵合わせゲーム - 脳トレゲームversion2</title>
+    <style>
+        body {
+            font-family: 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .game-frame {
+            border: 3px solid #4CAF50;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            background-color: #fff;
+        }
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        .game-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+        }
+        .game-controls {
+            display: flex;
+            gap: 10px;
+        }
+        .game-controls button {
+            padding: 10px 20px;
+            font-size: 1.1em;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .game-content {
+            min-height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .game-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        .game-stats {
+            display: flex;
+            gap: 20px;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+        }
+        .stat-value {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+        }
+        .game-message {
+            text-align: center;
+            font-size: 1.2em;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .game-message.success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        .game-message.error {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>絵合わせゲーム</h1>
+        <div class="game-frame">
+            <div class="game-header">
+                <div class="game-title">絵合わせゲーム</div>
+                <div class="game-controls">
+                    <button onclick="startGame()">ゲーム開始</button>
+                    <button onclick="resetGame()">リセット</button>
+                </div>
+            </div>
+            <div class="game-content" id="gameContent">
+                <p>「ゲーム開始」ボタンを押してゲームを始めてください</p>
+            </div>
+            <div class="game-message" id="gameMessage"></div>
+            <div class="game-footer">
+                <div class="game-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">残り問題数</div>
+                        <div class="stat-value" id="questionCount">10</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">スコア</div>
+                        <div class="stat-value" id="score">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">正解数</div>
+                        <div class="stat-value" id="correctCount">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">不正解数</div>
+                        <div class="stat-value" id="incorrectCount">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game_result.js"></script>
+    <script>
+        let isGameActive = false;
+        let score = 0;
+        let startTime = 0;
+        let comboCount = 0;
+        let correctCount = 0;
+        let incorrectCount = 0;
+
+        // ゲーム設定を取得
+        const gameSettings = getGameSettings('picturematch');
+        const difficultySettings = getDifficultySettings('picturematch');
+
+        function startGame() {
+            isGameActive = true;
+            score = 0;
+            correctCount = 0;
+            incorrectCount = 0;
+            comboCount = 0;
+            startTime = Date.now();
+            // 難易度設定に基づいて問題数を設定
+            questionCount = difficultySettings.totalQuestions;
+            updateStats();
+            document.getElementById('gameMessage').textContent = '同じ絵を選んでください';
+        }
+
+        function checkAnswer(isCorrect) {
+            if (!isGameActive) return;
+            const timeUsed = (Date.now() - startTime) / 1000;
+            if (isCorrect) {
+                correctCount++;
+                comboCount++;
+                document.getElementById('gameMessage').textContent = '正解！';
+                score = calculateScore(correctCount, questionCount, timeUsed, comboCount);
+            } else {
+                incorrectCount++;
+                comboCount = 0;
+                document.getElementById('gameMessage').textContent = '不正解...';
+            }
+            questionCount--;
+            updateStats();
+            if (questionCount <= 0) {
+                isGameActive = false;
+                showPreview();
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('questionCount').textContent = questionCount;
+            document.getElementById('score').textContent = score;
+        }
+
+        function showPreview() {
+            document.getElementById('gameContent').innerHTML = '';
+            showGameResult(correctCount, difficultySettings.totalQuestions, incorrectCount);
+        }
+
+        function resetGame() {
+            // ゲームリセット時の処理
+            document.getElementById('gameMessage').textContent = 'ゲームをリセットしました';
+            document.getElementById('gameMessage').className = 'game-message';
+        }
+    </script>
+</body>
+</html> 

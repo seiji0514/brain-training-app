@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Dataset xsi:schemaLocation="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema FGD_GMLSchema.xsd"
+	xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema"
+	gml:id="Dataset1">
+  <gml:description>基盤地図情報メタデータ ID=fmdid:16-0101</gml:description>
+  <gml:name>基盤地図情報ダウンロードデータ（GML版）</gml:name>
+<BldA gml:id="K17_4617011490_1">
+<fid>20151218-46206-11517-s-364</fid>
+<lfSpanFr gml:id="K17_4617011490_1-1">
+<gml:timePosition>2015-12-18</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4617011490_1-2">
+<gml:timePosition>2015-12-21</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4617011490_1-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4617011490_1-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+31.99238425 128.350471917
+31.992372944 128.350425722
+31.992367278 128.350438889
+31.992236278 128.350453222
+31.992229944 128.350559472
+31.992372389 128.350558139
+31.99238425 128.350471917
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4617011490_2">
+<fid>20151218-46206-11517-s-365</fid>
+<lfSpanFr gml:id="K17_4617011490_2-1">
+<gml:timePosition>2015-12-18</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4617011490_2-2">
+<gml:timePosition>2015-12-21</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4617011490_2-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4617011490_2-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+31.994804056 128.351389222
+31.994693028 128.351489
+31.994747778 128.35157425
+31.994861111 128.351475389
+31.994804056 128.351389222
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4617011490_3">
+<fid>20151218-46206-11517-s-366</fid>
+<lfSpanFr gml:id="K17_4617011490_3-1">
+<gml:timePosition>2015-12-18</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4617011490_3-2">
+<gml:timePosition>2015-12-21</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4617011490_3-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4617011490_3-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+31.99487025 128.352174417
+31.994819417 128.352114694
+31.994791083 128.352134694
+31.994712194 128.352200806
+31.994757472 128.352273583
+31.99487025 128.352174417
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+</Dataset>

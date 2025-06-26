@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIN登録</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Meiryo', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .header h1 {
+            color: #2574c7;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            color: #666;
+            margin: 0;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2574c7;
+        }
+        
+        .pin-section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 2px solid #e9ecef;
+        }
+        
+        .pin-input {
+            font-size: 1.2rem;
+            letter-spacing: 0.5em;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            -webkit-text-security: disc;
+            -moz-text-security: disc;
+            text-security: disc;
+        }
+        
+        .pin-strength {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .strength-weak {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .strength-medium {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .strength-strong {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #3498db;
+            color: white;
+            margin: 0.5rem;
+            min-width: 120px;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-success {
+            background: #27ae60;
+        }
+        
+        .btn-success:hover {
+            background: #229954;
+        }
+        
+        .status {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+        
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .status-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255,255,255,1);
+            transform: scale(1.1);
+        }
+        
+        .security-info {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: #1565c0;
+        }
+        
+        .requirements {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        /* 登録完了画面用スタイル */
+        .completion-info {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .info-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .access-panel {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .access-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .next-steps {
+            background: #f3e5f5;
+            border: 1px solid #e1bee7;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .step-list {
+            margin-top: 1rem;
+        }
+        
+        .step-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 0.5rem 0;
+        }
+        
+        .step-number {
+            background: #9c27b0;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+        
+        .step-text {
+            flex: 1;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="window.location.href='index.html'">←</button>
+    
+    <div class="container">
+        <div class="header">
+            <h1>🔐 PIN登録</h1>
+            <p>セキュアなPIN認証</p>
+        </div>
+        
+        <div id="status" class="status"></div>
+        
+        <div class="security-info">
+            <strong>🔒 セキュリティ強化機能</strong><br>
+            • 6桁以上の英数字混合PIN<br>
+            • ログイン試行回数制限<br>
+            • 自動ログアウト機能<br>
+            • セッション管理強化
+        </div>
+        
+        <form id="registrationForm">
+            <h3>👤 利用者情報</h3>
+            
+            <div class="form-group">
+                <label for="lastName">姓 *</label>
+                <input type="text" id="lastName" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="firstName">名 *</label>
+                <input type="text" id="firstName" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="birthDate">生年月日 *</label>
+                <input type="date" id="birthDate" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="gender">性別 *</label>
+                <select id="gender" required>
+                    <option value="">選択してください</option>
+                    <option value="male">男性</option>
+                    <option value="female">女性</option>
+                    <option value="other">その他</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">メールアドレス *</label>
+                <input type="email" id="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">電話番号 *</label>
+                <input type="tel" id="phone" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="emergencyContact">緊急連絡先 *</label>
+                <input type="text" id="emergencyContact" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="jobTitle">職種 *</label>
+                <select id="jobTitle" required>
+                    <option value="">選択してください</option>
+                    <option value="manager">管理者</option>
+                    <option value="staff">スタッフ</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="medicalInfo">医療情報（任意）</label>
+                <textarea id="medicalInfo" rows="3" placeholder="アレルギー、服薬中の薬、既往歴など"></textarea>
+            </div>
+            
+            <div class="pin-section">
+                <h3>🔐 セキュアPIN設定</h3>
+                
+                <div class="form-group">
+                    <label for="pin">PINコード *</label>
+                    <input type="password" id="pin" class="pin-input" 
+                           placeholder="6桁以上の英数字" 
+                           minlength="6" maxlength="12" required>
+                    <div class="requirements">
+                        要件: 6桁以上、英数字混合、連続数字禁止
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="pinConfirm">PIN確認 *</label>
+                    <input type="password" id="pinConfirm" class="pin-input" 
+                           placeholder="PINを再入力" required>
+                </div>
+                
+                <div id="pinStrength" class="pin-strength" style="display: none;"></div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <button type="button" class="btn btn-success" onclick="registerUser()">
+                    ✅ 登録完了
+                </button>
+                <button type="button" class="btn" onclick="resetForm()">
+                    🔄 やり直し
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // PIN強度チェック機能
+        function checkPinStrength(pin) {
+            if (pin.length < 6) return { strength: 'weak', message: 'PINは6桁以上で入力してください' };
+            
+            let score = 0;
+            let hasLetter = /[a-zA-Z]/.test(pin);
+            let hasNumber = /\d/.test(pin);
+            let hasSpecial = /[!@#$%^&*]/.test(pin);
+            let isSequential = /(123|234|345|456|567|678|789|012|abc|bcd|cde|def|efg|fgh|ghi|hij|ijk|jkl|klm|lmn|mno|nop|opq|pqr|qrs|rst|stu|tuv|uvw|vwx|wxy|xyz)/i.test(pin);
+            
+            if (hasLetter) score += 1;
+            if (hasNumber) score += 1;
+            if (hasSpecial) score += 1;
+            if (pin.length >= 8) score += 1;
+            if (!isSequential) score += 1;
+            
+            if (score <= 2) return { strength: 'weak', message: 'PINの強度が弱いです。英数字混合で8桁以上を推奨' };
+            if (score <= 3) return { strength: 'medium', message: 'PINの強度は中程度です。特殊文字の追加を推奨' };
+            return { strength: 'strong', message: 'PINの強度は良好です' };
+        }
+        
+        // PIN入力時のリアルタイムチェック
+        document.getElementById('pin').addEventListener('input', function() {
+            const pin = this.value;
+            const strengthDiv = document.getElementById('pinStrength');
+            
+            if (pin.length >= 3) {
+                const result = checkPinStrength(pin);
+                strengthDiv.className = `pin-strength strength-${result.strength}`;
+                strengthDiv.textContent = result.message;
+                strengthDiv.style.display = 'block';
+            } else {
+                strengthDiv.style.display = 'none';
+            }
+        });
+        
+        // 登録処理
+        function registerUser() {
+            const requiredFields = ['lastName', 'firstName', 'birthDate', 'gender', 'email', 'phone', 'emergencyContact', 'jobTitle', 'pin', 'pinConfirm'];
+            let isValid = true;
+            
+            // 必須項目チェック
+            requiredFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (!field.value.trim()) {
+                    field.style.borderColor = '#e74c3c';
+                    isValid = false;
+                } else {
+                    field.style.borderColor = '#ddd';
+                }
+            });
+            
+            if (!isValid) {
+                showStatus('必須項目をすべて入力してください。', 'error');
+                return;
+            }
+            
+            // PIN強度チェック
+            const pin = document.getElementById('pin').value;
+            const pinConfirm = document.getElementById('pinConfirm').value;
+            
+            if (pin !== pinConfirm) {
+                showStatus('PINが一致しません。', 'error');
+                document.getElementById('pinConfirm').style.borderColor = '#e74c3c';
+                return;
+            }
+            
+            const strengthResult = checkPinStrength(pin);
+            if (strengthResult.strength === 'weak') {
+                showStatus('PINの強度が弱すぎます。より強力なPINを設定してください。', 'error');
+                return;
+            }
+            
+            // ユーザーデータ作成
+            const userData = {
+                lastName: document.getElementById('lastName').value,
+                firstName: document.getElementById('firstName').value,
+                birthDate: document.getElementById('birthDate').value,
+                gender: document.getElementById('gender').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                emergencyContact: document.getElementById('emergencyContact').value,
+                jobTitle: document.getElementById('jobTitle').value,
+                medicalInfo: document.getElementById('medicalInfo').value,
+                pin: pin,
+                registrationDate: new Date().toISOString(),
+                lastLoginAttempt: 0,
+                loginAttempts: 0,
+                accountLocked: false,
+                lockTime: null,
+                // 職種に応じた権限設定
+                permissions: document.getElementById('jobTitle').value === 'manager' ? 
+                    ['admin', 'user_management', 'system_settings', 'reports'] : 
+                    ['basic_access', 'game_play', 'progress_view']
+            };
+            
+            // ローカルストレージに保存
+            localStorage.setItem('isAuthenticated', 'true');
+            localStorage.setItem('registeredUser', JSON.stringify(userData));
+            localStorage.setItem('registeredPin', pin);
+            localStorage.setItem('loginAttempts', '0');
+            localStorage.setItem('lastLoginAttempt', Date.now().toString());
+            
+            console.log('登録データ:', userData);
+            
+            showStatus('PIN登録が完了しました！ログインページに移動します。', 'success');
+            
+            // 登録完了画面を表示
+            showRegistrationComplete(userData);
+        }
+        
+        // 登録完了画面表示
+        function showRegistrationComplete(userData) {
+            const container = document.querySelector('.container');
+            const isManager = userData.jobTitle === 'manager';
+            
+            container.innerHTML = `
+                <div class="header">
+                    <h1>✅ 登録完了</h1>
+                    <p>PIN登録が正常に完了しました</p>
+                </div>
+                
+                <div class="status status-success" style="display: block;">
+                    <strong>${userData.lastName} ${userData.firstName} 様</strong><br>
+                    登録が完了しました。以下の機能をご利用いただけます。
+                </div>
+                
+                <div class="completion-info">
+                    <h3>📋 登録情報</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <strong>氏名:</strong> ${userData.lastName} ${userData.firstName}
+                        </div>
+                        <div class="info-item">
+                            <strong>職種:</strong> ${userData.jobTitle === 'manager' ? '管理者' : 'スタッフ'}
+                        </div>
+                        <div class="info-item">
+                            <strong>メール:</strong> ${userData.email}
+                        </div>
+                        <div class="info-item">
+                            <strong>登録日:</strong> ${new Date(userData.registrationDate).toLocaleDateString('ja-JP')}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="access-panel">
+                    <h3>🚀 アクセス可能な機能</h3>
+                    <div class="access-buttons">
+                        <button class="btn btn-success" onclick="window.location.href='index.html'">
+                            🏠 メインページ
+                        </button>
+                        <button class="btn btn-info" onclick="window.location.href='pin_login.html'">
+                            🔐 PINログイン
+                        </button>
+                        ${isManager ? `
+                            <button class="btn btn-warning" onclick="window.location.href='unified_admin.html'">
+                                ⚙️ 管理者画面
+                            </button>
+                        ` : `
+                            <button class="btn btn-warning" onclick="window.location.href='staff_dashboard.html'">
+                                📊 スタッフ管理画面
+                            </button>
+                        `}
+                    </div>
+                </div>
+                
+                <div class="next-steps">
+                    <h3>📝 次のステップ</h3>
+                    <div class="step-list">
+                        <div class="step-item">
+                            <span class="step-number">1</span>
+                            <span class="step-text">PINログインでシステムにログイン</span>
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">2</span>
+                            <span class="step-text">脳トレゲームを開始</span>
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">3</span>
+                            <span class="step-text">${isManager ? '管理者画面で利用状況を確認' : 'スタッフ管理画面で利用履歴を確認'}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="button-group" style="text-align: center; margin-top: 2rem;">
+                    <button class="btn btn-success" onclick="window.location.href='index.html'">
+                        🏠 メインページへ
+                    </button>
+                    ${isManager ? `
+                        <button class="btn btn-warning" onclick="window.location.href='unified_admin.html'">
+                            ⚙️ 管理者画面へ
+                        </button>
+                    ` : `
+                        <button class="btn btn-warning" onclick="window.location.href='staff_dashboard.html'">
+                            📊 スタッフ管理画面へ
+                        </button>
+                    `}
+                </div>
+            `;
+        }
+        
+        // フォームリセット
+        function resetForm() {
+            if (confirm('すべてのデータをリセットしますか？')) {
+                document.getElementById('registrationForm').reset();
+                document.getElementById('pinStrength').style.display = 'none';
+                showStatus('フォームをリセットしました。', 'info');
+            }
+        }
+        
+        // ステータス表示
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = message;
+            statusDiv.className = `status status-${type}`;
+            statusDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 5000);
+        }
+        
+        // ページ読み込み時の処理
+        document.addEventListener('DOMContentLoaded', function() {
+            // 既に登録済みの場合はメインページへ
+            if (localStorage.getItem('isAuthenticated') === 'true') {
+                window.location.href = '/version2/index.html';
+            }
+        });
+    </script>
+</body>
+</html> 

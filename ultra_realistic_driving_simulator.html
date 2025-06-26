@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>超高機能リアル運転シミュレーター</title>
+  <style>
+    body { margin: 0; padding: 0; background: #000; overflow: hidden; font-family: 'Meiryo', sans-serif; }
+    #container { position: relative; width: 100vw; height: 100vh; }
+    #canvas { display: block; width: 100vw; height: 100vh; }
+    #loading { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.95); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 2em; z-index: 2000; }
+    #dashboard { position: absolute; bottom: 0; left: 0; right: 0; height: 120px; background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.3)); backdrop-filter: blur(10px); z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 30px; color: white; }
+    .dashboard-value { font-size: 32px; font-weight: bold; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+    .dashboard-label { font-size: 12px; color: #ccc; text-transform: uppercase; }
+    #control-panel { position: absolute; top: 20px; right: 20px; background: rgba(0,0,0,0.8); color: white; padding: 20px; border-radius: 15px; border: 2px solid #4A90E2; backdrop-filter: blur(15px); z-index: 1000; min-width: 250px; }
+    .control-button { background: linear-gradient(45deg, #4A90E2, #357ABD); color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; margin: 3px; font-size: 11px; transition: all 0.3s; }
+    .control-button:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(74,144,226,0.4); }
+    .notification { position: fixed; top: 20px; right: 20px; background: rgba(0,255,136,0.9); color: #000; padding: 15px 20px; border-radius: 10px; z-index: 2000; transform: translateX(400px); transition: transform 0.3s; font-weight: bold; }
+    .notification.show { transform: translateX(0); }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <canvas id="canvas"></canvas>
+    <div id="loading">都市を生成中...</div>
+    
+    <!-- ダッシュボード -->
+    <div id="dashboard">
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <div class="dashboard-value" id="speed">0</div>
+        <div class="dashboard-label">km/h</div>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <div class="dashboard-value" id="rpm">800</div>
+        <div class="dashboard-label">RPM</div>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <div class="dashboard-value" id="gear">N</div>
+        <div class="dashboard-label">ギア</div>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <div class="dashboard-value" id="fuel">100</div>
+        <div class="dashboard-label">燃料 %</div>
+      </div>
+    </div>
+    
+    <!-- 制御パネル -->
+    <div id="control-panel">
+      <h3>🎮 運転制御</h3>
+      <button class="control-button">加速</button>
+      <button class="control-button">制動</button>
+      <button class="control-button">左折</button>
+      <button class="control-button">右折</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    // --- グローバル変数 ---
+    let scene, camera, renderer;
+    let ground, buildings = [];
+
+    // --- 初期化 ---
+    function init() {
+      // シーン
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0xffffff);
+      scene.fog = new THREE.Fog(0x111111, 150, 400);
+      
+      // カメラ
+      camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.set(0, 50, 100);
+      camera.lookAt(0, 0, 0);
+      
+      // レンダラー
+      renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('canvas'), antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.shadowMap.enabled = true;
+
+      // ライト
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+      scene.add(ambientLight);
+      
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+      directionalLight.position.set(50, 100, 50);
+      directionalLight.castShadow = true;
+      directionalLight.shadow.camera.left = -200;
+      directionalLight.shadow.camera.right = 200;
+      directionalLight.shadow.camera.top = 200;
+      directionalLight.shadow.camera.bottom = -200;
+      scene.add(directionalLight);
+      
+      // 地面
+      const groundGeometry = new THREE.PlaneGeometry(500, 500);
+      const groundMaterial = new THREE.MeshLambertMaterial({ color: 0x333333 });
+      ground = new THREE.Mesh(groundGeometry, groundMaterial);
+      ground.rotation.x = -Math.PI / 2;
+      ground.receiveShadow = true;
+      scene.add(ground);
+
+      // 手続き的な都市生成は一旦コメントアウト
+      // createProceduralCity();
+
+      // GMLファイルを読み込んで建物を表示
+      // loadGMLAndDisplay();
+
+      // イベントリスナー
+      window.addEventListener('resize', onWindowResize);
+      
+      // アニメーション開始
+      animate();
+      
+      const loadingEl = document.getElementById('loading');
+      if(loadingEl) loadingEl.style.display = 'none';
+      
+      console.log("シミュレーターの初期化が完了しました。");
+
+      // 道路と車両を読み込む
+      loadRoads();
+      spawnCarOnFirstRoad();
+    }
+    
+    // --- GMLファイルを読み込んで建物を表示 ---
+    const gmlPath = './bldg/49306065_bldg_6697_op.gml';
+
+    function loadGMLAndDisplay() {
+      fetch(gmlPath)
+        .then(res => res.text())
+        .then(gmlText => {
+          parseAndDisplayGML(gmlText);
+        })
+        .catch(err => {
+          alert('GMLファイルの読み込みに失敗しました: ' + err);
+        });
+    }
+
+    function parseAndDisplayGML(gmlText) {
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(gmlText, "text/xml");
+      const BLDG_NS = 'http://www.opengis.net/citygml/building/2.0';
+      const GML_NS = 'http://www.opengis.net/gml';
+      const buildingElements = xmlDoc.getElementsByTagNameNS(BLDG_NS, 'Building');
+      if (buildingElements.length === 0) {
+        alert('建物データが見つかりません');
+        return;
+      }
+
+      const buildingContainer = new THREE.Group();
+
+      Array.from(buildingElements).forEach(building => {
+        const polygons = building.getElementsByTagNameNS(GML_NS, 'Polygon');
+        Array.from(polygons).forEach(polygon => {
+          const exterior = polygon.getElementsByTagNameNS(GML_NS, 'exterior')[0];
+          if (!exterior) return;
+          const linearRing = exterior.getElementsByTagNameNS(GML_NS, 'LinearRing')[0];
+          if (!linearRing) return;
+          const posList = linearRing.getElementsByTagNameNS(GML_NS, 'posList')[0];
+          if (!posList) return;
+
+          const coordsArray = posList.textContent.trim().split(/\s+/).filter(s => s.length > 0);
+          const vertices = [];
+          for (let i = 0; i + 2 < coordsArray.length; i += 3) {
+            vertices.push(
+              new THREE.Vector3(
+                parseFloat(coordsArray[i]),
+                parseFloat(coordsArray[i + 2]), // Z→Y
+                -parseFloat(coordsArray[i + 1]) // Y→Z（右手系）
+              )
+            );
+          }
+          if (vertices.length < 3) return;
+
+          // 三角形分割（fan方式）
+          const geometry = new THREE.BufferGeometry();
+          const positions = [];
+          for (let i = 1; i < vertices.length - 1; i++) {
+            positions.push(
+              vertices[0].x, vertices[0].y, vertices[0].z,
+              vertices[i].x, vertices[i].y, vertices[i].z,
+              vertices[i + 1].x, vertices[i + 1].y, vertices[i + 1].z
+            );
+          }
+          geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+          geometry.computeVertexNormals();
+
+          const material = new THREE.MeshLambertMaterial({ color: 0xcccccc, side: THREE.DoubleSide });
+          const mesh = new THREE.Mesh(geometry, material);
+          mesh.castShadow = true;
+          mesh.receiveShadow = true;
+          buildingContainer.add(mesh);
+        });
+      });
+
+      scene.add(buildingContainer);
+      showNotification(`建物${buildingContainer.children.length}件を完全再現しました`, 'success');
+    }
+    
+    // --- 通知表示 ---
+    function showNotification(message, type = 'success') {
+      const notification = document.createElement('div');
+      notification.className = `notification ${type}`;
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.classList.add('show');
+      setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => document.body.removeChild(notification), 300);
+      }, 2000);
+      }, 100);
+    }
+    
+    // --- リサイズ処理 ---
+    function onWindowResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+    
+    // --- アニメーションループ ---
+    function animate() {
+      requestAnimationFrame(animate);
+      renderer.render(scene, camera);
+    }
+    
+    // --- 道路GeoJSONの自動読み込み・表示 ---
+    function loadRoads() {
+      const geojsonPath = 'version2/takeo_roads.geojson';
+      fetch(geojsonPath)
+        .then(res => res.json())
+        .then(geojson => {
+          const roadMaterial = new THREE.LineBasicMaterial({ color: 0x2222ff });
+          let firstPoint = null;
+          let offset = null;
+          const scale = 10000000;
+          geojson.features.forEach(feature => {
+            console.log('geometry.type:', feature.geometry.type);
+            if (feature.geometry.coordinates) {
+              if (feature.geometry.type === 'LineString' && feature.geometry.coordinates.length > 0) {
+                console.log('first coord:', feature.geometry.coordinates[0]);
+              } else if (feature.geometry.type === 'MultiLineString' && feature.geometry.coordinates.length > 0) {
+                console.log('first coord:', feature.geometry.coordinates[0][0]);
+              } else if (feature.geometry.type === 'Polygon' && feature.geometry.coordinates.length > 0) {
+                console.log('first coord:', feature.geometry.coordinates[0][0]);
+              } else if (feature.geometry.type === 'MultiPolygon' && feature.geometry.coordinates.length > 0 && feature.geometry.coordinates[0].length > 0) {
+                console.log('first coord:', feature.geometry.coordinates[0][0][0]);
+              }
+            }
+            if (feature.geometry.type === 'LineString') {
+              const coords = feature.geometry.coordinates;
+              if (!offset) offset = coords[0];
+              const points = coords.map(c => new THREE.Vector3(
+                (c[0] - offset[0]) * scale,
+                0.1,
+                -(c[1] - offset[1]) * scale
+              ));
+              if (!firstPoint && points.length > 0) firstPoint = points[0];
+              const geometry = new THREE.BufferGeometry().setFromPoints(points);
+              const line = new THREE.Line(geometry, roadMaterial);
+              scene.add(line);
+            } else if (feature.geometry.type === 'MultiLineString') {
+              feature.geometry.coordinates.forEach(lineCoords => {
+                if (!offset) offset = lineCoords[0];
+                const points = lineCoords.map(c => new THREE.Vector3(
+                  (c[0] - offset[0]) * scale,
+                  0.1,
+                  -(c[1] - offset[1]) * scale
+                ));
+                if (!firstPoint && points.length > 0) firstPoint = points[0];
+                const geometry = new THREE.BufferGeometry().setFromPoints(points);
+                const line = new THREE.Line(geometry, roadMaterial);
+                scene.add(line);
+              });
+            } else if (feature.geometry.type === 'Polygon') {
+              feature.geometry.coordinates.forEach(ring => {
+                if (!offset) offset = ring[0];
+                const points = ring.map(c => new THREE.Vector3(
+                  (c[0] - offset[0]) * scale,
+                  0.1,
+                  -(c[1] - offset[1]) * scale
+                ));
+                if (!firstPoint && points.length > 0) firstPoint = points[0];
+                const geometry = new THREE.BufferGeometry().setFromPoints(points);
+                const line = new THREE.Line(geometry, roadMaterial);
+                scene.add(line);
+              });
+            } else if (feature.geometry.type === 'MultiPolygon') {
+              feature.geometry.coordinates.forEach(polygon => {
+                polygon.forEach(ring => {
+                  if (!offset) offset = ring[0];
+                  const points = ring.map(c => new THREE.Vector3(
+                    (c[0] - offset[0]) * scale,
+                    0.1,
+                    -(c[1] - offset[1]) * scale
+                  ));
+                  if (!firstPoint && points.length > 0) firstPoint = points[0];
+                  const geometry = new THREE.BufferGeometry().setFromPoints(points);
+                  const line = new THREE.Line(geometry, roadMaterial);
+                  scene.add(line);
+                });
+              });
+            }
+          });
+          // 最初の道路座標にカメラを向ける
+          if (firstPoint) {
+            camera.position.set(firstPoint.x + 10000, firstPoint.y + 10000, firstPoint.z + 10000);
+            camera.lookAt(firstPoint);
+          }
+          // 原点に赤い球を置く（デバッグ用）
+          const sphere = new THREE.Mesh(
+            new THREE.SphereGeometry(5, 16, 16),
+            new THREE.MeshBasicMaterial({ color: 0xff0000 })
+          );
+          sphere.position.set(0, 0, 0);
+          scene.add(sphere);
+        });
+    }
+
+    // --- 自動車両1体を道路上に自動配置・自動移動 ---
+    let car, carPath = [], carT = 0;
+    function spawnCarOnFirstRoad() {
+      const geojsonPath = 'version2/takeo_roads.geojson';
+      fetch(geojsonPath)
+        .then(res => res.json())
+        .then(geojson => {
+          let coords = null;
+          let offset = null;
+          const scale = 10000000;
+          for (const feature of geojson.features) {
+            if (feature.geometry.type === 'LineString') {
+              coords = feature.geometry.coordinates;
+              offset = coords[0];
+              break;
+            } else if (feature.geometry.type === 'MultiLineString') {
+              if (feature.geometry.coordinates.length > 0) {
+                coords = feature.geometry.coordinates[0];
+                offset = coords[0];
+                break;
+              }
+            } else if (feature.geometry.type === 'Polygon') {
+              if (feature.geometry.coordinates.length > 0) {
+                coords = feature.geometry.coordinates[0];
+                offset = coords[0];
+                break;
+              }
+            } else if (feature.geometry.type === 'MultiPolygon') {
+              if (feature.geometry.coordinates.length > 0 && feature.geometry.coordinates[0].length > 0) {
+                coords = feature.geometry.coordinates[0][0];
+                offset = coords[0];
+                break;
+              }
+            }
+          }
+          if (!coords || !offset) return;
+          carPath = coords.map(c => new THREE.Vector3(
+            (c[0] - offset[0]) * scale,
+            0.5,
+            -(c[1] - offset[1]) * scale
+          ));
+          car = new THREE.Mesh(
+            new THREE.BoxGeometry(2, 1, 4),
+            new THREE.MeshLambertMaterial({ color: 0xff0000 })
+          );
+          car.position.copy(carPath[0]);
+          scene.add(car);
+        });
+    }
+    
+    // --- 実行 ---
+    init();
+  </script>
+</body>
+</html>

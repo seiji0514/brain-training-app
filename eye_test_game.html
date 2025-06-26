@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>視力検査（簡易版）</title>
+  <style>
+    body { background:#eef1f5; font-family:'Segoe UI','Meiryo',sans-serif; margin:0; }
+    .container { max-width:500px; margin:2em auto; background:#fff; border-radius:18px; box-shadow:0 2px 12px #dbe6f3; padding:2em; }
+    h1 { text-align:center; color:#e67e22; font-size:2em; margin-bottom:1em; }
+    #markArea { text-align:center; margin-bottom:2em; }
+    .landolt { display:inline-block; }
+    .choices { display:flex; flex-wrap:wrap; gap:1em; justify-content:center; margin-bottom:2em; }
+    .choice-btn { font-size:1.3em; padding:0.7em 2em; border-radius:10px; border:2px solid #e67e22; background:#fbeee0; color:#e67e22; cursor:pointer; transition:background 0.2s, color 0.2s; min-width:90px; }
+    .choice-btn:hover { background:#e67e22; color:#fff; }
+    #score, #comment { text-align:center; font-size:1.2em; margin-top:1em; }
+    #startBtn, #restartBtn { display:block; margin:2em auto 0 auto; font-size:1.2em; padding:0.7em 2em; border-radius:10px; border:none; background:#e67e22; color:#fff; cursor:pointer; }
+    #restartBtn { background:#2574c7; margin-top:1em; }
+    #startBtn:hover, #restartBtn:hover { opacity:0.85; }
+    .hidden { display:none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>視力検査（簡易版）</h1>
+    <div style="text-align:center; margin-bottom:1em; color:#555;">C型マークの切れ目の方向を選んでください。徐々に小さくなります。</div>
+    <div id="markArea"></div>
+    <div class="choices" id="choices"></div>
+    <button id="startBtn">スタート</button>
+    <button id="restartBtn" class="hidden">もう一度</button>
+    <div id="score" class="hidden"></div>
+    <div id="comment" class="hidden"></div>
+  </div>
+  <script>
+    const directions = ['上','右','下','左'];
+    const angles = [0,90,180,270];
+    let questions = [];
+    let current = 0, score = 0, minSize = 48;
+    const total = 10;
+    const markArea = document.getElementById('markArea');
+    const choicesDiv = document.getElementById('choices');
+    const startBtn = document.getElementById('startBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    function makeQuestions() {
+      questions = [];
+      for(let i=0;i<total;i++){
+        const dirIdx = Math.floor(Math.random()*4);
+        const size = Math.max(48 - i*4, 16); // 徐々に小さく
+        questions.push({dir:dirIdx, size});
+      }
+    }
+    function drawLandolt(dir,size) {
+      // SVGでランドルト環を描画
+      const angle = angles[dir];
+      return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" class="landolt" style="transform:rotate(${angle}deg)"><circle cx="50" cy="50" r="45" stroke="#333" stroke-width="10" fill="none"/><rect x="45" y="0" width="10" height="40" fill="#eef1f5"/></svg>`;
+    }
+    function showQuestion() {
+      markArea.innerHTML = drawLandolt(questions[current].dir, questions[current].size*2);
+      choicesDiv.innerHTML = '';
+      directions.forEach((d,idx)=>{
+        const btn = document.createElement('button');
+        btn.className = 'choice-btn';
+        btn.textContent = d;
+        btn.onclick = ()=>{
+          if(idx===questions[current].dir){ score++; btn.style.background='#27ae60'; } else { btn.style.background='#e74c3c'; }
+          setTimeout(()=>{
+            current++;
+            if(current<total) showQuestion();
+            else showResult();
+          }, 500);
+        };
+        choicesDiv.appendChild(btn);
+      });
+    }
+    function showResult() {
+      markArea.innerHTML = '';
+      choicesDiv.innerHTML = '';
+      document.getElementById('score').textContent = `スコア：${score}`;
+      let comment = '';
+      if(score>=9) comment = '視力はとても良好です！';
+      else if(score>=7) comment = 'よく見えています。この調子で！';
+      else comment = '無理せず、必要なら眼科受診もご検討ください。';
+      document.getElementById('score').classList.remove('hidden');
+      document.getElementById('comment').textContent = comment;
+      document.getElementById('comment').classList.remove('hidden');
+      restartBtn.classList.remove('hidden');
+    }
+    function startGame() {
+      current=0; score=0;
+      makeQuestions();
+      document.getElementById('score').classList.add('hidden');
+      document.getElementById('comment').classList.add('hidden');
+      restartBtn.classList.add('hidden');
+      showQuestion();
+    }
+    startBtn.onclick = startGame;
+    restartBtn.onclick = startGame;
+  </script>
+</body>
+</html> 

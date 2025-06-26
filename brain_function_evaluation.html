@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧠 脳機能評価 - 脳トレゲーム</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #48bb78, #38a169);
+            border-radius: 2px;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .evaluation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .evaluation-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .evaluation-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            border-color: #4299e1;
+        }
+
+        .evaluation-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: #2d3748;
+            text-align: center;
+            position: relative;
+        }
+
+        .evaluation-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #4299e1, #667eea);
+            border-radius: 2px;
+        }
+
+        .evaluation-card p {
+            margin-bottom: 20px;
+            color: #4a5568;
+            line-height: 1.6;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .test-area {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .test-area:hover {
+            border-color: #4299e1;
+            box-shadow: 0 5px 20px rgba(66, 153, 225, 0.1);
+        }
+
+        .test-button {
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(66, 153, 225, 0.3);
+            width: 100%;
+        }
+
+        .test-button:hover {
+            background: linear-gradient(135deg, #3182ce 0%, #2c5aa0 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(66, 153, 225, 0.4);
+        }
+
+        .test-button:disabled {
+            background: linear-gradient(135deg, #cbd5e0 0%, #a0aec0 100%);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .attention-test-button {
+            margin-top: 15px;
+        }
+
+        .attention-test-area {
+            min-height: 200px;
+        }
+
+        .judgment-test-area {
+            min-height: 220px;
+        }
+
+        .results-panel {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            margin-top: 30px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .result-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .result-label {
+            font-size: 1rem;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #48bb78, #38a169);
+            transition: width 0.5s ease;
+            border-radius: 6px;
+        }
+
+        .reaction-test {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #4a5568;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .attention-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            max-width: 350px;
+            margin: 0 auto;
+        }
+
+        .attention-cell {
+            width: 55px;
+            height: 55px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-weight: 600;
+        }
+
+        .attention-cell:hover {
+            transform: scale(1.05);
+            border-color: #4299e1;
+        }
+
+        .attention-cell.target {
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(66, 153, 225, 0.3);
+        }
+
+        .attention-cell.clicked {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
+        }
+
+        .spatial-test {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid #e2e8f0;
+        }
+
+        .shape {
+            position: absolute;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .circle {
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+        }
+
+        .square {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 52px solid #ed8936;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(72, 187, 120, 0.4);
+        }
+
+        .action-btn.secondary {
+            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+            box-shadow: 0 4px 15px rgba(237, 137, 54, 0.3);
+        }
+
+        .action-btn.secondary:hover {
+            box-shadow: 0 6px 20px rgba(237, 137, 54, 0.4);
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 35px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+            margin-bottom: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .evaluation-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-button" onclick="goBack()">← 戻る</button>
+
+    <div class="container">
+        <div class="header">
+            <h1>🧠 脳機能評価</h1>
+            <p>反応時間、判断力、注意力、空間認知能力を総合的に評価します</p>
+        </div>
+
+        <div class="evaluation-grid">
+            <!-- 反応時間テスト -->
+            <div class="evaluation-card">
+                <h3>⚡ 反応時間テスト</h3>
+                <p>画面が赤くなったらすぐにクリックしてください。反応時間を測定します。</p>
+                <div class="test-area">
+                    <div class="reaction-test" id="reactionTest">
+                        準備ができたら「開始」をクリックしてください
+                    </div>
+                </div>
+                <button class="test-button" onclick="startReactionTest()">開始</button>
+            </div>
+
+            <!-- 注意力テスト -->
+            <div class="evaluation-card">
+                <h3>🔍 注意力テスト</h3>
+                <p>青いマスを順番にクリックしてください。注意力と集中力を測定します。</p>
+                <div class="test-area attention-test-area">
+                    <div class="attention-grid" id="attentionGrid"></div>
+                </div>
+                <button class="test-button attention-test-button" onclick="startAttentionTest()">開始</button>
+            </div>
+
+            <!-- 空間認知テスト -->
+            <div class="evaluation-card">
+                <h3>🎯 空間認知テスト</h3>
+                <p>表示される図形を記憶し、同じ位置に配置してください。</p>
+                <div class="test-area">
+                    <div class="spatial-test" id="spatialTest">
+                        準備ができたら「開始」をクリックしてください
+                    </div>
+                </div>
+                <button class="test-button" onclick="startSpatialTest()">開始</button>
+            </div>
+
+            <!-- 判断力テスト -->
+            <div class="evaluation-card">
+                <h3>🧩 判断力テスト</h3>
+                <p>表示される問題に素早く回答してください。判断力を測定します。</p>
+                <div class="test-area judgment-test-area">
+                    <div id="judgmentTest">
+                        <div id="judgmentQuestion">準備ができたら「開始」をクリックしてください</div>
+                        <div id="judgmentOptions" style="margin-top: 20px;"></div>
+                    </div>
+                </div>
+                <button class="test-button" onclick="startJudgmentTest()">開始</button>
+            </div>
+        </div>
+
+        <div class="results-panel" id="resultsPanel" style="display: none;">
+            <h2>📊 評価結果</h2>
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-value" id="reactionScore">--</div>
+                    <div class="result-label">反応時間</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="reactionProgress" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value" id="attentionScore">--</div>
+                    <div class="result-label">注意力</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="attentionProgress" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value" id="spatialScore">--</div>
+                    <div class="result-label">空間認知</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="spatialProgress" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value" id="judgmentScore">--</div>
+                    <div class="result-label">判断力</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="judgmentProgress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <button class="action-btn" onclick="saveResults()">💾 結果を保存</button>
+                <button class="action-btn secondary" onclick="retakeTests()">🔄 再テスト</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 利用履歴記録
+        if (typeof usageLogger !== 'undefined') {
+            usageLogger.logGameStart('脳機能評価', 'brain_function_evaluation');
+        }
+
+        let testResults = {
+            reaction: null,
+            attention: null,
+            spatial: null,
+            judgment: null
+        };
+
+        function goBack() {
+            window.history.back();
+        }
+
+        // 反応時間テスト
+        function startReactionTest() {
+            const testArea = document.getElementById('reactionTest');
+            const button = event.target;
+            button.disabled = true;
+            
+            testArea.innerHTML = '準備してください...';
+            testArea.style.background = '#f7fafc';
+            
+            setTimeout(() => {
+                testArea.innerHTML = '';
+                testArea.style.background = '#e53e3e';
+                testArea.style.cursor = 'pointer';
+                
+                const startTime = Date.now();
+                
+                testArea.onclick = () => {
+                    const reactionTime = Date.now() - startTime;
+                    testResults.reaction = reactionTime;
+                    
+                    testArea.innerHTML = `反応時間: ${reactionTime}ms`;
+                    testArea.style.background = '#48bb78';
+                    testArea.style.cursor = 'default';
+                    testArea.onclick = null;
+                    
+                    button.disabled = false;
+                    button.textContent = '完了';
+                    checkAllTestsComplete();
+                };
+            }, Math.random() * 3000 + 2000);
+        }
+
+        // 注意力テスト
+        function startAttentionTest() {
+            const grid = document.getElementById('attentionGrid');
+            const button = event.target;
+            button.disabled = true;
+            
+            grid.innerHTML = '';
+            let targetCells = [];
+            let clickedCells = 0;
+            
+            // ランダムに5つのターゲットセルを選択
+            for (let i = 0; i < 5; i++) {
+                let randomCell;
+                do {
+                    randomCell = Math.floor(Math.random() * 25);
+                } while (targetCells.includes(randomCell));
+                targetCells.push(randomCell);
+            }
+            
+            // グリッドを作成
+            for (let i = 0; i < 25; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'attention-cell';
+                if (targetCells.includes(i)) {
+                    cell.classList.add('target');
+                }
+                
+                cell.onclick = () => {
+                    if (cell.classList.contains('target') && !cell.classList.contains('clicked')) {
+                        cell.classList.add('clicked');
+                        clickedCells++;
+                        
+                        if (clickedCells === 5) {
+                            const accuracy = (clickedCells / 5) * 100;
+                            testResults.attention = accuracy;
+                            
+                            button.disabled = false;
+                            button.textContent = '完了';
+                            checkAllTestsComplete();
+                        }
+                    }
+                };
+                
+                grid.appendChild(cell);
+            }
+        }
+
+        // 空間認知テスト
+        function startSpatialTest() {
+            const testArea = document.getElementById('spatialTest');
+            const button = event.target;
+            button.disabled = true;
+            
+            testArea.innerHTML = '';
+            
+            // ランダムな図形を配置
+            const shapes = ['circle', 'square', 'triangle'];
+            const positions = [];
+            
+            for (let i = 0; i < 3; i++) {
+                const shape = shapes[Math.floor(Math.random() * shapes.length)];
+                const x = Math.random() * (testArea.offsetWidth - 50);
+                const y = Math.random() * (testArea.offsetHeight - 50);
+                
+                const shapeElement = document.createElement('div');
+                shapeElement.className = `shape ${shape}`;
+                shapeElement.style.left = x + 'px';
+                shapeElement.style.top = y + 'px';
+                
+                if (shape === 'circle') {
+                    shapeElement.style.width = '50px';
+                    shapeElement.style.height = '50px';
+                } else if (shape === 'square') {
+                    shapeElement.style.width = '50px';
+                    shapeElement.style.height = '50px';
+                }
+                
+                testArea.appendChild(shapeElement);
+                positions.push({ shape, x, y });
+            }
+            
+            // 3秒後に図形を隠す
+            setTimeout(() => {
+                testArea.innerHTML = '図形を記憶してください...';
+                
+                setTimeout(() => {
+                    testArea.innerHTML = '記憶した図形と同じ位置に配置してください';
+                    testArea.style.cursor = 'crosshair';
+                    
+                    let correctPlacements = 0;
+                    let totalClicks = 0;
+                    
+                    testArea.onclick = (e) => {
+                        totalClicks++;
+                        const rect = testArea.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        
+                        // 最も近い正解位置をチェック
+                        let closest = null;
+                        let minDistance = Infinity;
+                        
+                        positions.forEach((pos, index) => {
+                            const distance = Math.sqrt(
+                                Math.pow(x - pos.x, 2) + Math.pow(y - pos.y, 2)
+                            );
+                            if (distance < minDistance) {
+                                minDistance = distance;
+                                closest = index;
+                            }
+                        });
+                        
+                        if (minDistance < 30) {
+                            correctPlacements++;
+                        }
+                        
+                        if (totalClicks >= 3) {
+                            const accuracy = (correctPlacements / 3) * 100;
+                            testResults.spatial = accuracy;
+                            
+                            testArea.innerHTML = `正解率: ${accuracy.toFixed(1)}%`;
+                            testArea.style.cursor = 'default';
+                            testArea.onclick = null;
+                            
+                            button.disabled = false;
+                            button.textContent = '完了';
+                            checkAllTestsComplete();
+                        }
+                    };
+                }, 3000);
+            }, 3000);
+        }
+
+        // 判断力テスト
+        function startJudgmentTest() {
+            const questionDiv = document.getElementById('judgmentQuestion');
+            const optionsDiv = document.getElementById('judgmentOptions');
+            const button = event.target;
+            button.disabled = true;
+            
+            const questions = [
+                {
+                    question: "次の数字の並びで、奇数は何個ありますか？\n2, 7, 4, 9, 1, 6, 3",
+                    options: ["3個", "4個", "5個", "6個"],
+                    correct: 2
+                },
+                {
+                    question: "A→B→C→D の順番で、BとDの間に何個の文字がありますか？",
+                    options: ["0個", "1個", "2個", "3個"],
+                    correct: 1
+                },
+                {
+                    question: "時計の針が3時15分を指している時、長針と短針の角度は？",
+                    options: ["7.5度", "15度", "22.5度", "30度"],
+                    correct: 0
+                }
+            ];
+            
+            let currentQuestion = 0;
+            let correctAnswers = 0;
+            let startTime = Date.now();
+            
+            function showQuestion() {
+                if (currentQuestion >= questions.length) {
+                    const totalTime = Date.now() - startTime;
+                    const accuracy = (correctAnswers / questions.length) * 100;
+                    const score = (accuracy * 100) / (totalTime / 1000); // 精度/時間
+                    testResults.judgment = Math.min(score, 100);
+                    
+                    questionDiv.textContent = `正解率: ${accuracy.toFixed(1)}%`;
+                    optionsDiv.innerHTML = '';
+                    
+                    button.disabled = false;
+                    button.textContent = '完了';
+                    checkAllTestsComplete();
+                    return;
+                }
+                
+                const q = questions[currentQuestion];
+                questionDiv.textContent = q.question;
+                
+                optionsDiv.innerHTML = '';
+                q.options.forEach((option, index) => {
+                    const optionBtn = document.createElement('button');
+                    optionBtn.textContent = option;
+                    optionBtn.style.cssText = `
+                        display: block;
+                        width: 100%;
+                        margin: 10px 0;
+                        padding: 10px;
+                        border: 2px solid #4299e1;
+                        background: white;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        transition: background 0.3s ease;
+                    `;
+                    
+                    optionBtn.onclick = () => {
+                        if (index === q.correct) {
+                            correctAnswers++;
+                        }
+                        currentQuestion++;
+                        showQuestion();
+                    };
+                    
+                    optionsDiv.appendChild(optionBtn);
+                });
+            }
+            
+            showQuestion();
+        }
+
+        // 結果表示
+        function showResults() {
+            const resultsPanel = document.getElementById('resultsPanel');
+            resultsPanel.style.display = 'block';
+            
+            // スコア計算と表示
+            const scores = {
+                reaction: testResults.reaction ? Math.max(0, 100 - (testResults.reaction - 200) / 10) : 0,
+                attention: testResults.attention || 0,
+                spatial: testResults.spatial || 0,
+                judgment: testResults.judgment || 0
+            };
+            
+            document.getElementById('reactionScore').textContent = testResults.reaction ? testResults.reaction + 'ms' : '--';
+            document.getElementById('attentionScore').textContent = scores.attention.toFixed(1) + '%';
+            document.getElementById('spatialScore').textContent = scores.spatial.toFixed(1) + '%';
+            document.getElementById('judgmentScore').textContent = scores.judgment.toFixed(1);
+            
+            document.getElementById('reactionProgress').style.width = scores.reaction + '%';
+            document.getElementById('attentionProgress').style.width = scores.attention + '%';
+            document.getElementById('spatialProgress').style.width = scores.spatial + '%';
+            document.getElementById('judgmentProgress').style.width = scores.judgment + '%';
+        }
+
+        // 結果保存
+        function saveResults() {
+            // 結果をローカルストレージに保存
+            const results = {
+                timestamp: new Date().toISOString(),
+                ...testResults
+            };
+            
+            let savedResults = JSON.parse(localStorage.getItem('brainEvaluationResults') || '[]');
+            savedResults.push(results);
+            localStorage.setItem('brainEvaluationResults', JSON.stringify(savedResults));
+            
+            alert('結果を保存しました！');
+        }
+
+        // 再テスト
+        function retakeTests() {
+            testResults = {
+                reaction: null,
+                attention: null,
+                spatial: null,
+                judgment: null
+            };
+            
+            document.getElementById('resultsPanel').style.display = 'none';
+            
+            // ボタンをリセット
+            const buttons = document.querySelectorAll('.test-button');
+            buttons.forEach(btn => {
+                btn.disabled = false;
+                btn.textContent = '開始';
+            });
+            
+            // テストエリアをリセット
+            document.getElementById('reactionTest').innerHTML = '準備ができたら「開始」をクリックしてください';
+            document.getElementById('reactionTest').style.background = '#f7fafc';
+            document.getElementById('reactionTest').style.cursor = 'default';
+            
+            document.getElementById('attentionGrid').innerHTML = '';
+            
+            document.getElementById('spatialTest').innerHTML = '準備ができたら「開始」をクリックしてください';
+            document.getElementById('spatialTest').style.cursor = 'default';
+            
+            document.getElementById('judgmentQuestion').textContent = '準備ができたら「開始」をクリックしてください';
+            document.getElementById('judgmentOptions').innerHTML = '';
+        }
+
+        // すべてのテストが完了したら結果を表示
+        function checkAllTestsComplete() {
+            if (testResults.reaction !== null && 
+                testResults.attention !== null && 
+                testResults.spatial !== null && 
+                testResults.judgment !== null) {
+                setTimeout(showResults, 1000);
+            }
+        }
+    </script>
+</body>
+</html> 

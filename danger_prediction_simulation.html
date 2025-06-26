@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>危険予測シミュレーション</title>
+  <style>
+    body { font-family: 'Meiryo', sans-serif; background: #f0f2f5; text-align: center; }
+    .container { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px #b0c4de; max-width: 520px; margin: 40px auto; padding: 2.5em; }
+    .scene { font-size: 1.2em; margin: 1.5em 0 1.2em 0; color: #2574c7; font-weight: bold; white-space: pre-line; }
+    .choices { margin-bottom: 1.5em; }
+    .choice-btn { background: #e67e22; color: #fff; border: none; border-radius: 10px; padding: 1em 2.5em; margin: 0.7em; font-size: 1.2em; cursor: pointer; letter-spacing: 0.1em; }
+    .choice-btn:hover { background: #b86b1b; }
+    .result { font-size: 1.3em; margin: 1.2em 0; color: #27ae60; }
+    .result.incorrect { color: #e67e22; }
+    .score { font-size: 2em; color: #2574c7; margin-top: 2em; font-weight: bold; }
+    .miss { font-size: 1.3em; color: #e74c3c; margin-top: 1em; font-weight: bold; }
+    .final-comment { font-size: 1.5em; margin-top: 1em; color: #2574c7; font-weight: bold; }
+    .next-btn { background: #43a047; color: #fff; border: none; border-radius: 10px; padding: 1em 2.5em; margin: 0.7em; font-size: 1.2em; cursor: pointer; letter-spacing: 0.1em; }
+    .next-btn:hover { background: #2e7031; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div style="font-size:1.5em; color:#2574c7; font-weight:bold; margin-bottom:0.5em;">危険予測シミュレーション</div>
+    <div style="font-size:1.1em; color:#444; margin-bottom:1.5em;">シーンを見て、どこが危険か・どんな行動が必要かを選んでください</div>
+    <div id="quizArea">
+      <div class="scene" id="scene"></div>
+      <div class="choices" id="choices"></div>
+      <div class="result" id="result"></div>
+      <button id="nextBtn" style="display:none;" class="next-btn">次の問題</button>
+    </div>
+    <div class="score" id="score" style="display:none;"></div>
+  </div>
+  <script>
+    // シンプルなシーンと選択肢例
+    const questions = [
+      { scene: '横断歩道の手前、子どもが道路脇で遊んでいる。', choices: ['スピードを落とし、子どもの動きに注意する', 'そのまま進む', 'クラクションを鳴らす', 'スピードを上げて通過する'], answer: 0 },
+      { scene: '交差点で自転車が急に飛び出してきた。', choices: ['すぐにブレーキをかける', 'クラクションを鳴らす', 'スピードを上げて避ける', '何もしない'], answer: 0 },
+      { scene: '信号が青に変わったが、歩行者がまだ横断中。', choices: ['歩行者が渡り終えるまで待つ', 'すぐ発進する', 'クラクションを鳴らす', '徐行しながら進む'], answer: 0 },
+      { scene: '見通しの悪いカーブで前方がよく見えない。', choices: ['スピードを落とし、対向車に注意する', 'そのままのスピードで進む', 'クラクションを鳴らす', '車線をはみ出して進む'], answer: 0 },
+      { scene: '夜間、歩行者が黒い服で道路を横断している。', choices: ['スピードを落とし、歩行者に注意する', 'そのまま進む', 'ハイビームで照らす', 'クラクションを鳴らす'], answer: 0 },
+      { scene: '住宅街で高齢者がゆっくり歩いている。', choices: ['徐行し、十分な間隔をとる', 'クラクションを鳴らす', 'スピードを上げて追い越す', '何もしない'], answer: 0 },
+      { scene: '自転車が車道をふらふら走っている。', choices: ['十分な距離をとって追い越す', 'クラクションを鳴らす', 'すぐ追い越す', 'スピードを上げる'], answer: 0 },
+      { scene: '交差点で右折しようとしたら、対向車がスピードを上げてきた。', choices: ['無理に曲がらず待つ', '急いで右折する', 'クラクションを鳴らす', '徐行しながら曲がる'], answer: 0 },
+      { scene: '小学校の前で子どもたちが集団で歩いている。', choices: ['徐行し、子どもの動きに注意する', 'クラクションを鳴らす', 'スピードを上げて通過する', '何もしない'], answer: 0 },
+      { scene: '見通しの悪い交差点で自転車が止まっている。', choices: ['徐行し、自転車の動きに注意する', 'クラクションを鳴らす', 'スピードを上げて通過する', '何もしない'], answer: 0 }
+    ];
+    const maxQuestions = 10;
+    let currentQuestion = 0, score = 0, miss = 0;
+    function showQuestion() {
+      document.getElementById('result').textContent = '';
+      document.getElementById('result').className = 'result';
+      document.getElementById('nextBtn').style.display = 'none';
+      const q = questions[currentQuestion];
+      document.getElementById('scene').textContent = q.scene;
+      const choicesDiv = document.getElementById('choices');
+      choicesDiv.innerHTML = '';
+      q.choices.forEach((choice, idx) => {
+        const btn = document.createElement('button');
+        btn.textContent = choice;
+        btn.className = 'choice-btn';
+        btn.onclick = () => checkAnswer(idx, q);
+        choicesDiv.appendChild(btn);
+      });
+    }
+    function checkAnswer(idx, q) {
+      document.querySelectorAll('.choice-btn').forEach(btn => btn.disabled = true);
+      if(idx === q.answer) {
+        document.getElementById('result').textContent = '正解！よく危険に気づけました。';
+        document.getElementById('result').className = 'result';
+        score++;
+      } else {
+        document.getElementById('result').textContent = '不正解… 正しい対応を心がけましょう。';
+        document.getElementById('result').className = 'result incorrect';
+        miss++;
+      }
+      document.getElementById('nextBtn').style.display = 'inline-block';
+    }
+    document.getElementById('nextBtn').onclick = () => {
+      currentQuestion++;
+      if(currentQuestion < questions.length) {
+        showQuestion();
+      } else {
+        document.getElementById('quizArea').style.display = 'none';
+        endGame();
+      }
+    };
+    function endGame() {
+      document.getElementById('question').style.display = 'none';
+      document.getElementById('choices').style.display = 'none';
+      document.getElementById('nextBtn').style.display = 'none';
+      document.getElementById('score').textContent = `スコア：${score}`;
+      document.getElementById('miss').innerHTML = `<span style='color:red'>ミス：${miss}</span>`;
+      let comment = '';
+      if(score >= 9) comment = '素晴らしい危険予測力です！';
+      else if(score >= 7) comment = 'よくできました！この調子でがんばりましょう。';
+      else comment = '次もがんばりましょう！';
+      document.getElementById('comment').textContent = comment;
+      document.getElementById('score').style.display = 'block';
+      document.getElementById('miss').style.display = 'block';
+      document.getElementById('comment').style.display = 'block';
+    }
+    // 初期表示
+    showQuestion();
+  </script>
+</body>
+</html> 

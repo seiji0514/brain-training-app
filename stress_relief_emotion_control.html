@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ストレス軽減・感情コントロール</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Meiryo', sans-serif;
+            background: #eef1f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: white;
+            color: #3498db;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #3498db;
+        }
+
+        .container {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 12px #dbe6f3;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px #b0c4de;
+        }
+
+        .card h3 {
+            color: #3498db;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .card p {
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin: 5px 0;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .button.breathing {
+            background: #27ae60;
+        }
+
+        .button.meditation {
+            background: #9b59b6;
+        }
+
+        .button.music {
+            background: #f39c12;
+        }
+
+        .button.emotion {
+            background: #e74c3c;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background 0.3s;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background: #2980b9;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: modalSlideIn 0.3s ease;
+            box-shadow: 0 4px 24px #b0c4de;
+        }
+
+        @keyframes modalSlideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .close:hover {
+            color: #3498db;
+        }
+
+        .breathing-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #27ae60, #229954);
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            animation: breathe 4s infinite ease-in-out;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+
+        .emotion-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .emotion-button {
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .emotion-button:hover {
+            transform: scale(1.05);
+        }
+
+        .emotion-happy { background: #f39c12; color: white; }
+        .emotion-sad { background: #3498db; color: white; }
+        .emotion-angry { background: #e74c3c; color: white; }
+        .emotion-calm { background: #27ae60; color: white; }
+        .emotion-excited { background: #9b59b6; color: white; }
+        .emotion-anxious { background: #95a5a6; color: white; }
+
+        .music-player {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .music-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .music-button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .music-button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #ecf0f1;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #3498db;
+            transition: width 0.3s ease;
+        }
+
+        .timer {
+            font-size: 2em;
+            font-weight: bold;
+            color: #3498db;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .meditation-background {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 300px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2em;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .stress-level {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .stress-meter {
+            flex: 1;
+            height: 20px;
+            background: #ecf0f1;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .stress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #27ae60, #f39c12, #e74c3c);
+            transition: width 0.3s ease;
+        }
+
+        .tips {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .tips h4 {
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+
+        .tips ul {
+            margin-left: 20px;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 15px;
+            }
+            
+            .emotion-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .modal-content {
+                margin: 10% auto;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="brain_training_game.html" class="back-button">← 戻る</a>
+    
+    <div class="header">
+        <h1>🧘 ストレス軽減・感情コントロール</h1>
+        <p>呼吸法、瞑想、音楽療法で心身のリラックスをサポート</p>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h3>🌬️ 呼吸法トレーニング</h3>
+            <p>深い呼吸でリラックス効果を高め、ストレスを軽減します。自律神経を整えて心身のバランスを保ちます。</p>
+            <button class="button breathing" onclick="openBreathingModal()">呼吸法を開始</button>
+        </div>
+
+        <div class="card">
+            <h3>🧘‍♀️ 瞑想・マインドフルネス</h3>
+            <p>瞑想を通じて心を落ち着かせ、現在の瞬間に集中します。思考の整理と感情の安定を促します。</p>
+            <button class="button meditation" onclick="openMeditationModal()">瞑想を開始</button>
+        </div>
+
+        <div class="card">
+            <h3>🎵 音楽療法</h3>
+            <p>リラックス効果のある音楽で心を癒し、ストレスを軽減します。気分に合わせて音楽を選択できます。</p>
+            <button class="button music" onclick="openMusicModal()">音楽療法を開始</button>
+        </div>
+
+        <div class="card">
+            <h3>😊 感情認識・調整</h3>
+            <p>現在の感情を認識し、適切な対処法を学びます。感情のコントロール力を向上させます。</p>
+            <button class="button emotion" onclick="openEmotionModal()">感情チェックを開始</button>
+        </div>
+
+        <div class="card">
+            <h3>📊 ストレスレベル測定</h3>
+            <p>現在のストレスレベルを測定し、適切な対処法を提案します。定期的なチェックで心身の健康を管理します。</p>
+            <button class="button" onclick="openStressModal()">ストレスチェックを開始</button>
+        </div>
+
+        <div class="card">
+            <h3>💡 ストレス対処法</h3>
+            <p>日常生活で実践できるストレス対処法を紹介します。効果的なリラックステクニックを身につけましょう。</p>
+            <button class="button" onclick="openTipsModal()">対処法を確認</button>
+        </div>
+    </div>
+
+    <!-- 呼吸法モーダル -->
+    <div id="breathingModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('breathingModal')">&times;</span>
+            <h2>🌬️ 呼吸法トレーニング</h2>
+            <div class="breathing-circle" id="breathingCircle">
+                吸って
+            </div>
+            <div class="timer" id="breathingTimer">4:00</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="breathingProgress"></div>
+            </div>
+            <div class="music-controls">
+                <button class="music-button" onclick="startBreathing()">開始</button>
+                <button class="music-button" onclick="pauseBreathing()">一時停止</button>
+                <button class="music-button" onclick="resetBreathing()">リセット</button>
+            </div>
+            <div class="tips">
+                <h4>呼吸法のポイント</h4>
+                <ul>
+                    <li>お腹を意識して深く呼吸する</li>
+                    <li>リラックスした姿勢で行う</li>
+                    <li>呼吸に集中し、他のことを考えない</li>
+                    <li>無理をせず、自分のペースで行う</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 瞑想モーダル -->
+    <div id="meditationModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('meditationModal')">&times;</span>
+            <h2>🧘‍♀️ 瞑想・マインドフルネス</h2>
+            <div class="meditation-background">
+                <div>
+                    <p>静かな場所で、リラックスした姿勢を取りましょう</p>
+                    <p>呼吸に意識を向け、今この瞬間に集中します</p>
+                </div>
+            </div>
+            <div class="timer" id="meditationTimer">10:00</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="meditationProgress"></div>
+            </div>
+            <div class="music-controls">
+                <button class="music-button" onclick="startMeditation()">開始</button>
+                <button class="music-button" onclick="pauseMeditation()">一時停止</button>
+                <button class="music-button" onclick="resetMeditation()">リセット</button>
+            </div>
+            <div class="tips">
+                <h4>瞑想のポイント</h4>
+                <ul>
+                    <li>背筋を伸ばして、リラックスした姿勢を保つ</li>
+                    <li>呼吸に集中し、雑念を手放す</li>
+                    <li>判断せず、観察する心を持つ</li>
+                    <li>継続することが大切</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 音楽療法モーダル -->
+    <div id="musicModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('musicModal')">&times;</span>
+            <h2>🎵 音楽療法</h2>
+            <div class="music-player">
+                <p>リラックス効果のある音楽を選択してください</p>
+                <div class="music-controls">
+                    <button class="music-button" onclick="playRelaxingMusic()">リラックス音楽</button>
+                    <button class="music-button" onclick="playNatureSounds()">自然音</button>
+                    <button class="music-button" onclick="playClassicalMusic()">クラシック</button>
+                </div>
+                <div class="timer" id="musicTimer">00:00</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="musicProgress"></div>
+                </div>
+                <div class="music-controls">
+                    <button class="music-button" onclick="startMusic()">再生</button>
+                    <button class="music-button" onclick="pauseMusic()">一時停止</button>
+                    <button class="music-button" onclick="stopMusic()">停止</button>
+                </div>
+            </div>
+            <div class="tips">
+                <h4>音楽療法の効果</h4>
+                <ul>
+                    <li>心拍数と血圧の安定</li>
+                    <li>ストレスホルモンの減少</li>
+                    <li>リラックス効果の向上</li>
+                    <li>睡眠の質の改善</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 感情認識モーダル -->
+    <div id="emotionModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('emotionModal')">&times;</span>
+            <h2>😊 感情認識・調整</h2>
+            <p>現在の感情を選択してください：</p>
+            <div class="emotion-grid">
+                <button class="emotion-button emotion-happy" onclick="selectEmotion('happy')">😊 嬉しい</button>
+                <button class="emotion-button emotion-sad" onclick="selectEmotion('sad')">😢 悲しい</button>
+                <button class="emotion-button emotion-angry" onclick="selectEmotion('angry')">😠 怒り</button>
+                <button class="emotion-button emotion-calm" onclick="selectEmotion('calm')">😌 落ち着いている</button>
+                <button class="emotion-button emotion-excited" onclick="selectEmotion('excited')">🤩 興奮</button>
+                <button class="emotion-button emotion-anxious" onclick="selectEmotion('anxious')">😰 不安</button>
+            </div>
+            <div id="emotionAdvice" class="tips" style="display: none;">
+                <h4>感情調整のアドバイス</h4>
+                <div id="adviceContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ストレスチェックモーダル -->
+    <div id="stressModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('stressModal')">&times;</span>
+            <h2>📊 ストレスレベル測定</h2>
+            <p>現在のストレスレベルを教えてください：</p>
+            <div class="stress-level">
+                <span>低</span>
+                <div class="stress-meter">
+                    <div class="stress-fill" id="stressFill" style="width: 50%;"></div>
+                </div>
+                <span>高</span>
+            </div>
+            <input type="range" id="stressSlider" min="0" max="100" value="50" oninput="updateStressLevel()" style="width: 100%; margin: 20px 0;">
+            <div class="timer" id="stressLevel">50%</div>
+            <button class="button" onclick="analyzeStress()">分析結果を表示</button>
+            <div id="stressAnalysis" class="tips" style="display: none;">
+                <h4>ストレス分析結果</h4>
+                <div id="analysisContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 対処法モーダル -->
+    <div id="tipsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('tipsModal')">&times;</span>
+            <h2>💡 ストレス対処法</h2>
+            <div class="tips">
+                <h4>日常生活での対処法</h4>
+                <ul>
+                    <li><strong>深呼吸:</strong> ゆっくりと深い呼吸を5回行う</li>
+                    <li><strong>軽い運動:</strong> 散歩やストレッチで体を動かす</li>
+                    <li><strong>十分な睡眠:</strong> 7-8時間の質の良い睡眠を取る</li>
+                    <li><strong>バランスの良い食事:</strong> 栄養を考えた食事を心がける</li>
+                    <li><strong>趣味の時間:</strong> 好きなことをする時間を作る</li>
+                    <li><strong>人との交流:</strong> 信頼できる人と話す</li>
+                </ul>
+            </div>
+            <div class="tips">
+                <h4>緊急時の対処法</h4>
+                <ul>
+                    <li><strong>5-4-3-2-1テクニック:</strong> 5つの見えるもの、4つの触れるもの、3つの聞こえるもの、2つの匂い、1つの味を意識する</li>
+                    <li><strong>プログレッシブ・リラクゼーション:</strong> 体の各部分を順番に緊張・弛緩させる</li>
+                    <li><strong>グラウンディング:</strong> 今ここにいることを意識する</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // モーダル制御
+        function openBreathingModal() {
+            document.getElementById('breathingModal').style.display = 'block';
+        }
+
+        function openMeditationModal() {
+            document.getElementById('meditationModal').style.display = 'block';
+        }
+
+        function openMusicModal() {
+            document.getElementById('musicModal').style.display = 'block';
+        }
+
+        function openEmotionModal() {
+            document.getElementById('emotionModal').style.display = 'block';
+        }
+
+        function openStressModal() {
+            document.getElementById('stressModal').style.display = 'block';
+        }
+
+        function openTipsModal() {
+            document.getElementById('tipsModal').style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // 呼吸法機能
+        let breathingInterval;
+        let breathingTime = 240; // 4分
+        let breathingPaused = false;
+
+        function startBreathing() {
+            if (breathingPaused) {
+                breathingPaused = false;
+            } else {
+                breathingTime = 240;
+            }
+            
+            breathingInterval = setInterval(() => {
+                if (!breathingPaused) {
+                    breathingTime--;
+                    updateBreathingDisplay();
+                    
+                    if (breathingTime <= 0) {
+                        clearInterval(breathingInterval);
+                        alert('呼吸法トレーニングが完了しました！');
+                    }
+                }
+            }, 1000);
+        }
+
+        function pauseBreathing() {
+            breathingPaused = !breathingPaused;
+        }
+
+        function resetBreathing() {
+            clearInterval(breathingInterval);
+            breathingTime = 240;
+            breathingPaused = false;
+            updateBreathingDisplay();
+        }
+
+        function updateBreathingDisplay() {
+            const minutes = Math.floor(breathingTime / 60);
+            const seconds = breathingTime % 60;
+            document.getElementById('breathingTimer').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            const progress = ((240 - breathingTime) / 240) * 100;
+            document.getElementById('breathingProgress').style.width = progress + '%';
+            
+            const circle = document.getElementById('breathingCircle');
+            if (breathingTime % 8 < 4) {
+                circle.textContent = '吸って';
+            } else {
+                circle.textContent = '吐いて';
+            }
+        }
+
+        // 瞑想機能
+        let meditationInterval;
+        let meditationTime = 600; // 10分
+        let meditationPaused = false;
+
+        function startMeditation() {
+            if (meditationPaused) {
+                meditationPaused = false;
+            } else {
+                meditationTime = 600;
+            }
+            
+            meditationInterval = setInterval(() => {
+                if (!meditationPaused) {
+                    meditationTime--;
+                    updateMeditationDisplay();
+                    
+                    if (meditationTime <= 0) {
+                        clearInterval(meditationInterval);
+                        alert('瞑想が完了しました！');
+                    }
+                }
+            }, 1000);
+        }
+
+        function pauseMeditation() {
+            meditationPaused = !meditationPaused;
+        }
+
+        function resetMeditation() {
+            clearInterval(meditationInterval);
+            meditationTime = 600;
+            meditationPaused = false;
+            updateMeditationDisplay();
+        }
+
+        function updateMeditationDisplay() {
+            const minutes = Math.floor(meditationTime / 60);
+            const seconds = meditationTime % 60;
+            document.getElementById('meditationTimer').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            const progress = ((600 - meditationTime) / 600) * 100;
+            document.getElementById('meditationProgress').style.width = progress + '%';
+        }
+
+        // 音楽療法機能
+        let musicInterval;
+        let musicTime = 0;
+        let musicPaused = false;
+
+        function playRelaxingMusic() {
+            alert('リラックス音楽を再生します（実際の音楽ファイルは含まれていません）');
+        }
+
+        function playNatureSounds() {
+            alert('自然音を再生します（実際の音声ファイルは含まれていません）');
+        }
+
+        function playClassicalMusic() {
+            alert('クラシック音楽を再生します（実際の音楽ファイルは含まれていません）');
+        }
+
+        function startMusic() {
+            if (musicPaused) {
+                musicPaused = false;
+            }
+            
+            musicInterval = setInterval(() => {
+                if (!musicPaused) {
+                    musicTime++;
+                    updateMusicDisplay();
+                }
+            }, 1000);
+        }
+
+        function pauseMusic() {
+            musicPaused = !musicPaused;
+        }
+
+        function stopMusic() {
+            clearInterval(musicInterval);
+            musicTime = 0;
+            musicPaused = false;
+            updateMusicDisplay();
+        }
+
+        function updateMusicDisplay() {
+            const minutes = Math.floor(musicTime / 60);
+            const seconds = musicTime % 60;
+            document.getElementById('musicTimer').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            const progress = (musicTime % 300) / 300 * 100; // 5分でリセット
+            document.getElementById('musicProgress').style.width = progress + '%';
+        }
+
+        // 感情認識機能
+        function selectEmotion(emotion) {
+            const advice = {
+                'happy': '素晴らしい気分ですね！この良い気分を大切にしましょう。感謝の気持ちを持つことで、さらに良い気分を維持できます。',
+                'sad': '悲しい気持ちは自然な感情です。無理に明るくする必要はありません。優しく自分を労わり、時間をかけて回復しましょう。',
+                'angry': '怒りの感情は理解できます。深呼吸をして、少し時間を置いてから状況を見直してみましょう。運動も効果的です。',
+                'calm': '落ち着いた状態は素晴らしいです。この穏やかな気持ちを大切にし、マインドフルネスを続けましょう。',
+                'excited': '興奮している状態ですね！このエネルギーを建設的な活動に活かしましょう。ただし、適度な休息も忘れずに。',
+                'anxious': '不安な気持ちは理解できます。深呼吸や瞑想で心を落ち着かせましょう。不安は一時的なものだと自分に言い聞かせてください。'
+            };
+            
+            document.getElementById('adviceContent').innerHTML = advice[emotion];
+            document.getElementById('emotionAdvice').style.display = 'block';
+        }
+
+        // ストレスチェック機能
+        function updateStressLevel() {
+            const value = document.getElementById('stressSlider').value;
+            document.getElementById('stressFill').style.width = value + '%';
+            document.getElementById('stressLevel').textContent = value + '%';
+        }
+
+        function analyzeStress() {
+            const level = parseInt(document.getElementById('stressSlider').value);
+            let analysis = '';
+            
+            if (level < 30) {
+                analysis = '<p><strong>低ストレスレベル:</strong> 良好な状態です。この状態を維持するために、定期的な運動と十分な休息を心がけましょう。</p>';
+            } else if (level < 60) {
+                analysis = '<p><strong>中程度のストレスレベル:</strong> 注意が必要です。深呼吸や軽い運動でストレスを軽減しましょう。</p>';
+            } else {
+                analysis = '<p><strong>高ストレスレベル:</strong> 専門家への相談を検討してください。まずは深呼吸や瞑想で心を落ち着かせましょう。</p>';
+            }
+            
+            document.getElementById('analysisContent').innerHTML = analysis;
+            document.getElementById('stressAnalysis').style.display = 'block';
+        }
+
+        // 初期化
+        document.addEventListener('DOMContentLoaded', function() {
+            updateBreathingDisplay();
+            updateMeditationDisplay();
+            updateMusicDisplay();
+        });
+    </script>
+</body>
+</html> 

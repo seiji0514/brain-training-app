@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>脳機能障害者社会復帰支援システム - メインページ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Meiryo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 3rem;
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+        }
+        
+        .header {
+            margin-bottom: 2rem;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            margin: 0;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .menu-item {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 2rem 1.5rem;
+            text-decoration: none;
+            color: #495057;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: #3498db;
+            color: #3498db;
+        }
+        
+        .menu-item i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #3498db;
+        }
+        
+        .menu-item h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.3rem;
+        }
+        
+        .menu-item p {
+            margin: 0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .feature-list {
+            background: #e8f4fd;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        
+        .feature-list h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-list ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+        
+        .feature-list li {
+            margin-bottom: 0.5rem;
+            color: #34495e;
+        }
+        
+        .footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #ecf0f1;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 脳機能障害者社会復帰支援システム</h1>
+            <p>安全で効果的なリハビリテーションをサポート</p>
+        </div>
+        
+        <div class="feature-list">
+            <h3>✨ システムの特徴</h3>
+            <ul>
+                <li><strong>脳トレゲーム</strong> - 記憶力、注意力、判断力を鍛えるゲーム</li>
+                <li><strong>3D運転シミュレーター</strong> - 安全な運転技術トレーニング</li>
+                <li><strong>生活技能トレーニング</strong> - 日常生活に必要な技能を習得</li>
+                <li><strong>進捗管理</strong> - 個人の成長を記録・分析</li>
+            </ul>
+        </div>
+        
+        <div class="menu-grid">
+            <a href="brain_training_game.html" class="menu-item">
+                <i class="fas fa-brain"></i>
+                <h3>脳トレゲーム（記憶編）</h3>
+                <p>記憶力、注意力、判断力を鍛えるゲーム集</p>
+            </a>
+            
+            <a href="brain_training_game2.html" class="menu-item">
+                <i class="fas fa-home"></i>
+                <h3>脳トレゲーム（生活編）</h3>
+                <p>日常生活に必要な技能をトレーニング</p>
+            </a>
+            
+            <a href="integrated_driving_system.html" class="menu-item">
+                <i class="fas fa-car"></i>
+                <h3>統合運転システム</h3>
+                <p>運転技術の総合トレーニング</p>
+            </a>
+            
+            <div class="game-card">
+                <h3>🚗 運転席視点シミュレーター</h3>
+                <p>実際の地図データをもとに運転席からの風景を再現した3Dシミュレーターです。</p>
+                <a href="driver_view_simulator.html" class="game-link">開始する</a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>医療法人 巨樹の会様 向けシステム</p>
+            <p>開発: 小川 清志 | 医療AIソリューションアーキテクト</p>
+        </div>
+    </div>
+    
+    <script>
+        // 開発用：認証状態を自動設定
+        localStorage.setItem("isAuthenticated", "true");
+        
+        // デフォルトユーザー情報を設定
+        if (!localStorage.getItem('currentUser')) {
+            const defaultUser = {
+                username: 'テストユーザー',
+                role: 'user',
+                id: 'test_user_001'
+            };
+            localStorage.setItem('currentUser', JSON.stringify(defaultUser));
+        }
+        
+        console.log('脳機能障害者社会復帰支援システムにアクセスしました');
+    </script>
+</body>
+</html>

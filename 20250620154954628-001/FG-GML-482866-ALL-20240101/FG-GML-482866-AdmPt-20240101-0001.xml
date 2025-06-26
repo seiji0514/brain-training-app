@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Dataset xsi:schemaLocation="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema FGD_GMLSchema.xsd"
+	xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema"
+	gml:id="Dataset1">
+  <gml:description>基盤地図情報メタデータ ID=fmdid:24-0101</gml:description>
+  <gml:name>基盤地図情報ダウンロードデータ（GML版）</gml:name>
+<AdmPt gml:id="K6_4635311727_1">
+<fid>46353-11727-i-338</fid>
+<lfSpanFr gml:id="K6_4635311727_1-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K6_4635311727_1-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>非表示</vis>
+<pos>
+<gml:Point gml:id="K6_4635311727_1-g" srsName="fguuid:jgd2011.bl">
+<gml:pos>32.578582565 128.764212536</gml:pos>
+</gml:Point>
+</pos>
+<type>郡市・東京都の区</type>
+<name>五島市</name>
+<admCode>42211</admCode>
+</AdmPt>
+</Dataset>

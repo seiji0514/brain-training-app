@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>セキュリティ・運用ルール</title>
+  <style>
+    @media print {
+      body { margin: 0; }
+      .no-print { display: none; }
+      .page-break { page-break-before: always; }
+    }
+    
+    body { 
+      font-family: 'Meiryo', 'Yu Gothic', sans-serif; 
+      margin: 2em; 
+      background: #f9f9f9; 
+      line-height: 1.6;
+    }
+    h1, h2 { color: #2c3e50; }
+    ul, ol { margin-bottom: 1em; }
+    .point { color: #e67e22; font-weight: bold; }
+    
+    .print-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    
+    .print-btn:hover {
+      background: #2980b9;
+    }
+    
+    .approval-section {
+      border: 2px solid #333;
+      padding: 20px;
+      margin: 30px 0;
+      background: #f9f9f9;
+    }
+    
+    .approval-section h3 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    
+    .approval-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    
+    .approval-item {
+      border: 1px solid #ccc;
+      padding: 15px;
+      background: white;
+    }
+    
+    .approval-item h4 {
+      margin: 0 0 10px 0;
+      color: #333;
+      font-size: 14px;
+    }
+    
+    .approval-field {
+      margin-bottom: 15px;
+    }
+    
+    .approval-field label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      font-size: 12px;
+    }
+    
+    .approval-field input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      font-size: 12px;
+    }
+    
+    .approval-field textarea {
+      width: 100%;
+      height: 60px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      resize: vertical;
+      font-size: 12px;
+    }
+    
+    @media (max-width: 768px) {
+      .approval-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="print-btn no-print" onclick="window.print()">
+    🖨️ 印刷
+  </button>
+
+  <h1>セキュリティ・運用ルール</h1>
+  <h2>1. パスワード管理</h2>
+  <ul>
+    <li>パスワードは他人に教えないでください。</li>
+    <li>定期的にパスワードを変更してください。</li>
+    <li>パスワードは紙やメモ帳に書かず、管理者にのみ伝えてください。</li>
+  </ul>
+  <h2>2. 機器・データの管理</h2>
+  <ul>
+    <li>サーバーPCや端末は院外に持ち出さないでください。</li>
+    <li>USBメモリ等でのデータ持ち出しは禁止です。</li>
+    <li>不要なデータは速やかに削除してください。</li>
+  </ul>
+  <h2>3. システムの更新・点検</h2>
+  <ul>
+    <li>OSやNode.js、アプリのアップデートは定期的に行ってください。</li>
+    <li>不審な動作やエラーがあれば、すぐに管理者へ報告してください。</li>
+  </ul>
+  <h2>4. その他</h2>
+  <ul>
+    <li>個人情報の取り扱いには十分注意してください。</li>
+    <li>運用ルールは定期的に見直し、必要に応じて更新してください。</li>
+  </ul>
+
+  <div class="page-break"></div>
+  
+  <!-- 情報システム部様向け確認欄 -->
+  <div class="approval-section">
+    <h3>【情報システム部様向け確認欄】</h3>
+    <div class="approval-grid">
+      <div class="approval-item">
+        <h4>セキュリティルール確認</h4>
+        <div class="approval-field">
+          <label>セキュリティルールの技術的妥当性について確認</label>
+          <textarea placeholder="確認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>確認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>確認日</label>
+          <input type="date">
+        </div>
+      </div>
+      
+      <div class="approval-item">
+        <h4>運用ルール確認</h4>
+        <div class="approval-field">
+          <label>運用ルールの技術的妥当性について確認</label>
+          <textarea placeholder="確認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>確認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>確認日</label>
+          <input type="date">
+        </div>
+      </div>
+    </div>
+    
+    <div class="approval-grid">
+      <div class="approval-item">
+        <h4>教育・研修確認</h4>
+        <div class="approval-field">
+          <label>スタッフ教育・研修の技術的内容について確認</label>
+          <textarea placeholder="確認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>確認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>確認日</label>
+          <input type="date">
+        </div>
+      </div>
+      
+      <div class="approval-item">
+        <h4>最終確認</h4>
+        <div class="approval-field">
+          <label>セキュリティ・運用ルールの技術的確認</label>
+          <textarea placeholder="確認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>確認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>確認日</label>
+          <input type="date">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html> 

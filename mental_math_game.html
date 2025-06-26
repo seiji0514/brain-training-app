@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>暗算チャレンジ - 脳トレゲームversion2</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .game-area {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .problem-display {
+            font-size: 2.5em;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .input-area {
+            margin: 20px 0;
+        }
+        input[type="number"] {
+            font-size: 1.5em;
+            padding: 10px;
+            width: 150px;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            text-align: center;
+        }
+        button {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        .score-display {
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+        .question-count {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .difficulty {
+            margin: 20px 0;
+        }
+        .stats {
+            margin: 20px 0;
+            text-align: left;
+        }
+        .correct {
+            color: #27ae60;
+        }
+        .incorrect {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>暗算チャレンジ</h1>
+        <div class="difficulty">
+            <button onclick="setDifficulty('easy')">初級</button>
+            <button onclick="setDifficulty('medium')">中級</button>
+            <button onclick="setDifficulty('hard')">上級</button>
+        </div>
+        <div class="question-count">残り問題数: <span id="questionCount">10</span>問</div>
+        <div class="score-display">スコア: <span id="score">0</span></div>
+        <div class="game-area">
+            <div class="problem-display" id="problem">準備完了</div>
+            <div class="input-area">
+                <input type="number" id="answerInput" placeholder="答えを入力">
+                <button onclick="checkAnswer()">回答</button>
+            </div>
+        </div>
+        <div class="stats">
+            <h3>統計</h3>
+            <p>正解数: <span id="correctCount">0</span></p>
+            <p>不正解数: <span id="incorrectCount">0</span></p>
+            <p>正答率: <span id="accuracy">0</span>%</p>
+        </div>
+    </div>
+
+    <script src="game_result.js"></script>
+    <script>
+        let isGameActive = false;
+        let score = 0;
+        let startTime = 0;
+        let comboCount = 0;
+        let correctCount = 0;
+        let incorrectCount = 0;
+        let questionCount = 10;
+        let difficulty = 'medium';
+        let currentProblem = {
+            num1: 0,
+            num2: 0,
+            operator: '+',
+            answer: 0
+        };
+
+        // ゲーム設定を取得
+        const gameSettings = getGameSettings('mentalmath');
+        const difficultySettings = getDifficultySettings('mentalmath');
+
+        function setDifficulty(level) {
+            difficulty = level;
+            startGame();
+        }
+
+        function startGame() {
+            isGameActive = true;
+            score = 0;
+            correctCount = 0;
+            incorrectCount = 0;
+            comboCount = 0;
+            startTime = Date.now();
+            // 難易度設定に基づいて問題数を設定
+            questionCount = difficultySettings.totalQuestions;
+            updateStats();
+            document.getElementById('gameMessage').textContent = '計算問題に答えてください';
+            document.getElementById('score').textContent = score;
+            document.getElementById('questionCount').textContent = questionCount;
+            document.getElementById('correctCount').textContent = correctCount;
+            document.getElementById('incorrectCount').textContent = incorrectCount;
+            document.getElementById('accuracy').textContent = '0';
+            document.getElementById('answerInput').value = '';
+            
+            generateProblem();
+        }
+
+        function generateProblem() {
+            let maxNum;
+            switch(difficulty) {
+                case 'easy':
+                    maxNum = 10;
+                    break;
+                case 'medium':
+                    maxNum = 50;
+                    break;
+                case 'hard':
+                    maxNum = 100;
+                    break;
+            }
+
+            currentProblem.num1 = Math.floor(Math.random() * maxNum) + 1;
+            currentProblem.num2 = Math.floor(Math.random() * maxNum) + 1;
+            const operators = ['+', '-', '*'];
+            currentProblem.operator = operators[Math.floor(Math.random() * operators.length)];
+
+            // 引き算の場合は大きい数を左に
+            if (currentProblem.operator === '-' && currentProblem.num1 < currentProblem.num2) {
+                [currentProblem.num1, currentProblem.num2] = [currentProblem.num2, currentProblem.num1];
+            }
+
+            switch(currentProblem.operator) {
+                case '+':
+                    currentProblem.answer = currentProblem.num1 + currentProblem.num2;
+                    break;
+                case '-':
+                    currentProblem.answer = currentProblem.num1 - currentProblem.num2;
+                    break;
+                case '*':
+                    currentProblem.answer = currentProblem.num1 * currentProblem.num2;
+                    break;
+            }
+
+            document.getElementById('problem').textContent = 
+                `${currentProblem.num1} ${currentProblem.operator} ${currentProblem.num2} = ?`;
+        }
+
+        function checkAnswer() {
+            if (!isGameActive) return;
+            const userAnswer = parseInt(document.getElementById('answerInput').value);
+            
+            if (userAnswer === currentProblem.answer) {
+                correctCount++;
+                comboCount++;
+                document.getElementById('problem').className = 'problem-display correct';
+                score = calculateScore(correctCount, questionCount, (Date.now() - startTime) / 1000, comboCount);
+            } else {
+                incorrectCount++;
+                document.getElementById('problem').className = 'problem-display incorrect';
+            }
+
+            document.getElementById('score').textContent = score;
+            document.getElementById('correctCount').textContent = correctCount;
+            document.getElementById('incorrectCount').textContent = incorrectCount;
+            document.getElementById('accuracy').textContent = 
+                Math.round((correctCount / (correctCount + incorrectCount)) * 100);
+
+            document.getElementById('answerInput').value = '';
+            questionCount--;
+            updateStats();
+
+            if (questionCount > 0) {
+                setTimeout(() => {
+                    document.getElementById('problem').className = 'problem-display';
+                    generateProblem();
+                }, 500);
+            } else {
+                isGameActive = false;
+                showPreview();
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('questionCount').textContent = questionCount;
+            document.getElementById('score').textContent = score;
+        }
+
+        function showPreview() {
+            document.getElementById('problem').textContent = 'お疲れさまでした！';
+            showGameResult(correctCount, difficultySettings.totalQuestions, incorrectCount);
+        }
+
+        // Enterキーで回答
+        document.getElementById('answerInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
+
+        // 初期表示
+        setDifficulty('medium');
+    </script>
+</body>
+</html> 

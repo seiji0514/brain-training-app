@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>本格運用開始準備チェックリスト</title>
+  <style>
+    @media print {
+      body { margin: 0; }
+      .no-print { display: none; }
+      .page-break { page-break-before: always; }
+    }
+    
+    body { 
+      font-family: 'Meiryo', 'Yu Gothic', sans-serif; 
+      margin: 2em; 
+      background: #f9f9f9; 
+      line-height: 1.6;
+    }
+    h1, h2 { color: #2c3e50; }
+    table { border-collapse: collapse; width: 100%; margin-bottom: 2em; }
+    th, td { border: 1px solid #bbb; padding: 0.5em; text-align: left; }
+    th { background: #e0e7ef; }
+    .note { color: #e67e22; font-size: 0.95em; }
+    .priority-high { background: #ffebee; }
+    .priority-medium { background: #fff3e0; }
+    .priority-low { background: #f1f8e9; }
+    
+    .print-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    
+    .print-btn:hover {
+      background: #2980b9;
+    }
+    
+    .approval-section {
+      border: 2px solid #333;
+      padding: 20px;
+      margin: 30px 0;
+      background: #f9f9f9;
+    }
+    
+    .approval-section h3 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    
+    .approval-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    
+    .approval-item {
+      border: 1px solid #ccc;
+      padding: 15px;
+      background: white;
+    }
+    
+    .approval-item h4 {
+      margin: 0 0 10px 0;
+      color: #333;
+      font-size: 14px;
+    }
+    
+    .approval-field {
+      margin-bottom: 15px;
+    }
+    
+    .approval-field label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      font-size: 12px;
+    }
+    
+    .approval-field input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      font-size: 12px;
+    }
+    
+    .approval-field textarea {
+      width: 100%;
+      height: 60px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      resize: vertical;
+      font-size: 12px;
+    }
+    
+    @media (max-width: 768px) {
+      .approval-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="print-btn no-print" onclick="window.print()">
+    🖨️ 印刷
+  </button>
+
+  <h1>本格運用開始準備チェックリスト</h1>
+  
+  <h2>1. システム環境準備（優先度：高）</h2>
+  <table>
+    <tr><th>項目</th><th>確認</th><th>担当者</th><th>期限</th><th>備考</th></tr>
+    <tr class="priority-high"><td>サーバーPCの最終動作確認</td><td>□</td><td></td><td></td><td></td></tr>
+    <tr class="priority-high"><td>ネットワーク接続の安定性確認</td><td>□</td><td></td><td></td><td></td></tr>
+    <tr class="priority-high"><td>バックアップシステムの動作確認</td><td>□</td><td></td><td></td><td></td></tr>
+    <tr class="priority-high"><td>セキュリティ設定の最終確認</td><td>□</td><td></td><td></td><td></td></tr>
+  </table>
+
+  <h2>2. スタッフ研修・教育（優先度：高）</h2>
+  <table>
+    <tr><th>項目</th><th>確認</th><th>担当者</th><th>期限</th><th>備考</th></tr>
+    <tr class="priority-high"><td>管理者向け研修の実施</td><td>□</td><td></td><td></td><td></td></tr>
+    <tr class="priority-high"><td>一般スタッフ向け研修の実施</td><td>□</td><td></td><td></td><td></td></tr>
+    <tr class="priority-medium"><td>操作マニュアルの配布</td><td>□</td><td></td><td></td><td></td></tr>
+    <tr class="priority-medium"><td>Q&Aリストの配布</td><td>□</td><td></td><td></td><td></td></tr>
+  </table>
+
+  <h2>3. 運用体制の確立（優先度：高）</h2>
+  <table>
+    <tr><th>項目</th><th>確認</th><th>担当者</th><th>期限</th><th>備考</th></tr>
+    <tr class="priority-high"><td>運用責任者の決定</td><td>□</td><td></td><td></td><td></td></tr>
+    <tr class="priority-high"><td>バックアップ担当者の決定</td><td>□</td><td></td><td></td><td></td></tr>
+    <tr class="priority-medium"><td>緊急連絡体制の確立</td><td>□</td><td></td><td></td><td></td></tr>
+    <tr class="priority-medium"><td>定期点検スケジュールの決定</td><td>□</td><td></td><td></td><td></td></tr>
+  </table>
+
+  <h2>4. 利用者準備（優先度：中）</h2>
+  <table>
+    <tr><th>項目</th><th>確認</th><th>担当者</th><th>期限</th><th>備考</th></tr>
+    <tr class="priority-medium"><td>利用者向け案内の作成</td><td>□</td><td></td><td></td><td></td></tr>
+    <tr class="priority-medium"><td>利用者登録手順の確認</td><td>□</td><td></td><td></td><td></td></tr>
+    <tr class="priority-low"><td>利用者向けFAQの作成</td><td>□</td><td></td><td></td><td></td></tr>
+    <tr class="priority-low"><td>利用者向け研修の準備</td><td>□</td><td></td><td></td><td></td></tr>
+  </table>
+
+  <h2>5. 運用開始準備（優先度：高）</h2>
+  <table>
+    <tr><th>項目</th><th>確認</th><th>担当者</th><th>期限</th><th>備考</th></tr>
+    <tr class="priority-high"><td>運用開始日の決定</td><td>□</td><td></td><td></td><td></td></tr>
+    <tr class="priority-high"><td>初回バックアップの実行</td><td>□</td><td></td><td></td><td></td></tr>
+    <tr class="priority-high"><td>システム起動テストの実施</td><td>□</td><td></td><td></td><td></td></tr>
+    <tr class="priority-medium"><td>運用開始告知の準備</td><td>□</td><td></td><td></td><td></td></tr>
+  </table>
+
+  <p class="note">※優先度：高（必須）、中（推奨）、低（余裕があれば）</p>
+
+  <div class="page-break"></div>
+  
+  <!-- 情報システム部様向け確認欄 -->
+  <div class="approval-section">
+    <h3>【情報システム部様向け確認欄】</h3>
+    <div class="approval-grid">
+      <div class="approval-item">
+        <h4>システム準備確認</h4>
+        <div class="approval-field">
+          <label>システム環境準備の技術的妥当性について確認</label>
+          <textarea placeholder="確認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>確認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>確認日</label>
+          <input type="date">
+        </div>
+      </div>
+      
+      <div class="approval-item">
+        <h4>運用体制確認</h4>
+        <div class="approval-field">
+          <label>運用体制・責任者の妥当性について確認</label>
+          <textarea placeholder="確認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>確認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>確認日</label>
+          <input type="date">
+        </div>
+      </div>
+    </div>
+    
+    <div class="approval-grid">
+      <div class="approval-item">
+        <h4>セキュリティ確認</h4>
+        <div class="approval-field">
+          <label>セキュリティ設定・運用ルールについて確認</label>
+          <textarea placeholder="確認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>確認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>確認日</label>
+          <input type="date">
+        </div>
+      </div>
+      
+      <div class="approval-item">
+        <h4>最終確認</h4>
+        <div class="approval-field">
+          <label>本格運用開始準備の技術的確認</label>
+          <textarea placeholder="確認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>確認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>確認日</label>
+          <input type="date">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html> 

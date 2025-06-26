@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>統合運転システム - 脳機能障害からの社会復帰支援</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', 'Meiryo', sans-serif; margin: 0; background-color: #f4f7f6; }
+        .header { background: #2c3e50; color: white; padding: 1em 1.5em; display: flex; align-items: center; justify-content: center; position: relative; }
+        .header .icon { font-size: 1.8em; margin-right: 0.5em; }
+        .header h1 { margin: 0; font-size: 1.5em; }
+        .container { max-width: 1600px; margin: 2em auto; padding: 1em; }
+        .card { background: white; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.07); margin-bottom: 2em; overflow: hidden; width: 100%; }
+        .card-header { background: #3498db; color: white; padding: 1em 1.5em; font-size: 1.2em; font-weight: bold; }
+        .card-body { padding: 1.5em; }
+        .scenario-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5em; }
+        .scenario { border: 1px solid #ddd; border-radius: 8px; padding: 1.5em 1.2em 2em 1.2em; text-align: center; transition: transform 0.2s, box-shadow 0.2s; }
+        .scenario:hover { transform: translateY(-5px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .scenario i { font-size: 2.5em; color: #3498db; margin-bottom: 0.5em; }
+        .scenario h3 { margin: 0.5em 0; }
+        .scenario p { font-size: 0.9em; color: #666; }
+        .start-btn { display: block; width: 100%; max-width: 100%; box-sizing: border-box; padding: 0.8em; margin-top: 1em; background: #27ae60; color: white; border: none; border-radius: 5px; font-size: 1em; font-weight: bold; cursor: pointer; }
+        .knowledge-btn { background: #e67e22 !important; }
+        .simulator-btn { background: #9b59b6 !important; }
+        .start-btn.disabled { background: #95a5a6; cursor: not-allowed; }
+        .back-button {
+            position: absolute;
+            left: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+        .back-button:hover {
+            background: rgba(255,255,255,0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <span class="icon"><i class="fas fa-car-side"></i></span>
+        <h1>統合運転システム - 社会復帰支援プログラム</h1>
+        <a href="brain_training_game.html" class="back-button">戻る</a>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                脳機能障害からの運転再開に向けた統合トレーニングシステム
+            </div>
+            <div class="card-body">
+                <p>このシステムは、脳機能障害を経験された方々が、再び安全に自動車の運転ができるようになるための、統合的なリハビリテーションプログラムです。理論知識の学習から実践的な3Dシミュレーションまで、段階的に訓練を進めることができます。</p>
+                <div class="scenario-grid">
+                    <div class="scenario">
+                        <i class="fas fa-book"></i>
+                        <h3>運転に必要な基礎知識</h3>
+                        <p>交通ルール、安全運転の心得、車両操作、危険予測、緊急時対応などの理論知識を学びます。</p>
+                        <a href="driving_basic_knowledge.html" class="start-btn knowledge-btn">学習開始</a>
+                    </div>
+                    <div class="scenario">
+                        <i class="fas fa-cube"></i>
+                        <h3>高精度3D自動車シミュレーター</h3>
+                        <p>基礎知識を組み込んだ総合的な3D運転シミュレーションで、実践的な運転技術を習得します。</p>
+                        <button class="start-btn simulator-btn disabled" disabled>準備中</button>
+                        <div style="color:#c00; font-size:0.95em; margin-top:0.5em;">
+                          公開予定日：2025年年内公開予定
+                        </div>
+                    </div>
+                    <div class="scenario">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <h3>軽量3D運転シミュレーター</h3>
+                        <p>動作が軽く、基本的な運転操作に特化した軽量版シミュレーターです。低スペック機器でも快適に動作します。</p>
+                        <a href="lightweight_driving_simulator.html" class="start-btn" style="background:#e74c3c;">軽量版開始</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html> 

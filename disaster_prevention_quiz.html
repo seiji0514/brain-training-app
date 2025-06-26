@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>防災クイズ</title>
+  <style>
+    body { font-family: 'Meiryo', sans-serif; background: #f0f2f5; text-align: center; }
+    .container { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px #b0c4de; max-width: 540px; margin: 40px auto; padding: 2.5em; }
+    .question { font-size: 1.3em; margin: 1.7em 0 1.2em 0; color: #2574c7; font-weight: bold; }
+    .choices { margin-bottom: 1.5em; }
+    .choice-btn { background: #e67e22; color: #fff; border: none; border-radius: 10px; padding: 1em 2.5em; margin: 0.7em; font-size: 1.2em; cursor: pointer; letter-spacing: 0.1em; }
+    .choice-btn:hover { background: #b86b1b; }
+    .result { font-size: 1.3em; margin: 1.2em 0; color: #27ae60; }
+    .result.incorrect { color: #e67e22; }
+    .score { font-size: 2em; color: #2574c7; margin-top: 2em; font-weight: bold; }
+    .miss { font-size: 1.3em; color: #e74c3c; margin-top: 1em; font-weight: bold; }
+    .final-comment { font-size: 1.5em; margin-top: 1em; color: #2574c7; font-weight: bold; }
+    .next-btn { background: #43a047; color: #fff; border: none; border-radius: 10px; padding: 1em 2.5em; margin: 0.7em; font-size: 1.2em; cursor: pointer; letter-spacing: 0.1em; }
+    .next-btn:hover { background: #2e7031; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="quizArea">
+      <div class="question" id="question"></div>
+      <div class="choices" id="choices"></div>
+      <div class="result" id="result"></div>
+    </div>
+    <div class="score" id="score" style="display:none;"></div>
+    <button id="nextBtn" style="display:none;" class="next-btn">次の問題</button>
+  </div>
+  <script>
+    // サンプル問題
+    const questions = [
+      {
+        q: '地震が発生したとき、まず最初にするべきことは？',
+        answer: '頭を守る',
+        choices: ['頭を守る', '外に飛び出さない', '窓から離れる', '火を使わない']
+      },
+      {
+        q: '火事が起きたとき、煙が充満している場合は？',
+        answer: '姿勢を低くして避難する',
+        choices: ['姿勢を低くして避難する', '普通に歩く', 'エレベーターで逃げる', '窓を開ける']
+      },
+      {
+        q: '台風が接近しているとき、正しい行動は？',
+        answer: '外出を控える',
+        choices: ['外出を控える', '川を見に行かない', '傘をさして出かけない', '窓を開けない']
+      },
+      {
+        q: '避難所に持っていくべきものは？',
+        answer: '飲み水・薬・保険証',
+        choices: ['飲み水・薬・保険証', 'ゲーム機', '大きな家具', 'ペットのみ']
+      },
+      {
+        q: '地震のとき、エレベーターに乗っていたら？',
+        answer: '最寄りの階で降りる',
+        choices: ['最寄りの階で降りる', 'そのまま乗り続ける', '一番上の階に行く', 'ジャンプする']
+      },
+      {
+        q: '大雨で道路が冠水しています。どうしますか？',
+        answer: '無理に進まず安全な場所に避難する',
+        choices: ['無理に進まず安全な場所に避難する', 'そのまま進む', '写真を撮る', '走って渡る']
+      },
+      {
+        q: '地震のあと、ガスの元栓はどうしますか？',
+        answer: '閉める',
+        choices: ['閉める', '開けたまま', '何もしない', '強くたたく']
+      },
+      {
+        q: '避難時に靴を選ぶとき、どれがよい？',
+        answer: 'はきなれた運動靴',
+        choices: ['はきなれた運動靴', 'サンダル', 'ハイヒール', '裸足']
+      },
+      {
+        q: '停電したとき、まずどうしますか？',
+        answer: '懐中電灯やラジオを用意する',
+        choices: ['懐中電灯やラジオを用意する', '大声を出す', '外に出る', 'テレビをつける']
+      },
+      {
+        q: '災害時、家族と連絡が取れないときは？',
+        answer: 'あらかじめ決めた連絡方法を使う',
+        choices: ['あらかじめ決めた連絡方法を使う', 'あきらめる', '大声で呼ぶ', '何もしない']
+      }
+    ];
+    let current = 0;
+    let score = 0;
+    let miss = 0;
+
+    function showQuestion() {
+      document.getElementById('result').textContent = '';
+      document.getElementById('nextBtn').style.display = 'none';
+      const q = questions[current];
+      document.getElementById('question').textContent = q.q;
+      const choicesDiv = document.getElementById('choices');
+      choicesDiv.innerHTML = '';
+      q.choices.forEach(choice => {
+        const btn = document.createElement('button');
+        btn.textContent = choice;
+        btn.className = 'choice-btn';
+        btn.onclick = () => checkAnswer(choice);
+        choicesDiv.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(choice) {
+      const q = questions[current];
+      if (choice === q.answer) {
+        document.getElementById('result').textContent = '正解です！いざという時も落ち着いて行動しましょう。';
+        document.getElementById('result').className = 'result';
+        score++;
+      } else {
+        document.getElementById('result').textContent = `おしいです。正解は「${q.answer}」でした。落ち着いて安全に行動しましょう。`;
+        document.getElementById('result').className = 'result incorrect';
+        miss++;
+      }
+      document.querySelectorAll('.choice-btn').forEach(btn => btn.disabled = true);
+      document.getElementById('nextBtn').style.display = 'inline-block';
+    }
+
+    document.getElementById('nextBtn').onclick = () => {
+      current++;
+      if (current < questions.length) {
+        showQuestion();
+      } else {
+        document.getElementById('quizArea').style.display = 'none';
+        let comment = '';
+        if (score === questions.length) {
+          comment = '満点です！すばらしいですね！';
+        } else if (score >= Math.floor(questions.length * 0.8)) {
+          comment = 'よくできました！この調子でがんばりましょう。';
+        } else if (score < Math.floor(questions.length * 0.5)) {
+          comment = '次もがんばりましょう！';
+        } else {
+          comment = 'あと少しで満点です。';
+        }
+        document.getElementById('score').innerHTML =
+          `あなたのスコア：${score} / ${questions.length}` +
+          `<div class='miss'>ミス回数：${miss}</div>` +
+          `<div class='final-comment'>${comment}</div>`;
+        document.getElementById('score').style.display = 'block';
+      }
+    };
+
+    // 初期表示
+    showQuestion();
+  </script>
+</body>
+</html> 

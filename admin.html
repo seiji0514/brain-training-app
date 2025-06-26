@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>管理者用編集画面（API連携版）</title>
+  <style>
+    body { background: #eef1f5; font-family: 'Meiryo', sans-serif; margin: 0; padding: 20px; }
+    .container { max-width: 1200px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px #b0c4de; padding: 2em; }
+    h1, h2 { color: #2574c7; }
+    h1 { text-align: center; margin-bottom: 1.5em; }
+    .tabs { display: flex; gap: 1em; margin-bottom: 2em; flex-wrap: wrap; }
+    .tab { padding: 0.8em 1.5em; background: #eef1f5; border-radius: 6px; cursor: pointer; }
+    .tab.active { background: #2574c7; color: white; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    textarea { width: 100%; height: 300px; border-radius: 6px; border: 1px solid #ccc; font-size: 1em; }
+    button { margin-top: 1.5em; background: #27ae60; color: #fff; border: none; border-radius: 8px; padding: 0.8em 2em; font-size: 1.1em; font-weight: bold; cursor: pointer; }
+    button:hover { background: #219150; }
+    .info { margin-top: 1.5em; color: #888; font-size: 0.95em; }
+    .progress-table, .user-table, .notice-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    .progress-table th, .progress-table td,
+    .user-table th, .user-table td,
+    .notice-table th, .notice-table td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+    .progress-table th, .user-table th, .notice-table th { background: #f5f6fa; color: #2574c7; }
+    .progress-table tr:hover, .user-table tr:hover, .notice-table tr:hover { background: #f5f6fa; }
+    .notice-form { margin-top: 20px; }
+    .notice-form textarea { height: 100px; }
+    .user-form { margin-top: 20px; }
+    .user-form input { width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1em; }
+    .header-buttons { display: flex; gap: 1em; }
+    .btn-secondary { background: #3498db; }
+    .btn-secondary:hover { background: #2980b9; }
+    .btn-danger { background: #e74c3c; }
+    .btn-danger:hover { background: #c0392b; }
+    .section { margin-bottom: 2em; padding: 1.5em; background: #f8f9fa; border-radius: 12px; }
+    .form-group { margin-bottom: 1em; }
+    label { display: block; margin-bottom: 0.5em; color: #555; font-weight: bold; }
+    .admin-only { display: none; }
+    .warning-message { background: #fff3cd; color: #856404; padding: 1em; border-radius: 8px; margin-bottom: 1em; text-align: center; }
+    .task-items {
+      list-style: none;
+      padding: 0;
+    }
+    .task-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      margin: 5px 0;
+      background: #f8f9fa;
+      border-radius: 6px;
+    }
+    .task-item.completed {
+      background: #e8f5e9;
+      text-decoration: line-through;
+      color: #666;
+    }
+    .task-item.in-progress {
+      background: #fff3e0;
+    }
+    .task-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .task-actions button {
+      margin: 0;
+      padding: 5px 10px;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- お知らせ欄 -->
+    <div id="noticeBar" style="background:#fff3cd;color:#856404;padding:1em;border-radius:8px;margin-bottom:1em;">
+      <strong>【お知らせ】</strong>
+      <ul id="noticeList" style="margin:0;padding-left:1.2em;"></ul>
+      <button class="btn btn-secondary" style="margin-top:0.5em;" onclick="showNoticeModal()">お知らせ追加</button>
+    </div>
+
+    <div class="header">
+      <h1>管理者用編集画面</h1>
+      <div class="header-buttons">
+        <button onclick="showPasswordChangeModal()" class="btn btn-secondary">パスワード変更</button>
+        <button onclick="logout()" class="btn btn-danger">ログアウト</button>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active" onclick="showTab('games')">ゲーム管理</div>
+      <div class="tab" onclick="showTab('result')">結果表示設定</div>
+      <div class="tab" onclick="showTab('progress')">進捗管理</div>
+      <div class="tab admin-only" onclick="showTab('users')">ユーザー管理</div>
+      <div class="tab" onclick="showTab('notice')">お知らせ管理</div>
+      <div class="tab" onclick="showTab('settings')">全体設定</div>
+      <div class="tab admin-only" onclick="showTab('backup')">バックアップ管理</div>
+      <div class="tab" onclick="showTab('todo')">やるべきことリスト</div>
+    </div>
+
+    <!-- ゲーム管理タブ -->
+    <div id="games" class="tab-content active">
+      <h2>games.json 編集（全ゲーム一括）</h2>
+      <textarea id="gamesJson"></textarea>
+      <button onclick="saveGames()">保存</button>
+      <div class="info">API経由でgames.jsonを編集・保存します。<br>編集後は全端末・全ゲームに即時反映されます。</div>
+    </div>
+
+    <!-- 結果表示設定タブ -->
+    <div id="result" class="tab-content">
+      <h2>結果表示設定</h2>
+      <div class="section">
+        <div class="form-group">
+          <label>タイトル</label>
+          <input type="text" id="resultTitle" placeholder="結果画面のタイトル">
+        </div>
+        <div class="form-group">
+          <label>メッセージ</label>
+          <textarea id="resultMessage" placeholder="結果画面のメッセージ"></textarea>
+        </div>
+        <button onclick="saveResultSettings()">保存</button>
+      </div>
+    </div>
+
+    <!-- 進捗管理タブ -->
+    <div id="progress" class="tab-content">
+      <h2>進捗管理</h2>
+      <table class="progress-table">
+        <thead>
+          <tr>
+            <th>ユーザー名</th>
+            <th>ゲーム名</th>
+            <th>スコア</th>
+            <th>日時</th>
+          </tr>
+        </thead>
+        <tbody id="progressData"></tbody>
+      </table>
+    </div>
+
+    <!-- ユーザー管理タブ -->
+    <div id="users" class="tab-content">
+      <h2>ユーザー管理</h2>
+      <div class="user-form">
+        <input type="text" id="newUsername" placeholder="ユーザー名">
+        <input type="password" id="newPassword" placeholder="パスワード">
+        <select id="newUserRole">
+          <option value="user">一般ユーザー</option>
+          <option value="admin">管理者</option>
+        </select>
+        <button onclick="addUser()">ユーザー追加</button>
+      </div>
+      <table class="user-table">
+        <thead>
+          <tr>
+            <th>ユーザー名</th>
+            <th>権限</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody id="userData"></tbody>
+      </table>
+    </div>
+
+    <!-- お知らせ管理タブ -->
+    <div id="notice" class="tab-content">
+      <h2>お知らせ管理</h2>
+      <div class="notice-form">
+        <textarea id="newNotice" placeholder="新しいお知らせを入力"></textarea>
+        <button onclick="addNotice()">お知らせ追加</button>
+      </div>
+      <table class="notice-table">
+        <thead>
+          <tr>
+            <th>日時</th>
+            <th>内容</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody id="noticeData"></tbody>
+      </table>
+    </div>
+
+    <!-- 全体設定タブ -->
+    <div id="settings" class="tab-content">
+      <h2>全体設定</h2>
+      <div class="section">
+        <div class="form-group">
+          <label>サイトタイトル</label>
+          <input type="text" id="siteTitle" placeholder="サイトのタイトル">
+        </div>
+        <div class="form-group">
+          <label>テーマカラー</label>
+          <input type="color" id="themeColor" value="#2574c7">
+        </div>
+        <button onclick="saveSettings()">保存</button>
+      </div>
+    </div>
+
+    <!-- バックアップ管理タブ -->
+    <div id="backup" class="tab-content">
+      <h2>バックアップ管理</h2>
+      <div class="section">
+        <button onclick="createBackup()">バックアップ作成</button>
+        <button onclick="restoreBackup()">バックアップ復元</button>
+        <div id="backupList"></div>
+      </div>
+    </div>
+
+    <!-- やるべきことリストタブ -->
+    <div id="todo" class="tab-content">
+      <h2>やるべきことリスト</h2>
+      <div class="section">
+        <div class="form-group">
+          <label>新しいタスク</label>
+          <input type="text" id="newTask" placeholder="タスクを入力" style="width: 100%; padding: 8px; margin-bottom: 10px;">
+          <select id="taskStatus" style="width: 100%; padding: 8px; margin-bottom: 10px;">
+            <option value="未完了">未完了</option>
+            <option value="進行中">進行中</option>
+            <option value="完了">完了</option>
+          </select>
+          <button onclick="addTask()">タスク追加</button>
+        </div>
+        <div class="task-list">
+          <h3>未完了</h3>
+          <ul id="incompleteTasks" class="task-items"></ul>
+          <h3>進行中</h3>
+          <ul id="inProgressTasks" class="task-items"></ul>
+          <h3>完了</h3>
+          <ul id="completedTasks" class="task-items"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // タブ切り替え
+    function showTab(tabId) {
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      document.querySelector(`.tab[onclick="showTab('${tabId}')"]`).classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    // 管理者権限チェック
+    function checkAdmin() {
+      const userRole = localStorage.getItem('userRole');
+      if (userRole === 'admin') {
+        document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
+      }
+    }
+
+    // ゲーム管理
+    fetch('http://localhost:3000/api/games')
+      .then(r => r.json())
+      .then(data => {
+        document.getElementById('gamesJson').value = JSON.stringify(data, null, 2);
+      });
+
+    function saveGames() {
+      fetch('http://localhost:3000/api/games', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: document.getElementById('gamesJson').value
+      })
+      .then(res => {
+        if (res.ok) {
+          alert('保存しました（全端末に即時反映）');
+        } else {
+          alert('保存に失敗しました');
+        }
+      });
+    }
+
+    // 進捗管理
+    async function loadProgressData() {
+      try {
+        const response = await fetch('http://localhost:3000/api/progress');
+        const data = await response.json();
+        const tbody = document.getElementById('progressData');
+        tbody.innerHTML = '';
+        
+        data.forEach(item => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${item.username}</td>
+            <td>${item.gameName}</td>
+            <td>${item.score}</td>
+            <td>${new Date(item.timestamp).toLocaleString()}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      } catch (error) {
+        console.error('進捗データの取得に失敗しました:', error);
+      }
+    }
+
+    // ユーザー管理
+    async function loadUserData() {
+      try {
+        const response = await fetch('/api/users');
+        const data = await response.json();
+        const tbody = document.getElementById('userData');
+        tbody.innerHTML = '';
+        
+        data.forEach(user => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${user.username}</td>
+            <td>${user.role}</td>
+            <td>
+              <button onclick="editUser('${user.username}')">編集</button>
+              <button onclick="deleteUser('${user.username}')">削除</button>
+            </td>
+          `;
+          tbody.appendChild(row);
+        });
+      } catch (error) {
+        console.error('ユーザーデータの取得に失敗しました:', error);
+      }
+    }
+
+    function addUser() {
+      const username = document.getElementById('newUsername').value;
+      const password = document.getElementById('newPassword').value;
+      const role = document.getElementById('newUserRole').value;
+
+      fetch('/api/users', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ username, password, role })
+      })
+      .then(res => {
+        if (res.ok) {
+          alert('ユーザーを追加しました');
+          loadUserData();
+        } else {
+          alert('ユーザーの追加に失敗しました');
+        }
+      });
+    }
+
+    // お知らせ管理
+    async function loadNoticeData() {
+      try {
+        const response = await fetch('http://localhost:3000/api/notices');
+        const data = await response.json();
+        const tbody = document.getElementById('noticeData');
+        tbody.innerHTML = '';
+        
+        data.forEach(notice => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${new Date(notice.timestamp).toLocaleString()}</td>
+            <td>${notice.content}</td>
+            <td>
+              <button onclick="deleteNotice('${notice.id}')">削除</button>
+            </td>
+          `;
+          tbody.appendChild(row);
+        });
+      } catch (error) {
+        console.error('お知らせデータの取得に失敗しました:', error);
+      }
+    }
+
+    function addNotice() {
+      const content = document.getElementById('newNotice').value;
+
+      fetch('http://localhost:3000/api/notices', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ content })
+      })
+      .then(res => {
+        if (res.ok) {
+          alert('お知らせを追加しました');
+          loadNoticeData();
+          document.getElementById('newNotice').value = '';
+        } else {
+          alert('お知らせの追加に失敗しました');
+        }
+      });
+    }
+
+    // 全体設定
+    function saveSettings() {
+      const settings = {
+        siteTitle: document.getElementById('siteTitle').value,
+        themeColor: document.getElementById('themeColor').value
+      };
+
+      fetch('http://localhost:3000/api/settings', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(settings)
+      })
+      .then(res => {
+        if (res.ok) {
+          alert('設定を保存しました');
+        } else {
+          alert('設定の保存に失敗しました');
+        }
+      });
+    }
+
+    // バックアップ管理
+    function createBackup() {
+      fetch('/api/backup', {
+        method: 'POST'
+      })
+      .then(res => {
+        if (res.ok) {
+          alert('バックアップを作成しました');
+          loadBackupList();
+        } else {
+          alert('バックアップの作成に失敗しました');
+        }
+      });
+    }
+
+    function loadBackupList() {
+      fetch('/api/backup')
+        .then(res => res.json())
+        .then(data => {
+          const backupList = document.getElementById('backupList');
+          backupList.innerHTML = '';
+          data.forEach(backup => {
+            const div = document.createElement('div');
+            div.innerHTML = `
+              <div>${new Date(backup.timestamp).toLocaleString()}</div>
+              <button onclick="restoreBackup('${backup.id}')">復元</button>
+              <button onclick="deleteBackup('${backup.id}')">削除</button>
+            `;
+            backupList.appendChild(div);
+          });
+        });
+    }
+
+    // やるべきことリストの機能
+    let tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+
+    function addTask() {
+      const taskInput = document.getElementById('newTask');
+      const statusSelect = document.getElementById('taskStatus');
+      const task = {
+        id: Date.now(),
+        text: taskInput.value,
+        status: statusSelect.value,
+        createdAt: new Date().toISOString()
+      };
+      
+      tasks.push(task);
+      saveTasks();
+      renderTasks();
+      taskInput.value = '';
+    }
+
+    function updateTaskStatus(taskId, newStatus) {
+      const task = tasks.find(t => t.id === taskId);
+      if (task) {
+        task.status = newStatus;
+        saveTasks();
+        renderTasks();
+      }
+    }
+
+    function deleteTask(taskId) {
+      tasks = tasks.filter(t => t.id !== taskId);
+      saveTasks();
+      renderTasks();
+    }
+
+    function saveTasks() {
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    function renderTasks() {
+      const incompleteList = document.getElementById('incompleteTasks');
+      const inProgressList = document.getElementById('inProgressTasks');
+      const completedList = document.getElementById('completedTasks');
+
+      incompleteList.innerHTML = '';
+      inProgressList.innerHTML = '';
+      completedList.innerHTML = '';
+
+      tasks.forEach(task => {
+        const li = document.createElement('li');
+        li.className = `task-item ${task.status === '完了' ? 'completed' : task.status === '進行中' ? 'in-progress' : ''}`;
+        
+        li.innerHTML = `
+          <span>${task.text}</span>
+          <div class="task-actions">
+            <select onchange="updateTaskStatus(${task.id}, this.value)">
+              <option value="未完了" ${task.status === '未完了' ? 'selected' : ''}>未完了</option>
+              <option value="進行中" ${task.status === '進行中' ? 'selected' : ''}>進行中</option>
+              <option value="完了" ${task.status === '完了' ? 'selected' : ''}>完了</option>
+            </select>
+            <button onclick="deleteTask(${task.id})" class="btn btn-danger">削除</button>
+          </div>
+        `;
+
+        switch(task.status) {
+          case '未完了':
+            incompleteList.appendChild(li);
+            break;
+          case '進行中':
+            inProgressList.appendChild(li);
+            break;
+          case '完了':
+            completedList.appendChild(li);
+            break;
+        }
+      });
+    }
+
+    // 定期的な更新
+    setInterval(() => {
+      loadProgressData();
+      loadUserData();
+      loadNoticeData();
+    }, 30000);
+
+    // 初期表示
+    checkAdmin();
+    loadProgressData();
+    loadUserData();
+    loadNoticeData();
+    loadBackupList();
+    renderTasks();
+  </script>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>管理者ログイン</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { 
+      background: #eef1f5; 
+      font-family: "Segoe UI", "Meiryo", sans-serif; 
+      margin: 0; 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    
+    .login-container { 
+      max-width: 400px; 
+      background: #fff; 
+      border-radius: 18px; 
+      box-shadow: 0 2px 12px #dbe6f3; 
+      padding: 2em; 
+      text-align: center; 
+    }
+    
+    .login-title { 
+      font-size: 1.8em; 
+      color: #2574c7; 
+      font-weight: bold; 
+      margin-bottom: 1.5em; 
+    }
+    
+    .pin-container {
+      margin-bottom: 2em;
+    }
+    
+    .pin-display {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 2em;
+    }
+    
+    .pin-digit {
+      width: 50px;
+      height: 50px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #333;
+      background: #f8f9fa;
+    }
+    
+    .pin-digit.filled {
+      border-color: #3498db;
+      background: #3498db;
+      color: white;
+    }
+    
+    .pin-keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    
+    .pin-btn {
+      width: 70px;
+      height: 70px;
+      border: none;
+      border-radius: 15px;
+      background: #f8f9fa;
+      color: #333;
+      font-size: 1.5em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .pin-btn:hover {
+      background: #e9ecef;
+      transform: scale(1.05);
+    }
+    
+    .pin-btn:active {
+      transform: scale(0.95);
+    }
+    
+    .pin-btn.clear {
+      background: #ff6b6b;
+      color: white;
+    }
+    
+    .pin-btn.clear:hover {
+      background: #ff5252;
+    }
+    
+    .pin-btn.enter {
+      background: #27ae60;
+      color: white;
+    }
+    
+    .pin-btn.enter:hover {
+      background: #229954;
+    }
+    
+    .error { 
+      color: #e74c3c; 
+      margin-top: 1em; 
+      font-weight: bold;
+    }
+    
+    .success {
+      color: #27ae60;
+      margin-top: 1em;
+      font-weight: bold;
+    }
+    
+    .admin-note {
+      margin-top: 2em;
+      padding: 1em;
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      border-radius: 8px;
+      color: #856404;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-title">
+      <i class="fas fa-user-shield"></i> 管理者ログイン
+    </div>
+    
+    <div class="pin-container">
+      <div class="pin-display">
+        <div class="pin-digit" id="pin1"></div>
+        <div class="pin-digit" id="pin2"></div>
+        <div class="pin-digit" id="pin3"></div>
+        <div class="pin-digit" id="pin4"></div>
+      </div>
+      
+      <div class="pin-keypad">
+        <button class="pin-btn" onclick="addPin(1)">1</button>
+        <button class="pin-btn" onclick="addPin(2)">2</button>
+        <button class="pin-btn" onclick="addPin(3)">3</button>
+        <button class="pin-btn" onclick="addPin(4)">4</button>
+        <button class="pin-btn" onclick="addPin(5)">5</button>
+        <button class="pin-btn" onclick="addPin(6)">6</button>
+        <button class="pin-btn" onclick="addPin(7)">7</button>
+        <button class="pin-btn" onclick="addPin(8)">8</button>
+        <button class="pin-btn" onclick="addPin(9)">9</button>
+        <button class="pin-btn clear" onclick="clearPin()">C</button>
+        <button class="pin-btn" onclick="addPin(0)">0</button>
+        <button class="pin-btn enter" onclick="login()">✓</button>
+      </div>
+    </div>
+    
+    <div class="error" id="errorMsg"></div>
+    <div class="success" id="successMsg"></div>
+    
+    <div class="admin-note">
+      <i class="fas fa-info-circle"></i> 管理者PINを入力してください
+    </div>
+  </div>
+
+  <script>
+    // 管理者PIN（実際の運用ではサーバー側で管理）
+    const ADMIN_PIN = "0525";
+    
+    let currentPin = "";
+    const maxPinLength = 4;
+    
+    function addPin(digit) {
+      if (currentPin.length < maxPinLength) {
+        currentPin += digit;
+        updatePinDisplay();
+        
+        // 4桁入力されたら自動的にログイン処理
+        if (currentPin.length === maxPinLength) {
+          setTimeout(login, 300);
+        }
+      }
+    }
+    
+    function clearPin() {
+      currentPin = "";
+      updatePinDisplay();
+      clearMessages();
+    }
+    
+    function updatePinDisplay() {
+      for (let i = 1; i <= maxPinLength; i++) {
+        const digitElement = document.getElementById(`pin${i}`);
+        if (i <= currentPin.length) {
+          digitElement.textContent = "●";
+          digitElement.classList.add("filled");
+        } else {
+          digitElement.textContent = "";
+          digitElement.classList.remove("filled");
+        }
+      }
+    }
+    
+    function clearMessages() {
+      document.getElementById("errorMsg").textContent = "";
+      document.getElementById("successMsg").textContent = "";
+    }
+    
+    function login() {
+      clearMessages();
+      
+      if (currentPin.length !== maxPinLength) {
+        document.getElementById("errorMsg").textContent = "4桁のPINを入力してください";
+        return;
+      }
+      
+      // PIN認証
+      if (currentPin === ADMIN_PIN) {
+        document.getElementById("successMsg").textContent = "認証成功！リダイレクト中...";
+        
+        // 管理者認証情報を保存
+        localStorage.setItem("adminAuth", "true");
+        localStorage.setItem("adminPin", currentPin);
+        localStorage.setItem("loginTime", new Date().toISOString());
+        
+        // 統一管理画面にリダイレクト
+        setTimeout(() => {
+          window.location.href = "unified_admin.html";
+        }, 1000);
+      } else {
+        document.getElementById("errorMsg").textContent = "PINが正しくありません";
+        currentPin = "";
+        updatePinDisplay();
+      }
+    }
+    
+    // キーボード入力対応
+    document.addEventListener("keydown", function(event) {
+      const key = event.key;
+      
+      if (key >= "0" && key <= "9") {
+        addPin(parseInt(key));
+      } else if (key === "Enter") {
+        login();
+      } else if (key === "Backspace" || key === "Delete") {
+        clearPin();
+      }
+    });
+    
+    // ページ読み込み時の初期化
+    document.addEventListener("DOMContentLoaded", function() {
+      // 既にログイン済みの場合は管理画面にリダイレクト
+      const isAdmin = localStorage.getItem("adminAuth");
+      if (isAdmin === "true") {
+        window.location.href = "unified_admin.html";
+      }
+      
+      updatePinDisplay();
+    });
+  </script>
+</body>
+</html>

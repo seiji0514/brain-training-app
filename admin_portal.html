@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>管理者ポータル（管理画面一元管理）</title>
+  <style>
+    body { font-family: 'Segoe UI', 'Meiryo', sans-serif; background: #f4f7f6; margin: 0; }
+    .header { background: #2c3e50; color: white; padding: 1em 1.5em; text-align: center; }
+    .container { max-width: 900px; margin: 2em auto; background: white; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.07); padding: 2em; }
+    .portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2em; margin-bottom: 2em; }
+    .portal-card { background: #f8f9fa; border-radius: 10px; box-shadow: 0 2px 8px #dbe6f3; padding: 2em 1em; text-align: center; transition: box-shadow 0.2s; text-decoration: none; color: #2574c7; font-weight: bold; font-size: 1.1em; }
+    .portal-card:hover { box-shadow: 0 8px 24px #b0c4de; background: #eaf6ff; }
+    .alert-list { margin-top: 2em; }
+    .alert-item { background: #fff3cd; color: #856404; border: 1px solid #ffeaa7; border-radius: 6px; padding: 1em; margin-bottom: 1em; }
+    h2 { color: #3498db; }
+    @media (max-width: 700px) { .container { padding: 0.5em; } .portal-card { font-size: 1em; } }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>管理者ポータル（管理画面一元管理）</h1>
+  </div>
+  <div class="container">
+    <h2>管理機能メニュー</h2>
+    <div class="portal-grid">
+      <a href="unified_admin.html" class="portal-card">統合管理（上級者向け）</a>
+      <!-- <a href="admin_dashboard.html" class="portal-card" style="color:#aaa;pointer-events:none;">旧ダッシュボード（アーカイブ）</a> -->
+      <!-- <a href="admin.html" class="portal-card" style="color:#aaa;pointer-events:none;">旧管理画面（アーカイブ）</a> -->
+    </div>
+    <div class="alert-list">
+      <h2>重要アラート一覧</h2>
+      <div class="alert-item">2024-06-20 10:30 [現場D] CPU使用率90%超（未対応）</div>
+      <div class="alert-item">2024-06-20 10:20 [現場C] ネットワーク断（未対応）</div>
+      <div class="alert-item">2024-06-20 10:12 [現場A] サーバー応答なし（未対応）</div>
+    </div>
+  </div>
+</body>
+</html> 

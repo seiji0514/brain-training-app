@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>脳トレゲーム Q&Aリスト</title>
+  <style>
+    @media print {
+      body { margin: 0; }
+      .no-print { display: none; }
+      .page-break { page-break-before: always; }
+    }
+    
+    body { 
+      font-family: 'Meiryo', 'Yu Gothic', sans-serif; 
+      margin: 2em; 
+      background: #f9f9f9; 
+      line-height: 1.6;
+    }
+    h1, h2, h3 { color: #2c3e50; }
+    ul, ol { margin-bottom: 1em; }
+    .q { color: #2980b9; font-weight: bold; }
+    .a { color: #27ae60; margin-left: 1em; }
+    .section { margin-bottom: 2em; }
+    
+    .print-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    
+    .print-btn:hover {
+      background: #2980b9;
+    }
+    
+    .approval-section {
+      border: 2px solid #333;
+      padding: 20px;
+      margin: 30px 0;
+      background: #f9f9f9;
+    }
+    
+    .approval-section h3 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    
+    .approval-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    
+    .approval-item {
+      border: 1px solid #ccc;
+      padding: 15px;
+      background: white;
+    }
+    
+    .approval-item h4 {
+      margin: 0 0 10px 0;
+      color: #333;
+      font-size: 14px;
+    }
+    
+    .approval-field {
+      margin-bottom: 15px;
+    }
+    
+    .approval-field label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      font-size: 12px;
+    }
+    
+    .approval-field input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      font-size: 12px;
+    }
+    
+    .approval-field textarea {
+      width: 100%;
+      height: 60px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      resize: vertical;
+      font-size: 12px;
+    }
+    
+    @media (max-width: 768px) {
+      .approval-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="print-btn no-print" onclick="window.print()">
+    🖨️ 印刷
+  </button>
+
+  <h1>脳トレゲーム Q&Aリスト</h1>
+
+  <div class="section">
+    <h2>システム・接続関連</h2>
+    <div class="q">Q1: ゲームサイトにアクセスできません</div>
+    <div class="a">A: 以下の点を確認してください：<br>
+      ・院内WiFiに接続されているか<br>
+      ・アドレスが正しく入力されているかhttp://[サーバーPCのIPアドレス]/version2/index_limited.html
+      ・サーバーが起動しているか（管理者に確認）
+    </div>
+    <div class="q">Q2: ログインできません</div>
+    <div class="a">A: 以下を確認してください：<br>
+      ・ユーザー名とパスワードが正しいか<br>
+      ・Caps Lockがオンになっていないか<br>
+      ・管理者にアカウントが有効か確認
+    </div>
+    <div class="q">Q3: ゲーム中に画面が固まりました</div>
+    <div class="a">A: 以下の対処を試してください：<br>
+      ・ブラウザの更新ボタンを押す<br>
+      ・一度ログアウトして再度ログイン<br>
+      ・別のブラウザで試す
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>ゲームプレイ関連</h2>
+    <div class="q">Q4: ゲームの難易度を変更したい</div>
+    <div class="a">A: 以下の手順で変更できます：<br>
+      1. メイン画面右上の設定アイコンをクリック<br>
+      2. 難易度スライダーで調整<br>
+      3. 保存ボタンを押す
+    </div>
+    <div class="q">Q5: 眼の訓練はどのように進めればよいですか？</div>
+    <div class="a">A: 以下の順序で進めることをお勧めします：<br>
+      1. 追視訓練から開始<br>
+      2. 周辺視野訓練<br>
+      3. 動体視力訓練<br>
+      4. 反応速度訓練
+    </div>
+    <div class="q">Q6: 進捗状況を確認したい</div>
+    <div class="a">A: メイン画面の「進捗確認」から確認できます。<br>
+      ・各ゲームのスコア履歴<br>
+      ・訓練時間<br>
+      ・改善グラフ
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>管理者向け</h2>
+    <div class="q">Q7: バックアップはどうすればよいですか？</div>
+    <div class="a">A: 以下の方法があります：<br>
+      1. 管理画面から「バックアップ作成」を実行<br>
+      2. 自動バックアップ（毎日実行）<br>
+      3. データフォルダの手動コピー
+    </div>
+    <div class="q">Q8: ユーザーの追加方法は？</div>
+    <div class="a">A: 管理画面から以下の手順で行えます：<br>
+      1. 「ユーザー管理」を選択<br>
+      2. 「新規追加」をクリック<br>
+      3. 必要情報を入力<br>
+      4. 「保存」をクリック
+    </div>
+    <div class="q">Q9: お知らせの更新方法は？</div>
+    <div class="a">A: 管理画面から以下の手順で行えます：<br>
+      1. 「お知らせ管理」を選択<br>
+      2. 「新規追加」または既存のお知らせを選択<br>
+      3. 内容を編集<br>
+      4. 「保存」をクリック
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>その他</h2>
+    <div class="q">Q10: 推奨ブラウザは何ですか？</div>
+    <div class="a">A: 以下のブラウザで動作確認しています：<br>
+      ・Google Chrome（推奨）<br>
+      ・Microsoft Edge<br>
+      ・Firefox
+    </div>
+    <div class="q">Q11: データの保存期間は？</div>
+    <div class="a">A: 以下のようになっています：<br>
+      ・プレイ履歴：6ヶ月<br>
+      ・スコア記録：1年<br>
+      ・ユーザー情報：退院まで
+    </div>
+    <div class="q">Q12: 個人情報の扱いは？</div>
+    <div class="a">A: 以下の方針で管理しています：<br>
+      ・院内システムでの完結<br>
+      ・外部への情報送信なし<br>
+      ・定期的なデータ消去
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+  
+  <!-- 課長様・承認者向け確認欄 -->
+  <div class="approval-section">
+    <h3>【課長様・承認者向け確認欄】</h3>
+    <div class="approval-grid">
+      <div class="approval-item">
+        <h4>Q&A内容確認</h4>
+        <div class="approval-field">
+          <label>Q&A内容の妥当性について確認</label>
+          <textarea placeholder="確認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>承認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>承認日</label>
+          <input type="date">
+        </div>
+      </div>
+      
+      <div class="approval-item">
+        <h4>運用サポート確認</h4>
+        <div class="approval-field">
+          <label>運用サポート体制について確認</label>
+          <textarea placeholder="確認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>承認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>承認日</label>
+          <input type="date">
+        </div>
+      </div>
+    </div>
+    
+    <div class="approval-grid">
+      <div class="approval-item">
+        <h4>教育・研修確認</h4>
+        <div class="approval-field">
+          <label>スタッフ教育・研修について確認</label>
+          <textarea placeholder="確認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>承認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>承認日</label>
+          <input type="date">
+        </div>
+      </div>
+      
+      <div class="approval-item">
+        <h4>最終承認</h4>
+        <div class="approval-field">
+          <label>Q&Aリストの最終承認</label>
+          <textarea placeholder="承認内容を記入してください"></textarea>
+        </div>
+        <div class="approval-field">
+          <label>承認者名</label>
+          <input type="text" placeholder="氏名を記入">
+        </div>
+        <div class="approval-field">
+          <label>承認日</label>
+          <input type="date">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html> 

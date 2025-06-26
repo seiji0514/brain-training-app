@@ -1,0 +1,3559 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>統一管理画面 - 脳トレゲームシステム</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Meiryo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f6fa;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logout-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            background: white;
+            border-radius: 12px 12px 0 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+        
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #666;
+            transition: all 0.3s;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .nav-tab:hover {
+            background: #f8f9fa;
+            color: #333;
+        }
+        
+        .nav-tab.active {
+            color: #3498db;
+            border-bottom-color: #3498db;
+            background: #f8f9fa;
+        }
+        
+        .tab-content {
+            background: white;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 2rem;
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .stat-card.success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+        
+        .stat-card.warning {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .stat-card.info {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .data-table th {
+            background: #f8f9fa;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+            margin: 0.5rem;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+        }
+        
+        .btn-success {
+            background: #27ae60;
+        }
+        
+        .btn-success:hover {
+            background: #229954;
+        }
+        
+        .btn-warning {
+            background: #f39c12;
+        }
+        
+        .btn-warning:hover {
+            background: #e67e22;
+        }
+        
+        .btn-danger {
+            background: #e74c3c;
+        }
+        
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .activity-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: #3498db;
+        }
+        
+        .activity-content {
+            flex: 1;
+        }
+        
+        .activity-time {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-inactive {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        /* ゲーム管理用スタイル */
+        .game-category {
+            margin-bottom: 2rem;
+        }
+        
+        .game-category h4 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .game-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        
+        .game-item {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s;
+        }
+        
+        .game-item:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .game-info {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+        
+        .game-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            width: 50px;
+            text-align: center;
+        }
+        
+        .game-details h5 {
+            margin: 0 0 0.5rem 0;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+        
+        .game-details p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .game-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #27ae60;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        .toggle-label {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .game-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+        
+        .game-status.visible {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .game-status.hidden {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        /* モーダルスタイル */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        .modal-header {
+            background: #3498db;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+        }
+        
+        .close {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            opacity: 0.7;
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+        }
+        
+        .modal-footer {
+            background: #f8f9fa;
+            padding: 1rem 1.5rem;
+            border-radius: 0 0 12px 12px;
+            text-align: right;
+        }
+        
+        /* アラートスタイル */
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .alert-warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .alert-danger {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        /* ボタングループ */
+        .button-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .btn-info {
+            background: #17a2b8;
+        }
+        
+        .btn-info:hover {
+            background: #138496;
+        }
+        
+        /* AI連携機能用スタイル */
+        .ai-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .ai-feature-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .ai-feature-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+        
+        .ai-feature-card h4 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .ai-feature-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .automation-settings {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .automation-item {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .automation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .automation-header h4 {
+            color: #2c3e50;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .automation-item p {
+            color: #666;
+            margin: 0;
+            line-height: 1.6;
+        }
+        
+        .ai-settings {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .ai-settings .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .ai-settings .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .ai-settings .form-group input,
+        .ai-settings .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        
+        .ai-settings .form-group input:focus,
+        .ai-settings .form-group select:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .nav-tab {
+                border-bottom: 1px solid #eee;
+                border-right: none;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .ai-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .automation-settings {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* デバイス対応のスタイル */
+        .device-warning {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .device-info {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 0.5rem;
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        .performance-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+        
+        .performance-high { background-color: #28a745; }
+        .performance-medium { background-color: #ffc107; }
+        .performance-low { background-color: #dc3545; }
+        
+        /* モバイル対応 */
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .tab-content {
+                padding: 1rem;
+            }
+            
+            .table-responsive {
+                font-size: 0.85rem;
+            }
+            
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .modal-dialog {
+                margin: 1rem;
+                max-width: calc(100% - 2rem);
+            }
+            
+            .ai-settings-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* タブレット対応 */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .ai-settings-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* 低性能デバイス対応 */
+        .low-performance-mode {
+            animation: none !important;
+            transition: none !important;
+            box-shadow: none !important;
+        }
+        
+        .low-performance-mode .dashboard-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .low-performance-mode .table-responsive {
+            overflow-x: auto;
+        }
+        
+        /* デバイス別の最適化 */
+        .mobile-optimized {
+            font-size: 0.9rem;
+        }
+        
+        .mobile-optimized .btn {
+            margin-bottom: 0.5rem;
+            width: 100%;
+        }
+        
+        .mobile-optimized .table-responsive {
+            font-size: 0.8rem;
+        }
+        
+        /* エラー表示の改善 */
+        .error-display {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            color: #721c24;
+        }
+        
+        .error-display .device-info {
+            background: rgba(255,255,255,0.5);
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+        
+        /* ローディング表示の改善 */
+        .loading-optimized {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(5px);
+        }
+        
+        .loading-optimized .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><i class="fas fa-cogs"></i> 統一管理画面</h1>
+        <div class="user-info">
+            <span id="userDisplay">管理者</span>
+            <button class="logout-btn" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> ログアウト
+            </button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- タブナビゲーション -->
+        <div class="tab-navigation">
+            <button class="nav-tab active" onclick="showTab('dashboard')">
+                <i class="fas fa-tachometer-alt"></i> ダッシュボード
+            </button>
+            <button class="nav-tab" onclick="showTab('users')">
+                <i class="fas fa-users"></i> ユーザー管理
+            </button>
+            <button class="nav-tab" onclick="showTab('alerts')">
+                <i class="fas fa-exclamation-triangle"></i> アラート管理
+            </button>
+            <button class="nav-tab" onclick="showTab('games')">
+                <i class="fas fa-gamepad"></i> ゲーム管理
+            </button>
+            <button class="nav-tab" onclick="showTab('ai')">
+                <i class="fas fa-robot"></i> AI連携
+            </button>
+            <button class="nav-tab" onclick="showTab('notifications')">
+                <i class="fab fa-line"></i> LINE通知
+            </button>
+            <button class="nav-tab" onclick="showTab('remote')">
+                <i class="fas fa-desktop"></i> 遠隔操作
+            </button>
+            <button class="nav-tab" onclick="showTab('system')">
+                <i class="fas fa-cog"></i> システム設定
+            </button>
+        </div>
+        
+        <!-- ダッシュボード -->
+        <div id="dashboard" class="tab-content active">
+            <h2><i class="fas fa-tachometer-alt"></i> システム概要</h2>
+            
+            <div class="dashboard-grid">
+                <div class="stat-card success">
+                    <div class="stat-number" id="totalUsers">0</div>
+                    <div class="stat-label">登録ユーザー数</div>
+                </div>
+                <div class="stat-card info">
+                    <div class="stat-number" id="activeUsers">0</div>
+                    <div class="stat-label">アクティブユーザー</div>
+                </div>
+                <div class="stat-card warning">
+                    <div class="stat-number" id="totalGames">0</div>
+                    <div class="stat-label">総ゲームプレイ数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="avgScore">0</div>
+                    <div class="stat-label">平均スコア</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3><i class="fas fa-clock"></i> 最近のアクティビティ</h3>
+                <div id="recentActivity">
+                    <div class="activity-item">
+                        <div class="activity-icon"><i class="fas fa-user-plus"></i></div>
+                        <div class="activity-content">
+                            <div>新しいユーザーが登録しました</div>
+                            <div class="activity-time">2024年1月15日 14:30</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon"><i class="fas fa-gamepad"></i></div>
+                        <div class="activity-content">
+                            <div>記憶力ゲームがプレイされました</div>
+                            <div class="activity-time">2024年1月15日 14:25</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ユーザー管理 -->
+        <div id="users" class="tab-content">
+            <h2><i class="fas fa-users"></i> ユーザー管理</h2>
+            
+            <div class="section">
+                <h3>ユーザー一覧</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ユーザーID</th>
+                            <th>名前</th>
+                            <th>登録日</th>
+                            <th>最終ログイン</th>
+                            <th>ステータス</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTableBody">
+                        <tr>
+                            <td>user001</td>
+                            <td>田中太郎</td>
+                            <td>2024-01-10</td>
+                            <td>2024-01-15 14:30</td>
+                            <td><span class="status-badge status-active">アクティブ</span></td>
+                            <td>
+                                <button class="btn btn-warning">編集</button>
+                                <button class="btn btn-danger">削除</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="section">
+                <h3>新規ユーザー追加</h3>
+                <div class="form-group">
+                    <label for="newUserName">ユーザー名</label>
+                    <input type="text" id="newUserName" placeholder="ユーザー名を入力">
+                </div>
+                <div class="form-group">
+                    <label for="newUserEmail">メールアドレス</label>
+                    <input type="email" id="newUserEmail" placeholder="メールアドレスを入力">
+                </div>
+                <button class="btn btn-success">ユーザー追加</button>
+            </div>
+        </div>
+        
+        <!-- ゲーム管理 -->
+        <div id="games" class="tab-content">
+            <h2><i class="fas fa-gamepad"></i> ゲーム管理</h2>
+            
+            <!-- ゲーム編集機能 -->
+            <div class="section">
+                <h3><i class="fas fa-edit"></i> ゲーム詳細編集</h3>
+                <p>各ゲームの設定を詳細に編集できます。トラブル対応時は該当ゲームを一時的に非表示にしてください。</p>
+                
+                <div class="form-group">
+                    <label for="gameCategory">カテゴリ選択</label>
+                    <select id="gameCategory" onchange="loadGameSettings()">
+                        <option value="memory">記憶編</option>
+                        <option value="life">生活面編</option>
+                    </select>
+                </div>
+                
+                <div id="gameSettingsContainer">
+                    <!-- 記憶編ゲーム設定 -->
+                    <div id="memoryGames" class="game-category">
+                        <h4>記憶編ゲーム設定</h4>
+                        <div class="game-list" id="memoryGameList">
+                            <!-- 動的に生成 -->
+                        </div>
+                    </div>
+                    
+                    <!-- 生活面編ゲーム設定 -->
+                    <div id="lifeGames" class="game-category" style="display: none;">
+                        <h4>生活面編ゲーム設定</h4>
+                        <div class="game-list" id="lifeGameList">
+                            <!-- 動的に生成 -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="button-group" style="margin-top: 2rem;">
+                    <button class="btn btn-success" onclick="saveGameSettings()">
+                        <i class="fas fa-save"></i> 設定保存
+                    </button>
+                    <button class="btn btn-warning" onclick="resetGameSettings()">
+                        <i class="fas fa-undo"></i> 設定リセット
+                    </button>
+                    <button class="btn btn-info" onclick="exportGameSettings()">
+                        <i class="fas fa-download"></i> 設定エクスポート
+                    </button>
+                    <button class="btn btn-secondary" onclick="importGameSettings()">
+                        <i class="fas fa-upload"></i> 設定インポート
+                    </button>
+                </div>
+            </div>
+            
+            <!-- ゲーム詳細編集モーダル -->
+            <div id="gameEditModal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 id="modalTitle">ゲーム編集</h3>
+                        <span class="close" onclick="closeGameEditModal()">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="editGameName">ゲーム名</label>
+                            <input type="text" id="editGameName" placeholder="ゲーム名を入力">
+                        </div>
+                        <div class="form-group">
+                            <label for="editGameIcon">アイコン</label>
+                            <input type="text" id="editGameIcon" placeholder="絵文字またはアイコン名">
+                        </div>
+                        <div class="form-group">
+                            <label for="editGameDescription">説明</label>
+                            <textarea id="editGameDescription" placeholder="ゲームの説明を入力" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="editGameFile">ファイル名</label>
+                            <input type="text" id="editGameFile" placeholder="HTMLファイル名">
+                        </div>
+                        <div class="form-group">
+                            <label for="editGameVisible">表示状態</label>
+                            <select id="editGameVisible">
+                                <option value="true">表示</option>
+                                <option value="false">非表示</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editGameDifficulty">難易度</label>
+                            <select id="editGameDifficulty">
+                                <option value="easy">初級</option>
+                                <option value="medium">中級</option>
+                                <option value="hard">上級</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editGameCategory">カテゴリ</label>
+                            <select id="editGameCategory">
+                                <option value="memory">記憶編</option>
+                                <option value="life">生活面編</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editGameTags">タグ</label>
+                            <input type="text" id="editGameTags" placeholder="カンマ区切りでタグを入力">
+                        </div>
+                        <div class="form-group">
+                            <label for="editGameNotes">管理者メモ</label>
+                            <textarea id="editGameNotes" placeholder="管理者用のメモを入力" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" onclick="saveGameEdit()">
+                            <i class="fas fa-save"></i> 保存
+                        </button>
+                        <button class="btn btn-secondary" onclick="closeGameEditModal()">
+                            <i class="fas fa-times"></i> キャンセル
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ゲーム統計 -->
+            <div class="section">
+                <h3><i class="fas fa-chart-bar"></i> ゲーム統計</h3>
+                <div class="dashboard-grid">
+                    <div class="stat-card info">
+                        <div class="stat-number" id="totalVisibleGames">0</div>
+                        <div class="stat-label">表示中ゲーム数</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-number" id="totalHiddenGames">0</div>
+                        <div class="stat-label">非表示ゲーム数</div>
+                    </div>
+                    <div class="stat-card success">
+                        <div class="stat-number" id="mostPlayedGame">-</div>
+                        <div class="stat-label">最多プレイゲーム</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="avgGameRating">0.0</div>
+                        <div class="stat-label">平均評価</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 進捗管理 -->
+        <div id="progress" class="tab-content">
+            <h2><i class="fas fa-chart-line"></i> 進捗管理</h2>
+            
+            <div class="section">
+                <h3>進捗データ</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ユーザー</th>
+                            <th>ゲーム</th>
+                            <th>スコア</th>
+                            <th>プレイ日時</th>
+                            <th>改善率</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>田中太郎</td>
+                            <td>記憶力ゲーム</td>
+                            <td>85</td>
+                            <td>2024-01-15 14:30</td>
+                            <td>+15%</td>
+                        </tr>
+                        <tr>
+                            <td>田中太郎</td>
+                            <td>反応ゲーム</td>
+                            <td>78</td>
+                            <td>2024-01-15 13:45</td>
+                            <td>+8%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="section">
+                <h3>進捗エクスポート</h3>
+                <button class="btn btn-success">CSVエクスポート</button>
+                <button class="btn btn-info">レポート生成</button>
+            </div>
+        </div>
+        
+        <!-- お知らせ管理 -->
+        <div id="notices" class="tab-content">
+            <h2><i class="fas fa-bullhorn"></i> お知らせ管理</h2>
+            
+            <div class="section">
+                <h3>お知らせ一覧</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>タイトル</th>
+                            <th>投稿日</th>
+                            <th>ステータス</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>システムメンテナンスのお知らせ</td>
+                            <td>2024-01-15</td>
+                            <td><span class="status-badge status-active">公開中</span></td>
+                            <td>
+                                <button class="btn btn-warning">編集</button>
+                                <button class="btn btn-danger">削除</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="section">
+                <h3>新規お知らせ投稿</h3>
+                <div class="form-group">
+                    <label for="noticeTitle">タイトル</label>
+                    <input type="text" id="noticeTitle" placeholder="お知らせのタイトル">
+                </div>
+                <div class="form-group">
+                    <label for="noticeContent">内容</label>
+                    <textarea id="noticeContent" placeholder="お知らせの内容を入力"></textarea>
+                </div>
+                <button class="btn btn-success">投稿</button>
+            </div>
+        </div>
+        
+        <!-- AI連携 -->
+        <div id="ai" class="tab-content">
+            <h2><i class="fas fa-robot"></i> AI連携システム</h2>
+            
+            <!-- AI分析ダッシュボード -->
+            <div class="section">
+                <h3><i class="fas fa-brain"></i> AI分析ダッシュボード</h3>
+                <div class="dashboard-grid">
+                    <div class="stat-card info">
+                        <div class="stat-number" id="aiPredictions">0</div>
+                        <div class="stat-label">AI予測数</div>
+                    </div>
+                    <div class="stat-card success">
+                        <div class="stat-number" id="aiAccuracy">0%</div>
+                        <div class="stat-label">予測精度</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-number" id="aiRecommendations">0</div>
+                        <div class="stat-label">推奨事項</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="aiAlerts">0</div>
+                        <div class="stat-label">AIアラート</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AI分析機能 -->
+            <div class="section">
+                <h3><i class="fas fa-chart-bar"></i> AI分析機能</h3>
+                <div class="ai-features">
+                    <div class="ai-feature-card">
+                        <h4><i class="fas fa-user-chart"></i> ユーザー行動分析</h4>
+                        <p>ユーザーのゲームプレイパターン、学習進捗、行動傾向をAIが分析し、個別化されたサポートを提供します。</p>
+                        <div class="button-group">
+                            <button class="btn btn-success" onclick="runUserAnalysis()">
+                                <i class="fas fa-play"></i> 分析実行
+                            </button>
+                            <button class="btn btn-info" onclick="viewUserInsights()">
+                                <i class="fas fa-eye"></i> 分析結果
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-feature-card">
+                        <h4><i class="fas fa-crystal-ball"></i> 進捗予測</h4>
+                        <p>過去のデータを基に、ユーザーの将来の進捗や学習成果を予測し、最適な学習計画を提案します。</p>
+                        <div class="button-group">
+                            <button class="btn btn-success" onclick="runProgressPrediction()">
+                                <i class="fas fa-play"></i> 予測実行
+                            </button>
+                            <button class="btn btn-info" onclick="viewPredictions()">
+                                <i class="fas fa-eye"></i> 予測結果
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-feature-card">
+                        <h4><i class="fas fa-lightbulb"></i> パーソナライズ推奨</h4>
+                        <p>ユーザーの能力と学習スタイルに基づいて、最適なゲームや学習内容をAIが自動推奨します。</p>
+                        <div class="button-group">
+                            <button class="btn btn-success" onclick="generateRecommendations()">
+                                <i class="fas fa-play"></i> 推奨生成
+                            </button>
+                            <button class="btn btn-info" onclick="viewRecommendations()">
+                                <i class="fas fa-eye"></i> 推奨一覧
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-feature-card">
+                        <h4><i class="fas fa-exclamation-triangle"></i> 異常検知</h4>
+                        <p>学習パターンの変化や異常な行動をAIが検知し、早期介入の必要性を判断します。</p>
+                        <div class="button-group">
+                            <button class="btn btn-warning" onclick="runAnomalyDetection()">
+                                <i class="fas fa-play"></i> 異常検知
+                            </button>
+                            <button class="btn btn-danger" onclick="viewAnomalies()">
+                                <i class="fas fa-eye"></i> 異常一覧
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AI自動化機能 -->
+            <div class="section">
+                <h3><i class="fas fa-cogs"></i> AI自動化機能</h3>
+                <div class="automation-settings">
+                    <div class="automation-item">
+                        <div class="automation-header">
+                            <h4><i class="fas fa-bell"></i> 自動アラート</h4>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="autoAlert" onchange="toggleAutoAlert()">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <p>学習進捗の停滞や異常を自動検知し、管理者にアラートを送信します。</p>
+                    </div>
+                    
+                    <div class="automation-item">
+                        <div class="automation-header">
+                            <h4><i class="fas fa-route"></i> 自動ルート最適化</h4>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="autoRoute" onchange="toggleAutoRoute()">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <p>ユーザーの学習進捗に応じて、最適な学習ルートを自動調整します。</p>
+                    </div>
+                    
+                    <div class="automation-item">
+                        <div class="automation-header">
+                            <h4><i class="fas fa-comments"></i> 自動サポート</h4>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="autoSupport" onchange="toggleAutoSupport()">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <p>ユーザーの質問や問題に対して、AIが自動的に回答やサポートを提供します。</p>
+                    </div>
+                    
+                    <div class="automation-item">
+                        <div class="automation-header">
+                            <h4><i class="fas fa-file-alt"></i> 自動レポート生成</h4>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="autoReport" onchange="toggleAutoReport()">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <p>定期的に学習進捗レポートを自動生成し、関係者に配信します。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AI設定 -->
+            <div class="section">
+                <h3><i class="fas fa-sliders-h"></i> AI設定</h3>
+                <div class="ai-settings">
+                    <div class="form-group">
+                        <label for="aiModel">AIモデル</label>
+                        <select id="aiModel" onchange="updateAIModel()">
+                            <option value="gpt-4">GPT-4（高精度）</option>
+                            <option value="gpt-3.5">GPT-3.5（標準）</option>
+                            <option value="claude">Claude（分析特化）</option>
+                            <option value="custom">カスタムモデル</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="aiSensitivity">分析感度</label>
+                        <select id="aiSensitivity" onchange="updateAISensitivity()">
+                            <option value="high">高（詳細分析）</option>
+                            <option value="medium" selected>中（標準）</option>
+                            <option value="low">低（基本分析）</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="aiUpdateInterval">更新間隔</label>
+                        <select id="aiUpdateInterval" onchange="updateAIInterval()">
+                            <option value="realtime">リアルタイム</option>
+                            <option value="hourly">1時間</option>
+                            <option value="daily" selected>1日</option>
+                            <option value="weekly">1週間</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="aiApiKey">API キー</label>
+                        <input type="password" id="aiApiKey" placeholder="AI サービスの API キーを入力">
+                    </div>
+                    
+                    <button class="btn btn-success" onclick="saveAISettings()">
+                        <i class="fas fa-save"></i> AI設定保存
+                    </button>
+                    <button class="btn btn-info" onclick="testAIConnection()">
+                        <i class="fas fa-plug"></i> 接続テスト
+                    </button>
+                </div>
+            </div>
+            
+            <!-- AIログ -->
+            <div class="section">
+                <h3><i class="fas fa-list"></i> AI実行ログ</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>日時</th>
+                            <th>機能</th>
+                            <th>ステータス</th>
+                            <th>処理時間</th>
+                            <th>詳細</th>
+                        </tr>
+                    </thead>
+                    <tbody id="aiLogTable">
+                        <tr>
+                            <td>2024-01-15 14:30</td>
+                            <td>ユーザー行動分析</td>
+                            <td><span class="status-badge status-active">成功</span></td>
+                            <td>2.3秒</td>
+                            <td>15ユーザーの分析完了</td>
+                        </tr>
+                        <tr>
+                            <td>2024-01-15 13:45</td>
+                            <td>進捗予測</td>
+                            <td><span class="status-badge status-active">成功</span></td>
+                            <td>1.8秒</td>
+                            <td>予測精度: 87%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- システム設定 -->
+        <div id="system" class="tab-content">
+            <h2><i class="fas fa-cog"></i> システム設定</h2>
+            
+            <!-- サイト停止機能 -->
+            <div class="section">
+                <h3><i class="fas fa-power-off"></i> サイト停止管理</h3>
+                <div class="alert alert-warning">
+                    <strong>⚠️ 注意:</strong> サイト停止機能は緊急時のみ使用してください。停止中はすべてのユーザーがアクセスできなくなります。
+                </div>
+                
+                <div class="form-group">
+                    <label for="siteStatus">サイト状態</label>
+                    <select id="siteStatus" onchange="updateSiteStatus()">
+                        <option value="active">稼働中</option>
+                        <option value="maintenance">メンテナンス中</option>
+                        <option value="emergency">緊急停止</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="stopMessage">停止メッセージ</label>
+                    <textarea id="stopMessage" placeholder="ユーザーに表示するメッセージを入力してください" rows="3">システムメンテナンスのため、一時的にサービスを停止しています。ご不便をおかけしますが、しばらくお待ちください。</textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="stopDuration">停止期間</label>
+                    <select id="stopDuration">
+                        <option value="30">30分</option>
+                        <option value="60">1時間</option>
+                        <option value="120">2時間</option>
+                        <option value="240">4時間</option>
+                        <option value="480">8時間</option>
+                        <option value="indefinite">無期限</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="stopReason">停止理由</label>
+                    <select id="stopReason">
+                        <option value="maintenance">定期メンテナンス</option>
+                        <option value="emergency">緊急対応</option>
+                        <option value="update">システム更新</option>
+                        <option value="trouble">トラブル対応</option>
+                        <option value="other">その他</option>
+                    </select>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn btn-warning" onclick="stopSite()">
+                        <i class="fas fa-stop-circle"></i> サイト停止
+                    </button>
+                    <button class="btn btn-success" onclick="startSite()">
+                        <i class="fas fa-play-circle"></i> サイト再開
+                    </button>
+                    <button class="btn btn-info" onclick="scheduleStop()">
+                        <i class="fas fa-clock"></i> 停止予約
+                    </button>
+                </div>
+                
+                <div id="stopHistory" class="section" style="margin-top: 2rem;">
+                    <h4>停止履歴</h4>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>日時</th>
+                                <th>状態</th>
+                                <th>理由</th>
+                                <th>期間</th>
+                                <th>操作者</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stopHistoryBody">
+                            <tr>
+                                <td>2024-01-15 14:30</td>
+                                <td><span class="status-badge status-inactive">停止</span></td>
+                                <td>定期メンテナンス</td>
+                                <td>2時間</td>
+                                <td>管理者</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- メンテナンス設定 -->
+            <div class="section">
+                <h3><i class="fas fa-tools"></i> メンテナンス設定</h3>
+                <div class="form-group">
+                    <label for="maintenanceMode">メンテナンスモード</label>
+                    <select id="maintenanceMode" onchange="toggleMaintenanceMode()">
+                        <option value="false">無効</option>
+                        <option value="true">有効</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="maintenanceMessage">メンテナンスメッセージ</label>
+                    <textarea id="maintenanceMessage" placeholder="メンテナンス中のメッセージを入力してください" rows="3">システムメンテナンス中です。ご不便をおかけしますが、しばらくお待ちください。</textarea>
+                </div>
+                <button class="btn btn-success" onclick="saveMaintenanceSettings()">設定保存</button>
+            </div>
+            
+            <!-- システム情報 -->
+            <div class="section">
+                <h3><i class="fas fa-info-circle"></i> システム情報</h3>
+                <div class="dashboard-grid">
+                    <div class="stat-card info">
+                        <div class="stat-number">v2.1.0</div>
+                        <div class="stat-label">システムバージョン</div>
+                    </div>
+                    <div class="stat-card success">
+                        <div class="stat-number">99.8%</div>
+                        <div class="stat-label">稼働率</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-number">2.3GB</div>
+                        <div class="stat-label">メモリ使用量</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">45°C</div>
+                        <div class="stat-label">CPU温度</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ログ管理 -->
+        <div id="logs" class="tab-content">
+            <h2><i class="fas fa-file-alt"></i> ログ管理</h2>
+            
+            <div class="section">
+                <h3>システムログ</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>日時</th>
+                            <th>レベル</th>
+                            <th>メッセージ</th>
+                            <th>ユーザー</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2024-01-15 14:30:25</td>
+                            <td><span class="status-badge status-active">INFO</span></td>
+                            <td>ユーザーログイン: user001</td>
+                            <td>田中太郎</td>
+                        </tr>
+                        <tr>
+                            <td>2024-01-15 14:25:10</td>
+                            <td><span class="status-badge status-warning">WARN</span></td>
+                            <td>ゲームセッション終了</td>
+                            <td>田中太郎</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="section">
+                <h3>ログ設定</h3>
+                <div class="form-group">
+                    <label for="logLevel">ログレベル</label>
+                    <select id="logLevel">
+                        <option value="debug">DEBUG</option>
+                        <option value="info" selected>INFO</option>
+                        <option value="warn">WARN</option>
+                        <option value="error">ERROR</option>
+                    </select>
+                </div>
+                <button class="btn btn-success">設定保存</button>
+                <button class="btn btn-danger">ログクリア</button>
+            </div>
+        </div>
+        
+        <!-- LINE通知管理 -->
+        <div id="notifications" class="tab-content">
+            <h2><i class="fab fa-line"></i> LINE通知管理</h2>
+            
+            <!-- LINE通知設定 -->
+            <div class="section">
+                <h3><i class="fas fa-cog"></i> LINE通知設定</h3>
+                <div class="settings-grid">
+                    <div class="form-group">
+                        <label for="lineAccessToken">LINE Access Token</label>
+                        <input type="password" id="lineAccessToken" placeholder="LINE Messaging APIのアクセストークンを入力">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="lineGroupId">LINE Group ID</label>
+                        <input type="text" id="lineGroupId" placeholder="通知先のLINEグループIDを入力">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="lineNotifyLevel">通知レベル</label>
+                        <select id="lineNotifyLevel">
+                            <option value="all">すべて</option>
+                            <option value="error">エラーのみ</option>
+                            <option value="warning">警告以上</option>
+                            <option value="info">情報以上</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="lineAutoNotify" checked> 自動通知
+                        </label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="lineManualNotify" checked> 手動通知
+                        </label>
+                    </div>
+                </div>
+                
+                <button class="btn btn-success" onclick="saveLineSettings()">
+                    <i class="fas fa-save"></i> 設定保存
+                </button>
+                <button class="btn btn-info" onclick="testLineConnection()">
+                    <i class="fas fa-plug"></i> 接続テスト
+                </button>
+            </div>
+            
+            <!-- 連絡網管理 -->
+            <div class="section">
+                <h3><i class="fas fa-address-book"></i> 連絡網管理</h3>
+                <div class="contact-list">
+                    <div class="contact-item">
+                        <div class="contact-info">
+                            <h4>システム管理者</h4>
+                            <p>役割: 管理者 | 優先度: 高</p>
+                            <p>LINE ID: admin_line_id</p>
+                        </div>
+                        <div class="contact-actions">
+                            <button class="btn btn-sm btn-primary" onclick="editContact('admin')">
+                                <i class="fas fa-edit"></i> 編集
+                            </button>
+                            <button class="btn btn-sm btn-success" onclick="testContact('admin')">
+                                <i class="fas fa-paper-plane"></i> テスト送信
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-info">
+                            <h4>技術担当者</h4>
+                            <p>役割: 技術 | 優先度: 高</p>
+                            <p>LINE ID: tech_line_id</p>
+                        </div>
+                        <div class="contact-actions">
+                            <button class="btn btn-sm btn-primary" onclick="editContact('tech')">
+                                <i class="fas fa-edit"></i> 編集
+                            </button>
+                            <button class="btn btn-sm btn-success" onclick="testContact('tech')">
+                                <i class="fas fa-paper-plane"></i> テスト送信
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-info">
+                            <h4>スタッフA</h4>
+                            <p>役割: スタッフ | 優先度: 中</p>
+                            <p>LINE ID: staff_a_line_id</p>
+                        </div>
+                        <div class="contact-actions">
+                            <button class="btn btn-sm btn-primary" onclick="editContact('staff_a')">
+                                <i class="fas fa-edit"></i> 編集
+                            </button>
+                            <button class="btn btn-sm btn-success" onclick="testContact('staff_a')">
+                                <i class="fas fa-paper-plane"></i> テスト送信
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-info">
+                            <h4>緊急連絡先</h4>
+                            <p>役割: 緊急 | 優先度: 最高</p>
+                            <p>LINE ID: emergency_line_id</p>
+                        </div>
+                        <div class="contact-actions">
+                            <button class="btn btn-sm btn-primary" onclick="editContact('emergency')">
+                                <i class="fas fa-edit"></i> 編集
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="testContact('emergency')">
+                                <i class="fas fa-exclamation-triangle"></i> 緊急テスト
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary" onclick="addNewContact()">
+                    <i class="fas fa-plus"></i> 新規連絡先追加
+                </button>
+            </div>
+            
+            <!-- 手動通知送信 -->
+            <div class="section">
+                <h3><i class="fas fa-paper-plane"></i> 手動通知送信</h3>
+                <div class="manual-notification">
+                    <div class="form-group">
+                        <label for="manualNotificationMessage">通知メッセージ</label>
+                        <textarea id="manualNotificationMessage" rows="4" placeholder="通知するメッセージを入力してください"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="manualNotificationLevel">通知レベル</label>
+                        <select id="manualNotificationLevel">
+                            <option value="info">情報</option>
+                            <option value="warning">警告</option>
+                            <option value="error">エラー</option>
+                            <option value="critical">緊急</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="manualNotificationRecipients">送信先</label>
+                        <select id="manualNotificationRecipients">
+                            <option value="all">全員</option>
+                            <option value="admin,tech">管理者・技術担当</option>
+                            <option value="admin">管理者のみ</option>
+                            <option value="tech">技術担当のみ</option>
+                            <option value="staff">スタッフのみ</option>
+                            <option value="emergency">緊急連絡先のみ</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn btn-success" onclick="sendManualNotification()">
+                        <i class="fas fa-paper-plane"></i> 通知送信
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 通知履歴 -->
+            <div class="section">
+                <h3><i class="fas fa-history"></i> 通知履歴</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>日時</th>
+                            <th>レベル</th>
+                            <th>デバイス</th>
+                            <th>メッセージ</th>
+                            <th>送信先</th>
+                        </tr>
+                    </thead>
+                    <tbody id="notificationLogTable">
+                        <tr>
+                            <td>2024-01-15 14:30</td>
+                            <td><span class="status-badge status-info">情報</span></td>
+                            <td>desktop</td>
+                            <td>システム起動完了</td>
+                            <td>all</td>
+                        </tr>
+                        <tr>
+                            <td>2024-01-15 13:45</td>
+                            <td><span class="status-badge status-warning">警告</span></td>
+                            <td>desktop</td>
+                            <td>メモリ使用量が高い</td>
+                            <td>admin,tech</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- 遠隔操作 -->
+        <div id="remote" class="tab-content">
+            <h2><i class="fas fa-desktop"></i> 遠隔操作</h2>
+            
+            <!-- 遠隔操作接続 -->
+            <div class="section">
+                <h3><i class="fas fa-plug"></i> 遠隔操作接続</h3>
+                <div class="remote-connection">
+                    <div class="connection-status">
+                        <strong>接続状態: </strong>
+                        <span id="remoteControlStatus" class="status-inactive">未接続</span>
+                    </div>
+                    
+                    <div class="connection-info">
+                        <p><strong>デスクトップPC:</strong> 192.168.1.100:8888</p>
+                        <p><strong>セッションタイムアウト:</strong> 5分</p>
+                    </div>
+                    
+                    <div class="connection-actions">
+                        <button id="startRemoteControl" class="btn btn-success" onclick="startRemoteControl()">
+                            <i class="fas fa-play"></i> 接続開始
+                        </button>
+                        <button id="stopRemoteControl" class="btn btn-danger" onclick="stopRemoteControl()" disabled>
+                            <i class="fas fa-stop"></i> 接続終了
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 遠隔操作機能 -->
+            <div class="section">
+                <h3><i class="fas fa-tools"></i> 遠隔操作機能</h3>
+                <div class="remote-operations">
+                    <div class="operation-grid">
+                        <div class="operation-card">
+                            <h4><i class="fas fa-heartbeat"></i> システム状態確認</h4>
+                            <p>デスクトップPCのシステム状態を確認します</p>
+                            <button class="btn btn-info" onclick="checkDesktopSystemStatus()">
+                                <i class="fas fa-play"></i> 実行
+                            </button>
+                        </div>
+                        
+                        <div class="operation-card">
+                            <h4><i class="fas fa-redo"></i> サービス再起動</h4>
+                            <p>デスクトップPCのサービスを再起動します</p>
+                            <button class="btn btn-warning" onclick="restartDesktopService()">
+                                <i class="fas fa-play"></i> 実行
+                            </button>
+                        </div>
+                        
+                        <div class="operation-card">
+                            <h4><i class="fas fa-download"></i> データバックアップ</h4>
+                            <p>デスクトップPCのデータをバックアップします</p>
+                            <button class="btn btn-primary" onclick="backupDesktopData()">
+                                <i class="fas fa-play"></i> 実行
+                            </button>
+                        </div>
+                        
+                        <div class="operation-card">
+                            <h4><i class="fas fa-cog"></i> 設定更新</h4>
+                            <p>デスクトップPCの設定を更新します</p>
+                            <button class="btn btn-secondary" onclick="updateDesktopSettings()">
+                                <i class="fas fa-play"></i> 実行
+                            </button>
+                        </div>
+                        
+                        <div class="operation-card">
+                            <h4><i class="fas fa-file-alt"></i> ログ表示</h4>
+                            <p>デスクトップPCのログを表示します</p>
+                            <button class="btn btn-info" onclick="viewDesktopLogs()">
+                                <i class="fas fa-play"></i> 実行
+                            </button>
+                        </div>
+                        
+                        <div class="operation-card">
+                            <h4><i class="fas fa-power-off"></i> 緊急停止</h4>
+                            <p>デスクトップPCを緊急停止します</p>
+                            <button class="btn btn-danger" onclick="emergencyStopDesktop()">
+                                <i class="fas fa-play"></i> 実行
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 遠隔操作履歴 -->
+            <div class="section">
+                <h3><i class="fas fa-history"></i> 遠隔操作履歴</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>日時</th>
+                            <th>操作</th>
+                            <th>デバイス</th>
+                            <th>結果</th>
+                            <th>メッセージ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="remoteOperationLogTable">
+                        <tr>
+                            <td>2024-01-15 14:30</td>
+                            <td>system_status</td>
+                            <td>desktop</td>
+                            <td><span class="status-badge status-active">成功</span></td>
+                            <td>システム正常</td>
+                        </tr>
+                        <tr>
+                            <td>2024-01-15 13:45</td>
+                            <td>backup_data</td>
+                            <td>desktop</td>
+                            <td><span class="status-badge status-active">成功</span></td>
+                            <td>バックアップ完了</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // タブ切り替え機能
+        function showTab(tabName) {
+            // すべてのタブコンテンツを非表示
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // すべてのタブボタンを非アクティブ
+            const tabButtons = document.querySelectorAll('.nav-tab');
+            tabButtons.forEach(button => button.classList.remove('active'));
+            
+            // 選択されたタブを表示
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        // ログアウト機能
+        function logout() {
+            localStorage.removeItem('adminAuth');
+            localStorage.removeItem('token');
+            window.location.href = 'admin_login.html';
+        }
+        
+        // ページ読み込み時の初期化
+        document.addEventListener('DOMContentLoaded', function() {
+            // デバイス検出を最初に実行
+            detectDevice();
+            
+            // 初期データ読み込み
+            loadUsers();
+            loadAlerts();
+            loadGameHistory();
+            loadSystemLogs();
+            loadAILogs();
+            
+            // AI機能の最適化設定
+            optimizeAISettings();
+            
+            // LINE通知設定
+            setupLineNotifications();
+            
+            // 遠隔操作UI初期化
+            updateRemoteControlUI();
+            
+            // 統計更新
+            updateStats();
+            updateAIStats();
+            
+            // 定期的な更新
+            setInterval(updateStats, 30000);
+            setInterval(updateAIStats, 60000);
+            
+            // デバイス情報をログに記録
+            addSystemLog('システム', 'デバイス検出完了', `${deviceInfo.type} (${deviceInfo.os}) - ${deviceInfo.browser} - 性能: ${deviceInfo.performance}`);
+        });
+        
+        // LINE通知設定の初期化
+        function setupLineNotifications() {
+            // 設定を読み込み
+            const savedSettings = localStorage.getItem('lineNotificationSettings');
+            if (savedSettings) {
+                lineNotificationSettings = { ...lineNotificationSettings, ...JSON.parse(savedSettings) };
+            }
+            
+            // UIに設定を反映
+            document.getElementById('lineAccessToken').value = lineNotificationSettings.accessToken;
+            document.getElementById('lineGroupId').value = lineNotificationSettings.groupId;
+            document.getElementById('lineNotifyLevel').value = lineNotificationSettings.notifyLevel;
+            document.getElementById('lineAutoNotify').checked = lineNotificationSettings.autoNotify;
+            document.getElementById('lineManualNotify').checked = lineNotificationSettings.manualNotify;
+            
+            // 自動通知設定
+            setupAutoNotifications();
+            
+            // 通知履歴表示
+            updateNotificationLogDisplay();
+        }
+        
+        // LINE設定保存
+        function saveLineSettings() {
+            lineNotificationSettings.accessToken = document.getElementById('lineAccessToken').value;
+            lineNotificationSettings.groupId = document.getElementById('lineGroupId').value;
+            lineNotificationSettings.notifyLevel = document.getElementById('lineNotifyLevel').value;
+            lineNotificationSettings.autoNotify = document.getElementById('lineAutoNotify').checked;
+            lineNotificationSettings.manualNotify = document.getElementById('lineManualNotify').checked;
+            
+            localStorage.setItem('lineNotificationSettings', JSON.stringify(lineNotificationSettings));
+            alert('LINE通知設定を保存しました。');
+        }
+        
+        // LINE接続テスト
+        function testLineConnection() {
+            if (!lineNotificationSettings.accessToken || !lineNotificationSettings.groupId) {
+                alert('LINE Access TokenとGroup IDを設定してください。');
+                return;
+            }
+            
+            sendLineNotification('接続テスト: LINE通知機能が正常に動作しています。', 'info', 'all');
+            alert('テスト通知を送信しました。LINEグループで確認してください。');
+        }
+        
+        // AI機能を安全な実行でラップ
+        const safeAnalyzeUserBehavior = safeAIExecution(analyzeUserBehavior, (error) => {
+            console.log('ユーザー行動分析をスキップしました');
+        });
+        
+        const safePredictProgress = safeAIExecution(predictProgress, (error) => {
+            console.log('進捗予測をスキップしました');
+        });
+        
+        const safeGenerateRecommendations = safeAIExecution(generateRecommendations, (error) => {
+            console.log('推奨生成をスキップしました');
+        });
+        
+        const safeDetectAnomalies = safeAIExecution(detectAnomalies, (error) => {
+            console.log('異常検知をスキップしました');
+        });
+        
+        const safeAutoAlert = safeAIExecution(autoAlert, (error) => {
+            console.log('自動アラートをスキップしました');
+        });
+        
+        const safeOptimizeRoutes = safeAIExecution(optimizeRoutes, (error) => {
+            console.log('ルート最適化をスキップしました');
+        });
+        
+        const safeAutoSupport = safeAIExecution(autoSupport, (error) => {
+            console.log('自動サポートをスキップしました');
+        });
+        
+        const safeGenerateReport = safeAIExecution(generateReport, (error) => {
+            console.log('レポート生成をスキップしました');
+        });
+        
+        // AI連携機能
+        let aiSettings = {
+            model: 'gpt-3.5',
+            sensitivity: 'medium',
+            updateInterval: 'daily',
+            apiKey: '',
+            autoAlert: false,
+            autoRoute: false,
+            autoSupport: false,
+            autoReport: false
+        };
+        
+        // デバイス情報
+        let deviceInfo = {
+            type: 'unknown',
+            os: 'unknown',
+            browser: 'unknown',
+            screenSize: { width: 0, height: 0 },
+            memory: 'unknown',
+            performance: 'unknown'
+        };
+        
+        // デバイス検出と性能評価
+        function detectDevice() {
+            const userAgent = navigator.userAgent;
+            const screen = window.screen;
+            
+            // デバイスタイプ判定
+            if (window.innerWidth >= 1024) {
+                deviceInfo.type = 'desktop';
+            } else if (window.innerWidth >= 768) {
+                deviceInfo.type = 'tablet';
+            } else {
+                deviceInfo.type = 'mobile';
+            }
+            
+            // OS判定
+            if (userAgent.includes('Windows')) {
+                deviceInfo.os = 'Windows';
+            } else if (userAgent.includes('Mac')) {
+                deviceInfo.os = 'macOS';
+            } else if (userAgent.includes('Linux')) {
+                deviceInfo.os = 'Linux';
+            } else if (userAgent.includes('Android')) {
+                deviceInfo.os = 'Android';
+            } else if (userAgent.includes('iOS')) {
+                deviceInfo.os = 'iOS';
+            }
+            
+            // ブラウザ判定
+            if (userAgent.includes('Chrome')) {
+                deviceInfo.browser = 'Chrome';
+            } else if (userAgent.includes('Firefox')) {
+                deviceInfo.browser = 'Firefox';
+            } else if (userAgent.includes('Safari')) {
+                deviceInfo.browser = 'Safari';
+            } else if (userAgent.includes('Edge')) {
+                deviceInfo.browser = 'Edge';
+            }
+            
+            // 画面サイズ
+            deviceInfo.screenSize = {
+                width: screen.width,
+                height: screen.height
+            };
+            
+            // 性能評価
+            evaluatePerformance();
+            
+            console.log('デバイス情報:', deviceInfo);
+            return deviceInfo;
+        }
+        
+        // 性能評価
+        function evaluatePerformance() {
+            const startTime = performance.now();
+            
+            // 簡単な計算処理で性能をテスト
+            let result = 0;
+            for (let i = 0; i < 1000000; i++) {
+                result += Math.random();
+            }
+            
+            const endTime = performance.now();
+            const processingTime = endTime - startTime;
+            
+            if (processingTime < 50) {
+                deviceInfo.performance = 'high';
+            } else if (processingTime < 100) {
+                deviceInfo.performance = 'medium';
+            } else {
+                deviceInfo.performance = 'low';
+            }
+            
+            // メモリ情報（利用可能な場合）
+            if (navigator.deviceMemory) {
+                deviceInfo.memory = `${navigator.deviceMemory}GB`;
+            } else if (navigator.hardwareConcurrency) {
+                deviceInfo.memory = `CPU: ${navigator.hardwareConcurrency}コア`;
+            }
+        }
+        
+        // AI機能のデバイス対応チェック
+        function checkAICapability() {
+            const issues = [];
+            
+            // 性能チェック
+            if (deviceInfo.performance === 'low') {
+                issues.push('デバイスの性能が低いため、AI機能の処理速度が遅くなる可能性があります');
+            }
+            
+            // メモリチェック
+            if (deviceInfo.memory && deviceInfo.memory.includes('GB')) {
+                const memoryGB = parseFloat(deviceInfo.memory);
+                if (memoryGB < 4) {
+                    issues.push('メモリが4GB未満のため、AI機能の同時実行に制限があります');
+                }
+            }
+            
+            // ブラウザチェック
+            if (deviceInfo.browser === 'Safari' && deviceInfo.os === 'iOS') {
+                issues.push('iOS Safariでは一部のAI機能に制限があります');
+            }
+            
+            // 画面サイズチェック
+            if (deviceInfo.screenSize.width < 1366) {
+                issues.push('画面幅が狭いため、AI分析結果の表示が最適化されます');
+            }
+            
+            return issues;
+        }
+        
+        // AI機能の最適化設定
+        function optimizeAISettings() {
+            const issues = checkAICapability();
+            
+            if (issues.length > 0) {
+                // 警告メッセージを表示
+                const warningDiv = document.createElement('div');
+                warningDiv.className = 'alert alert-warning';
+                warningDiv.innerHTML = `
+                    <strong>⚠️ デバイス対応の注意事項</strong><br>
+                    ${issues.map(issue => `• ${issue}`).join('<br>')}
+                    <br><br>
+                    <button class="btn btn-info" onclick="applyOptimizations()">
+                        <i class="fas fa-cog"></i> 最適化設定を適用
+                    </button>
+                `;
+                
+                // AIタブの最初に挿入
+                const aiTab = document.getElementById('ai');
+                aiTab.insertBefore(warningDiv, aiTab.firstChild);
+            }
+            
+            // デバイスに応じた設定調整
+            if (deviceInfo.performance === 'low') {
+                aiSettings.sensitivity = 'low';
+                aiSettings.updateInterval = 'weekly';
+            }
+            
+            if (deviceInfo.type === 'mobile') {
+                // モバイル向けの軽量化設定
+                aiSettings.model = 'gpt-3.5';
+            }
+        }
+        
+        // 最適化設定の適用
+        function applyOptimizations() {
+            const optimizations = [];
+            
+            if (deviceInfo.performance === 'low') {
+                optimizations.push('• 分析感度を「低」に設定');
+                optimizations.push('• 更新間隔を「1週間」に設定');
+                optimizations.push('• 同時実行数を制限');
+            }
+            
+            if (deviceInfo.type === 'mobile') {
+                optimizations.push('• モバイル向け軽量モデルを使用');
+                optimizations.push('• 画面表示を最適化');
+            }
+            
+            if (deviceInfo.screenSize.width < 1366) {
+                optimizations.push('• レスポンシブ表示を強化');
+                optimizations.push('• テーブル表示を簡略化');
+            }
+            
+            alert(`最適化設定を適用しました:\n\n${optimizations.join('\n')}\n\nこれらの設定により、お使いのデバイスでAI機能がより安定して動作します。`);
+            
+            // 設定を適用
+            document.getElementById('aiSensitivity').value = aiSettings.sensitivity;
+            document.getElementById('aiUpdateInterval').value = aiSettings.updateInterval;
+            document.getElementById('aiModel').value = aiSettings.model;
+        }
+        
+        // AI機能のエラーハンドリング強化
+        function safeAIExecution(func, fallback) {
+            return function(...args) {
+                try {
+                    // デバイス性能チェック
+                    if (deviceInfo.performance === 'low') {
+                        showLoadingMessage('処理に時間がかかる場合があります...');
+                    }
+                    
+                    // メモリ使用量チェック
+                    if (performance.memory && performance.memory.usedJSHeapSize > 50000000) {
+                        console.warn('メモリ使用量が高いため、処理を軽量化します');
+                    }
+                    
+                    return func.apply(this, args);
+                } catch (error) {
+                    console.error('AI機能でエラーが発生しました:', error);
+                    
+                    // エラーログに記録
+                    addAILog('エラー', '失敗', '0秒', `エラー: ${error.message}`);
+                    
+                    // フォールバック処理
+                    if (fallback) {
+                        fallback(error);
+                    } else {
+                        alert(`AI機能でエラーが発生しました。\n\nエラー内容: ${error.message}\n\nデバイス情報: ${deviceInfo.type} (${deviceInfo.os})\n\n問題が続く場合は、ページを再読み込みしてください。`);
+                    }
+                }
+            };
+        }
+        
+        // AI統計の更新
+        function updateAIStats() {
+            try {
+                // 実際のAIデータから取得
+                document.getElementById('aiPredictions').textContent = '156';
+                document.getElementById('aiAccuracy').textContent = '87%';
+                document.getElementById('aiRecommendations').textContent = '23';
+                document.getElementById('aiAlerts').textContent = '3';
+                
+                // デバイス情報を統計に反映
+                const deviceStats = document.createElement('div');
+                deviceStats.innerHTML = `
+                    <small style="color: #666; display: block; margin-top: 0.5rem;">
+                        📱 ${deviceInfo.type} | ${deviceInfo.os} | ${deviceInfo.browser}
+                    </small>
+                `;
+                
+                const aiDashboard = document.querySelector('#ai .dashboard-grid');
+                if (aiDashboard && !document.querySelector('#ai .dashboard-grid small')) {
+                    aiDashboard.appendChild(deviceStats);
+                }
+            } catch (error) {
+                console.error('AI統計の更新でエラーが発生しました:', error);
+            }
+        }
+        
+        // ユーザー行動分析
+        function runUserAnalysis() {
+            showLoadingMessage('ユーザー行動分析を実行中...');
+            
+            // 実際の実装ではAI APIを呼び出し
+            setTimeout(() => {
+                addAILog('ユーザー行動分析', '成功', '2.3秒', '15ユーザーの分析完了');
+                alert('ユーザー行動分析が完了しました。\n\n分析結果:\n• 学習パターン: 3つの主要パターンを特定\n• 改善点: 集中力ゲームでの停滞が検出\n• 推奨: 難易度調整が必要なユーザー5名');
+                hideLoadingMessage();
+            }, 2000);
+        }
+        
+        // 進捗予測
+        function runProgressPrediction() {
+            showLoadingMessage('進捗予測を実行中...');
+            
+            setTimeout(() => {
+                addAILog('進捗予測', '成功', '1.8秒', '予測精度: 87%');
+                alert('進捗予測が完了しました。\n\n予測結果:\n• 1週間後: 平均スコア +15% 予測\n• 1ヶ月後: 完了率 85% 予測\n• リスク要因: 3名の学習停滞リスク');
+                hideLoadingMessage();
+            }, 1500);
+        }
+        
+        // パーソナライズ推奨生成
+        function generateRecommendations() {
+            showLoadingMessage('推奨事項を生成中...');
+            
+            setTimeout(() => {
+                addAILog('パーソナライズ推奨', '成功', '3.1秒', '23件の推奨を生成');
+                alert('推奨事項の生成が完了しました。\n\n生成された推奨:\n• 田中太郎: 記憶力ゲームの難易度を上げる\n• 佐藤花子: 反応ゲームを追加\n• 山田次郎: 集中力トレーニングを強化');
+                hideLoadingMessage();
+            }, 3000);
+        }
+        
+        // 異常検知
+        function runAnomalyDetection() {
+            showLoadingMessage('異常検知を実行中...');
+            
+            setTimeout(() => {
+                addAILog('異常検知', '成功', '1.2秒', '2件の異常を検出');
+                alert('異常検知が完了しました。\n\n検出された異常:\n• 田中太郎: 学習時間の急激な減少\n• システム: メモリ使用量の異常増加\n\n推奨アクション:\n• 田中太郎への個別サポート\n• システムメンテナンスの実施');
+                hideLoadingMessage();
+            }, 1200);
+        }
+        
+        // 分析結果表示
+        function viewUserInsights() {
+            alert('ユーザー行動分析結果:\n\n• 学習時間: 平均45分/日\n• 好みのゲーム: 記憶力ゲーム\n• 苦手分野: 反応速度\n• 学習スタイル: 視覚的学習者\n• 推奨改善: 反応ゲームの頻度を増加');
+        }
+        
+        // 予測結果表示
+        function viewPredictions() {
+            alert('進捗予測結果:\n\n• 短期予測 (1週間):\n  - スコア向上: +12%\n  - 完了率: 78%\n\n• 中期予測 (1ヶ月):\n  - スコア向上: +25%\n  - 完了率: 85%\n\n• 長期予測 (3ヶ月):\n  - 目標達成率: 92%');
+        }
+        
+        // 推奨一覧表示
+        function viewRecommendations() {
+            alert('AI推奨事項一覧:\n\n1. 田中太郎\n   - 推奨ゲーム: 集中力ゲーム\n   - 理由: 注意力の向上が必要\n   - 期待効果: スコア +15%\n\n2. 佐藤花子\n   - 推奨ゲーム: 記憶力ゲーム\n   - 理由: 記憶力の強化\n   - 期待効果: 完了率 +20%\n\n3. 山田次郎\n   - 推奨ゲーム: 反応ゲーム\n   - 理由: 反応速度の改善\n   - 期待効果: 総合スコア +18%');
+        }
+        
+        // 異常一覧表示
+        function viewAnomalies() {
+            alert('検出された異常一覧:\n\n🚨 高リスク:\n• 田中太郎: 学習中断 (3日間)\n• システム: メモリ使用量 90%超\n\n⚠️ 中リスク:\n• 佐藤花子: スコア低下 (-20%)\n• ネットワーク: 応答時間増加\n\n💡 推奨アクション:\n• 即座の個別サポート\n• システム最適化\n• 予防的メンテナンス');
+        }
+        
+        // 自動化機能の切り替え
+        function toggleAutoAlert() {
+            aiSettings.autoAlert = document.getElementById('autoAlert').checked;
+            saveAISettings();
+            alert(`自動アラートが${aiSettings.autoAlert ? '有効' : '無効'}になりました。`);
+        }
+        
+        function toggleAutoRoute() {
+            aiSettings.autoRoute = document.getElementById('autoRoute').checked;
+            saveAISettings();
+            alert(`自動ルート最適化が${aiSettings.autoRoute ? '有効' : '無効'}になりました。`);
+        }
+        
+        function toggleAutoSupport() {
+            aiSettings.autoSupport = document.getElementById('autoSupport').checked;
+            saveAISettings();
+            alert(`自動サポートが${aiSettings.autoSupport ? '有効' : '無効'}になりました。`);
+        }
+        
+        function toggleAutoReport() {
+            aiSettings.autoReport = document.getElementById('autoReport').checked;
+            saveAISettings();
+            alert(`自動レポート生成が${aiSettings.autoReport ? '有効' : '無効'}になりました。`);
+        }
+        
+        // AI設定の更新
+        function updateAIModel() {
+            aiSettings.model = document.getElementById('aiModel').value;
+        }
+        
+        function updateAISensitivity() {
+            aiSettings.sensitivity = document.getElementById('aiSensitivity').value;
+        }
+        
+        function updateAIInterval() {
+            aiSettings.updateInterval = document.getElementById('aiUpdateInterval').value;
+        }
+        
+        // AI設定の保存
+        function saveAISettings() {
+            aiSettings.apiKey = document.getElementById('aiApiKey').value;
+            
+            // 実際の実装ではサーバーに保存
+            localStorage.setItem('aiSettings', JSON.stringify(aiSettings));
+            alert('AI設定が保存されました。');
+        }
+        
+        // AI接続テスト
+        function testAIConnection() {
+            const apiKey = document.getElementById('aiApiKey').value;
+            
+            if (!apiKey) {
+                alert('API キーを入力してください。');
+                return;
+            }
+            
+            showLoadingMessage('AI接続をテスト中...');
+            
+            // 実際の実装ではAI APIに接続テスト
+            setTimeout(() => {
+                hideLoadingMessage();
+                alert('AI接続テストが成功しました！\n\n接続情報:\n• モデル: GPT-3.5\n• 応答時間: 1.2秒\n• ステータス: 正常\n• 利用可能機能: すべて');
+            }, 2000);
+        }
+        
+        // AIログの追加
+        function addAILog(functionName, status, duration, details) {
+            const tbody = document.getElementById('aiLogTable');
+            const row = document.createElement('tr');
+            const now = new Date().toLocaleString('ja-JP');
+            
+            row.innerHTML = `
+                <td>${now}</td>
+                <td>${functionName}</td>
+                <td><span class="status-badge status-${status === '成功' ? 'active' : 'inactive'}">${status}</span></td>
+                <td>${duration}</td>
+                <td>${details}</td>
+            `;
+            
+            tbody.insertBefore(row, tbody.firstChild);
+        }
+        
+        // ローディングメッセージ
+        function showLoadingMessage(message) {
+            // ローディングオーバーレイを表示
+            const overlay = document.createElement('div');
+            overlay.id = 'loadingOverlay';
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+            `;
+            
+            overlay.innerHTML = `
+                <div style="background: white; padding: 2rem; border-radius: 12px; text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">🤖</div>
+                    <div style="font-weight: bold; margin-bottom: 0.5rem;">AI処理中</div>
+                    <div style="color: #666;">${message}</div>
+                </div>
+            `;
+            
+            document.body.appendChild(overlay);
+        }
+        
+        function hideLoadingMessage() {
+            const overlay = document.getElementById('loadingOverlay');
+            if (overlay) {
+                overlay.remove();
+            }
+        }
+        
+        // ダッシュボード統計の更新
+        function updateDashboardStats() {
+            // 実際のデータベースから取得する場合はAPI呼び出し
+            document.getElementById('totalUsers').textContent = '156';
+            document.getElementById('activeUsers').textContent = '23';
+            document.getElementById('totalGames').textContent = '2,847';
+            document.getElementById('avgScore').textContent = '78.5';
+        }
+        
+        // ユーザー管理機能
+        function addUser() {
+            const name = document.getElementById('newUserName').value;
+            const email = document.getElementById('newUserEmail').value;
+            
+            if (!name || !email) {
+                alert('すべての項目を入力してください。');
+                return;
+            }
+            
+            // 実際の実装ではAPI呼び出し
+            alert('ユーザーが追加されました。');
+            document.getElementById('newUserName').value = '';
+            document.getElementById('newUserEmail').value = '';
+        }
+        
+        // お知らせ投稿機能
+        function postNotice() {
+            const title = document.getElementById('noticeTitle').value;
+            const content = document.getElementById('noticeContent').value;
+            
+            if (!title || !content) {
+                alert('タイトルと内容を入力してください。');
+                return;
+            }
+            
+            // 実際の実装ではAPI呼び出し
+            alert('お知らせが投稿されました。');
+            document.getElementById('noticeTitle').value = '';
+            document.getElementById('noticeContent').value = '';
+        }
+        
+        // ゲーム管理機能
+        let gameSettings = {};
+        
+        // ゲーム設定の読み込み
+        async function loadGameSettings() {
+            try {
+                const response = await fetch('game_settings.json');
+                gameSettings = await response.json();
+                renderGameSettings();
+            } catch (error) {
+                console.error('ゲーム設定の読み込みに失敗しました:', error);
+                // デフォルト設定を使用
+                gameSettings = getDefaultGameSettings();
+                renderGameSettings();
+            }
+        }
+        
+        // デフォルトゲーム設定
+        function getDefaultGameSettings() {
+            return {
+                memory_games: {
+                    memory_game: { name: "記憶力ゲーム", file: "memory_game.html", icon: "🧠", description: "表示された内容を覚えて答える記憶力トレーニング", visible: true },
+                    eye_training_index: { name: "眼の訓練ゲーム一覧", file: "eye_training_index.html", icon: "🔍", description: "視力と眼の機能を鍛えるトレーニング", visible: true },
+                    integrated_driving_system: { name: "統合運転システム", file: "integrated_driving_system.html", icon: "🚗", description: "総合的な運転技術をトレーニング", visible: true },
+                    concentration_game: { name: "神経衰弱ゲーム", file: "concentration_game.html", icon: "🃏", description: "同じ絵柄を揃えて記憶力を鍛える", visible: true },
+                    click_training_game: { name: "指先運動・クリック練習ゲーム", file: "click_training_game.html", icon: "👉", description: "クリック操作で指先の運動や反応速度を鍛える", visible: true },
+                    number_order: { name: "数字順番探しゲーム", file: "number-order.html", icon: "🔢", description: "数字を正しい順番に並べるゲーム", visible: true },
+                    date_quiz: { name: "日付・曜日クイズ", file: "date-quiz.html", icon: "📅", description: "日付や曜日に関するクイズで脳を活性化", visible: true },
+                    reaction_game: { name: "反応ゲーム", file: "reaction_game.html", icon: "⚡", description: "素早い反応で正解を選ぶ反射神経トレーニング", visible: true },
+                    letter_game: { name: "文字ゲーム", file: "letter_game.html", icon: "🔤", description: "文字を使った脳トレゲーム", visible: true }
+                },
+                life_games: {
+                    shopping_simulation: { name: "買い物シミュレーション", file: "shopping-simulation.html", icon: "🛒", description: "買い物体験で計算力や判断力を鍛える", visible: true },
+                    daily_life_simulation: { name: "日常生活シミュレーション", file: "daily_life_simulation.html", icon: "🏠", description: "家事や生活習慣のシミュレーションで実践力を鍛える", visible: true },
+                    conversation_simulation: { name: "会話シミュレーション", file: "conversation_simulation.html", icon: "💬", description: "日常会話やコミュニケーション能力をトレーニング", visible: true },
+                    manner_game: { name: "マナー・礼儀ゲーム", file: "manner_game.html", icon: "🤝", description: "社会でのマナーや礼儀作法を学ぶゲーム", visible: true },
+                    life_wisdom_quiz: { name: "生活知恵クイズ", file: "life_wisdom_quiz.html", icon: "💡", description: "日常生活に役立つ知恵や知識をクイズ形式で学習", visible: true },
+                    disaster_prevention_quiz: { name: "防災・安全クイズ", file: "disaster_prevention_quiz.html", icon: "🚨", description: "災害時の対応や安全知識を学ぶクイズ", visible: true },
+                    traffic_rule_quiz: { name: "交通ルールクイズ", file: "traffic_rule_quiz.html", icon: "🚦", description: "交通安全や交通ルールに関するクイズ", visible: true },
+                    trouble_response_simulation: { name: "トラブル対応シミュレーション", file: "trouble_response_simulation.html", icon: "⚠️", description: "日常生活で起こりうるトラブルへの対応を練習", visible: true },
+                    face_expression_quiz: { name: "表情読み取りクイズ", file: "face_expression_quiz.html", icon: "😊", description: "表情から感情を読み取るクイズ", visible: true }
+                }
+            };
+        }
+        
+        // ゲーム設定の表示
+        function renderGameSettings() {
+            const category = document.getElementById('gameCategory').value;
+            const memoryContainer = document.getElementById('memoryGames');
+            const lifeContainer = document.getElementById('lifeGames');
+            
+            if (category === 'memory') {
+                memoryContainer.style.display = 'block';
+                lifeContainer.style.display = 'none';
+                renderGameList('memoryGameList', gameSettings.memory_games);
+            } else {
+                memoryContainer.style.display = 'none';
+                lifeContainer.style.display = 'block';
+                renderGameList('lifeGameList', gameSettings.life_games);
+            }
+        }
+        
+        // ゲームリストの表示
+        function renderGameList(containerId, games) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            Object.keys(games).forEach(gameKey => {
+                const game = games[gameKey];
+                const gameItem = document.createElement('div');
+                gameItem.className = 'game-item';
+                gameItem.innerHTML = `
+                    <div class="game-info">
+                        <div class="game-icon">${game.icon}</div>
+                        <div class="game-details">
+                            <h5>${game.name}</h5>
+                            <p>${game.description}</p>
+                        </div>
+                    </div>
+                    <div class="game-toggle">
+                        <span class="toggle-label">${game.visible ? '表示' : '非表示'}</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" ${game.visible ? 'checked' : ''} onchange="toggleGameVisibility('${gameKey}', this.checked)">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="game-status ${game.visible ? 'visible' : 'hidden'}">
+                            ${game.visible ? '表示中' : '非表示'}
+                        </span>
+                    </div>
+                `;
+                container.appendChild(gameItem);
+            });
+        }
+        
+        // ゲームの表示・非表示切り替え
+        function toggleGameVisibility(gameKey, visible) {
+            const category = document.getElementById('gameCategory').value;
+            const games = category === 'memory' ? gameSettings.memory_games : gameSettings.life_games;
+            
+            if (games[gameKey]) {
+                games[gameKey].visible = visible;
+                renderGameSettings(); // 表示を更新
+            }
+        }
+        
+        // ゲーム設定の保存
+        async function saveGameSettings() {
+            try {
+                // 実際の実装ではサーバーに保存
+                localStorage.setItem('gameSettings', JSON.stringify(gameSettings));
+                alert('ゲーム設定が保存されました。');
+            } catch (error) {
+                console.error('設定の保存に失敗しました:', error);
+                alert('設定の保存に失敗しました。');
+            }
+        }
+        
+        // ゲーム設定のリセット
+        function resetGameSettings() {
+            if (confirm('すべてのゲーム設定をデフォルトにリセットしますか？')) {
+                gameSettings = getDefaultGameSettings();
+                renderGameSettings();
+                alert('ゲーム設定がリセットされました。');
+            }
+        }
+        
+        // メンテナンスモードの切り替え
+        function toggleMaintenanceMode() {
+            const maintenanceMode = document.getElementById('maintenanceMode').value === 'true';
+            if (maintenanceMode) {
+                alert('メンテナンスモードが有効になりました。');
+            } else {
+                alert('メンテナンスモードが無効になりました。');
+            }
+        }
+        
+        // メンテナンス設定の保存
+        function saveMaintenanceSettings() {
+            const maintenanceMode = document.getElementById('maintenanceMode').value === 'true';
+            const maintenanceMessage = document.getElementById('maintenanceMessage').value;
+            
+            // 実際の実装ではサーバーに保存
+            localStorage.setItem('maintenanceMode', maintenanceMode);
+            localStorage.setItem('maintenanceMessage', maintenanceMessage);
+            
+            alert('メンテナンス設定が保存されました。');
+        }
+        
+        // サイト停止機能
+        function stopSite() {
+            const reason = document.getElementById('stopReason').value;
+            const duration = document.getElementById('stopDuration').value;
+            const message = document.getElementById('stopMessage').value;
+            
+            if (!message.trim()) {
+                alert('停止メッセージを入力してください。');
+                return;
+            }
+            
+            if (confirm(`サイトを停止しますか？\n理由: ${reason}\n期間: ${duration}分\nメッセージ: ${message}`)) {
+                // 実際の実装ではサーバーに停止命令を送信
+                localStorage.setItem('siteStatus', 'stopped');
+                localStorage.setItem('stopMessage', message);
+                localStorage.setItem('stopReason', reason);
+                localStorage.setItem('stopTime', new Date().toISOString());
+                
+                // 停止履歴に追加
+                addStopHistory('停止', reason, duration, '管理者');
+                
+                alert('サイトが停止されました。');
+                updateSiteStatus();
+            }
+        }
+        
+        // サイト再開機能
+        function startSite() {
+            if (confirm('サイトを再開しますか？')) {
+                // 実際の実装ではサーバーに再開命令を送信
+                localStorage.removeItem('siteStatus');
+                localStorage.removeItem('stopMessage');
+                localStorage.removeItem('stopReason');
+                localStorage.removeItem('stopTime');
+                
+                // 停止履歴に追加
+                addStopHistory('再開', '手動再開', '-', '管理者');
+                
+                alert('サイトが再開されました。');
+                updateSiteStatus();
+            }
+        }
+        
+        // 停止予約機能
+        function scheduleStop() {
+            const reason = document.getElementById('stopReason').value;
+            const duration = document.getElementById('stopDuration').value;
+            const message = document.getElementById('stopMessage').value;
+            
+            if (!message.trim()) {
+                alert('停止メッセージを入力してください。');
+                return;
+            }
+            
+            const scheduledTime = prompt('停止予約時刻を入力してください（例: 2024-01-15 22:00）');
+            if (scheduledTime) {
+                // 実際の実装ではサーバーに予約を送信
+                alert(`停止が予約されました。\n予約時刻: ${scheduledTime}`);
+                addStopHistory('予約停止', reason, duration, '管理者');
+            }
+        }
+        
+        // サイト状態更新
+        function updateSiteStatus() {
+            const status = localStorage.getItem('siteStatus');
+            const statusSelect = document.getElementById('siteStatus');
+            
+            if (status === 'stopped') {
+                statusSelect.value = 'emergency';
+            } else {
+                statusSelect.value = 'active';
+            }
+        }
+        
+        // 停止履歴追加
+        function addStopHistory(action, reason, duration, operator) {
+            const tbody = document.getElementById('stopHistoryBody');
+            const row = document.createElement('tr');
+            const now = new Date().toLocaleString('ja-JP');
+            
+            row.innerHTML = `
+                <td>${now}</td>
+                <td><span class="status-badge status-${action === '停止' ? 'inactive' : 'active'}">${action}</span></td>
+                <td>${reason}</td>
+                <td>${duration}</td>
+                <td>${operator}</td>
+            `;
+            
+            tbody.insertBefore(row, tbody.firstChild);
+        }
+        
+        // ゲーム編集モーダル機能
+        let currentEditingGame = null;
+        
+        function openGameEditModal(gameKey) {
+            const category = document.getElementById('gameCategory').value;
+            const games = category === 'memory' ? gameSettings.memory_games : gameSettings.life_games;
+            const game = games[gameKey];
+            
+            if (!game) return;
+            
+            currentEditingGame = gameKey;
+            
+            // モーダルに値を設定
+            document.getElementById('modalTitle').textContent = `${game.name} の編集`;
+            document.getElementById('editGameName').value = game.name || '';
+            document.getElementById('editGameIcon').value = game.icon || '';
+            document.getElementById('editGameDescription').value = game.description || '';
+            document.getElementById('editGameFile').value = game.file || '';
+            document.getElementById('editGameVisible').value = game.visible ? 'true' : 'false';
+            document.getElementById('editGameDifficulty').value = game.difficulty || 'medium';
+            document.getElementById('editGameCategory').value = category;
+            document.getElementById('editGameTags').value = game.tags || '';
+            document.getElementById('editGameNotes').value = game.notes || '';
+            
+            // モーダルを表示
+            document.getElementById('gameEditModal').style.display = 'block';
+        }
+        
+        function closeGameEditModal() {
+            document.getElementById('gameEditModal').style.display = 'none';
+            currentEditingGame = null;
+        }
+        
+        function saveGameEdit() {
+            if (!currentEditingGame) return;
+            
+            const category = document.getElementById('gameCategory').value;
+            const games = category === 'memory' ? gameSettings.memory_games : gameSettings.life_games;
+            
+            // 値を更新
+            games[currentEditingGame] = {
+                ...games[currentEditingGame],
+                name: document.getElementById('editGameName').value,
+                icon: document.getElementById('editGameIcon').value,
+                description: document.getElementById('editGameDescription').value,
+                file: document.getElementById('editGameFile').value,
+                visible: document.getElementById('editGameVisible').value === 'true',
+                difficulty: document.getElementById('editGameDifficulty').value,
+                tags: document.getElementById('editGameTags').value,
+                notes: document.getElementById('editGameNotes').value
+            };
+            
+            // 表示を更新
+            renderGameSettings();
+            closeGameEditModal();
+            alert('ゲーム設定が保存されました。');
+        }
+        
+        // ゲーム設定のエクスポート
+        function exportGameSettings() {
+            const dataStr = JSON.stringify(gameSettings, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `game_settings_${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        // ゲーム設定のインポート
+        function importGameSettings() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        try {
+                            const importedSettings = JSON.parse(e.target.result);
+                            if (confirm('インポートした設定で現在の設定を上書きしますか？')) {
+                                gameSettings = importedSettings;
+                                renderGameSettings();
+                                alert('ゲーム設定がインポートされました。');
+                            }
+                        } catch (error) {
+                            alert('ファイルの読み込みに失敗しました。');
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+            };
+            input.click();
+        }
+        
+        // ゲーム統計の更新
+        function updateGameStats() {
+            const memoryGames = Object.values(gameSettings.memory_games || {});
+            const lifeGames = Object.values(gameSettings.life_games || {});
+            const allGames = [...memoryGames, ...lifeGames];
+            
+            const visibleGames = allGames.filter(game => game.visible).length;
+            const hiddenGames = allGames.filter(game => !game.visible).length;
+            
+            document.getElementById('totalVisibleGames').textContent = visibleGames;
+            document.getElementById('totalHiddenGames').textContent = hiddenGames;
+        }
+        
+        // パフォーマンスモニタリング
+        function monitorPerformance() {
+            const startTime = performance.now();
+            
+            // メモリ使用量チェック
+            if (performance.memory) {
+                const memoryUsage = performance.memory.usedJSHeapSize / 1024 / 1024; // MB
+                const memoryLimit = performance.memory.jsHeapSizeLimit / 1024 / 1024; // MB
+                
+                if (memoryUsage > memoryLimit * 0.8) {
+                    console.warn('メモリ使用量が高いため、最適化を実行します');
+                    optimizeMemory();
+                }
+            }
+            
+            // CPU使用率の推定
+            const processingTime = performance.now() - startTime;
+            if (processingTime > 100) {
+                console.warn('処理時間が長いため、軽量化モードを有効にします');
+                enableLowPerformanceMode();
+            }
+        }
+        
+        // メモリ最適化
+        function optimizeMemory() {
+            // 不要なデータをクリア
+            if (window.gc) {
+                window.gc();
+            }
+            
+            // 大きなオブジェクトを削除
+            if (window.aiAnalysisCache) {
+                delete window.aiAnalysisCache;
+            }
+            
+            // ログの古い部分を削除
+            const logs = document.querySelectorAll('.log-entry');
+            if (logs.length > 100) {
+                for (let i = 0; i < logs.length - 100; i++) {
+                    logs[i].remove();
+                }
+            }
+        }
+        
+        // 低性能モードの有効化
+        function enableLowPerformanceMode() {
+            document.body.classList.add('low-performance-mode');
+            
+            // アニメーションを無効化
+            const animatedElements = document.querySelectorAll('[style*="animation"], [style*="transition"]');
+            animatedElements.forEach(el => {
+                el.style.animation = 'none';
+                el.style.transition = 'none';
+            });
+            
+            // 更新間隔を延長
+            clearInterval(window.updateInterval);
+            window.updateInterval = setInterval(updateStats, 60000); // 1分間隔
+            
+            console.log('低性能モードが有効になりました');
+        }
+        
+        // エラー回復機能
+        function recoverFromError(error) {
+            console.log('エラー回復を開始します:', error);
+            
+            // エラー情報を記録
+            const errorInfo = {
+                message: error.message,
+                stack: error.stack,
+                device: deviceInfo,
+                timestamp: new Date().toISOString(),
+                url: window.location.href
+            };
+            
+            // ローカルストレージにエラー履歴を保存
+            const errorHistory = JSON.parse(localStorage.getItem('errorHistory') || '[]');
+            errorHistory.push(errorInfo);
+            
+            // 最新の10件のみ保持
+            if (errorHistory.length > 10) {
+                errorHistory.splice(0, errorHistory.length - 10);
+            }
+            
+            localStorage.setItem('errorHistory', JSON.stringify(errorHistory));
+            
+            // 自動回復を試行
+            try {
+                // ページの状態をリセット
+                resetPageState();
+                
+                // データを再読み込み
+                loadUsers();
+                loadAlerts();
+                loadGameHistory();
+                
+                console.log('エラー回復が完了しました');
+                return true;
+            } catch (recoveryError) {
+                console.error('エラー回復に失敗しました:', recoveryError);
+                return false;
+            }
+        }
+        
+        // ページ状態のリセット
+        function resetPageState() {
+            // モーダルを閉じる
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                modal.style.display = 'none';
+            });
+            
+            // ローディング表示を削除
+            const loadingOverlays = document.querySelectorAll('#loadingOverlay');
+            loadingOverlays.forEach(overlay => overlay.remove());
+            
+            // エラー表示をクリア
+            const errorDisplays = document.querySelectorAll('.error-display');
+            errorDisplays.forEach(display => display.remove());
+            
+            // タブを最初に戻す
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            const tabButtons = document.querySelectorAll('.nav-tab');
+            tabButtons.forEach(button => button.classList.remove('active'));
+            
+            if (tabContents[0]) tabContents[0].classList.add('active');
+            if (tabButtons[0]) tabButtons[0].classList.add('active');
+        }
+        
+        // デバイス情報の表示
+        function showDeviceInfo() {
+            const deviceInfoDiv = document.createElement('div');
+            deviceInfoDiv.className = 'device-info';
+            deviceInfoDiv.innerHTML = `
+                <strong>デバイス情報:</strong><br>
+                📱 タイプ: ${deviceInfo.type}<br>
+                💻 OS: ${deviceInfo.os}<br>
+                🌐 ブラウザ: ${deviceInfo.browser}<br>
+                📐 画面: ${deviceInfo.screenSize.width} × ${deviceInfo.screenSize.height}<br>
+                💾 メモリ: ${deviceInfo.memory}<br>
+                ⚡ 性能: <span class="performance-indicator performance-${deviceInfo.performance}"></span>${deviceInfo.performance}
+            `;
+            
+            // ページの右上に表示
+            deviceInfoDiv.style.cssText = `
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                z-index: 1000;
+                max-width: 250px;
+                font-size: 0.8rem;
+            `;
+            
+            document.body.appendChild(deviceInfoDiv);
+            
+            // 5秒後に自動で非表示
+            setTimeout(() => {
+                if (deviceInfoDiv.parentNode) {
+                    deviceInfoDiv.remove();
+                }
+            }, 5000);
+        }
+        
+        // グローバルエラーハンドラー
+        window.addEventListener('error', function(event) {
+            console.error('グローバルエラーが発生しました:', event.error);
+            
+            // エラー回復を試行
+            if (!recoverFromError(event.error)) {
+                // 回復に失敗した場合はユーザーに通知
+                alert(`システムエラーが発生しました。\n\nエラー: ${event.error.message}\n\nページを再読み込みしてください。`);
+            }
+        });
+        
+        // 未処理のPromiseエラーハンドラー
+        window.addEventListener('unhandledrejection', function(event) {
+            console.error('未処理のPromiseエラーが発生しました:', event.reason);
+            
+            // エラー回復を試行
+            if (!recoverFromError(new Error(event.reason))) {
+                console.error('Promiseエラーの回復に失敗しました');
+            }
+        });
+        
+        // 定期的なパフォーマンスチェック
+        setInterval(monitorPerformance, 30000); // 30秒ごと
+        
+        // デバイス情報表示のショートカット（Ctrl+Shift+D）
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && event.shiftKey && event.key === 'D') {
+                showDeviceInfo();
+            }
+        });
+        
+        // LINE通知機能
+        let lineNotificationSettings = {
+            enabled: true,
+            accessToken: '',
+            groupId: '',
+            notifyLevel: 'all', // all, error, warning, info
+            autoNotify: true,
+            manualNotify: true,
+            contactList: [
+                { name: 'システム管理者', lineId: 'admin_line_id', role: 'admin', priority: 'high' },
+                { name: '技術担当者', lineId: 'tech_line_id', role: 'tech', priority: 'high' },
+                { name: 'スタッフA', lineId: 'staff_a_line_id', role: 'staff', priority: 'medium' },
+                { name: 'スタッフB', lineId: 'staff_b_line_id', role: 'staff', priority: 'medium' },
+                { name: '緊急連絡先', lineId: 'emergency_line_id', role: 'emergency', priority: 'critical' }
+            ]
+        };
+        
+        // LINE通知送信
+        function sendLineNotification(message, level = 'info', recipients = 'all') {
+            if (!lineNotificationSettings.enabled) {
+                console.log('LINE通知が無効になっています');
+                return;
+            }
+            
+            const notification = {
+                message: message,
+                level: level,
+                timestamp: new Date().toISOString(),
+                device: deviceInfo,
+                recipients: recipients
+            };
+            
+            // LINE APIに送信
+            sendToLineAPI(notification);
+            
+            // 通知履歴に記録
+            addNotificationLog(notification);
+        }
+        
+        // LINE API送信
+        function sendToLineAPI(notification) {
+            const lineMessage = formatLineMessage(notification);
+            
+            // LINE Messaging APIを使用
+            fetch('https://api.line.me/v2/bot/message/push', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${lineNotificationSettings.accessToken}`
+                },
+                body: JSON.stringify({
+                    to: lineNotificationSettings.groupId,
+                    messages: [{
+                        type: 'text',
+                        text: lineMessage
+                    }]
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('LINE通知送信成功');
+                } else {
+                    console.error('LINE通知送信失敗:', response.status);
+                }
+            })
+            .catch(error => {
+                console.error('LINE通知送信エラー:', error);
+            });
+        }
+        
+        // LINEメッセージフォーマット
+        function formatLineMessage(notification) {
+            const levelEmoji = {
+                'critical': '🚨',
+                'error': '❌',
+                'warning': '⚠️',
+                'info': 'ℹ️',
+                'success': '✅'
+            };
+            
+            const emoji = levelEmoji[notification.level] || 'ℹ️';
+            const device = notification.device.type;
+            const time = new Date(notification.timestamp).toLocaleString('ja-JP');
+            
+            return `${emoji} システム通知\n\n📱 デバイス: ${device}\n⏰ 時刻: ${time}\n\n${notification.message}`;
+        }
+        
+        // 自動通知設定
+        function setupAutoNotifications() {
+            // システムエラー時の通知
+            window.addEventListener('error', function(event) {
+                if (lineNotificationSettings.autoNotify) {
+                    sendLineNotification(
+                        `システムエラーが発生しました\n\nエラー: ${event.error.message}\n\nデバイス: ${deviceInfo.type} (${deviceInfo.os})`,
+                        'error',
+                        'admin,tech'
+                    );
+                }
+            });
+            
+            // AI機能エラー時の通知
+            window.addEventListener('aiError', function(event) {
+                if (lineNotificationSettings.autoNotify) {
+                    sendLineNotification(
+                        `AI機能でエラーが発生しました\n\n機能: ${event.detail.function}\nエラー: ${event.detail.error}\n\nデバイス: ${deviceInfo.type}`,
+                        'warning',
+                        'admin,tech'
+                    );
+                }
+            });
+            
+            // 同期エラー時の通知
+            window.addEventListener('syncError', function(event) {
+                if (lineNotificationSettings.autoNotify) {
+                    sendLineNotification(
+                        `データ同期でエラーが発生しました\n\n詳細: ${event.detail.message}\n\nデバイス: ${deviceInfo.type}`,
+                        'warning',
+                        'admin,tech'
+                    );
+                }
+            });
+        }
+        
+        // 手動通知送信
+        function sendManualNotification() {
+            const message = document.getElementById('manualNotificationMessage').value;
+            const level = document.getElementById('manualNotificationLevel').value;
+            const recipients = document.getElementById('manualNotificationRecipients').value;
+            
+            if (!message.trim()) {
+                alert('通知メッセージを入力してください。');
+                return;
+            }
+            
+            sendLineNotification(message, level, recipients);
+            alert('LINE通知を送信しました。');
+            
+            // 入力フィールドをクリア
+            document.getElementById('manualNotificationMessage').value = '';
+        }
+        
+        // 通知履歴の追加
+        function addNotificationLog(notification) {
+            const notificationLogs = JSON.parse(localStorage.getItem('notificationLogs') || '[]');
+            notificationLogs.push(notification);
+            
+            // 最新の100件のみ保持
+            if (notificationLogs.length > 100) {
+                notificationLogs.splice(0, notificationLogs.length - 100);
+            }
+            
+            localStorage.setItem('notificationLogs', JSON.stringify(notificationLogs));
+            updateNotificationLogDisplay();
+        }
+        
+        // 通知履歴表示の更新
+        function updateNotificationLogDisplay() {
+            const notificationLogs = JSON.parse(localStorage.getItem('notificationLogs') || '[]');
+            const tbody = document.getElementById('notificationLogTable');
+            
+            if (!tbody) return;
+            
+            tbody.innerHTML = '';
+            
+            notificationLogs.slice(-20).reverse().forEach(log => {
+                const row = document.createElement('tr');
+                const time = new Date(log.timestamp).toLocaleString('ja-JP');
+                
+                row.innerHTML = `
+                    <td>${time}</td>
+                    <td><span class="status-badge status-${log.level}">${log.level}</span></td>
+                    <td>${log.device.type}</td>
+                    <td>${log.message.substring(0, 50)}${log.message.length > 50 ? '...' : ''}</td>
+                    <td>${log.recipients}</td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+        }
+        
+        // 遠隔操作機能
+        let remoteControlSettings = {
+            enabled: true,
+            desktopIP: '192.168.1.100',
+            desktopPort: 8888,
+            authentication: {
+                username: 'admin',
+                password: '',
+                token: ''
+            },
+            allowedOperations: [
+                'system_status',
+                'restart_service',
+                'backup_data',
+                'update_settings',
+                'view_logs',
+                'emergency_stop'
+            ],
+            sessionTimeout: 300000 // 5分
+        };
+        
+        // 遠隔操作セッション
+        let remoteSession = {
+            active: false,
+            startTime: null,
+            lastActivity: null,
+            operations: []
+        };
+        
+        // 遠隔操作開始
+        function startRemoteControl() {
+            if (remoteSession.active) {
+                alert('遠隔操作セッションが既に開始されています。');
+                return;
+            }
+            
+            // 認証確認
+            const username = prompt('ユーザー名を入力してください:');
+            const password = prompt('パスワードを入力してください:');
+            
+            if (username !== remoteControlSettings.authentication.username || 
+                password !== remoteControlSettings.authentication.password) {
+                alert('認証に失敗しました。');
+                return;
+            }
+            
+            // セッション開始
+            remoteSession.active = true;
+            remoteSession.startTime = new Date().toISOString();
+            remoteSession.lastActivity = new Date().toISOString();
+            
+            // デスクトップPCに接続
+            connectToDesktop();
+            
+            // セッションタイマー開始
+            startSessionTimer();
+            
+            alert('遠隔操作セッションを開始しました。');
+            updateRemoteControlUI();
+        }
+        
+        // 遠隔操作終了
+        function stopRemoteControl() {
+            if (!remoteSession.active) {
+                alert('遠隔操作セッションが開始されていません。');
+                return;
+            }
+            
+            // セッション終了
+            remoteSession.active = false;
+            remoteSession.startTime = null;
+            remoteSession.lastActivity = null;
+            
+            // デスクトップPCとの接続を切断
+            disconnectFromDesktop();
+            
+            // セッションタイマー停止
+            stopSessionTimer();
+            
+            alert('遠隔操作セッションを終了しました。');
+            updateRemoteControlUI();
+        }
+        
+        // デスクトップPCに接続
+        function connectToDesktop() {
+            const desktopUrl = `http://${remoteControlSettings.desktopIP}:${remoteControlSettings.desktopPort}`;
+            
+            fetch(`${desktopUrl}/remote/connect`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${remoteControlSettings.authentication.token}`
+                },
+                body: JSON.stringify({
+                    client: deviceInfo,
+                    sessionId: generateSessionId(),
+                    allowedOperations: remoteControlSettings.allowedOperations
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('デスクトップPCに接続しました');
+                    return response.json();
+                } else {
+                    throw new Error('接続に失敗しました');
+                }
+            })
+            .then(data => {
+                console.log('接続情報:', data);
+            })
+            .catch(error => {
+                console.error('デスクトップPC接続エラー:', error);
+                alert('デスクトップPCに接続できませんでした。');
+                stopRemoteControl();
+            });
+        }
+        
+        // デスクトップPCとの接続を切断
+        function disconnectFromDesktop() {
+            const desktopUrl = `http://${remoteControlSettings.desktopIP}:${remoteControlSettings.desktopPort}`;
+            
+            fetch(`${desktopUrl}/remote/disconnect`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${remoteControlSettings.authentication.token}`
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('デスクトップPCとの接続を切断しました');
+                }
+            })
+            .catch(error => {
+                console.error('切断エラー:', error);
+            });
+        }
+        
+        // 遠隔操作実行
+        function executeRemoteOperation(operation, parameters = {}) {
+            if (!remoteSession.active) {
+                alert('遠隔操作セッションが開始されていません。');
+                return;
+            }
+            
+            // 操作が許可されているかチェック
+            if (!remoteControlSettings.allowedOperations.includes(operation)) {
+                alert('この操作は許可されていません。');
+                return;
+            }
+            
+            // セッションタイムアウトチェック
+            if (isSessionExpired()) {
+                alert('セッションがタイムアウトしました。');
+                stopRemoteControl();
+                return;
+            }
+            
+            const desktopUrl = `http://${remoteControlSettings.desktopIP}:${remoteControlSettings.desktopPort}`;
+            
+            fetch(`${desktopUrl}/remote/execute`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${remoteControlSettings.authentication.token}`
+                },
+                body: JSON.stringify({
+                    operation: operation,
+                    parameters: parameters,
+                    client: deviceInfo,
+                    timestamp: new Date().toISOString()
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('操作の実行に失敗しました');
+                }
+            })
+            .then(data => {
+                console.log('遠隔操作実行結果:', data);
+                
+                // 操作履歴に記録
+                addRemoteOperationLog(operation, parameters, data);
+                
+                // 結果を表示
+                showRemoteOperationResult(data);
+                
+                // セッション活動時間を更新
+                remoteSession.lastActivity = new Date().toISOString();
+            })
+            .catch(error => {
+                console.error('遠隔操作エラー:', error);
+                alert(`遠隔操作の実行に失敗しました: ${error.message}`);
+            });
+        }
+        
+        // システム状態確認
+        function checkDesktopSystemStatus() {
+            executeRemoteOperation('system_status');
+        }
+        
+        // サービス再起動
+        function restartDesktopService() {
+            if (confirm('デスクトップPCのサービスを再起動しますか？')) {
+                executeRemoteOperation('restart_service');
+            }
+        }
+        
+        // データバックアップ
+        function backupDesktopData() {
+            if (confirm('デスクトップPCのデータをバックアップしますか？')) {
+                executeRemoteOperation('backup_data');
+            }
+        }
+        
+        // 設定更新
+        function updateDesktopSettings() {
+            const newSettings = prompt('新しい設定をJSON形式で入力してください:');
+            try {
+                const settings = JSON.parse(newSettings);
+                executeRemoteOperation('update_settings', { settings: settings });
+            } catch (error) {
+                alert('設定の形式が正しくありません。');
+            }
+        }
+        
+        // ログ表示
+        function viewDesktopLogs() {
+            executeRemoteOperation('view_logs');
+        }
+        
+        // 緊急停止
+        function emergencyStopDesktop() {
+            if (confirm('⚠️ デスクトップPCを緊急停止しますか？\n\nこの操作は取り消せません。')) {
+                executeRemoteOperation('emergency_stop');
+            }
+        }
+        
+        // セッションID生成
+        function generateSessionId() {
+            return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        }
+        
+        // セッションタイムアウトチェック
+        function isSessionExpired() {
+            if (!remoteSession.lastActivity) return true;
+            
+            const now = new Date().getTime();
+            const lastActivity = new Date(remoteSession.lastActivity).getTime();
+            const timeout = remoteControlSettings.sessionTimeout;
+            
+            return (now - lastActivity) > timeout;
+        }
+        
+        // セッションタイマー開始
+        function startSessionTimer() {
+            remoteSession.timer = setInterval(() => {
+                if (isSessionExpired()) {
+                    alert('セッションがタイムアウトしました。');
+                    stopRemoteControl();
+                }
+            }, 30000); // 30秒ごとにチェック
+        }
+        
+        // セッションタイマー停止
+        function stopSessionTimer() {
+            if (remoteSession.timer) {
+                clearInterval(remoteSession.timer);
+                remoteSession.timer = null;
+            }
+        }
+        
+        // 遠隔操作UI更新
+        function updateRemoteControlUI() {
+            const statusElement = document.getElementById('remoteControlStatus');
+            const startButton = document.getElementById('startRemoteControl');
+            const stopButton = document.getElementById('stopRemoteControl');
+            
+            if (statusElement) {
+                statusElement.textContent = remoteSession.active ? '接続中' : '未接続';
+                statusElement.className = remoteSession.active ? 'status-active' : 'status-inactive';
+            }
+            
+            if (startButton) {
+                startButton.disabled = remoteSession.active;
+            }
+            
+            if (stopButton) {
+                stopButton.disabled = !remoteSession.active;
+            }
+        }
+        
+        // 遠隔操作履歴の追加
+        function addRemoteOperationLog(operation, parameters, result) {
+            const log = {
+                timestamp: new Date().toISOString(),
+                operation: operation,
+                parameters: parameters,
+                result: result,
+                device: deviceInfo
+            };
+            
+            const remoteOperationLogs = JSON.parse(localStorage.getItem('remoteOperationLogs') || '[]');
+            remoteOperationLogs.push(log);
+            
+            // 最新の50件のみ保持
+            if (remoteOperationLogs.length > 50) {
+                remoteOperationLogs.splice(0, remoteOperationLogs.length - 50);
+            }
+            
+            localStorage.setItem('remoteOperationLogs', JSON.stringify(remoteOperationLogs));
+            updateRemoteOperationLogDisplay();
+        }
+        
+        // 遠隔操作履歴表示の更新
+        function updateRemoteOperationLogDisplay() {
+            const remoteOperationLogs = JSON.parse(localStorage.getItem('remoteOperationLogs') || '[]');
+            const tbody = document.getElementById('remoteOperationLogTable');
+            
+            if (!tbody) return;
+            
+            tbody.innerHTML = '';
+            
+            remoteOperationLogs.slice(-10).reverse().forEach(log => {
+                const row = document.createElement('tr');
+                const time = new Date(log.timestamp).toLocaleString('ja-JP');
+                
+                row.innerHTML = `
+                    <td>${time}</td>
+                    <td>${log.operation}</td>
+                    <td>${log.device.type}</td>
+                    <td>${log.result.success ? '成功' : '失敗'}</td>
+                    <td>${log.result.message || ''}</td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+        }
+        
+        // 遠隔操作結果表示
+        function showRemoteOperationResult(result) {
+            const message = result.success ? 
+                `操作が成功しました: ${result.message}` : 
+                `操作が失敗しました: ${result.message}`;
+            
+            alert(message);
+        }
+    </script>
+</body>
+</html> 

@@ -1,0 +1,1005 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Dataset xsi:schemaLocation="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema FGD_GMLSchema.xsd"
+	xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema"
+	gml:id="Dataset1">
+  <gml:description>基盤地図情報メタデータ ID=fmdid:23-1001</gml:description>
+  <gml:name>基盤地図情報ダウンロードデータ（GML版）</gml:name>
+<WL gml:id="K13_4639511751_1">
+<fid>46395-11751-s-645</fid>
+<lfSpanFr gml:id="K13_4639511751_1-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639511751_1-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639511751_1-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.648982444 128.879879944
+32.648997833 128.879855861
+32.649037583 128.879934556
+32.649044861 128.879958472
+32.649032667 128.880143278
+32.649036556 128.880208139
+32.649055944 128.880270028
+32.649078806 128.880309389
+32.649258639 128.880487222
+32.649346028 128.880547250
+32.649329500 128.880584028
+32.649225278 128.880500139
+32.649099444 128.880381139
+32.649050250 128.880322250
+32.649017722 128.880260444
+32.649006722 128.880206917
+32.649007500 128.880123722
+32.649012861 128.879999583
+32.649011444 128.879953083
+32.648982444 128.879879944
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>水涯線（河川）</type>
+</WL>
+<WL gml:id="K13_4639511751_2">
+<fid>46395-11751-s-646</fid>
+<lfSpanFr gml:id="K13_4639511751_2-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639511751_2-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639511751_2-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.650000000 128.880862056
+32.649925667 128.880759000
+32.649774444 128.880573917
+32.649715111 128.880517194
+32.649697194 128.880513111
+32.649679333 128.880523806
+32.649583194 128.880621778
+32.649496111 128.880742222
+32.649475694 128.880718389
+32.649511222 128.880664583
+32.649581167 128.880572417
+32.649646444 128.880507111
+32.649684472 128.880473000
+32.649703528 128.880468639
+32.649719056 128.880474167
+32.649775389 128.880524556
+32.649824611 128.880587667
+32.649939833 128.880727194
+32.650000000 128.880808889
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>水涯線（河川）</type>
+</WL>
+<WL gml:id="K13_4639511754_1">
+<fid>46395-11754-s-6</fid>
+<lfSpanFr gml:id="K13_4639511754_1-1">
+<gml:timePosition>2013-12-10</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639511754_1-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639511754_1-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.650000000 128.880808889
+32.650073139 128.880908167
+32.650201056 128.881082861
+32.650426306 128.881400694
+32.650550556 128.881554278
+32.650577500 128.881577361
+32.650625917 128.881598167
+32.650697611 128.881620944
+32.651071917 128.881679722
+32.651072083 128.881715667
+32.650776583 128.881671167
+32.650672722 128.881652833
+32.650622528 128.881636278
+32.650568722 128.881611250
+32.650539972 128.881588194
+32.650511194 128.881556667
+32.650060806 128.880946333
+32.650000000 128.880862056
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>水涯線（河川）</type>
+</WL>
+<WL gml:id="K13_4639511754_2">
+<fid>46395-11754-s-2312</fid>
+<lfSpanFr gml:id="K13_4639511754_2-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639511754_2-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639511754_2-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.652364361 128.876830333
+32.652387250 128.877282861
+32.652389694 128.877297611
+32.652393361 128.877315833
+32.652398222 128.877334778
+32.652403667 128.877356528
+32.652415083 128.877379611
+32.652430056 128.877404806
+32.652483333 128.877479639
+32.652769278 128.877879389
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一条河川</type>
+</WL>
+<WL gml:id="K13_4639511754_3">
+<fid>46395-11754-s-2313</fid>
+<lfSpanFr gml:id="K13_4639511754_3-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639511754_3-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639511754_3-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.652790278 128.877922500
+32.652998639 128.878222222
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一条河川</type>
+</WL>
+<WL gml:id="K13_4639511754_4">
+<fid>46395-11754-s-2314</fid>
+<lfSpanFr gml:id="K13_4639511754_4-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639511754_4-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639511754_4-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.653011972 128.878235250
+32.653255694 128.878535806
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一条河川</type>
+</WL>
+<WL gml:id="K13_4639511754_5">
+<fid>46395-11754-s-2315</fid>
+<lfSpanFr gml:id="K13_4639511754_5-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639511754_5-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639511754_5-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.653693750 128.878956833
+32.653275722 128.878569194
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一条河川</type>
+</WL>
+<WL gml:id="K13_4639511754_6">
+<fid>46395-11754-s-2438</fid>
+<lfSpanFr gml:id="K13_4639511754_6-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639511754_6-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639511754_6-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.654527222 128.879721000
+32.654355139 128.879664750
+32.654248056 128.879617028
+32.654195528 128.879594333
+32.654142750 128.879560083
+32.654100278 128.879527806
+32.654056417 128.879493167
+32.654012500 128.879443417
+32.653980694 128.879400750
+32.653892528 128.879272194
+32.653783528 128.879105333
+32.653806139 128.879060694
+32.653862389 128.879153250
+32.653948361 128.879281333
+32.654002889 128.879363278
+32.654028556 128.879393278
+32.654067722 128.879431917
+32.654131806 128.879480750
+32.654163528 128.879509111
+32.654192528 128.879532750
+32.654241250 128.879561000
+32.654287056 128.879581361
+32.654359111 128.879612611
+32.654442583 128.879648583
+32.654538028 128.879683250
+32.654527222 128.879721000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>水涯線（河川）</type>
+</WL>
+<WL gml:id="K13_4639511754_7">
+<fid>46395-11754-s-2439</fid>
+<lfSpanFr gml:id="K13_4639511754_7-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639511754_7-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639511754_7-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.654627222 128.879713000
+32.654628556 128.879690056
+32.654755833 128.879733611
+32.654841917 128.879773222
+32.654915500 128.879815028
+32.654965806 128.879852750
+32.655043083 128.879922028
+32.655088056 128.879968250
+32.655138417 128.880022889
+32.655197833 128.880096528
+32.655284250 128.880201694
+32.655349139 128.880294306
+32.655388750 128.880346917
+32.655421139 128.880378444
+32.655462417 128.880405667
+32.655498306 128.880426556
+32.655528806 128.880441167
+32.655557500 128.880451528
+32.655541306 128.880469194
+32.655522444 128.880462361
+32.655490528 128.880447083
+32.655453583 128.880425556
+32.655410361 128.880397083
+32.655375528 128.880363167
+32.655334722 128.880308972
+32.655270083 128.880216722
+32.655184139 128.880112111
+32.655125111 128.880038944
+32.655075389 128.879985000
+32.655031083 128.879939472
+32.654954944 128.879871222
+32.654906250 128.879834694
+32.654834361 128.879793833
+32.654749722 128.879754917
+32.654627222 128.879713000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>水涯線（河川）</type>
+</WL>
+<WL gml:id="K13_4639511754_8">
+<fid>46395-11754-s-2440</fid>
+<lfSpanFr gml:id="K13_4639511754_8-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639511754_8-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639511754_8-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.651369778 128.881761250
+32.651383722 128.881766417
+32.651748194 128.882013500
+32.651739333 128.882032611
+32.651377861 128.881789722
+32.651362778 128.881782778
+32.651369778 128.881761250
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>水涯線（河川）</type>
+</WL>
+<WL gml:id="K13_4639511754_9">
+<fid>46395-11754-s-2441</fid>
+<lfSpanFr gml:id="K13_4639511754_9-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639511754_9-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639511754_9-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.652416194 128.883333333
+32.652413806 128.883330972
+32.652401722 128.883300028
+32.652263917 128.882934333
+32.652249222 128.882855472
+32.652212361 128.882635722
+32.652199861 128.882523000
+32.652124806 128.882303528
+32.652098444 128.882275500
+32.651916583 128.882169583
+32.651933083 128.882132806
+32.652134083 128.882249861
+32.652153889 128.882273000
+32.652223000 128.882498861
+32.652243194 128.882602361
+32.652275083 128.882798389
+32.652293028 128.882908750
+32.652311222 128.882972083
+32.652381917 128.883151389
+32.652436278 128.883292750
+32.652454306 128.883318000
+32.652472417 128.883333333
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>水涯線（河川）</type>
+</WL>
+<WL gml:id="K13_4639511757_1">
+<fid>46395-11757-s-899</fid>
+<lfSpanFr gml:id="K13_4639511757_1-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639511757_1-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639511757_1-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.660683472 128.877730222
+32.660662917 128.877675333
+32.660740250 128.877633917
+32.660759611 128.877685972
+32.660683472 128.877730222
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>水涯線（河川）</type>
+</WL>
+<WL gml:id="K13_4639511757_2">
+<fid>46395-11757-s-1174</fid>
+<lfSpanFr gml:id="K13_4639511757_2-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639511757_2-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639511757_2-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.660233472 128.882568167
+32.660265972 128.882775556
+32.660266944 128.882787556
+32.660273222 128.882865167
+32.660273250 128.882865444
+32.660274667 128.882978611
+32.660266917 128.883142083
+32.660265472 128.883333333
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一条河川</type>
+</WL>
+<WL gml:id="K13_4639511757_3">
+<fid>46395-11757-s-1175</fid>
+<lfSpanFr gml:id="K13_4639511757_3-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639511757_3-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639511757_3-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.661114028 128.878028250
+32.661175861 128.878167917
+32.661193056 128.878206722
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一条河川</type>
+</WL>
+<WL gml:id="K13_4639511757_4">
+<fid>46395-11757-s-1176</fid>
+<lfSpanFr gml:id="K13_4639511757_4-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639511757_4-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639511757_4-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.661136611 128.879041167
+32.661036028 128.879476000
+32.660992389 128.879637972
+32.660945278 128.879790889
+32.660880167 128.879992556
+32.660846611 128.880096444
+32.660822250 128.880179472
+32.660813833 128.880209861
+32.660807250 128.880260417
+32.660801667 128.880337278
+32.660788222 128.880433972
+32.660781972 128.880589333
+32.660775333 128.880627778
+32.660756056 128.880701667
+32.660712361 128.880857583
+32.660632417 128.881108750
+32.660604889 128.881208944
+32.660556083 128.881386833
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一条河川</type>
+</WL>
+<WL gml:id="K13_4639511757_5">
+<fid>46395-11757-s-1177</fid>
+<lfSpanFr gml:id="K13_4639511757_5-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639511757_5-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639511757_5-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.661211222 128.878253722
+32.661213278 128.878261694
+32.661215333 128.878293167
+32.661210917 128.878361778
+32.661204583 128.878426444
+32.661147639 128.878953278
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一条河川</type>
+</WL>
+<WL gml:id="K13_4639511757_6">
+<fid>46395-11757-s-1234</fid>
+<lfSpanFr gml:id="K13_4639511757_6-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639511757_6-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639511757_6-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.662480111 128.876523194
+32.662401194 128.876489889
+32.662414111 128.876447500
+32.662491806 128.876476556
+32.662480111 128.876523194
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>水涯線（河川）</type>
+</WL>
+<WL gml:id="K13_4639511757_7">
+<fid>46395-11757-s-1235</fid>
+<lfSpanFr gml:id="K13_4639511757_7-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639511757_7-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639511757_7-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.660588611 128.877605361
+32.660584444 128.877489722
+32.660805111 128.877482556
+32.660809250 128.877592528
+32.660588611 128.877605361
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>水涯線（河川）</type>
+</WL>
+<WL gml:id="K13_4639511757_8">
+<fid>46395-11757-s-1249</fid>
+<lfSpanFr gml:id="K13_4639511757_8-1">
+<gml:timePosition>2016-02-18</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639511757_8-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639511757_8-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.660537417 128.881459861
+32.660498639 128.881608472
+32.660344972 128.882017806
+32.660308028 128.882145000
+32.660270500 128.882310472
+32.660256250 128.882369167
+32.660248722 128.882405611
+32.660247139 128.882430889
+32.660248722 128.882451778
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一条河川</type>
+</WL>
+<WL gml:id="K13_4639811754_1">
+<fid>46398-11754-s-862</fid>
+<lfSpanFr gml:id="K13_4639811754_1-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639811754_1-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639811754_1-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.652472417 128.883333333
+32.652610639 128.883450194
+32.652711306 128.883542583
+32.652725750 128.883567861
+32.653209306 128.884744889
+32.653183194 128.884768333
+32.652807611 128.883840167
+32.652805139 128.883824694
+32.652698917 128.883571583
+32.652670139 128.883540750
+32.652444972 128.883361806
+32.652416194 128.883333333
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>水涯線（河川）</type>
+</WL>
+<WL gml:id="K13_4639811754_2">
+<fid>46398-11754-s-1269</fid>
+<lfSpanFr gml:id="K13_4639811754_2-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639811754_2-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639811754_2-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.656300889 128.885535444
+32.656531861 128.885037722
+32.656544417 128.884997417
+32.656554194 128.884943167
+32.656582667 128.884713583
+32.656594194 128.884584139
+32.656606556 128.884533306
+32.656617500 128.884486333
+32.656644861 128.884405639
+32.656677333 128.884340250
+32.656717139 128.884291111
+32.656749694 128.884255167
+32.656796556 128.884212750
+32.656833472 128.884188333
+32.656874389 128.884163806
+32.657281222 128.884014861
+32.657299444 128.884007556
+32.657301917 128.884004750
+32.657304111 128.884000306
+32.657303778 128.883985167
+32.657303444 128.883981333
+32.657301194 128.883953861
+32.657300722 128.883947972
+32.657249806 128.883596917
+32.657278667 128.883591278
+32.657327694 128.883945111
+32.657328917 128.883952278
+32.657333694 128.883979778
+32.657334083 128.883981972
+32.657334667 128.884008250
+32.657331389 128.884021111
+32.657315611 128.884038972
+32.657290611 128.884049028
+32.656885833 128.884197222
+32.656847778 128.884220028
+32.656813306 128.884242833
+32.656769333 128.884282611
+32.656738500 128.884316667
+32.656701750 128.884362056
+32.656672194 128.884421500
+32.656646333 128.884497833
+32.656635806 128.884543028
+32.656624111 128.884591056
+32.656612806 128.884718056
+32.656584111 128.884949528
+32.656573667 128.885007417
+32.656559583 128.885052639
+32.656324722 128.885558750
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>水涯線（河川）</type>
+</WL>
+<WL gml:id="K13_4639811754_3">
+<fid>46398-11754-s-1270</fid>
+<lfSpanFr gml:id="K13_4639811754_3-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639811754_3-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639811754_3-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.653228000 128.884905528
+32.653595667 128.885802028
+32.653591528 128.885810528
+32.653430333 128.886028778
+32.653363139 128.886192833
+32.653346667 128.886239472
+32.653267806 128.886699750
+32.653266750 128.886730778
+32.653390028 128.887054278
+32.653452583 128.887163861
+32.653423500 128.887188750
+32.653372972 128.887102361
+32.653235139 128.886733111
+32.653235000 128.886703500
+32.653308056 128.886273583
+32.653325639 128.886210000
+32.653357500 128.886133639
+32.653405167 128.886000750
+32.653547444 128.885825611
+32.653559889 128.885804389
+32.653559806 128.885787472
+32.653204806 128.884920500
+32.653228000 128.884905528
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>水涯線（河川）</type>
+</WL>
+<WL gml:id="K13_4639811754_4">
+<fid>46398-11754-s-1271</fid>
+<lfSpanFr gml:id="K13_4639811754_4-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639811754_4-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639811754_4-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.653535361 128.887380472
+32.653567528 128.887371778
+32.653689806 128.888221306
+32.653716944 128.888288806
+32.653789389 128.888460361
+32.654147889 128.889321000
+32.654124694 128.889333139
+32.653733611 128.888402917
+32.653715583 128.888375556
+32.653657694 128.888244806
+32.653652167 128.888215222
+32.653535361 128.887380472
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>水涯線（河川）</type>
+</WL>
+<WL gml:id="K13_4639811754_5">
+<fid>46398-11754-s-1272</fid>
+<lfSpanFr gml:id="K13_4639811754_5-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639811754_5-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639811754_5-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.654262389 128.889661417
+32.654198889 128.889506778
+32.654220306 128.889492528
+32.654283861 128.889652083
+32.654262389 128.889661417
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>水涯線（河川）</type>
+</WL>
+<WL gml:id="K13_4639811757_1">
+<fid>46398-11757-s-387</fid>
+<lfSpanFr gml:id="K13_4639811757_1-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639811757_1-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639811757_1-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.660265472 128.883333333
+32.660264861 128.883416944
+32.660271444 128.883716000
+32.660277472 128.884005167
+32.660279306 128.884093583
+32.660262250 128.884241750
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一条河川</type>
+</WL>
+<WL gml:id="K13_4639811757_2">
+<fid>46398-11757-s-388</fid>
+<lfSpanFr gml:id="K13_4639811757_2-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4639811757_2-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4639811757_2-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.660254194 128.884290056
+32.660205528 128.884530278
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一条河川</type>
+</WL>
+<WL gml:id="K13_4640111754_1">
+<fid>46401-11754-s-449</fid>
+<lfSpanFr gml:id="K13_4640111754_1-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4640111754_1-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4640111754_1-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.652733333 128.895087778
+32.652772778 128.895201111
+32.652772778 128.895380833
+32.652750278 128.895534167
+32.652710833 128.895700556
+32.652705278 128.895860556
+32.652733333 128.895973611
+32.652868889 128.896200000
+32.652868889 128.896240000
+32.652857500 128.896273333
+32.652789722 128.896326667
+32.652750278 128.896320000
+32.652716389 128.896280000
+32.652705278 128.896140278
+32.652626389 128.895966944
+32.652626389 128.895540833
+32.652637500 128.895161111
+32.652654444 128.895101111
+32.652676944 128.895074444
+32.652733333 128.895087778
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>水涯線（河川）</type>
+</WL>
+<WL gml:id="K13_4641011733_1">
+<fid>46410-11733-s-1391</fid>
+<lfSpanFr gml:id="K13_4641011733_1-1">
+<gml:timePosition>2017-09-25</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4641011733_1-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4641011733_1-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.596274591 128.924234756
+32.596299353 128.924206900
+32.596328854 128.924189773
+32.596355617 128.924185127
+32.596370504 128.924186843
+32.596420299 128.924209748
+32.596441481 128.924227297
+32.596446631 128.924248890
+32.596446646 128.924271901
+32.596441817 128.924300482
+32.596432884 128.924319076
+32.596410316 128.924333708
+32.596375546 128.924342453
+32.596346963 128.924343381
+32.596333334 128.924340805
+32.596297542 128.924323350
+32.596278802 128.924307490
+32.596273689 128.924293780
+32.596269521 128.924249916
+32.596274591 128.924234756
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>水涯線（河川）</type>
+</WL>
+<WL gml:id="K13_4641011733_2">
+<fid>46410-11733-s-1403</fid>
+<lfSpanFr gml:id="K13_4641011733_2-1">
+<gml:timePosition>2017-09-25</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K13_4641011733_2-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K13_4641011733_2-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.597555957 128.923269044
+32.597559588 128.923234931
+32.597569142 128.923214202
+32.597607924 128.923156319
+32.597635944 128.923130891
+32.597653427 128.923128329
+32.597666154 128.923130804
+32.597675788 128.923147042
+32.597676822 128.923175906
+32.597671508 128.923197033
+32.597655970 128.923230371
+32.597613072 128.923275709
+32.597592208 128.923288414
+32.597579407 128.923289348
+32.597561065 128.923281689
+32.597555957 128.923269044
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>水涯線（河川）</type>
+</WL>
+</Dataset>

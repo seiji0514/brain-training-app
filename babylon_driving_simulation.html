@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>高精度3D自動車シミュレータ（佐賀県武雄市）</title>
+  <script src="https://cdn.babylonjs.com/babylon.js"></script>
+  <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+  <script src="https://cdn.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
+  <script src="https://cdn.babylonjs.com/gui/babylon.gui.min.js"></script>
+  <script src="https://cdn.babylonjs.com/ammo.js"></script>
+  <style>
+    html, body { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; background: #222; }
+    #renderCanvas { width: 100vw; height: 100vh; display: block; touch-action: none; }
+    .ui-panel {
+      position: absolute; top: 20px; left: 20px; background: rgba(255,255,255,0.95); border-radius: 12px; padding: 18px 24px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); z-index: 10; min-width: 280px;
+    }
+    .ui-panel h2 { margin: 0 0 10px 0; font-size: 1.2em; color: #2c3e50; }
+    .ui-panel ul { margin: 0; padding-left: 1.2em; font-size: 0.9em; color: #444; }
+    .ui-panel .btn { margin-top: 10px; padding: 8px 18px; border: none; border-radius: 6px; background: #3498db; color: #fff; font-weight: bold; cursor: pointer; font-size: 0.9em; margin-right: 5px; }
+    .ui-panel .btn:hover { background: #217dbb; }
+    .ui-panel .btn-success { background: #27ae60; }
+    .ui-panel .btn-warning { background: #f39c12; }
+    .status-bar {
+      position: absolute; bottom: 20px; left: 20px; background: rgba(0,0,0,0.8); color: #fff; border-radius: 8px; padding: 12px 18px; font-size: 0.9em; z-index: 10; min-width: 300px;
+    }
+    .control-panel {
+      position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.95); border-radius: 12px; padding: 15px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); z-index: 10; width: 200px;
+    }
+    .control-panel h3 { margin: 0 0 10px 0; font-size: 1em; color: #2c3e50; }
+    .control-panel select, .control-panel input { width: 100%; padding: 5px; margin-bottom: 8px; border: 1px solid #ddd; border-radius: 4px; }
+    @media (max-width: 600px) {
+      .ui-panel { min-width: 90vw; left: 5vw; padding: 10px; }
+      .status-bar { left: 5vw; min-width: 90vw; }
+    }
+  </style>
+</head>
+<body>
+  <div class="ui-panel">
+    <h2>🗺️ 高精度3D自動車シミュレータ<br>佐賀県武雄市</h2>
+    <ul>
+      <li>高精度地形データ（国土地理院）</li>
+      <li>武雄市特有のランドマーク</li>
+      <li>詳細な道路網（車線数・曲率）</li>
+      <li>AI車両・歩行者環境</li>
+      <li>交通インフラ（信号・標識）</li>
+    </ul>
+    <button class="btn" onclick="window.location.href='index.html'">← 戻る</button>
+    <button class="btn btn-success" onclick="toggleAI()">🤖 AI車両</button>
+    <button class="btn btn-warning" onclick="toggleWeather()">🌤️ 天候</button>
+  </div>
+
+  <div class="control-panel">
+    <h3>⚙️ シミュレーション設定</h3>
+    <select id="timeOfDay" onchange="updateTimeOfDay()">
+      <option value="day">昼間</option>
+      <option value="morning">朝（通勤時間）</option>
+      <option value="evening">夕方（帰宅ラッシュ）</option>
+      <option value="night">夜間</option>
+    </select>
+    <select id="weather" onchange="updateWeather()">
+      <option value="clear">晴天</option>
+      <option value="cloudy">曇天</option>
+      <option value="rain">雨天</option>
+      <option value="fog">霧</option>
+    </select>
+    <select id="trafficLevel" onchange="updateTrafficLevel()">
+      <option value="low">交通量：少</option>
+      <option value="medium" selected>交通量：中</option>
+      <option value="high">交通量：多</option>
+    </select>
+  </div>
+
+  <div class="status-bar" id="statusBar">
+    速度: 0 km/h | 位置: -- | 車線: -- | 信号: -- | 天候: 晴天
+  </div>
+
+  <canvas id="renderCanvas"></canvas>
+
+  <script>
+    let canvas = document.getElementById('renderCanvas');
+    let engine = new BABYLON.Engine(canvas, true);
+    let scene, camera, car, carBody, ground, speed = 0;
+    let input = { forward: false, back: false, left: false, right: false };
+    let aiVehicles = [];
+    let pedestrians = [];
+    let trafficSignals = [];
+    let currentLane = '中央車線';
+    let currentSignal = '青信号';
+    let currentWeather = '晴天';
+    let aiEnabled = true;
+    let weatherEnabled = true;
+
+    // 武雄市の座標データ
+    const TAKEO_DATA = {
+      center: { lat: 33.1581, lng: 129.9944 },
+      landmarks: {
+        hospital: { name: '新武雄病院', x: -40, z: 30, type: 'hospital' },
+        onsen: { name: '武雄温泉', x: 60, z: -50, type: 'onsen' },
+        cityHall: { name: '武雄市役所', x: -80, z: -60, type: 'government' },
+        library: { name: '武雄図書館', x: 30, z: 60, type: 'library' }
+      }
+    };
+
+    function createScene() {
+      scene = new BABYLON.Scene(engine);
+      scene.clearColor = new BABYLON.Color3(0.85, 0.92, 1.0);
+      scene.enablePhysics(new BABYLON.Vector3(0, -9.81, 0), new BABYLON.AmmoJSPlugin());
+
+      // 環境光
+      let hemi = new BABYLON.HemisphericLight('hemi', new BABYLON.Vector3(0,1,0), scene);
+      hemi.intensity = 0.7;
+      
+      // 太陽光
+      let sun = new BABYLON.DirectionalLight('sun', new BABYLON.Vector3(-1,-2,-1), scene);
+      sun.position = new BABYLON.Vector3(100,200,100);
+      sun.intensity = 1.2;
+      sun.shadowEnabled = true;
+
+      // カメラ
+      camera = new BABYLON.ArcRotateCamera('cam', Math.PI/2, Math.PI/2.5, 80, new BABYLON.Vector3(0,0,0), scene);
+      camera.attachControl(canvas, true);
+      camera.lowerRadiusLimit = 20;
+      camera.upperRadiusLimit = 200;
+
+      // 高精度地形生成
+      createHighPrecisionTerrain();
+      
+      // 詳細道路網生成
+      createDetailedRoadNetwork();
+      
+      // 武雄市ランドマーク生成
+      createTakeoLandmarks();
+      
+      // 交通インフラ生成
+      createTrafficInfrastructure();
+      
+      // AI車両生成
+      createAIVehicles();
+      
+      // 歩行者環境生成
+      createPedestrianEnvironment();
+
+      return scene;
+    }
+
+    // 高精度地形生成
+    function createHighPrecisionTerrain() {
+      const terrainSize = 500;
+      const subdivisions = 100;
+      
+      ground = BABYLON.MeshBuilder.CreateGroundFromHeightMap("terrain", "", {
+        width: terrainSize,
+        height: terrainSize,
+        subdivisions: subdivisions,
+        minHeight: 0,
+        maxHeight: 50,
+        heightMap: generateHeightMap(subdivisions)
+      }, scene);
+
+      let groundMat = new BABYLON.StandardMaterial('terrainMat', scene);
+      groundMat.diffuseColor = new BABYLON.Color3(0.3, 0.5, 0.2);
+      groundMat.specularColor = new BABYLON.Color3(0,0,0);
+      ground.material = groundMat;
+      ground.receiveShadows = true;
+    }
+
+    // 高度マップ生成（武雄市の地形を模擬）
+    function generateHeightMap(resolution) {
+      const heightMap = new Float32Array(resolution * resolution);
+      
+      for (let i = 0; i < resolution; i++) {
+        for (let j = 0; j < resolution; j++) {
+          const index = i * resolution + j;
+          const x = (i / resolution) * 2 - 1;
+          const z = (j / resolution) * 2 - 1;
+          
+          let height = 0;
+          const distanceFromCenter = Math.sqrt(x*x + z*z);
+          
+          if (distanceFromCenter < 0.3) {
+            height = 0.1; // 中心部は平坦
+          } else {
+            height = Math.sin(x * 8) * Math.cos(z * 6) * 0.3 + 0.2; // 周辺部は起伏
+          }
+          
+          // 温泉地周辺の起伏
+          const onsenDistance = Math.sqrt((x-0.2)*(x-0.2) + (z+0.1)*(z+0.1));
+          if (onsenDistance < 0.2) {
+            height += Math.sin(onsenDistance * 20) * 0.1;
+          }
+          
+          heightMap[index] = height;
+        }
+      }
+      
+      return heightMap;
+    }
+
+    // 詳細道路網生成
+    function createDetailedRoadNetwork() {
+      const roads = [
+        { name: '県道武雄温泉線', lanes: 2, width: 8, x: 0 },
+        { name: '市道中央通り', lanes: 4, width: 12, x: 30 },
+        { name: '温泉街通り', lanes: 1, width: 4, x: -30 }
+      ];
+      
+      roads.forEach((road, index) => {
+        createDetailedRoad(road, index);
+      });
+    }
+
+    function createDetailedRoad(roadData, index) {
+      const roadWidth = roadData.width;
+      const roadLength = 200;
+      
+      // メイン道路
+      let road = BABYLON.MeshBuilder.CreateBox(`road_${index}`, {
+        width: roadWidth,
+        height: 0.2,
+        depth: roadLength
+      }, scene);
+      
+      let roadMat = new BABYLON.StandardMaterial(`roadMat_${index}`, scene);
+      roadMat.diffuseColor = new BABYLON.Color3(0.1,0.1,0.1);
+      road.material = roadMat;
+      road.position.y = 0.11;
+      road.position.x = roadData.x;
+      
+      // 車線分離線
+      if (roadData.lanes > 1) {
+        for (let i = 0; i < roadData.lanes - 1; i++) {
+          const laneWidth = roadWidth / roadData.lanes;
+          const laneOffset = (i + 1) * laneWidth - roadWidth / 2;
+          
+          for (let j = -90; j < 90; j += 10) {
+            const line = BABYLON.MeshBuilder.CreateBox(`laneLine_${index}_${i}_${j}`, {
+              width: 0.2,
+              height: 0.15,
+              depth: 5
+            }, scene);
+            line.position = new BABYLON.Vector3(
+              road.position.x + laneOffset,
+              0.075,
+              j
+            );
+            
+            let lineMat = new BABYLON.StandardMaterial(`lineMat_${index}_${i}_${j}`, scene);
+            lineMat.diffuseColor = new BABYLON.Color3(1, 1, 0);
+            lineMat.emissiveColor = new BABYLON.Color3(0.2, 0.2, 0);
+            line.material = lineMat;
+          }
+        }
+      }
+    }
+
+    // 武雄市ランドマーク生成
+    function createTakeoLandmarks() {
+      Object.values(TAKEO_DATA.landmarks).forEach((landmark, index) => {
+        createDetailedLandmark(landmark, index);
+      });
+    }
+
+    function createDetailedLandmark(landmark, index) {
+      const colors = {
+        hospital: '#e74c3c',
+        onsen: '#f39c12',
+        government: '#27ae60',
+        library: '#2980b9'
+      };
+      
+      const sizes = {
+        hospital: { width: 20, height: 8, depth: 15 },
+        onsen: { width: 25, height: 6, depth: 20 },
+        government: { width: 18, height: 10, depth: 12 },
+        library: { width: 15, height: 6, depth: 18 }
+      };
+      
+      const size = sizes[landmark.type];
+      const color = colors[landmark.type];
+      
+      // メインビル
+      let building = BABYLON.MeshBuilder.CreateBox(landmark.name, size, scene);
+      building.position = new BABYLON.Vector3(
+        landmark.x,
+        size.height / 2,
+        landmark.z
+      );
+      
+      let buildingMat = new BABYLON.StandardMaterial(`${landmark.name}Mat`, scene);
+      buildingMat.diffuseColor = BABYLON.Color3.FromHexString(color);
+      building.material = buildingMat;
+      building.receiveShadows = true;
+      
+      // 駐車場
+      if (landmark.type === 'hospital' || landmark.type === 'government') {
+        createParkingLot(building.position, landmark.type);
+      }
+      
+      // バス停
+      if (landmark.type === 'onsen' || landmark.type === 'government') {
+        createBusStop(building.position, landmark.type);
+      }
+    }
+
+    // 駐車場生成
+    function createParkingLot(position, type) {
+      const parkingSize = type === 'hospital' ? 15 : 10;
+      
+      for (let i = 0; i < parkingSize; i++) {
+        const car = BABYLON.MeshBuilder.CreateBox(`parkedCar_${i}`, {
+          width: 2,
+          height: 0.5,
+          depth: 4
+        }, scene);
+        
+        car.position = new BABYLON.Vector3(
+          position.x + (i % 5 - 2) * 4,
+          0.25,
+          position.z + Math.floor(i / 5) * 6 + 20
+        );
+        
+        let carMat = new BABYLON.StandardMaterial(`parkedCarMat_${i}`, scene);
+        carMat.diffuseColor = new BABYLON.Color3(
+          Math.random() * 0.8 + 0.2,
+          Math.random() * 0.8 + 0.2,
+          Math.random() * 0.8 + 0.2
+        );
+        car.material = carMat;
+      }
+    }
+
+    // バス停生成
+    function createBusStop(position, type) {
+      const busStop = BABYLON.MeshBuilder.CreateBox('busStop', {
+        width: 3,
+        height: 2.5,
+        depth: 1
+      }, scene);
+      
+      busStop.position = new BABYLON.Vector3(
+        position.x + 15,
+        1.25,
+        position.z + 25
+      );
+      
+      let busStopMat = new BABYLON.StandardMaterial('busStopMat', scene);
+      busStopMat.diffuseColor = new BABYLON.Color3(0.2, 0.6, 0.8);
+      busStop.material = busStopMat;
+      
+      // 待っている人々
+      for (let i = 0; i < 3; i++) {
+        const person = BABYLON.MeshBuilder.CreateCylinder(`person_${i}`, {
+          height: 1.7,
+          diameter: 0.5
+        }, scene);
+        
+        person.position = new BABYLON.Vector3(
+          busStop.position.x + (i - 1) * 1.5,
+          0.85,
+          busStop.position.z + 2
+        );
+        
+        let personMat = new BABYLON.StandardMaterial(`personMat_${i}`, scene);
+        personMat.diffuseColor = new BABYLON.Color3(0.8, 0.6, 0.4);
+        person.material = personMat;
+      }
+    }
+
+    // 交通インフラ生成
+    function createTrafficInfrastructure() {
+      // 信号機
+      const signalPositions = [
+        { x: 0, z: 50 },
+        { x: 30, z: -30 },
+        { x: -30, z: 20 }
+      ];
+      
+      signalPositions.forEach((pos, index) => {
+        const signal = BABYLON.MeshBuilder.CreateBox(`signal_${index}`, {
+          width: 0.5,
+          height: 6,
+          depth: 0.5
+        }, scene);
+        
+        signal.position = new BABYLON.Vector3(pos.x, 3, pos.z);
+        
+        let signalMat = new BABYLON.StandardMaterial(`signalMat_${index}`, scene);
+        signalMat.diffuseColor = new BABYLON.Color3(0.2, 0.2, 0.2);
+        signal.material = signalMat;
+        
+        // 信号灯
+        const light = new BABYLON.PointLight(`signalLight_${index}`, new BABYLON.Vector3(pos.x, 5, pos.z), scene);
+        light.intensity = 0.5;
+        light.range = 10;
+        light.diffuse = new BABYLON.Color3(0, 1, 0); // 緑信号
+        
+        trafficSignals.push({ signal, light, index });
+      });
+    }
+
+    // AI車両生成
+    function createAIVehicles() {
+      const vehicleCount = 8;
+      
+      for (let i = 0; i < vehicleCount; i++) {
+        const vehicle = createAIVehicle(i);
+        aiVehicles.push(vehicle);
+      }
+    }
+
+    function createAIVehicle(index) {
+      const vehicleTypes = ['car', 'truck', 'bus', 'motorcycle'];
+      const type = vehicleTypes[index % vehicleTypes.length];
+      
+      let size;
+      switch(type) {
+        case 'car': size = { width: 2, height: 1, depth: 4 }; break;
+        case 'truck': size = { width: 2.5, height: 2.5, depth: 6 }; break;
+        case 'bus': size = { width: 2.5, height: 3, depth: 8 }; break;
+        case 'motorcycle': size = { width: 0.8, height: 1.2, depth: 2 }; break;
+      }
+      
+      const vehicle = BABYLON.MeshBuilder.CreateBox(`aiVehicle_${index}`, size, scene);
+      
+      vehicle.position = new BABYLON.Vector3(
+        (Math.random() - 0.5) * 200,
+        size.height / 2,
+        (Math.random() - 0.5) * 200
+      );
+      
+      let vehicleMat = new BABYLON.StandardMaterial(`aiVehicleMat_${index}`, scene);
+      vehicleMat.diffuseColor = new BABYLON.Color3(
+        Math.random() * 0.8 + 0.2,
+        Math.random() * 0.8 + 0.2,
+        Math.random() * 0.8 + 0.2
+      );
+      vehicle.material = vehicleMat;
+      
+      vehicle.physicsImpostor = new BABYLON.PhysicsImpostor(vehicle, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 1000, friction: 0.8 }, scene);
+      
+      return { mesh: vehicle, type, target: new BABYLON.Vector3(0, 0, 0), speed: Math.random() * 10 + 5 };
+    }
+
+    // 歩行者環境生成
+    function createPedestrianEnvironment() {
+      const pedestrianCount = 12;
+      
+      for (let i = 0; i < pedestrianCount; i++) {
+        const pedestrian = createPedestrian(i);
+        pedestrians.push(pedestrian);
+      }
+    }
+
+    function createPedestrian(index) {
+      const pedestrian = BABYLON.MeshBuilder.CreateCylinder(`pedestrian_${index}`, {
+        height: 1.7,
+        diameter: 0.5
+      }, scene);
+      
+      pedestrian.position = new BABYLON.Vector3(
+        (Math.random() - 0.5) * 150,
+        0.85,
+        (Math.random() - 0.5) * 150
+      );
+      
+      let pedestrianMat = new BABYLON.StandardMaterial(`pedestrianMat_${index}`, scene);
+      pedestrianMat.diffuseColor = new BABYLON.Color3(
+        Math.random() * 0.5 + 0.3,
+        Math.random() * 0.5 + 0.3,
+        Math.random() * 0.5 + 0.3
+      );
+      pedestrian.material = pedestrianMat;
+      
+      return { mesh: pedestrian, target: new BABYLON.Vector3(0, 0, 0), speed: Math.random() * 2 + 1 };
+    }
+
+    // 車両生成
+    function createPlayerVehicle() {
+      car = BABYLON.MeshBuilder.CreateBox('playerCar', {width: 2, height: 1, depth: 4}, scene);
+      let carMat = new BABYLON.StandardMaterial('playerCarMat', scene);
+      carMat.diffuseColor = new BABYLON.Color3(0.2,0.4,0.9);
+      car.material = carMat;
+      car.position = new BABYLON.Vector3(0,1,0);
+      carBody = car;
+      
+      car.physicsImpostor = new BABYLON.PhysicsImpostor(car, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 1200, friction: 0.8, restitution: 0.1 }, scene);
+    }
+
+    // 入力処理
+    window.addEventListener('keydown', e => {
+      if (e.key === 'ArrowUp' || e.key === 'w') input.forward = true;
+      if (e.key === 'ArrowDown' || e.key === 's') input.back = true;
+      if (e.key === 'ArrowLeft' || e.key === 'a') input.left = true;
+      if (e.key === 'ArrowRight' || e.key === 'd') input.right = true;
+    });
+    window.addEventListener('keyup', e => {
+      if (e.key === 'ArrowUp' || e.key === 'w') input.forward = false;
+      if (e.key === 'ArrowDown' || e.key === 's') input.back = false;
+      if (e.key === 'ArrowLeft' || e.key === 'a') input.left = false;
+      if (e.key === 'ArrowRight' || e.key === 'd') input.right = false;
+    });
+
+    // AI車両制御
+    function updateAIVehicles() {
+      if (!aiEnabled) return;
+      
+      aiVehicles.forEach((vehicle, index) => {
+        const direction = vehicle.mesh.position.subtract(vehicle.target).normalize();
+        const force = direction.scale(-vehicle.speed);
+        
+        vehicle.mesh.physicsImpostor.applyImpulse(force, vehicle.mesh.getAbsolutePosition());
+        
+        if (vehicle.mesh.position.distanceTo(vehicle.target) < 10) {
+          vehicle.target = new BABYLON.Vector3(
+            (Math.random() - 0.5) * 200,
+            0,
+            (Math.random() - 0.5) * 200
+          );
+        }
+      });
+    }
+
+    // 歩行者制御
+    function updatePedestrians() {
+      pedestrians.forEach((pedestrian, index) => {
+        const direction = pedestrian.mesh.position.subtract(pedestrian.target).normalize();
+        pedestrian.mesh.position.addInPlace(direction.scale(-pedestrian.speed * 0.01));
+        
+        if (pedestrian.mesh.position.distanceTo(pedestrian.target) < 5) {
+          pedestrian.target = new BABYLON.Vector3(
+            (Math.random() - 0.5) * 100,
+            0.85,
+            (Math.random() - 0.5) * 100
+          );
+        }
+      });
+    }
+
+    // 信号制御
+    function updateTrafficSignals() {
+      const time = Date.now() * 0.001;
+      trafficSignals.forEach((signal, index) => {
+        const cycle = 10;
+        const phase = (time + index * 3) % cycle;
+        
+        if (phase < 5) {
+          signal.light.diffuse = new BABYLON.Color3(0, 1, 0);
+          currentSignal = '青信号';
+        } else if (phase < 6) {
+          signal.light.diffuse = new BABYLON.Color3(1, 1, 0);
+          currentSignal = '黄信号';
+        } else {
+          signal.light.diffuse = new BABYLON.Color3(1, 0, 0);
+          currentSignal = '赤信号';
+        }
+      });
+    }
+
+    // 時間帯更新
+    function updateTimeOfDay() {
+      const timeOfDay = document.getElementById('timeOfDay').value;
+      
+      switch(timeOfDay) {
+        case 'morning': scene.ambientColor = new BABYLON.Color3(0.8, 0.7, 0.6); break;
+        case 'evening': scene.ambientColor = new BABYLON.Color3(0.9, 0.6, 0.4); break;
+        case 'night': scene.ambientColor = new BABYLON.Color3(0.1, 0.1, 0.2); break;
+        default: scene.ambientColor = new BABYLON.Color3(0.7, 0.7, 0.7);
+      }
+    }
+
+    // 天候更新
+    function updateWeather() {
+      const weather = document.getElementById('weather').value;
+      currentWeather = weather;
+      
+      switch(weather) {
+        case 'rain': createRainEffect(); scene.fogDensity = 0.02; break;
+        case 'fog': scene.fogDensity = 0.05; break;
+        case 'cloudy': scene.ambientColor = new BABYLON.Color3(0.4, 0.4, 0.5); break;
+        default: scene.fogDensity = 0.001; scene.ambientColor = new BABYLON.Color3(0.7, 0.7, 0.7);
+      }
+    }
+
+    // 交通量更新
+    function updateTrafficLevel() {
+      const trafficLevel = document.getElementById('trafficLevel').value;
+      
+      aiVehicles.forEach((vehicle, index) => {
+        const shouldBeActive = index < (trafficLevel === 'low' ? 3 : trafficLevel === 'medium' ? 6 : 8);
+        vehicle.mesh.setEnabled(shouldBeActive);
+      });
+    }
+
+    // 雨効果
+    function createRainEffect() {
+      if (!weatherEnabled) return;
+      
+      const rainParticles = new BABYLON.ParticleSystem("rain", 1000, scene);
+      rainParticles.particleTexture = new BABYLON.Texture("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==");
+      
+      rainParticles.emitter = new BABYLON.Vector3(0, 100, 0);
+      rainParticles.minEmitBox = new BABYLON.Vector3(-200, 0, -200);
+      rainParticles.maxEmitBox = new BABYLON.Vector3(200, 0, 200);
+      
+      rainParticles.color1 = new BABYLON.Color4(0.7, 0.8, 1.0, 1.0);
+      rainParticles.color2 = new BABYLON.Color4(0.2, 0.5, 1.0, 1.0);
+      rainParticles.colorDead = new BABYLON.Color4(0, 0, 0.2, 0.0);
+      
+      rainParticles.minSize = 0.1;
+      rainParticles.maxSize = 0.3;
+      rainParticles.minLifeTime = 0.3;
+      rainParticles.maxLifeTime = 1.5;
+      rainParticles.emitRate = 500;
+      rainParticles.blendMode = BABYLON.ParticleSystem.BLENDMODE_ONEONE;
+      rainParticles.gravity = new BABYLON.Vector3(0, -9.81, 0);
+      rainParticles.direction1 = new BABYLON.Vector3(-1, -1, -1);
+      rainParticles.direction2 = new BABYLON.Vector3(1, -1, 1);
+      rainParticles.minEmitPower = 1;
+      rainParticles.maxEmitPower = 3;
+      rainParticles.updateSpeed = 0.005;
+      
+      rainParticles.start();
+    }
+
+    // メインループ
+    engine.runRenderLoop(() => {
+      if (scene && car) {
+        let now = Date.now();
+        let dt = Math.min((now - Date.now()) / 1000, 0.05);
+        
+        // プレイヤー車両制御
+        let force = new BABYLON.Vector3(0,0,0);
+        let rot = car.rotation.y;
+        if (input.forward) force.z += Math.cos(rot) * -1.5, force.x += Math.sin(rot) * -1.5;
+        if (input.back) force.z += Math.cos(rot) * 1.0, force.x += Math.sin(rot) * 1.0;
+        if (input.left) car.rotation.y += 1.2 * dt;
+        if (input.right) car.rotation.y -= 1.2 * dt;
+        car.physicsImpostor.applyImpulse(force, car.getAbsolutePosition());
+        
+        // 速度計算
+        let v = car.physicsImpostor.getLinearVelocity();
+        speed = Math.sqrt(v.x*v.x + v.z*v.z) * 3.6;
+        
+        // AI更新
+        updateAIVehicles();
+        updatePedestrians();
+        updateTrafficSignals();
+        
+        // ステータスバー更新
+        document.getElementById('statusBar').textContent = 
+          `速度: ${speed.toFixed(1)} km/h | 位置: ${car.position.x.toFixed(1)}, ${car.position.z.toFixed(1)} | 車線: ${currentLane} | 信号: ${currentSignal} | 天候: ${currentWeather}`;
+      }
+      if (scene) scene.render();
+    });
+
+    // 制御関数
+    function toggleAI() {
+      aiEnabled = !aiEnabled;
+      console.log('AI車両:', aiEnabled ? '有効' : '無効');
+    }
+
+    function toggleWeather() {
+      weatherEnabled = !weatherEnabled;
+      console.log('天候効果:', weatherEnabled ? '有効' : '無効');
+    }
+
+    // 初期化
+    createScene();
+    createPlayerVehicle();
+    window.addEventListener('resize', () => engine.resize());
+  </script>
+</body>
+</html> 

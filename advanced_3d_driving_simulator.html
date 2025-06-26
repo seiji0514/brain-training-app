@@ -1,0 +1,231 @@
+  <div id="message">
+    スクリプトを読み込み中...
+  </div>
+
+  <script>
+    window.onload = function() {
+      'use strict';
+
+      function checkLibraries() {
+        if (typeof THREE === 'undefined') return { error: true, message: 'エラー: Three.jsが読み込めませんでした。' };
+        if (typeof Physijs === 'undefined') return { error: true, message: 'エラー: Physijsが読み込めませんでした。' };
+        return { error: false };
+      }
+
+      const libCheck = checkLibraries();
+      if (libCheck.error) {
+        const message = document.getElementById('message');
+        message.innerHTML = libCheck.message + "<br>ネットワーク接続を確認し、ページを再読み込みしてください。";
+        message.style.color = 'red';
+        message.style.display = 'block';
+        return;
+      }
+
+      Physijs.scripts.worker = 'https://cdn.jsdelivr.net/npm/physijs@1.0.4/physi-worker.js';
+      Physijs.scripts.ammo = 'https://cdn.jsdelivr.net/npm/ammo.js@0.0.10/ammo.js';
+
+      let scene, camera, renderer, car;
+      let clock = new THREE.Clock();
+
+      const controls = {
+          forward: false,
+          backward: false,
+          left: false,
+          right: false
+      };
+      
+      let vehicle, ground;
+      let gameStarted = false;
+
+      function log(message) {
+        console.log('[Sim Debug]', message);
+      }
+
+      function init() {
+          try {
+            log('初期化開始');
+
+            scene = new Physijs.Scene();
+            log('シーンを作成しました');
+            scene.setGravity(new THREE.Vector3(0, -9.8, 0));
+            log('重力を設定しました');
+
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 5, 10);
+            camera.lookAt(scene.position);
+            log('カメラを作成しました');
+
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.shadowMap.enabled = true;
+            document.getElementById('container').appendChild(renderer.domElement);
+            log('レンダラーを作成しました');
+            
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(10, 20, 10);
+            directionalLight.castShadow = true;
+            scene.add(directionalLight);
+            log('ライトを作成しました');
+
+            createGround();
+            createCar();
+            
+            window.addEventListener('resize', onWindowResize, false);
+            document.addEventListener('keydown', onKeyDown);
+            document.addEventListener('keyup', onKeyUp);
+            
+            const messageEl = document.getElementById('message');
+            messageEl.innerHTML = "クリックして開始<br>W/S/A/D: 操作 | R: ギアアップ | F: ギアシフトダウン";
+            messageEl.style.display = 'block';
+
+            messageEl.addEventListener('click', () => {
+              if (gameStarted) return;
+              messageEl.style.display = 'none';
+              gameStarted = true;
+              log('ゲーム開始');
+              animate();
+            });
+
+            log('初期化完了');
+
+          } catch (e) {
+            console.error("初期化中にエラーが発生しました:", e);
+            const message = document.getElementById('message');
+            message.innerHTML = "エラーが発生しました。<br>コンソールを確認してください。";
+            message.style.display = 'block';
+            message.style.color = 'red';
+          }
+      }
+
+      function createGround() {
+          const groundMaterial = Physijs.createMaterial(
+              new THREE.MeshStandardMaterial({ color: 0x808080 }),
+              0.8, 
+              0.4
+          );
+          const groundGeometry = new THREE.PlaneGeometry(500, 500);
+          ground = new Physijs.PlaneMesh(groundGeometry, groundMaterial, 0);
+          ground.rotation.x = -Math.PI / 2;
+          ground.receiveShadow = true;
+          scene.add(ground);
+          log('地面を作成しました');
+      }
+      
+      function createCar() {
+          const carMaterial = Physijs.createMaterial(
+              new THREE.MeshStandardMaterial({ color: 0xff4422 }),
+              0.8,
+              0.2
+          );
+          
+          const carGeometry = new THREE.BoxGeometry(2, 1, 4);
+          const carBody = new Physijs.BoxMesh(carGeometry, carMaterial, 800);
+          carBody.position.set(0, 1, 0);
+          carBody.castShadow = true;
+          scene.add(carBody);
+          
+          vehicle = new Physijs.Vehicle(carBody, new Physijs.VehicleTuning(
+              10.88, 1.83, 0.28, 500, 10.5, 6000
+          ));
+          
+          scene.add(vehicle);
+          
+          const wheelMaterial = Physijs.createMaterial(
+              new THREE.MeshStandardMaterial({ color: 0x333333 }),
+              0.9, 0.5
+          );
+          const wheelGeometry = new THREE.CylinderGeometry(0.4, 0.4, 0.3, 18);
+          
+          vehicle.addWheel(wheelGeometry, wheelMaterial, new THREE.Vector3(-1.1, 0.5, 1.5), new THREE.Vector3(0, -1, 0), new THREE.Vector3(-1, 0, 0), 0.5, 0.3, true);
+          vehicle.addWheel(wheelGeometry, wheelMaterial, new THREE.Vector3(1.1, 0.5, 1.5), new THREE.Vector3(0, -1, 0), new THREE.Vector3(-1, 0, 0), 0.5, 0.3, true);
+          vehicle.addWheel(wheelGeometry, wheelMaterial, new THREE.Vector3(-1.1, 0.5, -1.5), new THREE.Vector3(0, -1, 0), new THREE.Vector3(-1, 0, 0), 0.5, 0.3, false);
+          vehicle.addWheel(wheelGeometry, wheelMaterial, new THREE.Vector3(1.1, 0.5, -1.5), new THREE.Vector3(0, -1, 0), new THREE.Vector3(-1, 0, 0), 0.5, 0.3, false);
+          log('車を作成しました');
+      }
+
+      function onKeyDown(e) {
+          switch(e.code) {
+              case 'KeyW': controls.forward = true; break;
+              case 'KeyS': controls.backward = true; break;
+              case 'KeyA': controls.left = true; break;
+              case 'KeyD': controls.right = true; break;
+          }
+      }
+
+      function onKeyUp(e) {
+          switch(e.code) {
+              case 'KeyW': controls.forward = false; break;
+              case 'KeyS': controls.backward = false; break;
+              case 'KeyA': controls.left = false; break;
+              case 'KeyD': controls.right = false; break;
+          }
+      }
+
+      function onWindowResize() {
+          if (!camera || !renderer) return;
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+
+      function update() {
+          const maxSteering = 0.6;
+          const maxForce = 2000;
+          let force = 0;
+          let steering = 0;
+
+          if (controls.forward) force = maxForce;
+          if (controls.backward) force = -maxForce / 2;
+          if (controls.left) steering = maxSteering;
+          if (controls.right) steering = -maxSteering;
+
+          if (vehicle) {
+            vehicle.setSteering(steering, 0);
+            vehicle.setSteering(steering, 1);
+            vehicle.applyEngineForce(force, 2);
+            vehicle.applyEngineForce(force, 3);
+            
+            const speedKmh = vehicle.mesh.getLinearVelocity().length() * 3.6;
+            document.getElementById('speed').innerText = Math.round(speedKmh);
+            document.getElementById('rpm').innerText = controls.forward ? Math.round(800 + speedKmh * 50) : 800;
+            document.getElementById('gear').innerText = speedKmh > 50 ? '3' : speedKmh > 20 ? '2' : '1';
+
+            const carPosition = vehicle.mesh.position.clone();
+            const carQuaternion = vehicle.mesh.quaternion.clone();
+            const cameraOffset = new THREE.Vector3(0, 5, -10);
+            cameraOffset.applyQuaternion(carQuaternion);
+            camera.position.copy(carPosition).add(cameraOffset);
+            camera.lookAt(carPosition);
+          }
+      }
+      
+      function animate() {
+          if (!gameStarted) return;
+          
+          try {
+            requestAnimationFrame(animate);
+            update();
+            if (scene) {
+              scene.simulate(undefined, 1); 
+            }
+            if (renderer && scene && camera) {
+              renderer.render(scene, camera);
+            }
+          } catch(e) {
+            console.error("アニメーションループでエラー:", e);
+            const message = document.getElementById('message');
+            message.innerHTML = "ランタイムエラーが発生しました。<br>コンソールを確認してください。";
+            message.style.display = 'block';
+            message.style.color = 'red';
+            gameStarted = false; // Stop the loop
+          }
+      }
+
+      init();
+    };
+  </script>
+</body>
+</html> 

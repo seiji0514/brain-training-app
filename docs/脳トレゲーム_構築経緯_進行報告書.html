@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>脳トレゲーム 構築経緯・進行報告書</title>
+    <style>
+        @media print {
+            body { margin: 0; }
+            .no-print { display: none; }
+            .page-break { page-break-before: always; }
+        }
+        
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            font-size: 18px;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+        h1, h2, h3 {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 16px;
+        }
+        
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .print-btn:hover {
+            background: #2980b9;
+        }
+        
+        .approval-section {
+            border: 2px solid #333;
+            padding: 20px;
+            margin: 30px 0;
+            background: #f9f9f9;
+        }
+        
+        .approval-section h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .approval-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .approval-item {
+            border: 1px solid #ccc;
+            padding: 15px;
+            background: white;
+        }
+        
+        .approval-item h4 {
+            margin: 0 0 10px 0;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .approval-field {
+            margin-bottom: 15px;
+        }
+        
+        .approval-field label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+        
+        .approval-field input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            font-size: 12px;
+        }
+        
+        .approval-field textarea {
+            width: 100%;
+            height: 60px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            resize: vertical;
+            font-size: 12px;
+        }
+        
+        @media (max-width: 768px) {
+            .approval-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="print-btn no-print" onclick="window.print()">
+        🖨️ 印刷
+    </button>
+
+<pre>
+【表紙】
+
+脳トレゲームシステム 構築経緯・進行報告書
+
+作成日：2025年6月21日
+作成者：小川 清志　医療AIソリューションアーキテクト（リハビリ用AIゲーム開発・運用担当）
+
+【1. プロジェクト概要・目的】
+- 院内Wi-Fi限定でスタッフ・利用者が安全に利用できる脳トレゲームサイトを構築・運用する。
+- 管理者・スタッフ・利用者のアカウント分離と、管理画面からのゲーム内容編集を実現する。
+- 本番運用・引き継ぎ・トラブル対応も見据えた設計・運用を目指す。
+
+【2. 制作動機・経緯】
+2025年5月22日、当院で手術およびリハビリ等のために入院。リハビリスタッフのiPadで入院患者向けに数字順番探しゲームを実施しているのを見て、「自分にも作れるのでは」と考え開発を開始。スタッフの高評価・要望を受け、本格的に脳トレゲームおよびversion2を構築。情報セキュリティ対策も徹底。
+本年7月3日には再度入院予定。入院中に完全構築・提出書類の整備・リハビリテーション課長様および情報システム担当者様への申請を進める計画。
+医療法人 巨樹の会様のすべてのリハビリスタッフ様にご活用いただくことを目指す。
+
+【3. 障害について】
+- 総合等級 3級、両下肢 3級、上肢 6級、手帳取得年齢41歳（平成27年）
+- 難治性腰下肢痛のため自宅ではリハビリを兼ねて自力歩行、外出時は電動車椅子
+- 主治医より「数年後には歩けなくなる可能性」と宣告、車椅子利用
+- 両下肢（特に左下肢）の痺れと左腰の痛み
+- 普通自動車第1種運転免許は令和元年に返納、運転経歴証明書所持
+- 難治性腰下肢痛（腰椎椎間板ヘルニア術後）、脊髄刺激療法（SCS）実施中
+- 逆流性食道炎、緑内障（右目）、両肩峰下インシデント症候群、腸閉塞（完治）、糖尿病、多汗症等も治療・経過観察中
+- SCSの仕組みや注意点、家庭・職場での注意事項も記載
+
+【4. 就業・勤務形態、業務貢献】
+- 完全在宅勤務（フルリモート）
+- 下肢障害により立ち仕事・力仕事は困難、上半身は支障なく使用可能
+- パソコンスキルを活かした業務効率化が可能
+
+【5. 資格・認定】
+- マイクロソフトオフィススペシャリスト（MOS）Excel2013
+- アクセシビリティ検査技術者検定レベル1（初級）令和2年3月
+- アクセシビリティ検査技術者検定レベル2（中級）令和2年4月
+- アクセシビリティ検査技術者検定レベル3（上級）令和2年4月
+
+【6. 制作実績・サイト構築経緯】
+- AIセキュリティ分析ツール、AI音声生成ツール、AI作成ツールPro、AI自動プログラミング補助ツール、julia言語学習サイト、PC創作システム、Python学習サイト、高度QRコード生成ツール、参照帳票デザイン支援ツール、動画再生・画像生成ツール、チャットボット、カレンダー・TODO管理など、多種多様なシステム・ツールを開発
+- 脳トレゲームシステム：院内Wi-Fi限定でスタッフ・利用者が安全に利用できるWebシステムを構築。管理者・スタッフ・利用者のアカウント分離、管理画面からのゲーム内容編集、DB連携による柔軟な運用を実現。サーバー常時稼働（PM2）、バックアップ・障害時復旧手順も整備。アクセシビリティや現場の使いやすさを重視した設計
+- サイト構築の経緯：現場の課題や要望をヒアリングし、実際の運用に即したシステムを提案・開発。障害当事者の視点を活かし、バリアフリーなIT環境づくりに注力。継続的な改善・運用サポートも実施
+
+【PC運用・構築経験】
+
+■システム環境
+- Windows環境でのサーバー構築（Node.js + Express + PM2）
+- SQLiteデータベース連携による柔軟な運用
+- リモートデスクトップ・VPNによる遠隔管理
+- バックアップ・障害復旧手順の整備
+
+■開発・運用実績
+- 脳トレゲーム等のWebアプリケーション開発
+- アクセシビリティを重視したUI/UX設計
+- セキュリティ対策（情報処理安全確保支援士試験受験経験あり）
+- 趣味から本格的な運用・構築への発展
+
+■法令遵守・セキュリティ対策
+- 個人情報保護法に基づくデータ管理
+- 医療情報システムの安全管理措置の実施
+- アクセス権限の適切な設定と管理
+- セキュリティポリシーの策定と運用
+- 定期的なセキュリティ監査の実施
+- インシデント対応手順の整備
+
+【法令遵守の詳細】
+
+1. 個人情報保護関連
+- 個人情報保護法
+  - 個人情報の適切な取得・利用・管理
+  - 個人情報の漏洩防止措置
+  - 個人情報の開示・訂正・利用停止への対応
+- 医療・介護関係事業者における個人情報の適切な取扱いのためのガイダンス
+  - 医療情報の取り扱い基準
+  - アクセス権限の管理
+  - セキュリティ対策の実施
+
+2. 医療情報システム関連
+- 厚生労働省ガイドライン
+  - 医療・介護関係事業者における個人情報の適切な取扱いのためのガイダンス
+  - 医療・介護関係事業者における個人情報の漏えい等の事案が発生した場合の対応等に関するガイダンス
+
+3. セキュリティ関連
+- サイバーセキュリティ基本法
+  - サイバーセキュリティ対策の基本方針
+  - 重要インフラの保護
+  - インシデント対応
+- 不正アクセス禁止法
+  - 不正アクセス行為の禁止
+  - セキュリティ対策の実施
+  - インシデント発生時の対応
+
+4. アクセシビリティ関連
+- バリアフリー法
+  - 情報アクセシビリティの確保
+  - ユニバーサルデザインの考慮
+- 障害者差別解消法
+  - 合理的配慮の提供
+  - アクセシビリティの確保
+
+5. 著作権関連
+- 著作権法
+  - ソフトウェアの利用許諾
+  - コンテンツの利用権限
+  - オープンソースライセンスの遵守
+
+6. 労働関連
+- 労働基準法
+  - システム運用時の労働時間管理
+  - 休憩時間の確保
+  - 安全衛生管理
+
+7. その他の関連法令
+- e-文書法
+  - 電子文書の法的効力
+  - 電子署名の要件
+- 不正競争防止法
+  - 営業秘密の保護
+  - 技術情報の管理
+
+【7. 今後の計画・スケジュール】
+- サーバー・ネットワーク準備、DB設計・初期化（6/10～6/12）
+- サーバーアプリ実装（API・認証・PM2）（6/13～6/16）
+- 管理画面実装（編集UI・API連携）（6/17～6/20）
+- トップ画面・脳トレ改善版の動的化（6/21～6/24）
+- テスト・動作確認、バックアップ・復旧テスト（6/25～6/26）
+- ドキュメント整備（6/27～6/28）
+- 最終確認・リリース準備（6/29～6/30）
+
+【8. 連絡先】
+- Email: kaho052514@gmail.com
+- LINE: https://line.me/R/ti/p/@440cqgno
+
+---
+
+※進行中の内容も含め、毎朝6時～8時に進捗報告を行います。
+</pre>
+
+<div class="page-break"></div>
+
+<!-- 課長様・承認者向け確認欄 -->
+<div class="approval-section">
+    <h3>【課長様・承認者向け確認欄】</h3>
+    <div class="approval-grid">
+        <div class="approval-item">
+            <h4>構築経緯確認</h4>
+            <div class="approval-field">
+                <label>システム構築の経緯・目的について確認</label>
+                <textarea placeholder="確認内容を記入してください"></textarea>
+            </div>
+            <div class="approval-field">
+                <label>承認者名</label>
+                <input type="text" placeholder="氏名を記入">
+            </div>
+            <div class="approval-field">
+                <label>承認日</label>
+                <input type="date">
+            </div>
+        </div>
+        
+        <div class="approval-item">
+            <h4>進行状況確認</h4>
+            <div class="approval-field">
+                <label>進行状況・スケジュールについて確認</label>
+                <textarea placeholder="確認内容を記入してください"></textarea>
+            </div>
+            <div class="approval-field">
+                <label>承認者名</label>
+                <input type="text" placeholder="氏名を記入">
+            </div>
+            <div class="approval-field">
+                <label>承認日</label>
+                <input type="date">
+            </div>
+        </div>
+    </div>
+    
+    <div class="approval-grid">
+        <div class="approval-item">
+            <h4>技術仕様確認</h4>
+            <div class="approval-field">
+                <label>技術仕様・アーキテクチャについて確認</label>
+                <textarea placeholder="確認内容を記入してください"></textarea>
+            </div>
+            <div class="approval-field">
+                <label>承認者名</label>
+                <input type="text" placeholder="氏名を記入">
+            </div>
+            <div class="approval-field">
+                <label>承認日</label>
+                <input type="date">
+            </div>
+        </div>
+        
+        <div class="approval-item">
+            <h4>法令遵守確認</h4>
+            <div class="approval-field">
+                <label>法令遵守・セキュリティ対策について確認</label>
+                <textarea placeholder="確認内容を記入してください"></textarea>
+            </div>
+            <div class="approval-field">
+                <label>承認者名</label>
+                <input type="text" placeholder="氏名を記入">
+            </div>
+            <div class="approval-field">
+                <label>承認日</label>
+                <input type="date">
+            </div>
+        </div>
+    </div>
+    
+    <div class="approval-grid">
+        <div class="approval-item">
+            <h4>運用体制確認</h4>
+            <div class="approval-field">
+                <label>運用体制・責任者について確認</label>
+                <textarea placeholder="確認内容を記入してください"></textarea>
+            </div>
+            <div class="approval-field">
+                <label>承認者名</label>
+                <input type="text" placeholder="氏名を記入">
+            </div>
+            <div class="approval-field">
+                <label>承認日</label>
+                <input type="date">
+            </div>
+        </div>
+        
+        <div class="approval-item">
+            <h4>最終承認</h4>
+            <div class="approval-field">
+                <label>構築経緯・進行報告書の最終承認</label>
+                <textarea placeholder="承認内容を記入してください"></textarea>
+            </div>
+            <div class="approval-field">
+                <label>承認者名</label>
+                <input type="text" placeholder="氏名を記入">
+            </div>
+            <div class="approval-field">
+                <label>承認日</label>
+                <input type="date">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html> 

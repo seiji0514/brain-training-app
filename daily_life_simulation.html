@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生活動作シミュレーション</title>
+  <style>
+    body { background: #eef1f5; font-family: 'Segoe UI', 'Meiryo', sans-serif; margin: 0; }
+    .container { max-width: 520px; margin: 40px auto; background: #fff; border-radius: 18px; box-shadow: 0 2px 12px #dbe6f3; padding: 2em; text-align: center; }
+    .title { font-size: 1.5em; color: #2574c7; font-weight: bold; margin-bottom: 0.5em; }
+    .desc { color: #555; margin-bottom: 1.5em; }
+    .question { font-size: 1.1em; margin: 1.5em 0 1em 0; color: #2574c7; }
+    .steps-list { list-style: none; padding: 0; margin: 0 auto 1.5em auto; max-width: 320px; }
+    .steps-list li {
+      background: #f5f6fa;
+      border: 1.5px solid #b0c4de;
+      border-radius: 8px;
+      padding: 0.8em 1em;
+      margin-bottom: 0.7em;
+      font-size: 1.1em;
+      cursor: grab;
+      transition: background 0.2s, border 0.2s;
+      user-select: none;
+    }
+    .steps-list li.dragging { opacity: 0.5; }
+    .steps-list li.over { border: 2.5px dashed #2574c7; background: #eaf3fc; }
+    .btn { background: #2574c7; color: #fff; border: none; border-radius: 6px; padding: 0.7em 1.5em; font-size: 1.1em; cursor: pointer; margin-top: 1em; }
+    .btn:hover { background: #1a5ca8; }
+    .result { font-size: 1.2em; margin-top: 1.5em; color: #2574c7; }
+    .answer { background: #f9fbe7; border-radius: 8px; padding: 1em; margin-top: 1em; color: #888; font-size: 1em; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">生活動作シミュレーション</div>
+    <div class="desc">バラバラになった生活動作の手順を、正しい順番に並べ替えてください。</div>
+    <div class="question" id="question"></div>
+    <ul class="steps-list" id="stepsList"></ul>
+    <button class="btn" id="checkBtn">判定</button>
+    <button class="btn" id="nextBtn" style="display:none;">次の問題</button>
+    <div class="result" id="result"></div>
+    <div class="answer" id="answer" style="display:none;"></div>
+  </div>
+  <script>
+    // 問題データ
+    const questions = [
+      { q: '朝起きたら最初にすることは？', answer: '顔を洗う', choices: ['顔を洗う', 'ごはんを食べる', '外に出る', '寝る'] },
+      { q: 'ごはんを食べる前にすることは？', answer: '手を洗う', choices: ['手を洗う', 'テレビを見る', '薬を飲む', '寝る'] },
+      { q: '外出から帰ったらまず何をしますか？', answer: '手を洗う', choices: ['手を洗う', '靴を脱ぐ', '帽子を脱ぐ', 'テレビをつける'] },
+      { q: 'お風呂に入る前にすることは？', answer: '服を脱ぐ', choices: ['服を脱ぐ', '歯を磨く', 'ごはんを食べる', '薬を飲む'] },
+      { q: '歯を磨くときに使うものは？', answer: '歯ブラシ', choices: ['歯ブラシ', 'タオル', 'コップ', '石けん'] },
+      // 追加分
+      { q: '薬を飲むときに必要なものは？', answer: '水', choices: ['水', 'お茶', 'ジュース', '牛乳'] },
+      { q: '洗濯物を干すときに使うものは？', answer: '洗濯ばさみ', choices: ['洗濯ばさみ', 'タオル', '石けん', '歯ブラシ'] },
+      { q: 'ゴミを出すときに使うものは？', answer: 'ゴミ袋', choices: ['ゴミ袋', 'タオル', 'コップ', '靴'] },
+      { q: '買い物に行くときに持っていくものは？', answer: '財布', choices: ['財布', '歯ブラシ', 'タオル', 'コップ'] },
+      { q: '寝る前にすることは？', answer: '歯を磨く', choices: ['歯を磨く', '顔を洗う', 'ごはんを食べる', '薬を飲む'] }
+    ];
+    let current = 0;
+    let userSteps = [];
+
+    const questionElem = document.getElementById('question');
+    const stepsList = document.getElementById('stepsList');
+    const checkBtn = document.getElementById('checkBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const resultElem = document.getElementById('result');
+    const answerElem = document.getElementById('answer');
+
+    function shuffle(arr) {
+      return arr.map(v=>[v,Math.random()]).sort((a,b)=>a[1]-b[1]).map(v=>v[0]);
+    }
+
+    function renderQuestion() {
+      const q = questions[current];
+      questionElem.textContent = q.q;
+        userSteps = shuffle([...q.choices]);
+        renderSteps();
+        resultElem.textContent = '';
+        answerElem.style.display = 'none';
+        answerElem.textContent = '';
+        checkBtn.style.display = '';
+        nextBtn.style.display = 'none';
+    }
+
+    function renderSteps(disableDrag) {
+      stepsList.innerHTML = '';
+      userSteps.forEach((step, idx) => {
+        const li = document.createElement('li');
+        li.textContent = step;
+        li.dataset.idx = idx;
+          li.draggable = true;
+          // Dragイベント
+          li.addEventListener('dragstart', dragStart);
+          li.addEventListener('dragover', dragOver);
+          li.addEventListener('drop', drop);
+          li.addEventListener('dragend', dragEnd);
+        stepsList.appendChild(li);
+      });
+    }
+
+    let dragSrcIdx = null;
+    function dragStart(e) {
+      dragSrcIdx = +e.target.dataset.idx;
+      e.target.classList.add('dragging');
+    }
+    function dragOver(e) {
+      e.preventDefault();
+      if (e.target.tagName === 'LI') e.target.classList.add('over');
+    }
+    function dragEnd(e) {
+      e.target.classList.remove('dragging');
+      stepsList.querySelectorAll('.over').forEach(el=>el.classList.remove('over'));
+    }
+    function drop(e) {
+      e.preventDefault();
+      const tgtIdx = +e.target.dataset.idx;
+      if (dragSrcIdx === null || dragSrcIdx === tgtIdx) return;
+      // 並べ替え
+      const moved = userSteps.splice(dragSrcIdx,1)[0];
+      userSteps.splice(tgtIdx,0,moved);
+      renderSteps();
+    }
+
+    checkBtn.onclick = () => {
+      const q = questions[current];
+      let ok = true;
+      for(let i=0;i<q.choices.length;i++){
+        if(userSteps[i]!==q.choices[i]) ok=false;
+      }
+      if(ok){
+        resultElem.textContent = '正解！よくできました。';
+        answerElem.style.display = 'none';
+      }else{
+        resultElem.textContent = '不正解… 正しい順番を確認しましょう。';
+        answerElem.style.display = 'block';
+        answerElem.innerHTML = '<b>正しい順番：</b><br>' + q.choices.map((s,i)=>`${i+1}. ${s}`).join('<br>');
+      }
+      checkBtn.style.display = 'none';
+      nextBtn.style.display = '';
+    };
+    nextBtn.onclick = () => {
+      current++;
+      if(current>=questions.length){
+        resultElem.textContent = '全ての問題が終了しました！お疲れさまでした。';
+        stepsList.innerHTML = '';
+        questionElem.textContent = '';
+        nextBtn.style.display = 'none';
+        answerElem.style.display = 'none';
+      }else{
+        renderQuestion();
+      }
+    };
+
+    // 初期表示
+    renderQuestion();
+  </script>
+</body>
+</html> 

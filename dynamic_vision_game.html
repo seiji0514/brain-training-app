@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>動体視力トレーニング</title>
+  <style>
+    body { background:#eef1f5; font-family:'Segoe UI','Meiryo',sans-serif; margin:0; }
+    .container { max-width:500px; margin:2em auto; background:#fff; border-radius:18px; box-shadow:0 2px 12px #dbe6f3; padding:2em; }
+    h1 { text-align:center; color:#2574c7; font-size:2em; margin-bottom:1em; }
+    #gameArea { height:180px; position:relative; margin-bottom:2em; background:#f5f6fa; border-radius:12px; border:1.5px solid #b0c4de; }
+    .moving-char { position:absolute; font-size:2.5em; transition:all 0.1s; }
+    .choices { display:flex; flex-direction:column; gap:1em; margin-bottom:2em; }
+    .choice-btn { font-size:1.3em; padding:0.7em 1em; border-radius:10px; border:2px solid #2574c7; background:#eef6fd; color:#2574c7; cursor:pointer; transition:background 0.2s, color 0.2s; }
+    .choice-btn:hover { background:#2574c7; color:#fff; }
+    #score, #miss, #comment { text-align:center; font-size:1.2em; margin-top:1em; }
+    #miss { color:red; }
+    #startBtn, #restartBtn { display:block; margin:2em auto 0 auto; font-size:1.2em; padding:0.7em 2em; border-radius:10px; border:none; background:#2574c7; color:#fff; cursor:pointer; }
+    #restartBtn { background:#e67e22; margin-top:1em; }
+    #startBtn:hover, #restartBtn:hover { opacity:0.85; }
+    .hidden { display:none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>動体視力トレーニング</h1>
+    <div style="text-align:center; margin-bottom:1em; color:#555;">動く記号が一瞬止まったとき、何が表示されたか選んでください。</div>
+    <div id="gameArea"></div>
+    <div class="choices" id="choices"></div>
+    <button id="startBtn">スタート</button>
+    <button id="restartBtn" class="hidden">もう一度</button>
+    <div id="score" class="hidden"></div>
+    <div id="miss" class="hidden"></div>
+    <div id="comment" class="hidden"></div>
+  </div>
+  <script>
+    const chars = ['A','B','C','D','E','F','G','H','J','K','2','3','5','6','8','9','★','●','▲','■'];
+    let questions = [];
+    let current = 0, score = 0, miss = 0;
+    const total = 10;
+    const gameArea = document.getElementById('gameArea');
+    const choicesDiv = document.getElementById('choices');
+    const startBtn = document.getElementById('startBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    function makeQuestions() {
+      questions = [];
+      for(let i=0;i<total;i++){
+        const answer = chars[Math.floor(Math.random()*chars.length)];
+        let options = [answer];
+        while(options.length<4){
+          let c = chars[Math.floor(Math.random()*chars.length)];
+          if(!options.includes(c)) options.push(c);
+        }
+        options = options.sort(()=>Math.random()-0.5);
+        questions.push({answer, options});
+      }
+    }
+    function showQuestion() {
+      gameArea.innerHTML = '';
+      choicesDiv.innerHTML = '';
+      const q = questions[current];
+      // 動く記号を表示
+      const charDiv = document.createElement('div');
+      charDiv.className = 'moving-char';
+      charDiv.textContent = q.answer;
+      let pos = 0, dir = Math.random()<0.5?1:-1;
+      let moveTimer = setInterval(()=>{
+        pos += dir*15;
+        if(pos>320) dir=-1;
+        if(pos<0) dir=1;
+        charDiv.style.left = pos+30+'px';
+        charDiv.style.top = '60px';
+      }, 40);
+      setTimeout(()=>{
+        clearInterval(moveTimer);
+        charDiv.style.left = (Math.random()*250+30)+'px';
+        charDiv.style.top = '60px';
+        // 一瞬止まる
+        setTimeout(()=>{
+          charDiv.textContent = q.answer;
+          // 選択肢表示
+          q.options.forEach((opt,idx)=>{
+            const btn = document.createElement('button');
+            btn.className = 'choice-btn';
+            btn.textContent = opt;
+            btn.onclick = ()=>{
+              if(opt===q.answer){ score++; btn.style.background='#27ae60'; } else { miss++; btn.style.background='#e74c3c'; }
+              setTimeout(()=>{
+                current++;
+                if(current<total) showQuestion();
+                else showResult();
+              }, 500);
+            };
+            choicesDiv.appendChild(btn);
+          });
+        }, 500);
+      }, 1200);
+      gameArea.appendChild(charDiv);
+    }
+    function showResult() {
+      gameArea.innerHTML = '';
+      choicesDiv.innerHTML = '';
+      document.getElementById('score').textContent = `スコア：${score}`;
+      document.getElementById('miss').textContent = `ミス：${miss}`;
+      let comment = '';
+      if(score>=9) comment = '動体視力バッチリです！';
+      else if(score>=7) comment = 'よくできました！この調子でがんばりましょう。';
+      else comment = '次もがんばりましょう！';
+      document.getElementById('score').classList.remove('hidden');
+      document.getElementById('miss').classList.remove('hidden');
+      document.getElementById('comment').textContent = comment;
+      document.getElementById('comment').classList.remove('hidden');
+      restartBtn.classList.remove('hidden');
+    }
+    function startGame() {
+      current=0; score=0; miss=0;
+      makeQuestions();
+      document.getElementById('score').classList.add('hidden');
+      document.getElementById('miss').classList.add('hidden');
+      document.getElementById('comment').classList.add('hidden');
+      restartBtn.classList.add('hidden');
+      showQuestion();
+    }
+    startBtn.onclick = startGame;
+    restartBtn.onclick = startGame;
+  </script>
+</body>
+</html> 

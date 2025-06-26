@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スピード分類ゲーム - 脳トレゲームversion2</title>
+    <style>
+        body {
+            font-family: 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .game-frame {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .title {
+            color: #1a73e8;
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .menu-btn {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+        }
+        .menu-btn:hover {
+            background-color: #1557b0;
+        }
+        .menu {
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 10px;
+            display: none;
+            z-index: 1000;
+        }
+        .menu.active {
+            display: block;
+        }
+        .menu-item {
+            display: block;
+            padding: 10px 20px;
+            color: #333;
+            text-decoration: none;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+        .menu-item:hover {
+            background-color: #f0f2f5;
+        }
+        .controls {
+            margin: 15px 0;
+        }
+        .btn {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+        .btn:hover {
+            background-color: #1557b0;
+        }
+        .content-area {
+            min-height: 300px;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        .message {
+            font-size: 1.1em;
+            margin: 10px 0;
+            color: #666;
+        }
+        .item {
+            font-size: 1.5em;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .category-btn {
+            font-size: 1.2em;
+            padding: 15px;
+            border: 2px solid #1a73e8;
+            border-radius: 8px;
+            background-color: white;
+            color: #1a73e8;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .category-btn:hover {
+            background-color: #1a73e8;
+            color: white;
+        }
+        .footer {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .stat-item {
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .stat-label {
+            font-size: 1em;
+            color: #666;
+        }
+        .stat-value {
+            font-size: 1.3em;
+            color: #1a73e8;
+            font-weight: bold;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="game-frame">
+            <div class="header">
+                <h1 class="title">スピード分類ゲーム</h1>
+            </div>
+
+            <div class="controls">
+                <button class="btn" onclick="startGame()">ゲーム開始</button>
+                <button class="btn" onclick="resetGame()">リセット</button>
+            </div>
+
+            <div class="content-area" id="gameArea">
+                <div id="currentItem" class="item"></div>
+                <div class="categories" id="categories"></div>
+                <p class="message" id="gameMessage">「ゲーム開始」を押してください</p>
+            </div>
+
+            <div class="footer">
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-label">残り問題数</div>
+                        <div class="stat-value" id="questionCount">10</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">スコア</div>
+                        <div class="stat-value" id="score">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="index.html" class="back-link">← トップページに戻る</a>
+    </div>
+
+    <script src="game_result.js"></script>
+    <script>
+        let isGameActive = false;
+        let score = 0;
+        let startTime = 0;
+        let comboCount = 0;
+        let correctCount = 0;
+        let incorrectCount = 0;
+
+        // ゲーム設定を取得
+        const gameSettings = getGameSettings('speedsort');
+        const difficultySettings = getDifficultySettings('speedsort');
+
+        function startGame() {
+            isGameActive = true;
+            score = 0;
+            correctCount = 0;
+            incorrectCount = 0;
+            comboCount = 0;
+            startTime = Date.now();
+            // 難易度設定に基づいて問題数を設定
+            questionCount = difficultySettings.totalQuestions;
+            updateStats();
+            document.getElementById('gameMessage').textContent = '正しい順に並べてください';
+        }
+
+        function resetGame() {
+            isGameActive = false;
+            score = 0;
+            correctCount = 0;
+            incorrectCount = 0;
+            comboCount = 0;
+            startTime = 0;
+            updateStats();
+            document.getElementById('currentItem').textContent = '';
+            document.getElementById('categories').innerHTML = '';
+            document.getElementById('gameMessage').textContent = '「ゲーム開始」を押してください';
+        }
+
+        function generateQuestion() {
+            const categories = Object.keys(items);
+            const randomCategories = categories.sort(() => Math.random() - 0.5).slice(0, 2);
+            const selectedCategory = randomCategories[Math.floor(Math.random() * randomCategories.length)];
+            currentItem = items[selectedCategory][Math.floor(Math.random() * items[selectedCategory].length)];
+            currentCategories = randomCategories;
+            correctCategory = selectedCategory;
+
+            document.getElementById('currentItem').textContent = currentItem;
+            const categoriesDiv = document.getElementById('categories');
+            categoriesDiv.innerHTML = '';
+            currentCategories.forEach(category => {
+                const button = document.createElement('button');
+                button.className = 'category-btn';
+                button.textContent = category;
+                button.onclick = () => checkAnswer(category === correctCategory);
+                categoriesDiv.appendChild(button);
+            });
+        }
+
+        function checkAnswer(isCorrect) {
+            if (!isGameActive) return;
+            const timeUsed = (Date.now() - startTime) / 1000;
+            if (isCorrect) {
+                correctCount++;
+                comboCount++;
+                document.getElementById('gameMessage').textContent = '正解！';
+                score = calculateScore(correctCount, questionCount, timeUsed, comboCount);
+            } else {
+                incorrectCount++;
+                comboCount = 0;
+                document.getElementById('gameMessage').textContent = '不正解...';
+            }
+            questionCount--;
+            updateStats();
+            if (questionCount <= 0) {
+                isGameActive = false;
+                showPreview();
+            } else {
+                setTimeout(generateQuestion, 1000);
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('questionCount').textContent = questionCount;
+            document.getElementById('score').textContent = score;
+        }
+
+        function showInstructions() {
+            alert('【遊び方】\n1. 「ゲーム開始」を押してゲームを始めます\n2. 表示された単語を正しいカテゴリーに分類します\n3. 10問の問題に挑戦します\n4. 1問正解で10点獲得です\n\n【カテゴリー】\n・果物：りんご、バナナ、みかん、ぶどう、いちご\n・野菜：にんじん、トマト、きゅうり、なす、ピーマン\n・動物：いぬ、ねこ、うさぎ、くま、きりん\n・色：あか、あお、きいろ、みどり、むらさき');
+        }
+
+        function showSettings() {
+            alert('【設定】\n・問題数：10問\n・制限時間：なし\n・難易度：初級');
+        }
+
+        function showStats() {
+            alert(`【成績】\n・現在のスコア：${score}点\n・残り問題数：${questionCount}問`);
+        }
+
+        function showPreview() {
+            document.getElementById('gameArea').innerHTML = '';
+            showGameResult(correctCount, difficultySettings.totalQuestions, incorrectCount);
+        }
+    </script>
+</body>
+</html> 

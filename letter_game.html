@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文字ゲーム</title>
+  <style>
+    body {
+      background: #e0e5ea;
+      font-family: 'Segoe UI', 'Meiryo', sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+      padding: 40px 30px 30px 30px;
+      max-width: 480px;
+      width: 96vw;
+      text-align: center;
+      position: relative;
+    }
+    .mode-btns {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .mode-btn {
+      background: #fff;
+      border: 2px solid #f39c12;
+      color: #f39c12;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .mode-btn.active, .mode-btn:active {
+      background: #f39c12;
+      color: #fff;
+    }
+    .game-title {
+      font-size: 1.4em;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #222;
+    }
+    .subtitle {
+      color: #f39c12;
+      font-size: 1.1em;
+      margin-bottom: 10px;
+    }
+    .question {
+      font-size: 2.2em;
+      margin: 18px 0 18px 0;
+      letter-spacing: 0.1em;
+    }
+    .choices {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+    .choice-btn {
+      background: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 16px 36px;
+      font-size: 1.2em;
+      cursor: pointer;
+      min-width: 120px;
+      transition: background 0.2s;
+    }
+    .choice-btn:active {
+      background: #217dbb;
+    }
+    .result {
+      font-size: 1.2em;
+      margin: 12px 0 0 0;
+      color: #27ae60;
+    }
+    .next-btn {
+      background: #27ae60;
+      color: #fff;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 28px;
+      cursor: pointer;
+      margin-top: 16px;
+      transition: background 0.2s;
+    }
+    .next-btn:active {
+      background: #1e874b;
+    }
+    .red { color: #e74c3c; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="modal" id="main-content">
+    <div class="mode-btns">
+      <button class="mode-btn active" id="hiraganaBtn">ひらがな</button>
+      <button class="mode-btn" id="katakanaBtn">カタカナ</button>
+      <button class="mode-btn" id="kanjiBtn">漢字</button>
+    </div>
+    <div class="game-title">文字ゲーム <span id="progress">(1 / 1)</span></div>
+    <div class="subtitle" id="modeLabel">ひらがな</div>
+    <div class="question" id="question">さくら</div>
+    <div class="choices">
+      <button class="choice-btn" id="choice0">タマゴ</button>
+      <button class="choice-btn" id="choice1">サクラ</button>
+      <button class="choice-btn" id="choice2">サクラ</button>
+      <button class="choice-btn" id="choice3">サクラ</button>
+    </div>
+    <div class="result" id="result" style="display:none;"></div>
+    <button class="next-btn" id="nextBtn" style="display:none;">つぎへ</button>
+  </div>
+  <div id="gameResult" style="display:none; text-align:center;">
+    <h2>お疲れ様でした！</h2>
+    <div>正解数：<span id="correctCount"></span> / <span id="totalCount"></span></div>
+    <div>ミス回数：<span id="missCount" class="red"></span></div>
+    <button onclick="restartGame()">もう一度挑戦</button>
+    <a href="brain_training_game.html">トップ画面へ</a>
+  </div>
+  <script src="game_result.js"></script>
+  <script>
+    // 問題データ（各モード10問ずつ）
+    const questionsData = {
+      'ひらがな': [
+        { question: 'さくら', choices: ['たまご', 'さくら', 'みかん', 'すいか'], answer: 'さくら' },
+        { question: 'みかん', choices: ['りんご', 'みかん', 'ばなな', 'ぶどう'], answer: 'みかん' },
+        { question: 'すいか', choices: ['すいか', 'もも', 'なし', 'さくらんぼ'], answer: 'すいか' },
+        { question: 'たまご', choices: ['たまご', 'にく', 'さかな', 'やさい'], answer: 'たまご' },
+        { question: 'やま', choices: ['かわ', 'うみ', 'やま', 'そら'], answer: 'やま' },
+        { question: 'いぬ', choices: ['ねこ', 'いぬ', 'とり', 'うさぎ'], answer: 'いぬ' },
+        { question: 'くるま', choices: ['じてんしゃ', 'くるま', 'でんしゃ', 'ひこうき'], answer: 'くるま' },
+        { question: 'はな', choices: ['はな', 'き', 'くさ', 'みず'], answer: 'はな' },
+        { question: 'ごはん', choices: ['ごはん', 'みそしる', 'さかな', 'やさい'], answer: 'ごはん' },
+        { question: 'とけい', choices: ['とけい', 'かさ', 'かばん', 'ぼうし'], answer: 'とけい' }
+      ],
+      'カタカナ': [
+        { question: 'サクラ', choices: ['タマゴ', 'サクラ', 'ミカン', 'スイカ'], answer: 'サクラ' },
+        { question: 'ミカン', choices: ['リンゴ', 'ミカン', 'バナナ', 'ブドウ'], answer: 'ミカン' },
+        { question: 'スイカ', choices: ['スイカ', 'モモ', 'ナシ', 'サクランボ'], answer: 'スイカ' },
+        { question: 'タマゴ', choices: ['タマゴ', 'ニク', 'サカナ', 'ヤサイ'], answer: 'タマゴ' },
+        { question: 'ヤマ', choices: ['カワ', 'ウミ', 'ヤマ', 'ソラ'], answer: 'ヤマ' },
+        { question: 'イヌ', choices: ['ネコ', 'イヌ', 'トリ', 'ウサギ'], answer: 'イヌ' },
+        { question: 'クルマ', choices: ['ジテンシャ', 'クルマ', 'デンシャ', 'ヒコウキ'], answer: 'クルマ' },
+        { question: 'ハナ', choices: ['ハナ', 'キ', 'クサ', 'ミズ'], answer: 'ハナ' },
+        { question: 'ゴハン', choices: ['ゴハン', 'ミソシル', 'サカナ', 'ヤサイ'], answer: 'ゴハン' },
+        { question: 'トケイ', choices: ['トケイ', 'カサ', 'カバン', 'ボウシ'], answer: 'トケイ' }
+      ],
+      '漢字': [
+        { question: '桜', choices: ['卵', '桜', '蜜柑', '西瓜'], answer: '桜' },
+        { question: '蜜柑', choices: ['林檎', '蜜柑', '香蕉', '葡萄'], answer: '蜜柑' },
+        { question: '西瓜', choices: ['西瓜', '桃', '梨', '桜桃'], answer: '西瓜' },
+        { question: '卵', choices: ['卵', '肉', '魚', '野菜'], answer: '卵' },
+        { question: '山', choices: ['川', '海', '山', '空'], answer: '山' },
+        { question: '犬', choices: ['猫', '犬', '鳥', '兎'], answer: '犬' },
+        { question: '車', choices: ['自転車', '車', '電車', '飛行機'], answer: '車' },
+        { question: '花', choices: ['花', '木', '草', '水'], answer: '花' },
+        { question: '御飯', choices: ['御飯', '味噌汁', '魚', '野菜'], answer: '御飯' },
+        { question: '時計', choices: ['時計', '傘', '鞄', '帽子'], answer: '時計' }
+      ]
+    };
+    let questions = questionsData['ひらがな'];
+    let current = 0;
+    let mode = 'ひらがな';
+    let correctCount = 0;
+    let missCount = 0;
+
+    const hiraganaBtn = document.getElementById('hiraganaBtn');
+    const katakanaBtn = document.getElementById('katakanaBtn');
+    const kanjiBtn = document.getElementById('kanjiBtn');
+    const modeLabel = document.getElementById('modeLabel');
+    const progress = document.getElementById('progress');
+    const questionElem = document.getElementById('question');
+    const resultElem = document.getElementById('result');
+    const nextBtn = document.getElementById('nextBtn');
+    const choiceBtns = [
+      document.getElementById('choice0'),
+      document.getElementById('choice1'),
+      document.getElementById('choice2'),
+      document.getElementById('choice3')
+    ];
+
+    function setMode(newMode) {
+      mode = newMode;
+      hiraganaBtn.classList.toggle('active', mode === 'ひらがな');
+      katakanaBtn.classList.toggle('active', mode === 'カタカナ');
+      kanjiBtn.classList.toggle('active', mode === '漢字');
+      modeLabel.textContent = mode;
+      questions = questionsData[mode];
+      current = 0;
+      correctCount = 0;
+      missCount = 0;
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const q = questions[current];
+      questionElem.textContent = q.question;
+      progress.textContent = `(${current + 1} / ${questions.length})`;
+      q.choices.forEach((c, i) => {
+        choiceBtns[i].textContent = c;
+        choiceBtns[i].disabled = false;
+        choiceBtns[i].style.background = '#3498db';
+      });
+      resultElem.style.display = 'none';
+      nextBtn.style.display = 'none';
+    }
+
+    choiceBtns.forEach((btn, idx) => {
+      btn.onclick = () => {
+        const q = questions[current];
+        if (btn.textContent === q.answer) {
+          btn.style.background = '#27ae60';
+          resultElem.textContent = '正解！';
+          resultElem.style.color = '#27ae60';
+          correctCount++;
+        } else {
+          btn.style.background = '#e74c3c';
+          resultElem.textContent = '不正解...';
+          resultElem.style.color = '#e74c3c';
+          missCount++;
+        }
+        resultElem.style.display = 'block';
+        choiceBtns.forEach(b => b.disabled = true);
+        nextBtn.style.display = 'inline-block';
+      };
+    });
+
+    nextBtn.onclick = () => {
+      if (current < questions.length - 1) {
+        current++;
+        showQuestion();
+      } else {
+        onGameEnd(correctCount, questions.length, missCount);
+      }
+    };
+
+    hiraganaBtn.onclick = () => setMode('ひらがな');
+    katakanaBtn.onclick = () => setMode('カタカナ');
+    kanjiBtn.onclick = () => setMode('漢字');
+
+    // 初期化
+    showQuestion();
+
+    function onGameEnd(correct, total, miss) {
+      document.getElementById('correctCount').textContent = correct;
+      document.getElementById('totalCount').textContent = total;
+      document.getElementById('missCount').textContent = miss;
+      document.getElementById('main-content').style.display = 'none';
+      document.getElementById('gameResult').style.display = 'block';
+    }
+
+    function restartGame() {
+      current = 0;
+      correctCount = 0;
+      missCount = 0;
+      showQuestion();
+    }
+  </script>
+</body>
+</html> 

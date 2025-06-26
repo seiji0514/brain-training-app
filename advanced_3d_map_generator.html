@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高機能3D鮮明地図生成システム</title>
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+    <script src="https://cdn.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
+    <script src="https://cdn.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script>
+    <script src="https://cdn.babylonjs.com/gui/babylon.gui.min.js"></script>
+    <script src="https://cdn.babylonjs.com/physics/babylonjs.physicsEngine.min.js"></script>
+    <script src="https://cdn.babylonjs.com/physics/babylonjs.physicsEngine.cannonJSPlugin.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', 'Meiryo', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            overflow: hidden;
+        }
+
+        #renderCanvas {
+            width: 100%;
+            height: 100vh;
+            touch-action: none;
+        }
+
+        .control-panel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            max-width: 350px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .control-panel h2 {
+            margin: 0 0 20px 0;
+            color: #2c3e50;
+            font-size: 1.4rem;
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #34495e;
+            font-size: 1rem;
+        }
+
+        .control-group select,
+        .control-group input,
+        .control-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .control-group select:focus,
+        .control-group input:focus,
+        .control-group textarea:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            margin: 5px 5px 5px 0;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60, #229954);
+        }
+
+        .btn-success:hover {
+            box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+
+        .btn-warning:hover {
+            box-shadow: 0 8px 25px rgba(243, 156, 18, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .btn-danger:hover {
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
+        }
+
+        .btn-purple {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+        }
+
+        .btn-purple:hover {
+            box-shadow: 0 8px 25px rgba(155, 89, 182, 0.4);
+        }
+
+        .quality-slider {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .quality-value {
+            text-align: center;
+            font-weight: bold;
+            color: #3498db;
+            margin-top: 5px;
+        }
+
+        .map-preview {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 300px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .map-preview #mapPreview {
+            width: 100%;
+            height: 100%;
+        }
+
+        .status-panel {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 0.9rem;
+            z-index: 1000;
+            max-width: 300px;
+        }
+
+        .loading-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            z-index: 2000;
+        }
+
+        .loading-screen h2 {
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .loading-bar {
+            width: 400px;
+            height: 25px;
+            background: #333;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .loading-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71, #f39c12, #e74c3c);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 15px;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 2rem;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 2000;
+        }
+
+        .back-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .advanced-options {
+            background: rgba(52, 152, 219, 0.1);
+            border: 1px solid #3498db;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .advanced-options h3 {
+            margin: 0 0 10px 0;
+            color: #2980b9;
+            font-size: 1.1rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            font-weight: normal;
+        }
+
+        @media (max-width: 768px) {
+            .control-panel {
+                max-width: 90%;
+                left: 5%;
+                right: 5%;
+            }
+            
+            .map-preview {
+                width: 90%;
+                right: 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="window.location.href='index.html'">←</button>
+
+    <!-- ローディング画面 -->
+    <div id="loadingScreen" class="loading-screen">
+        <h2>🗺️ 高機能3D地図生成</h2>
+        <div class="loading-bar">
+            <div id="loadingProgress" class="loading-progress"></div>
+        </div>
+        <div id="loadingText">システム初期化中...</div>
+    </div>
+
+    <!-- メインコントロールパネル -->
+    <div class="control-panel">
+        <h2>🎯 高機能3D地図生成</h2>
+        
+        <div class="control-group">
+            <label for="location">場所検索</label>
+            <input type="text" id="location" placeholder="例: 東京タワー, 新宿駅, 渋谷スクランブル交差点" value="新武雄病院">
+        </div>
+
+        <div class="control-group">
+            <label for="mapType">地図タイプ</label>
+            <select id="mapType">
+                <option value="satellite">衛星画像（高解像度）</option>
+                <option value="terrain">地形図（詳細）</option>
+                <option value="hybrid">ハイブリッド（衛星+道路）</option>
+                <option value="street">ストリートビュー</option>
+                <option value="night">夜景モード</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label for="quality">品質設定</label>
+            <input type="range" id="quality" min="1" max="5" value="4" class="quality-slider">
+            <div class="quality-value">品質: 高品質 (4/5)</div>
+        </div>
+
+        <div class="control-group">
+            <label for="areaSize">エリアサイズ</label>
+            <select id="areaSize">
+                <option value="small">小 (500m x 500m)</option>
+                <option value="medium" selected>中 (1km x 1km)</option>
+                <option value="large">大 (2km x 2km)</option>
+                <option value="xlarge">超大 (5km x 5km)</option>
+            </select>
+        </div>
+
+        <div class="advanced-options">
+            <h3>⚙️ 高度設定</h3>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="highResTextures" checked>
+                <label for="highResTextures">高解像度テクスチャ</label>
+            </div>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="detailedBuildings" checked>
+                <label for="detailedBuildings">詳細建物モデル</label>
+            </div>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="realisticLighting" checked>
+                <label for="realisticLighting">リアルライティング</label>
+            </div>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="weatherEffects" checked>
+                <label for="weatherEffects">天候効果</label>
+            </div>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="trafficSimulation">
+                <label for="trafficSimulation">交通シミュレーション</label>
+            </div>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="ambientSounds">
+                <label for="ambientSounds">環境音</label>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label for="weather">天候設定</label>
+            <select id="weather">
+                <option value="clear">晴天</option>
+                <option value="cloudy">曇天</option>
+                <option value="rain">雨天</option>
+                <option value="fog">霧</option>
+                <option value="snow">雪</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label for="timeOfDay">時間帯</label>
+            <select id="timeOfDay">
+                <option value="day">昼間</option>
+                <option value="sunset">夕方</option>
+                <option value="night">夜間</option>
+                <option value="dawn">夜明け</option>
+            </select>
+        </div>
+
+        <button class="btn btn-success" onclick="generateAdvancedMap()">🚀 高機能地図生成</button>
+        <button class="btn btn-purple" onclick="previewMap()">👁️ プレビュー</button>
+        <button class="btn btn-warning" onclick="exportMap()">💾 エクスポート</button>
+        <button class="btn btn-danger" onclick="resetMap()">🔄 リセット</button>
+    </div>
+
+    <!-- 地図プレビュー -->
+    <div class="map-preview">
+        <div id="mapPreview"></div>
+    </div>
+
+    <!-- ステータスパネル -->
+    <div class="status-panel">
+        <div><strong>🗺️ 地図情報</strong></div>
+        <div id="mapStatus">準備完了</div>
+        <div id="mapDetails">地図が生成されていません</div>
+    </div>
+
+    <canvas id="renderCanvas"></canvas>
+
+    <script>
+        // グローバル変数
+        let canvas, engine, scene, camera, ground;
+        let mapData = null;
+        let mapPreview = null;
+        let currentMap = null;
+
+        // 初期化
+        window.addEventListener('DOMContentLoaded', function() {
+            initAdvancedMapGenerator();
+        });
+
+        // 高機能地図生成システム初期化
+        function initAdvancedMapGenerator() {
+            updateLoading('Babylon.js初期化中...', 10);
+            
+            canvas = document.getElementById('renderCanvas');
+            engine = new BABYLON.Engine(canvas, true);
+
+            updateLoading('シーン作成中...', 30);
+            createAdvancedScene();
+
+            updateLoading('ライティング設定中...', 50);
+            setupAdvancedLighting();
+
+            updateLoading('カメラ設定中...', 70);
+            setupAdvancedCamera();
+
+            updateLoading('地図プレビュー初期化中...', 90);
+            initMapPreview();
+
+            updateLoading('完了！', 100);
+            setTimeout(() => {
+                document.getElementById('loadingScreen').style.display = 'none';
+            }, 1000);
+
+            // ウィンドウリサイズ対応
+            window.addEventListener('resize', function() {
+                engine.resize();
+            });
+
+            // 品質スライダーイベント
+            document.getElementById('quality').addEventListener('input', function() {
+                const quality = this.value;
+                const qualityText = ['低品質', '標準', '高品質', '超高品質', '最高品質'][quality - 1];
+                document.querySelector('.quality-value').textContent = `品質: ${qualityText} (${quality}/5)`;
+            });
+        }
+
+        // ローディング更新
+        function updateLoading(text, progress) {
+            document.getElementById('loadingText').textContent = text;
+            document.getElementById('loadingProgress').style.width = progress + '%';
+        }
+
+        // 高度なシーン作成
+        function createAdvancedScene() {
+            scene = new BABYLON.Scene(engine);
+            
+            // 高度な環境設定
+            scene.fogMode = BABYLON.Scene.FOGMODE_EXP2;
+            scene.fogDensity = 0.001;
+            scene.fogColor = new BABYLON.Color3(0.8, 0.8, 0.9);
+            
+            // アンビエントオクルージョン
+            scene.enablePhysics();
+            
+            // 高度なレンダリング設定
+            scene.imageProcessingConfiguration.toneMappingEnabled = true;
+            scene.imageProcessingConfiguration.toneMappingType = BABYLON.ImageProcessingConfiguration.TONEMAPPING_ACES;
+            scene.imageProcessingConfiguration.exposure = 1.2;
+            scene.imageProcessingConfiguration.contrast = 1.1;
+        }
+
+        // 高度なライティング設定
+        function setupAdvancedLighting() {
+            // メインライト
+            const mainLight = new BABYLON.DirectionalLight("mainLight", new BABYLON.Vector3(0, -1, 0), scene);
+            mainLight.intensity = 0.8;
+            mainLight.shadowMinZ = 0.1;
+            mainLight.shadowMaxZ = 100;
+            mainLight.shadowGenerator = new BABYLON.ShadowGenerator(2048, mainLight);
+            mainLight.shadowGenerator.useBlurExponentialShadowMap = true;
+            mainLight.shadowGenerator.blurKernel = 32;
+
+            // 環境光
+            const ambientLight = new BABYLON.HemisphericLight("ambientLight", new BABYLON.Vector3(0, 1, 0), scene);
+            ambientLight.intensity = 0.3;
+            ambientLight.groundColor = new BABYLON.Color3(0.2, 0.2, 0.3);
+
+            // 補助ライト
+            const fillLight = new BABYLON.DirectionalLight("fillLight", new BABYLON.Vector3(1, -0.5, 0), scene);
+            fillLight.intensity = 0.2;
+        }
+
+        // 高度なカメラ設定
+        function setupAdvancedCamera() {
+            camera = new BABYLON.ArcRotateCamera("camera", 0, Math.PI / 3, 100, BABYLON.Vector3.Zero(), scene);
+            camera.lowerRadiusLimit = 10;
+            camera.upperRadiusLimit = 500;
+            camera.wheelDeltaPercentage = 0.01;
+            camera.panningSensibility = 1000;
+            camera.attachControl(canvas, true);
+            
+            // カメラの動きを滑らかに
+            camera.inertia = 0.9;
+            camera.angularSensibilityX = 1000;
+            camera.angularSensibilityY = 1000;
+        }
+
+        // 地図プレビュー初期化
+        function initMapPreview() {
+            mapPreview = L.map('mapPreview').setView([33.1581, 129.9944], 15); // 新武雄病院の座標
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(mapPreview);
+        }
+
+        // 高機能地図生成
+        function generateAdvancedMap() {
+            const location = document.getElementById('location').value;
+            const mapType = document.getElementById('mapType').value;
+            const quality = parseInt(document.getElementById('quality').value);
+            const areaSize = document.getElementById('areaSize').value;
+            const weather = document.getElementById('weather').value;
+            const timeOfDay = document.getElementById('timeOfDay').value;
+
+            // 高度設定の取得
+            const highResTextures = document.getElementById('highResTextures').checked;
+            const detailedBuildings = document.getElementById('detailedBuildings').checked;
+            const realisticLighting = document.getElementById('realisticLighting').checked;
+            const weatherEffects = document.getElementById('weatherEffects').checked;
+            const trafficSimulation = document.getElementById('trafficSimulation').checked;
+            const ambientSounds = document.getElementById('ambientSounds').checked;
+
+            // ローディング画面表示
+            document.getElementById('loadingScreen').style.display = 'flex';
+            updateLoading('地図データ取得中...', 0);
+
+            // 地図データの作成
+            mapData = {
+                location: location,
+                mapType: mapType,
+                quality: quality,
+                areaSize: areaSize,
+                weather: weather,
+                timeOfDay: timeOfDay,
+                highResTextures: highResTextures,
+                detailedBuildings: detailedBuildings,
+                realisticLighting: realisticLighting,
+                weatherEffects: weatherEffects,
+                trafficSimulation: trafficSimulation,
+                ambientSounds: ambientSounds,
+                coordinates: [129.9944, 33.1581], // 新武雄病院の座標
+                timestamp: Date.now()
+            };
+
+            // 段階的な地図生成
+            setTimeout(() => {
+                updateLoading('地形データ処理中...', 20);
+                createAdvancedTerrain();
+            }, 500);
+
+            setTimeout(() => {
+                updateLoading('建物データ生成中...', 40);
+                createAdvancedBuildings();
+            }, 1500);
+
+            setTimeout(() => {
+                updateLoading('道路網作成中...', 60);
+                createAdvancedRoads();
+            }, 2500);
+
+            setTimeout(() => {
+                updateLoading('環境効果適用中...', 80);
+                applyAdvancedEnvironmentEffects();
+            }, 3500);
+
+            setTimeout(() => {
+                updateLoading('最終調整中...', 90);
+                finalizeAdvancedMap();
+            }, 4500);
+
+            setTimeout(() => {
+                updateLoading('完了！', 100);
+                document.getElementById('loadingScreen').style.display = 'none';
+                
+                // ステータス更新
+                updateMapStatus();
+                
+                console.log('高機能3D地図生成完了:', mapData);
+                alert('高機能3D地図の生成が完了しました！');
+            }, 5500);
+        }
+
+        // 高度な地形作成
+        function createAdvancedTerrain() {
+            const terrainSize = getAreaSize();
+            
+            // 高度マップの生成
+            const heightMap = generateHeightMap(terrainSize);
+            
+            ground = BABYLON.MeshBuilder.CreateGroundFromHeightMap("advancedTerrain", "", {
+                width: terrainSize,
+                height: terrainSize,
+                subdivisions: 100,
+                minHeight: 0,
+                maxHeight: 20,
+                heightMap: heightMap
+            }, scene);
+
+            // 高度なマテリアル
+            const terrainMaterial = new BABYLON.StandardMaterial("advancedTerrainMaterial", scene);
+            
+            // 地図タイプに応じたテクスチャ
+            switch(mapData.mapType) {
+                case 'satellite':
+                    terrainMaterial.diffuseTexture = new BABYLON.Texture("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}");
+                    break;
+                case 'terrain':
+                    terrainMaterial.diffuseTexture = new BABYLON.Texture("https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}");
+                    break;
+                case 'hybrid':
+                    terrainMaterial.diffuseTexture = new BABYLON.Texture("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}");
+                    break;
+                default:
+                    terrainMaterial.diffuseColor = new BABYLON.Color3(0.3, 0.5, 0.2);
+            }
+
+            // 法線マップとスペキュラマップ
+            if (mapData.highResTextures) {
+                terrainMaterial.bumpTexture = new BABYLON.Texture("https://www.babylonjs-playground.com/textures/normalMap.jpg");
+                terrainMaterial.specularTexture = new BABYLON.Texture("https://www.babylonjs-playground.com/textures/specularMap.jpg");
+            }
+
+            ground.material = terrainMaterial;
+        }
+
+        // 高度な建物作成
+        function createAdvancedBuildings() {
+            const buildingCount = mapData.quality * 20; // 品質に応じて建物数を調整
+            
+            for (let i = 0; i < buildingCount; i++) {
+                const building = createAdvancedBuilding(i);
+                
+                // 影の設定
+                if (scene.lights[0].shadowGenerator) {
+                    scene.lights[0].shadowGenerator.addShadowCaster(building, true);
+                }
+            }
+        }
+
+        // 高度な建物作成
+        function createAdvancedBuilding(index) {
+            const buildingType = Math.random();
+            let building;
+            
+            if (buildingType < 0.3) {
+                // 高層ビル
+                building = BABYLON.MeshBuilder.CreateBox(`building_${index}`, {
+                    width: Math.random() * 30 + 20,
+                    height: Math.random() * 60 + 40,
+                    depth: Math.random() * 30 + 20
+                }, scene);
+            } else if (buildingType < 0.6) {
+                // 中層ビル
+                building = BABYLON.MeshBuilder.CreateBox(`building_${index}`, {
+                    width: Math.random() * 20 + 10,
+                    height: Math.random() * 30 + 15,
+                    depth: Math.random() * 20 + 10
+                }, scene);
+            } else {
+                // 低層ビル
+                building = BABYLON.MeshBuilder.CreateBox(`building_${index}`, {
+                    width: Math.random() * 15 + 8,
+                    height: Math.random() * 15 + 8,
+                    depth: Math.random() * 15 + 8
+                }, scene);
+            }
+
+            // 位置設定
+            const x = (Math.random() - 0.5) * 400;
+            const z = (Math.random() - 0.5) * 400;
+            building.position = new BABYLON.Vector3(x, building.scaling.y / 2, z);
+
+            // 高度なマテリアル
+            const buildingMaterial = new BABYLON.StandardMaterial(`buildingMaterial_${index}`, scene);
+            
+            if (mapData.detailedBuildings) {
+                // 詳細な建物テクスチャ
+                buildingMaterial.diffuseTexture = new BABYLON.Texture("https://www.babylonjs-playground.com/textures/building.jpg");
+                buildingMaterial.bumpTexture = new BABYLON.Texture("https://www.babylonjs-playground.com/textures/building_normal.jpg");
+            } else {
+                buildingMaterial.diffuseColor = new BABYLON.Color3(
+                    Math.random() * 0.5 + 0.3,
+                    Math.random() * 0.5 + 0.3,
+                    Math.random() * 0.5 + 0.3
+                );
+            }
+
+            building.material = buildingMaterial;
+            return building;
+        }
+
+        // 高度な道路網作成
+        function createAdvancedRoads() {
+            // メイン道路
+            const mainRoad = BABYLON.MeshBuilder.CreateGround("mainRoad", {
+                width: 500,
+                height: 20
+            }, scene);
+            mainRoad.position.y = 0.1;
+            
+            const roadMaterial = new BABYLON.StandardMaterial("mainRoadMaterial", scene);
+            roadMaterial.diffuseColor = new BABYLON.Color3(0.1, 0.1, 0.1);
+            roadMaterial.specularColor = new BABYLON.Color3(0.1, 0.1, 0.1);
+            mainRoad.material = roadMaterial;
+
+            // 車線マーキング
+            createAdvancedLaneMarkings();
+        }
+
+        // 高度な車線マーキング作成
+        function createAdvancedLaneMarkings() {
+            for (let i = -200; i < 200; i += 50) {
+                const marking = BABYLON.MeshBuilder.CreateBox(`laneMarking_${i}`, {
+                    width: 0.5,
+                    height: 0.15,
+                    depth: 5
+                }, scene);
+                marking.position = new BABYLON.Vector3(0, 0.075, i);
+                
+                const markingMaterial = new BABYLON.StandardMaterial(`markingMaterial_${i}`, scene);
+                markingMaterial.diffuseColor = new BABYLON.Color3(1, 1, 0);
+                markingMaterial.emissiveColor = new BABYLON.Color3(0.2, 0.2, 0);
+                marking.material = markingMaterial;
+            }
+        }
+
+        // 高度な環境効果適用
+        function applyAdvancedEnvironmentEffects() {
+            // 天候効果
+            if (mapData.weatherEffects) {
+                applyWeatherEffects();
+            }
+
+            // 時間帯効果
+            if (mapData.realisticLighting) {
+                applyTimeOfDayEffects();
+            }
+
+            // 交通シミュレーション
+            if (mapData.trafficSimulation) {
+                createTrafficSimulation();
+            }
+        }
+
+        // 天候効果適用
+        function applyWeatherEffects() {
+            switch(mapData.weather) {
+                case 'rain':
+                    createRainEffect();
+                    break;
+                case 'fog':
+                    scene.fogDensity = 0.05;
+                    break;
+                case 'snow':
+                    createSnowEffect();
+                    break;
+                case 'cloudy':
+                    scene.ambientColor = new BABYLON.Color3(0.4, 0.4, 0.5);
+                    break;
+            }
+        }
+
+        // 時間帯効果適用
+        function applyTimeOfDayEffects() {
+            switch(mapData.timeOfDay) {
+                case 'night':
+                    scene.ambientColor = new BABYLON.Color3(0.1, 0.1, 0.2);
+                    createStreetLights();
+                    break;
+                case 'sunset':
+                    scene.ambientColor = new BABYLON.Color3(0.8, 0.6, 0.4);
+                    break;
+                case 'dawn':
+                    scene.ambientColor = new BABYLON.Color3(0.6, 0.7, 0.8);
+                    break;
+            }
+        }
+
+        // 雨効果作成
+        function createRainEffect() {
+            const rainParticles = new BABYLON.ParticleSystem("rain", 1000, scene);
+            rainParticles.particleTexture = new BABYLON.Texture("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==");
+            
+            rainParticles.emitter = new BABYLON.Vector3(0, 100, 0);
+            rainParticles.minEmitBox = new BABYLON.Vector3(-200, 0, -200);
+            rainParticles.maxEmitBox = new BABYLON.Vector3(200, 0, 200);
+            
+            rainParticles.color1 = new BABYLON.Color4(0.7, 0.8, 1.0, 1.0);
+            rainParticles.color2 = new BABYLON.Color4(0.2, 0.5, 1.0, 1.0);
+            rainParticles.colorDead = new BABYLON.Color4(0, 0, 0.2, 0.0);
+            
+            rainParticles.minSize = 0.1;
+            rainParticles.maxSize = 0.3;
+            
+            rainParticles.minLifeTime = 0.3;
+            rainParticles.maxLifeTime = 1.5;
+            
+            rainParticles.emitRate = 500;
+            
+            rainParticles.blendMode = BABYLON.ParticleSystem.BLENDMODE_ONEONE;
+            
+            rainParticles.gravity = new BABYLON.Vector3(0, -9.81, 0);
+            
+            rainParticles.direction1 = new BABYLON.Vector3(-1, -1, -1);
+            rainParticles.direction2 = new BABYLON.Vector3(1, -1, 1);
+            
+            rainParticles.minEmitPower = 1;
+            rainParticles.maxEmitPower = 3;
+            rainParticles.updateSpeed = 0.005;
+            
+            rainParticles.start();
+        }
+
+        // 雪効果作成
+        function createSnowEffect() {
+            const snowParticles = new BABYLON.ParticleSystem("snow", 800, scene);
+            snowParticles.particleTexture = new BABYLON.Texture("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==");
+            
+            snowParticles.emitter = new BABYLON.Vector3(0, 80, 0);
+            snowParticles.minEmitBox = new BABYLON.Vector3(-200, 0, -200);
+            snowParticles.maxEmitBox = new BABYLON.Vector3(200, 0, 200);
+            
+            snowParticles.color1 = new BABYLON.Color4(1.0, 1.0, 1.0, 1.0);
+            snowParticles.color2 = new BABYLON.Color4(0.9, 0.9, 1.0, 1.0);
+            snowParticles.colorDead = new BABYLON.Color4(0, 0, 0, 0.0);
+            
+            snowParticles.minSize = 0.2;
+            snowParticles.maxSize = 0.5;
+            
+            snowParticles.minLifeTime = 2.0;
+            snowParticles.maxLifeTime = 4.0;
+            
+            snowParticles.emitRate = 200;
+            
+            snowParticles.blendMode = BABYLON.ParticleSystem.BLENDMODE_ONEONE;
+            
+            snowParticles.gravity = new BABYLON.Vector3(0, -2, 0);
+            
+            snowParticles.direction1 = new BABYLON.Vector3(-0.5, -1, -0.5);
+            snowParticles.direction2 = new BABYLON.Vector3(0.5, -1, 0.5);
+            
+            snowParticles.minEmitPower = 0.5;
+            snowParticles.maxEmitPower = 1.5;
+            snowParticles.updateSpeed = 0.01;
+            
+            snowParticles.start();
+        }
+
+        // 街路灯作成
+        function createStreetLights() {
+            for (let i = -150; i < 150; i += 50) {
+                const light = new BABYLON.PointLight(`streetLight_${i}`, new BABYLON.Vector3(i, 10, 0), scene);
+                light.intensity = 0.8;
+                light.range = 30;
+                light.diffuse = new BABYLON.Color3(1, 1, 0.8);
+            }
+        }
+
+        // 交通シミュレーション作成
+        function createTrafficSimulation() {
+            for (let i = 0; i < 10; i++) {
+                createTrafficCar(i);
+            }
+        }
+
+        // 交通車両作成
+        function createTrafficCar(index) {
+            const car = BABYLON.MeshBuilder.CreateBox(`trafficCar_${index}`, {
+                width: 2,
+                height: 0.5,
+                depth: 4
+            }, scene);
+            
+            car.position = new BABYLON.Vector3(
+                (Math.random() - 0.5) * 300,
+                0.25,
+                (Math.random() - 0.5) * 300
+            );
+            
+            const carMaterial = new BABYLON.StandardMaterial(`trafficCarMaterial_${index}`, scene);
+            carMaterial.diffuseColor = new BABYLON.Color3(
+                Math.random(),
+                Math.random(),
+                Math.random()
+            );
+            car.material = carMaterial;
+            
+            // 車両の移動アニメーション
+            const animation = new BABYLON.Animation(
+                `trafficCarAnimation_${index}`,
+                "position",
+                30,
+                BABYLON.Animation.ANIMATIONTYPE_VECTOR3,
+                BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
+            );
+            
+            const keyFrames = [];
+            keyFrames.push({
+                frame: 0,
+                value: car.position.clone()
+            });
+            
+            keyFrames.push({
+                frame: 300,
+                value: new BABYLON.Vector3(
+                    car.position.x + (Math.random() - 0.5) * 100,
+                    car.position.y,
+                    car.position.z + (Math.random() - 0.5) * 100
+                )
+            });
+            
+            animation.setKeys(keyFrames);
+            car.animations.push(animation);
+            
+            scene.beginAnimation(car, 0, 300, true);
+        }
+
+        // 最終調整
+        function finalizeAdvancedMap() {
+            // レンダリングループ開始
+            engine.runRenderLoop(function() {
+                scene.render();
+            });
+            
+            // 地図データをローカルストレージに保存
+            localStorage.setItem('advancedMapData', JSON.stringify(mapData));
+        }
+
+        // エリアサイズ取得
+        function getAreaSize() {
+            const sizes = {
+                'small': 500,
+                'medium': 1000,
+                'large': 2000,
+                'xlarge': 5000
+            };
+            return sizes[mapData.areaSize] || 1000;
+        }
+
+        // 高度マップ生成
+        function generateHeightMap(size) {
+            const resolution = 100;
+            const heightMap = new Float32Array(resolution * resolution);
+            
+            for (let i = 0; i < resolution; i++) {
+                for (let j = 0; j < resolution; j++) {
+                    const index = i * resolution + j;
+                    const x = (i / resolution) * 2 - 1;
+                    const z = (j / resolution) * 2 - 1;
+                    
+                    // ノイズベースの高度生成
+                    const height = Math.sin(x * 5) * Math.cos(z * 5) * 0.5 + 0.5;
+                    heightMap[index] = height;
+                }
+            }
+            
+            return heightMap;
+        }
+
+        // ステータス更新
+        function updateMapStatus() {
+            document.getElementById('mapStatus').textContent = '地図生成完了';
+            document.getElementById('mapDetails').innerHTML = `
+                場所: ${mapData.location}<br>
+                タイプ: ${mapData.mapType}<br>
+                品質: ${mapData.quality}/5<br>
+                サイズ: ${mapData.areaSize}<br>
+                天候: ${mapData.weather}<br>
+                時間: ${mapData.timeOfDay}
+            `;
+        }
+
+        // 地図プレビュー
+        function previewMap() {
+            if (mapData) {
+                // プレビューモードでカメラを調整
+                camera.setPosition(new BABYLON.Vector3(0, 50, 100));
+                camera.setTarget(BABYLON.Vector3.Zero());
+            } else {
+                alert('先に地図を生成してください。');
+            }
+        }
+
+        // 地図エクスポート
+        function exportMap() {
+            if (mapData) {
+                const dataStr = JSON.stringify(mapData, null, 2);
+                const dataBlob = new Blob([dataStr], {type: 'application/json'});
+                const url = URL.createObjectURL(dataBlob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `advanced_map_${Date.now()}.json`;
+                link.click();
+                URL.revokeObjectURL(url);
+            } else {
+                alert('先に地図を生成してください。');
+            }
+        }
+
+        // 地図リセット
+        function resetMap() {
+            if (confirm('地図をリセットしますか？')) {
+                // シーンをクリア
+                scene.meshes.forEach(mesh => {
+                    if (mesh !== camera) {
+                        mesh.dispose();
+                    }
+                });
+                
+                // パーティクルシステムをクリア
+                scene.particleSystems.forEach(ps => {
+                    ps.dispose();
+                });
+                
+                // 変数をリセット
+                mapData = null;
+                ground = null;
+                
+                // ステータスをリセット
+                document.getElementById('mapStatus').textContent = '準備完了';
+                document.getElementById('mapDetails').textContent = '地図が生成されていません';
+                
+                console.log('地図をリセットしました。');
+            }
+        }
+    </script>
+</body>
+</html> 

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>法令遵守と運用計画（PIN認証対応版）</title>
+    <style>
+        @media print {
+            body { margin: 0; }
+            .no-print { display: none; }
+            .page-break { page-break-before: always; }
+        }
+        
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            font-size: 18px;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+        h1, h2, h3 {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 16px;
+        }
+        
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .print-btn:hover {
+            background: #2980b9;
+        }
+        
+        .approval-section {
+            border: 2px solid #333;
+            padding: 20px;
+            margin: 30px 0;
+            background: #f9f9f9;
+        }
+        
+        .approval-section h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .approval-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .approval-item {
+            border: 1px solid #ccc;
+            padding: 15px;
+            background: white;
+        }
+        
+        .approval-item h4 {
+            margin: 0 0 10px 0;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .approval-field {
+            margin-bottom: 15px;
+        }
+        
+        .approval-field label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+        
+        .approval-field input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            font-size: 12px;
+        }
+        
+        .approval-field textarea {
+            width: 100%;
+            height: 60px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            resize: vertical;
+            font-size: 12px;
+        }
+        
+        @media (max-width: 768px) {
+            .approval-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="print-btn no-print" onclick="window.print()">
+        🖨️ 印刷
+    </button>
+
+<pre>
+# 法令遵守と運用計画書
+
+## 目次
+1. 法令遵守の基本ポイント
+2. 今月末までの予定
+3. 毎日の作業スケジュール
+4. チェックリスト
+5. 注意点
+6. システムアクセス情報
+7. 運用スケジュール
+8. PIN認証システム運用ガイドライン
+
+## 1. 法令遵守の基本ポイント
+
+### 1.1 個人情報の取り扱い
+- 患者さんの情報は絶対に漏らさない
+- 必要な人だけがアクセスできるようにする
+- 情報の開示や訂正の依頼があったらすぐに対応
+
+### 1.2 医療情報システムの運用
+- 厚生労働省のルールに従う
+- 情報漏洩が起きた場合の対応手順を決めておく
+- 定期的にセキュリティチェックを行う
+
+### 1.3 セキュリティ対策
+- PIN認証による本人確認システムを導入
+- 顔認証からPIN認証方式に変更し、セキュリティを強化
+- 不正アクセスを防ぐ
+- 問題が起きた時の対応手順を決めておく
+
+### 1.3.1 PIN認証システムのセキュリティ機能
+- システムアクセス前のPIN認証必須化
+- 6桁以上の英数字混合PINによる認証
+- 30分有効なセッション管理
+- 5回失敗で30分間アカウントロック
+- 利用状況の自動記録と監視
+- 管理者による利用履歴確認機能
+
+### 1.4 アクセシビリティ対応
+- 高齢者や障害のある方も使いやすい設計
+- 画面の見やすさ、操作のしやすさに配慮
+- 必要な支援を提供できる体制
+
+### 1.5 著作権の遵守
+- 使用するソフトウェアのライセンスを確認
+- コンテンツの利用権限を確認
+- オープンソースのルールを守る
+
+### 1.6 労働管理
+- 適切な労働時間の管理
+- 休憩時間の確保
+- 安全な作業環境の維持
+
+## 2. 今月末までの予定
+
+### 2.1 第1週（～7日）
+- SQLiteデータベースの導入
+- 基本的なAPI実装
+- セキュリティ対策の基本設定
+
+### 2.2 第2週（8日～14日）
+- 管理画面のUI実装
+- アクセス権限の設定
+- バックアップ体制の整備
+
+### 2.3 第3週（15日～21日）
+- トップ画面の動的化
+- アクセシビリティ対応の実装
+- セキュリティテストの実施
+
+### 2.4 第4週（22日～31日）
+- システム全体のテスト
+- ドキュメントの整備
+- 最終確認と調整
+
+## 3. 毎日の作業スケジュール
+
+### 3.1 基本スケジュール
+- 朝6:00～8:00：進捗確認と報告
+- 9:00～12:00：開発作業
+- 13:00～17:00：テストと調整
+- 17:00～18:00：ドキュメント作成・更新
+
+### 3.2 週間スケジュール
+- 月曜日：週間計画の策定
+- 火～木曜日：開発・テスト作業
+- 金曜日：週間振り返りと報告
+
+## 4. チェックリスト
+
+### 4.1 セキュリティ関連
+□ セキュリティ対策の実施
+□ アクセス権限の設定
+□ バックアップ体制の整備
+
+### 4.2 開発関連
+□ データベースの導入
+□ API実装の完了
+□ UI実装の完了
+
+### 4.3 テスト関連
+□ セキュリティテスト
+□ アクセシビリティテスト
+□ システム全体のテスト
+
+### 4.4 ドキュメント関連
+□ 運用マニュアルの作成
+□ セキュリティポリシーの作成
+□ 障害対応手順書の作成
+
+## 5. 注意点
+
+### 5.1 日常的な注意事項
+1. 毎日の進捗を記録
+2. 問題が発生したらすぐに報告
+3. セキュリティ対策を優先
+4. アクセシビリティ対応を忘れずに
+5. ドキュメントは随時更新
+
+### 5.2 緊急時の対応
+1. システム障害発生時の連絡体制
+2. セキュリティインシデント発生時の対応手順
+3. バックアップからの復旧手順
+
+### 5.3 報告・連絡事項
+1. 日次報告の提出
+2. 週次報告の提出
+3. 月次報告の提出
+
+## 6. システムアクセス情報
+
+### 6.1 アクセス権限区分
+1. 管理者（PIN認証登録時に「管理者」を選択）
+2. スタッフ（PIN認証登録時に「スタッフ」を選択）
+
+### 6.2 PIN認証システム情報
+
+#### 6.2.1 PIN認証登録手順
+1. システム初回アクセス時にPIN認証登録ページに自動リダイレクト
+2. 個人情報（姓名、生年月日、性別、連絡先）を入力
+3. 職種（管理者/スタッフ）を選択
+4. 6桁以上の英数字混合PINを設定
+5. PINの確認入力を行う
+6. 登録完了後、メインシステムにアクセス可能
+
+#### 6.2.2 セッション管理
+- 有効期限：30分
+- 再認証：30分経過後に自動的に必要
+- ログアウト：手動ログアウトボタンで即座に無効化
+- アカウントロック：5回失敗で30分間ロック
+
+#### 6.2.3 利用履歴管理
+- 自動記録：ゲーム開始・終了、利用時間、スコア等
+- 管理者確認：利用履歴ページで全利用者の状況を確認可能
+- データ保持：ローカルストレージに保存
+
+### 6.3 セキュリティ注意事項
+1. PINデータの安全な管理
+2. 個人情報の適切な取り扱い
+3. アクセス権限の適切な管理
+4. 不審なアクセスの監視
+5. 利用履歴の定期的な確認
+
+### 6.4 PIN認証システム運用ルール
+
+#### 6.4.1 登録時の注意事項
+1. 正確な個人情報の入力
+2. 6桁以上の英数字混合PINの設定
+3. 連続数字や簡単なPINの使用禁止
+4. 登録完了の確認
+
+#### 6.4.2 日常利用時の注意事項
+1. セッション有効期限の確認
+2. 利用終了時のログアウト
+3. 共有端末での利用時の注意
+4. PINの安全な管理
+
+#### 6.4.3 セキュリティ強化事項
+1. アカウントロック機能の活用
+2. 定期的なPIN変更の推奨
+3. 不審なアクセスの監視
+4. 利用履歴の定期的な確認
+
+## 7. 運用スケジュール
+
+### 7.1 システム設定
+
+#### 7.1.1 PIN認証システムの設定
+- PIN認証の必須化
+- セッション管理の設定（30分）
+- アカウントロック機能の設定（5回失敗で30分）
+- 利用履歴記録の設定
+- 管理者権限の設定
+
+#### 7.1.2 セキュリティ設定
+- アクセス制御の設定
+- データ暗号化の設定
+- バックアップ体制の整備
+- 監視体制の構築
+
+### 7.2 運用開始手順
+1. システムの最終確認
+2. 管理者アカウントの作成
+3. PIN認証登録の実行
+4. テスト利用の実施
+5. 本格運用開始
+
+### 7.3 日常運用
+1. 利用状況の監視
+2. セキュリティチェック
+3. バックアップの実行
+4. ログの確認
+5. 問題の対応
+
+## 8. 更新履歴
+
+### v2.0 (2025年6月21日)
+- 顔認証システムからPIN認証システムへの移行
+- セキュリティ機能の強化
+- アカウントロック機能の追加
+- セッション管理の改善
+
+### v1.0 (2025年6月20日)
+- 顔認証システムの初回リリース
+- 基本的な顔認証機能の実装
+
+---
+作成者：小川 清志
+作成日：2025年6月21日
+バージョン：2.0
+</pre>
+
+<div class="page-break"></div>
+
+<!-- 課長様・承認者向け確認欄 -->
+<div class="approval-section">
+    <h3>【課長様・承認者向け確認欄】</h3>
+    <div class="approval-grid">
+        <div class="approval-item">
+            <h4>法令遵守確認</h4>
+            <div class="approval-field">
+                <label>法令遵守・セキュリティ対策について確認</label>
+                <textarea placeholder="確認内容を記入してください"></textarea>
+            </div>
+            <div class="approval-field">
+                <label>承認者名</label>
+                <input type="text" placeholder="氏名を記入">
+            </div>
+            <div class="approval-field">
+                <label>承認日</label>
+                <input type="date">
+            </div>
+        </div>
+        
+        <div class="approval-item">
+            <h4>運用計画確認</h4>
+            <div class="approval-field">
+                <label>運用計画・スケジュールについて確認</label>
+                <textarea placeholder="確認内容を記入してください"></textarea>
+            </div>
+            <div class="approval-field">
+                <label>承認者名</label>
+                <input type="text" placeholder="氏名を記入">
+            </div>
+            <div class="approval-field">
+                <label>承認日</label>
+                <input type="date">
+            </div>
+        </div>
+    </div>
+    
+    <div class="approval-grid">
+        <div class="approval-item">
+            <h4>セキュリティ確認</h4>
+            <div class="approval-field">
+                <label>セキュリティ対策・PIN認証システムについて確認</label>
+                <textarea placeholder="確認内容を記入してください"></textarea>
+            </div>
+            <div class="approval-field">
+                <label>承認者名</label>
+                <input type="text" placeholder="氏名を記入">
+            </div>
+            <div class="approval-field">
+                <label>承認日</label>
+                <input type="date">
+            </div>
+        </div>
+        
+        <div class="approval-item">
+            <h4>運用体制確認</h4>
+            <div class="approval-field">
+                <label>運用体制・責任者について確認</label>
+                <textarea placeholder="確認内容を記入してください"></textarea>
+            </div>
+            <div class="approval-field">
+                <label>承認者名</label>
+                <input type="text" placeholder="氏名を記入">
+            </div>
+            <div class="approval-field">
+                <label>承認日</label>
+                <input type="date">
+            </div>
+        </div>
+    </div>
+    
+    <div class="approval-grid">
+        <div class="approval-item">
+            <h4>リスク管理確認</h4>
+            <div class="approval-field">
+                <label>リスク・対策について確認</label>
+                <textarea placeholder="確認内容を記入してください"></textarea>
+            </div>
+            <div class="approval-field">
+                <label>承認者名</label>
+                <input type="text" placeholder="氏名を記入">
+            </div>
+            <div class="approval-field">
+                <label>承認日</label>
+                <input type="date">
+            </div>
+        </div>
+        
+        <div class="approval-item">
+            <h4>最終承認</h4>
+            <div class="approval-field">
+                <label>法令遵守と運用計画の最終承認</label>
+                <textarea placeholder="承認内容を記入してください"></textarea>
+            </div>
+            <div class="approval-field">
+                <label>承認者名</label>
+                <input type="text" placeholder="氏名を記入">
+            </div>
+            <div class="approval-field">
+                <label>承認日</label>
+                <input type="date">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html> 

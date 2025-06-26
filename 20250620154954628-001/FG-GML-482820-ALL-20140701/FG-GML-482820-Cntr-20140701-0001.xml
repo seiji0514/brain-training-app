@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Dataset xsi:schemaLocation="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema FGD_GMLSchema.xsd"
+	xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema"
+	gml:id="Dataset1">
+  <gml:description>基盤地図情報メタデータ ID=fmdid:14-0701</gml:description>
+  <gml:name>基盤地図情報ダウンロードデータ（GML版）</gml:name>
+
+<Cntr gml:id="K3_4611611607_1">
+<fid>46116-11607-s-12</fid>
+<lfSpanFr gml:id="K3_4611611607_1-1">
+<gml:timePosition>2013-12-09</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4611611607_1-2">
+<gml:timePosition>2014-06-23</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4611611607_1-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+ 32.244520889 128.104676778
+ 32.244542444 128.104676028
+ 32.244556833 128.104683778
+ 32.244567028 128.104699306
+ 32.244567639 128.104719750
+ 32.244561028 128.104727528
+ 32.244549056 128.104735278
+ 32.244534056 128.104741611
+ 32.244499889 128.104744444
+ 32.244479306 128.104741194
+ 32.244473889 128.104732000
+ 32.244472111 128.104725667
+ 32.244471500 128.104715778
+ 32.244472111 128.104702389
+ 32.244475694 128.104693222
+ 32.244520889 128.104676778
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+<Cntr gml:id="K3_4611611607_2">
+<fid>46116-11607-s-13</fid>
+<lfSpanFr gml:id="K3_4611611607_2-1">
+<gml:timePosition>2013-12-09</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K3_4611611607_2-2">
+<gml:timePosition>2014-06-23</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<loc>
+<gml:Curve gml:id="K3_4611611607_2-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+ 32.243513500 128.104591333
+ 32.243548306 128.104588194
+ 32.243591472 128.104567556
+ 32.243622667 128.104558917
+ 32.243649639 128.104552556
+ 32.243705417 128.104552556
+ 32.243737778 128.104554667
+ 32.243749306 128.104559722
+ 32.243742111 128.104578750
+ 32.243733361 128.104597694
+ 32.243718528 128.104621500
+ 32.243695583 128.104634194
+ 32.243667556 128.104642722
+ 32.243626194 128.104642722
+ 32.243610611 128.104645306
+ 32.243588417 128.104653306
+ 32.243563389 128.104661194
+ 32.243510806 128.104673889
+ 32.243468972 128.104661194
+ 32.243454833 128.104639889
+ 32.243462917 128.104617667
+ 32.243483139 128.104604972
+ 32.243513500 128.104591333
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>一般等高線</type>
+<alti>10</alti>
+</Cntr>
+</Dataset>

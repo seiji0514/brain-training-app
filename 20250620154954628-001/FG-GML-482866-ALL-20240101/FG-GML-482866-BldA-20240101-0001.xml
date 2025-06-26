@@ -1,0 +1,2235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Dataset xsi:schemaLocation="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema FGD_GMLSchema.xsd"
+	xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema"
+	gml:id="Dataset1">
+  <gml:description>基盤地図情報メタデータ ID=fmdid:24-0101</gml:description>
+  <gml:name>基盤地図情報ダウンロードデータ（GML版）</gml:name>
+<BldA gml:id="K17_4635011700_1">
+<fid>20231130-46356-11727-s-846</fid>
+<lfSpanFr gml:id="K17_4635011700_1-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_1-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_1-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_1-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578411337 128.774368195
+32.578227091 128.774366697
+32.578226142 128.774530195
+32.578410388 128.774531694
+32.578411337 128.774368195
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_2">
+<fid>20231130-46356-11727-s-555</fid>
+<lfSpanFr gml:id="K17_4635011700_2-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_2-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_2-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_2-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578178056 128.772227778
+32.578082222 128.772148056
+32.578008889 128.772081389
+32.577963611 128.772054722
+32.5779525 128.772068056
+32.577918611 128.772114722
+32.577913056 128.772141389
+32.577986389 128.772194444
+32.578132778 128.772314167
+32.578178056 128.772227778
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_3">
+<fid>20231130-46356-11727-s-559</fid>
+<lfSpanFr gml:id="K17_4635011700_3-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_3-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_3-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_3-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578414722 128.772520556
+32.578296389 128.7724475
+32.5782175 128.772400833
+32.578183611 128.772453889
+32.578178056 128.772493889
+32.578330278 128.772587222
+32.578375278 128.772613611
+32.578414722 128.772520556
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_4">
+<fid>20231130-46356-11727-s-550</fid>
+<lfSpanFr gml:id="K17_4635011700_4-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_4-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_4-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_4-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581910556 128.771908333
+32.581893611 128.771841944
+32.581837222 128.771835278
+32.581763889 128.771855
+32.581713056 128.771868333
+32.5817075 128.771915
+32.581724444 128.771975
+32.581786389 128.771961667
+32.581899167 128.771928333
+32.581910556 128.771908333
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_5">
+<fid>20231130-46356-11727-s-566</fid>
+<lfSpanFr gml:id="K17_4635011700_5-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_5-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_5-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_5-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579891944 128.772886667
+32.579880556 128.77282
+32.579835556 128.772813333
+32.579694444 128.772846667
+32.579705833 128.772953056
+32.579886111 128.772913056
+32.579891944 128.772886667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_6">
+<fid>20231130-46356-11727-s-569</fid>
+<lfSpanFr gml:id="K17_4635011700_6-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_6-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_6-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_6-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578358333 128.773119444
+32.578223056 128.772966389
+32.578178056 128.773019722
+32.578172222 128.773046111
+32.578290833 128.7731925
+32.578324444 128.773172778
+32.578358333 128.773119444
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_7">
+<fid>20231130-46356-11727-s-573</fid>
+<lfSpanFr gml:id="K17_4635011700_7-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_7-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_7-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_7-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579186944 128.773545278
+32.579181389 128.773538611
+32.579158889 128.773458889
+32.579006667 128.773525278
+32.579000833 128.773558611
+32.579023611 128.773625278
+32.579091111 128.773605278
+32.579158889 128.773565278
+32.579181389 128.773565278
+32.579186944 128.773545278
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_8">
+<fid>20231130-46356-11727-s-564</fid>
+<lfSpanFr gml:id="K17_4635011700_8-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_8-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_8-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_8-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578031389 128.772786667
+32.577975 128.772720278
+32.577941111 128.77276
+32.577850833 128.77288
+32.577913056 128.772939722
+32.577941111 128.772919722
+32.578031389 128.772786667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_9">
+<fid>20231130-46356-11727-s-563</fid>
+<lfSpanFr gml:id="K17_4635011700_9-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_9-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_9-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_9-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580516663 128.772725914
+32.580511107 128.772659247
+32.580505274 128.772665914
+32.580353052 128.772679247
+32.580353052 128.772778969
+32.580505274 128.772785636
+32.580516663 128.772725914
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_10">
+<fid>20231130-46356-11727-s-547</fid>
+<lfSpanFr gml:id="K17_4635011700_10-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_10-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_10-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_10-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579119444 128.771682222
+32.579108056 128.771642222
+32.579068611 128.771535833
+32.579006667 128.771562222
+32.578983889 128.771582222
+32.579029167 128.771721944
+32.579051667 128.771748611
+32.5791025 128.771721944
+32.579119444 128.771682222
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_11">
+<fid>20231130-46359-11727-s-467</fid>
+<lfSpanFr gml:id="K17_4635011700_11-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_11-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_11-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_11-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578408566 128.775122406
+32.57840796 128.775017394
+32.578243841 128.775018714
+32.578244446 128.775123727
+32.578408566 128.775122406
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_12">
+<fid>20231130-46356-11727-s-557</fid>
+<lfSpanFr gml:id="K17_4635011700_12-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_12-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_12-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_12-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.5785275 128.772414167
+32.578505 128.772394167
+32.578409167 128.772334167
+32.578386667 128.7723275
+32.578347222 128.7724075
+32.578364167 128.772420833
+32.578375278 128.772434167
+32.57846 128.772487222
+32.578499444 128.772500556
+32.5785275 128.772414167
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_13">
+<fid>20231130-46356-11727-s-549</fid>
+<lfSpanFr gml:id="K17_4635011700_13-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_13-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_13-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_13-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579931389 128.771901667
+32.579908889 128.771848611
+32.579886111 128.771835278
+32.579756389 128.771908333
+32.579784722 128.771981667
+32.579801667 128.772001667
+32.57992 128.771928333
+32.579931389 128.771901667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_14">
+<fid>20231130-46356-11727-s-548</fid>
+<lfSpanFr gml:id="K17_4635011700_14-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_14-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_14-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_14-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.577636667 128.771781944
+32.577631111 128.771775278
+32.577608333 128.771755278
+32.577552222 128.771741944
+32.577506944 128.771908333
+32.577597222 128.771935
+32.577636667 128.771781944
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_15">
+<fid>20231130-46356-11727-s-562</fid>
+<lfSpanFr gml:id="K17_4635011700_15-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_15-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_15-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_15-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578995278 128.772680278
+32.578938889 128.772613611
+32.578843333 128.772706944
+32.578831944 128.772733611
+32.578882778 128.772806667
+32.578961389 128.772733611
+32.578995278 128.772680278
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_16">
+<fid>20231130-46356-11727-s-581</fid>
+<lfSpanFr gml:id="K17_4635011700_16-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_16-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_16-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_16-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579226389 128.774330556
+32.579192778 128.774190833
+32.579108056 128.7742175
+32.5791025 128.774290556
+32.579119444 128.774357222
+32.57917 128.774357222
+32.579226389 128.774330556
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_17">
+<fid>20231130-46356-11727-s-576</fid>
+<lfSpanFr gml:id="K17_4635011700_17-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_17-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_17-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_17-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579226389 128.773711667
+32.579198333 128.773631944
+32.579057222 128.773691667
+32.57908 128.773778333
+32.579108056 128.773778333
+32.579215278 128.773731667
+32.579226389 128.773711667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_18">
+<fid>20231130-46356-11727-s-565</fid>
+<lfSpanFr gml:id="K17_4635011700_18-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_18-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_18-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_18-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.5826375 128.77284
+32.582507778 128.772740278
+32.582468333 128.772826667
+32.5825925 128.772926389
+32.5826375 128.77284
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_19">
+<fid>20231130-46356-11727-s-544</fid>
+<lfSpanFr gml:id="K17_4635011700_19-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_19-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_19-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_19-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578268056 128.770664167
+32.578256944 128.770571111
+32.57824 128.770498056
+32.578161111 128.770517778
+32.578172222 128.770617778
+32.578189167 128.770690833
+32.578251389 128.7706775
+32.578268056 128.770664167
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_20">
+<fid>20231130-46356-11727-s-577</fid>
+<lfSpanFr gml:id="K17_4635011700_20-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_20-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_20-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_20-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580686944 128.773904722
+32.580613611 128.773878056
+32.580585278 128.773944444
+32.580562778 128.774044444
+32.580630556 128.774077778
+32.5806475 128.774051111
+32.580686944 128.773904722
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_21">
+<fid>20231130-46356-11727-s-588</fid>
+<lfSpanFr gml:id="K17_4635011700_21-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_21-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_21-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_21-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580596667 128.774916111
+32.580506389 128.774902778
+32.580444444 128.774902778
+32.580438889 128.774995833
+32.580469389 128.775
+32.580585278 128.775015833
+32.580587083 128.775
+32.580596667 128.774916111
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_22">
+<fid>20231130-46356-11727-s-546</fid>
+<lfSpanFr gml:id="K17_4635011700_22-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_22-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_22-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_22-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579807222 128.771602222
+32.579796111 128.771588889
+32.579722778 128.771489167
+32.579671944 128.771535833
+32.579660556 128.771562222
+32.579739722 128.771682222
+32.579767778 128.771655556
+32.579796111 128.771635556
+32.579807222 128.771602222
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_23">
+<fid>20231130-46356-11727-s-551</fid>
+<lfSpanFr gml:id="K17_4635011700_23-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_23-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_23-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_23-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581566389 128.771941667
+32.581560833 128.771935
+32.5814875 128.771935
+32.581476389 128.772028056
+32.581476389 128.772108056
+32.581498889 128.772121389
+32.581555278 128.772108056
+32.581566389 128.771941667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_24">
+<fid>20231130-46356-11727-s-570</fid>
+<lfSpanFr gml:id="K17_4635011700_24-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_24-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_24-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_24-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578877222 128.773159444
+32.578865833 128.773139444
+32.578815 128.773086111
+32.5787925 128.773106111
+32.578719167 128.773199167
+32.578775556 128.7732725
+32.578877222 128.773159444
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_25">
+<fid>20231130-46356-11727-s-575</fid>
+<lfSpanFr gml:id="K17_4635011700_25-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_25-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_25-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_25-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.5787925 128.773638333
+32.578736111 128.773565278
+32.578640278 128.773691667
+32.578679722 128.773731667
+32.578708056 128.773758333
+32.578741944 128.773718333
+32.5787925 128.773638333
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_26">
+<fid>20231130-46356-11727-s-568</fid>
+<lfSpanFr gml:id="K17_4635011700_26-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_26-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_26-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_26-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580286667 128.772926389
+32.580269722 128.772846667
+32.58014 128.772866667
+32.580134167 128.772933056
+32.580145556 128.772959722
+32.580185 128.772966389
+32.580275278 128.772939722
+32.580286667 128.772926389
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_27">
+<fid>20231130-46356-11727-s-583</fid>
+<lfSpanFr gml:id="K17_4635011700_27-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_27-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_27-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_27-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580608056 128.774663333
+32.580574167 128.77465
+32.580517778 128.77465
+32.580506389 128.774796389
+32.580596667 128.774809722
+32.580608056 128.774663333
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_28">
+<fid>20231130-46356-11727-s-558</fid>
+<lfSpanFr gml:id="K17_4635011700_28-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_28-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_28-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_28-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579096667 128.772500556
+32.579057222 128.772414167
+32.579034722 128.772380833
+32.578967222 128.772420833
+32.578961389 128.772440833
+32.579017778 128.772553889
+32.57908 128.772527222
+32.579096667 128.772500556
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_29">
+<fid>20231130-46359-11727-s-319</fid>
+<lfSpanFr gml:id="K17_4635011700_29-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_29-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_29-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_29-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581126667 128.775787778
+32.581081667 128.775701389
+32.581053333 128.775661389
+32.580985833 128.775708056
+32.581008333 128.775761111
+32.581059167 128.775841111
+32.581098611 128.775821111
+32.581126667 128.775787778
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_30">
+<fid>20231130-46356-11727-s-567</fid>
+<lfSpanFr gml:id="K17_4635011700_30-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_30-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_30-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_30-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579226389 128.772893333
+32.579175833 128.772826667
+32.579085556 128.772913056
+32.579074167 128.772939722
+32.579125 128.773006389
+32.579141944 128.772993056
+32.579226389 128.772893333
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_31">
+<fid>20231130-46356-11727-s-582</fid>
+<lfSpanFr gml:id="K17_4635011700_31-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_31-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_31-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_31-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579350556 128.774450278
+32.579254722 128.774363889
+32.579220833 128.774403611
+32.579215278 128.774483611
+32.579243333 128.774510278
+32.579311111 128.774516944
+32.579350556 128.774450278
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_32">
+<fid>20231130-46356-11727-s-552</fid>
+<lfSpanFr gml:id="K17_4635011700_32-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_32-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_32-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_32-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579267124 128.771970387
+32.579244346 128.771850387
+32.579165457 128.771863721
+32.579182401 128.772016776
+32.579261290 128.772003443
+32.579267124 128.771970387
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_33">
+<fid>20231130-46356-11727-s-543</fid>
+<lfSpanFr gml:id="K17_4635011700_33-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_33-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_33-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_33-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578606389 128.769965556
+32.578533333 128.769845833
+32.578471111 128.7698925
+32.578465556 128.7699125
+32.578538889 128.770025556
+32.578606389 128.769965556
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_34">
+<fid>20231130-46356-11727-s-584</fid>
+<lfSpanFr gml:id="K17_4635011700_34-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_34-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_34-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_34-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579858056 128.774749722
+32.579824167 128.774663333
+32.579705833 128.774723056
+32.579739722 128.774816389
+32.579767778 128.774803056
+32.579858056 128.774749722
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_35">
+<fid>20231130-46356-11727-s-579</fid>
+<lfSpanFr gml:id="K17_4635011700_35-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_35-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_35-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_35-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579643611 128.7741375
+32.57961 128.774057778
+32.579491389 128.774124167
+32.579525278 128.774210833
+32.579615556 128.774164167
+32.579643611 128.7741375
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_36">
+<fid>20231130-46356-11727-s-580</fid>
+<lfSpanFr gml:id="K17_4635011700_36-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_36-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_36-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_36-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579649444 128.774317222
+32.579615556 128.774237222
+32.579497222 128.774303889
+32.579530833 128.774390278
+32.579621111 128.774343889
+32.579649444 128.774317222
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_37">
+<fid>20231130-46356-11727-s-545</fid>
+<lfSpanFr gml:id="K17_4635011700_37-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_37-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_37-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_37-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578606389 128.770797222
+32.578533333 128.770763889
+32.578476944 128.770896944
+32.578555833 128.770943611
+32.578606389 128.770797222
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_38">
+<fid>20231130-46356-11727-s-586</fid>
+<lfSpanFr gml:id="K17_4635011700_38-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_38-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_38-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_38-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579863611 128.774916111
+32.579818611 128.774836111
+32.579716944 128.774916111
+32.579711389 128.774929444
+32.579754861 128.775
+32.579756389 128.7750025
+32.5797595 128.775
+32.579863611 128.774916111
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_39">
+<fid>20231130-46356-11727-s-578</fid>
+<lfSpanFr gml:id="K17_4635011700_39-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_39-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_39-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_39-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.5782175 128.774090833
+32.578093333 128.774090833
+32.578087778 128.774190833
+32.578211667 128.774190833
+32.5782175 128.774090833
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_40">
+<fid>20231130-46356-11727-s-554</fid>
+<lfSpanFr gml:id="K17_4635011700_40-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_40-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_40-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_40-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579029167 128.772114722
+32.578944444 128.772101389
+32.578933333 128.772254444
+32.579012222 128.772261111
+32.579029167 128.772114722
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_41">
+<fid>20231130-46356-11727-s-850</fid>
+<lfSpanFr gml:id="K17_4635011700_41-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_41-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_41-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_41-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578679739 128.771022711
+32.578763684 128.771036091
+32.578780163 128.770892171
+32.578696128 128.770878792
+32.578679739 128.771022711
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_42">
+<fid>20231130-46356-11727-s-572</fid>
+<lfSpanFr gml:id="K17_4635011700_42-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_42-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_42-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_42-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580608056 128.773425556
+32.580602222 128.773418889
+32.580574167 128.773325833
+32.580557222 128.773319167
+32.580489444 128.773352222
+32.580500833 128.773412222
+32.580523333 128.773478889
+32.580591111 128.773452222
+32.580608056 128.773425556
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_43">
+<fid>20231130-46356-11727-s-553</fid>
+<lfSpanFr gml:id="K17_4635011700_43-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_43-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_43-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_43-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.57917 128.772041389
+32.579091111 128.772028056
+32.579068611 128.772174444
+32.579153056 128.772187778
+32.57917 128.772041389
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_44">
+<fid>20231130-46356-11727-s-847</fid>
+<lfSpanFr gml:id="K17_4635011700_44-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_44-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_44-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_44-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580023557 128.773133105
+32.579959230 128.773081327
+32.57988566 128.773208988
+32.579949986 128.773260659
+32.580023557 128.773133105
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_45">
+<fid>20231130-46356-11727-s-852</fid>
+<lfSpanFr gml:id="K17_4635011700_45-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_45-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_45-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_45-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581901572 128.767685366
+32.581901593 128.767596108
+32.581771103 128.767596104
+32.581771082 128.767685255
+32.581901572 128.767685366
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_46">
+<fid>20231130-46356-11727-s-561</fid>
+<lfSpanFr gml:id="K17_4635011700_46-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_46-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_46-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_46-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580263889 128.772646944
+32.580258333 128.772640278
+32.580156944 128.772626944
+32.580145556 128.772640278
+32.580134167 128.772726944
+32.580252778 128.772733611
+32.580263889 128.772646944
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_47">
+<fid>20231130-46356-11727-s-848</fid>
+<lfSpanFr gml:id="K17_4635011700_47-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_47-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_47-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_47-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580288696 128.774664511
+32.580370672 128.774664916
+32.580371221 128.774525702
+32.580289244 128.774525191
+32.580288696 128.774664511
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_48">
+<fid>20231130-46356-11727-s-571</fid>
+<lfSpanFr gml:id="K17_4635011700_48-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_48-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_48-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_48-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581036389 128.773199167
+32.580985833 128.773146111
+32.580974444 128.773139444
+32.5809125 128.7732125
+32.580901111 128.773239167
+32.580951944 128.773305833
+32.580963056 128.7732925
+32.581036389 128.773199167
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_49">
+<fid>20231130-46356-11727-s-556</fid>
+<lfSpanFr gml:id="K17_4635011700_49-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_49-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_49-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_49-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579536667 128.772241111
+32.579514167 128.772227778
+32.579451944 128.772227778
+32.579446389 128.772354167
+32.579525278 128.7723675
+32.579536667 128.772241111
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_50">
+<fid>20231130-46356-11727-s-849</fid>
+<lfSpanFr gml:id="K17_4635011700_50-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_50-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_50-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_50-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580112089 128.774299216
+32.580182062 128.774329221
+32.580223133 128.774195539
+32.580153161 128.774165534
+32.580112089 128.774299216
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_51">
+<fid>20231130-46356-11727-s-590</fid>
+<lfSpanFr gml:id="K17_4635011700_51-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_51-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_51-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_51-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.583333333 128.770282528
+32.583333333 128.769887667
+32.583281389 128.769885
+32.583333333 128.770282528
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通無壁舎</type>
+</BldA>
+<BldA gml:id="K17_4635011700_52">
+<fid>20231130-46356-11727-s-560</fid>
+<lfSpanFr gml:id="K17_4635011700_52-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_52-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_52-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_52-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.577354722 128.772580556
+32.577253333 128.772567222
+32.5772475 128.772673611
+32.577343333 128.772680278
+32.577354722 128.772580556
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_53">
+<fid>20231130-46356-11727-s-574</fid>
+<lfSpanFr gml:id="K17_4635011700_53-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_53-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_53-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_53-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.5806925 128.773551944
+32.580613611 128.773538611
+32.580608056 128.773678333
+32.580681111 128.773678333
+32.5806925 128.773551944
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_54">
+<fid>20231130-46353-11727-s-1109</fid>
+<lfSpanFr gml:id="K17_4635011700_54-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_54-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_54-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_54-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.583081811 128.759967973
+32.583004569 128.760021119
+32.583048469 128.760110018
+32.583125621 128.760056872
+32.583081811 128.759967973
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_55">
+<fid>20231130-46356-11727-s-851</fid>
+<lfSpanFr gml:id="K17_4635011700_55-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_55-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_55-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_55-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578491768 128.770363771
+32.578540577 128.770336429
+32.578520811 128.770287062
+32.578551732 128.770269770
+32.578529679 128.770214671
+32.578449949 128.770259305
+32.578491768 128.770363771
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通建物</type>
+</BldA>
+<BldA gml:id="K17_4635011700_56">
+<fid>20231130-46356-11727-s-589</fid>
+<lfSpanFr gml:id="K17_4635011700_56-1">
+<gml:timePosition>2023-11-30</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K17_4635011700_56-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<area>
+<gml:Surface gml:id="K17_4635011700_56-g" srsName="fguuid:jgd2011.bl">
+<gml:patches>
+<gml:PolygonPatch>
+<gml:exterior>
+<gml:Ring>
+<gml:curveMember>
+<gml:Curve gml:id="K17_4635011700_56-3">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.583333333 128.769512472
+32.583333333 128.76951025
+32.5833325 128.769510833
+32.583333333 128.769512472
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</gml:curveMember>
+</gml:Ring>
+</gml:exterior>
+</gml:PolygonPatch>
+</gml:patches>
+</gml:Surface>
+</area>
+<type>普通無壁舎</type>
+</BldA>
+</Dataset>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>動く標識クリックゲーム</title>
+  <style>
+    body { font-family: 'Meiryo', sans-serif; background: #f0f2f5; text-align: center; }
+    .container { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px #b0c4de; max-width: 420px; margin: 40px auto; padding: 2.5em; }
+    .game-area { position: relative; width: 260px; height: 200px; margin: 0 auto 2em auto; background: #e3eaf6; border-radius: 10px; overflow: hidden; }
+    .sign { position: absolute; font-size: 2.5em; cursor: pointer; user-select: none; transition: left 0.2s, top 0.2s; }
+    .target-label { font-size: 1.2em; color: #2574c7; font-weight: bold; margin-bottom: 1em; }
+    .score { font-size: 1.5em; color: #2574c7; margin-top: 1em; font-weight: bold; }
+    .miss { font-size: 1.2em; color: #e74c3c; margin-top: 0.5em; font-weight: bold; }
+    .final-comment { font-size: 1.2em; margin-top: 1em; color: #2574c7; font-weight: bold; }
+    .start-btn, .restart-btn { background: #1a73e8; color: #fff; border: none; border-radius: 10px; padding: 1em 2.5em; margin: 1em; font-size: 1.2em; cursor: pointer; letter-spacing: 0.1em; }
+    .start-btn:hover, .restart-btn:hover { background: #1557b0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div style="font-size:1.5em; color:#2574c7; font-weight:bold; margin-bottom:0.5em;">動く標識クリックゲーム</div>
+    <div style="font-size:1.1em; color:#444; margin-bottom:1.5em;">指定された標識を素早くクリックしてください（全10問）</div>
+    <div class="target-label" id="targetLabel"></div>
+    <div class="game-area" id="gameArea"></div>
+    <div class="score" id="score" style="display:none;"></div>
+    <div class="miss" id="miss" style="display:none;"></div>
+    <div class="final-comment" id="comment" style="display:none;"></div>
+    <button id="startBtn" class="start-btn">スタート</button>
+    <button id="restartBtn" class="restart-btn" style="display:none;">もう一度</button>
+  </div>
+  <script>
+    const signs = [
+      { emoji: '🛑', label: '止まれ' },
+      { emoji: '🚫', label: '進入禁止' },
+      { emoji: '⚠️', label: '注意' },
+      { emoji: '🅿️', label: '駐車可' },
+      { emoji: '⛔', label: '車両進入禁止' }
+    ];
+    let targetIdx = 0, score = 0, miss = 0, question = 0, maxQuestion = 10, isPlaying = false, moveInterval = null;
+    const gameArea = document.getElementById('gameArea');
+    const targetLabel = document.getElementById('targetLabel');
+    const scoreDiv = document.getElementById('score');
+    const missDiv = document.getElementById('miss');
+    const commentDiv = document.getElementById('comment');
+    const startBtn = document.getElementById('startBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    function startGame() {
+      score = 0; miss = 0; question = 0; isPlaying = true;
+      scoreDiv.style.display = 'none';
+      missDiv.style.display = 'none';
+      commentDiv.style.display = 'none';
+      startBtn.style.display = 'none';
+      restartBtn.style.display = 'none';
+      nextTarget();
+    }
+    function endGame() {
+      isPlaying = false;
+      clearInterval(moveInterval);
+      gameArea.innerHTML = '';
+      targetLabel.textContent = '';
+      document.getElementById('startBtn').style.display = 'none';
+      document.getElementById('restartBtn').style.display = 'inline-block';
+      scoreDiv.textContent = `正解数：${score}`;
+      missDiv.innerHTML = `<span class='miss'>ミス数：${miss}</span>`;
+      let comment = '';
+      if(score >= 9) comment = '動体視力・反応速度バッチリです！';
+      else if(score >= 7) comment = 'よくできました！この調子でがんばりましょう。';
+      else comment = '次もがんばりましょう！';
+      scoreDiv.style.display = 'block';
+      missDiv.style.display = 'block';
+      commentDiv.textContent = comment;
+      commentDiv.style.display = 'block';
+    }
+    function nextTarget() {
+      if(!isPlaying) return;
+      if(question >= maxQuestion) { endGame(); return; }
+      question++;
+      // 新しいターゲットを決定
+      targetIdx = Math.floor(Math.random() * signs.length);
+      targetLabel.textContent = `「${signs[targetIdx].label}」の標識をクリック！（${question} / ${maxQuestion}）`;
+      showMovingSign(signs[targetIdx].emoji);
+    }
+    function showMovingSign(emoji) {
+      gameArea.innerHTML = '';
+      const signDiv = document.createElement('div');
+      signDiv.className = 'sign';
+      signDiv.textContent = emoji;
+      let pos = randomPos();
+      signDiv.style.left = pos.x + 'px';
+      signDiv.style.top = pos.y + 'px';
+      signDiv.onclick = () => {
+        if(!isPlaying) return;
+        score++;
+        clearInterval(moveInterval);
+        nextTarget();
+      };
+      gameArea.appendChild(signDiv);
+      // 他の標識もランダム配置
+      for(let i=0;i<signs.length;i++){
+        if(i===targetIdx) continue;
+        const otherDiv = document.createElement('div');
+        otherDiv.className = 'sign';
+        otherDiv.textContent = signs[i].emoji;
+        let pos = randomPos();
+        otherDiv.style.left = pos.x + 'px';
+        otherDiv.style.top = pos.y + 'px';
+        otherDiv.onclick = () => {
+          if(!isPlaying) return;
+          miss++;
+          clearInterval(moveInterval);
+          nextTarget();
+        };
+        gameArea.appendChild(otherDiv);
+      }
+      // 標識を1秒ごとに動かす
+      let moveCount = 0;
+      moveInterval = setInterval(() => {
+        if(!isPlaying || moveCount > 10) { clearInterval(moveInterval); return; }
+        Array.from(gameArea.children).forEach(div => {
+          let pos = randomPos();
+          div.style.left = pos.x + 'px';
+          div.style.top = pos.y + 'px';
+        });
+        moveCount++;
+      }, 1000);
+    }
+    function randomPos() {
+      // gameArea: 260x200, sign: 40x40
+      return {
+        x: Math.floor(Math.random()*200),
+        y: Math.floor(Math.random()*140)
+      };
+    }
+    startBtn.onclick = startGame;
+    restartBtn.onclick = startGame;
+  </script>
+</body>
+</html> 

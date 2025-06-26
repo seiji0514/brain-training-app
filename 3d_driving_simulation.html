@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>基礎操作訓練</title>
+    <style>
+        body { margin: 0; overflow: hidden; font-family: sans-serif; }
+        canvas { display: block; }
+        #hud { position: absolute; top: 10px; left: 10px; color: white; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px; }
+        #task-display { position: absolute; top: 10px; right: 10px; color: black; background: rgba(255, 255, 0, 0.8); padding: 15px; border-radius: 5px; font-size: 1.2em; font-weight: bold; }
+        #feedback { position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%); color: red; background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 10px; font-size: 2em; font-weight: bold; display: none; }
+        #back-button { position: absolute; top: 10px; right: 10px; z-index: 100; padding: 10px 15px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <a href="integrated_driving_system.html" id="back-button">戻る</a>
+    <div id="hud">
+        <div>速度: <span id="speed">0</span> km/h</div>
+        <div>ギア: <span id="gear">P</span></div>
+    </div>
+    <div id="task-display">現在の課題: <span id="current-task"></span></div>
+    <div id="feedback"></div>
+    <canvas id="canvas"></canvas>
+
+    <script type="importmap">
+        { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
+    </script>
+    <script type="module">
+        import * as THREE from 'three';
+
+        let scene, camera, renderer, car, road;
+        const gameState = { keys: {}, speed: 0, gear: 'P' };
+        let courseElements = { cones: [], stopLine: null };
+        let tasks, currentTaskIndex;
+
+        function init() {
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x87ceeb);
+
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
+            
+            renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('canvas'), antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.shadowMap.enabled = true;
+
+            const light = new THREE.DirectionalLight(0xffffff, 1.5);
+            light.position.set(100, 100, 50);
+            light.castShadow = true;
+            scene.add(light);
+            scene.add(new THREE.AmbientLight(0x404040, 0.8));
+
+            createRoadAndCourse();
+            createCar();
+            setupTasks();
+            setupEventListeners();
+            
+            animate();
+        }
+
+        function createRoadAndCourse() {
+            const roadMaterial = new THREE.MeshLambertMaterial({ color: 0x333333 });
+            
+            // Main straight road
+            const roadGeometry = new THREE.PlaneGeometry(20, 1000);
+            road = new THREE.Mesh(roadGeometry, roadMaterial);
+            road.rotation.x = -Math.PI / 2;
+            road.receiveShadow = true;
+            scene.add(road);
+
+            // Slalom cones
+            const coneGeometry = new THREE.ConeGeometry(0.5, 2, 8);
+            const coneMaterial = new THREE.MeshLambertMaterial({ color: 0xffa500 });
+            for (let i = 0; i < 6; i++) {
+                const cone = new THREE.Mesh(coneGeometry, coneMaterial);
+                cone.position.set((i % 2 === 0 ? -4 : 4), 1, -50 - i * 20);
+                cone.castShadow = true;
+                scene.add(cone);
+                courseElements.cones.push(cone);
+            }
+
+            // Stop line
+            const stopLineGeometry = new THREE.PlaneGeometry(20, 5);
+            const stopLineMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+            courseElements.stopLine = new THREE.Mesh(stopLineGeometry, stopLineMaterial);
+            courseElements.stopLine.rotation.x = -Math.PI / 2;
+            courseElements.stopLine.position.set(0, 0.01, -300);
+            scene.add(courseElements.stopLine);
+        }
+
+        function createCar() {
+            car = new THREE.Group();
+            const body = new THREE.Mesh(new THREE.BoxGeometry(2, 1, 4), new THREE.MeshLambertMaterial({ color: 0x007bff }));
+            body.position.y = 1;
+            body.castShadow = true;
+            car.add(body);
+            scene.add(car);
+            car.position.set(0, 0, 10);
+        }
+
+        function setupTasks() {
+            tasks = [
+                { name: "スラローム走行", targetZ: -200, completed: false, check: () => car.position.z < -180 },
+                { name: "目標地点で停止", targetZ: -300, completed: false, check: () => car.position.z < -295 && gameState.speed < 1 }
+            ];
+            currentTaskIndex = 0;
+            updateTaskDisplay();
+        }
+        
+        function updateTaskDisplay() {
+            document.getElementById('current-task').textContent = tasks[currentTaskIndex].name;
+        }
+
+        function setupEventListeners() {
+            window.addEventListener('keydown', (e) => gameState.keys[e.code] = true);
+            window.addEventListener('keyup', (e) => gameState.keys[e.code] = false);
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        function showFeedback(message) {
+            const feedbackEl = document.getElementById('feedback');
+            feedbackEl.textContent = message;
+            feedbackEl.style.display = 'block';
+            setTimeout(() => { feedbackEl.style.display = 'none'; }, 2000);
+        }
+
+        function checkCollisions() {
+            const carBox = new THREE.Box3().setFromObject(car);
+            for (const cone of courseElements.cones) {
+                const coneBox = new THREE.Box3().setFromObject(cone);
+                if (carBox.intersectsBox(coneBox)) {
+                    showFeedback("コーンに接触！");
+                    cone.material.color.set(0xff0000);
+                }
+            }
+        }
+        
+        function checkTasks() {
+            if (tasks[currentTaskIndex].completed) return;
+
+            if (tasks[currentTaskIndex].check()) {
+                tasks[currentTaskIndex].completed = true;
+                showFeedback(tasks[currentTaskIndex].name + " 完了！");
+
+                if (currentTaskIndex < tasks.length - 1) {
+                    currentTaskIndex++;
+                    updateTaskDisplay();
+                } else {
+                    document.getElementById('current-task').textContent = "全訓練完了！";
+                }
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Car control
+            if (gameState.keys['KeyW']) gameState.speed = Math.min(gameState.speed + 0.2, 50);
+            else gameState.speed = Math.max(gameState.speed - 0.1, 0);
+            if (gameState.keys['KeyS']) gameState.speed = Math.max(gameState.speed - 0.5, 0);
+
+            if (gameState.speed > 0) {
+                if (gameState.keys['KeyA']) car.rotation.y += 0.02;
+                if (gameState.keys['KeyD']) car.rotation.y -= 0.02;
+            }
+
+            car.position.x -= Math.sin(car.rotation.y) * gameState.speed * 0.02;
+            car.position.z -= Math.cos(car.rotation.y) * gameState.speed * 0.02;
+
+            // Camera follow
+            camera.position.x = car.position.x + Math.sin(car.rotation.y) * 12;
+            camera.position.z = car.position.z + Math.cos(car.rotation.y) * 12;
+            camera.position.y = car.position.y + 6;
+            camera.lookAt(car.position);
+
+            // Update UI
+            document.getElementById('speed').textContent = Math.floor(gameState.speed);
+            document.getElementById('gear').textContent = gameState.speed > 0 ? 'D' : 'P';
+
+            checkCollisions();
+            checkTasks();
+
+            renderer.render(scene, camera);
+        }
+
+        init();
+    </script>
+</body>
+</html>

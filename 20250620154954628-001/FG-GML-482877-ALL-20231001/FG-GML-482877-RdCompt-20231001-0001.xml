@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Dataset xsi:schemaLocation="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema FGD_GMLSchema.xsd"
+	xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema"
+	gml:id="Dataset1">
+  <gml:description>基盤地図情報メタデータ ID=fmdid:23-1001</gml:description>
+  <gml:name>基盤地図情報ダウンロードデータ（GML版）</gml:name>
+<RdCompt gml:id="K24_4639511757_1">
+<fid>46395-11757-s-1158</fid>
+<lfSpanFr gml:id="K24_4639511757_1-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K24_4639511757_1-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K24_4639511757_1-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.661850543 128.878991697
+32.662857012 128.879034545
+32.662869475 128.879021761
+32.662865815 128.879005571
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>歩道</type>
+<admOffice>不明</admOffice>
+</RdCompt>
+<RdCompt gml:id="K24_4639511757_2">
+<fid>46395-11757-s-1159</fid>
+<lfSpanFr gml:id="K24_4639511757_2-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K24_4639511757_2-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K24_4639511757_2-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.663523115 128.878976537
+32.663519508 128.878991179
+32.663511192 128.878998283
+32.663036522 128.879026950
+32.662937515 128.879029052
+32.662911258 128.879027816
+32.662904241 128.879009367
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>歩道</type>
+<admOffice>不明</admOffice>
+</RdCompt>
+<RdCompt gml:id="K24_4639511757_3">
+<fid>46395-11757-s-1160</fid>
+<lfSpanFr gml:id="K24_4639511757_3-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K24_4639511757_3-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K24_4639511757_3-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.663932090 128.878951683
+32.663929767 128.878963309
+32.663919678 128.878972729
+32.663574405 128.878995735
+32.663560062 128.878989480
+32.663555798 128.878977090
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>歩道</type>
+<admOffice>不明</admOffice>
+</RdCompt>
+<RdCompt gml:id="K24_4639511757_4">
+<fid>46395-11757-s-1161</fid>
+<lfSpanFr gml:id="K24_4639511757_4-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K24_4639511757_4-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K24_4639511757_4-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.664749608 128.878894567
+32.664747533 128.878907066
+32.664738575 128.878915656
+32.664318590 128.878946153
+32.663958983 128.878970111
+32.663950532 128.878966332
+32.663947594 128.878950136
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>歩道</type>
+<admOffice>不明</admOffice>
+</RdCompt>
+<RdCompt gml:id="K24_4639511757_5">
+<fid>46395-11757-s-1162</fid>
+<lfSpanFr gml:id="K24_4639511757_5-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K24_4639511757_5-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K24_4639511757_5-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.665313518 128.878834663
+32.665311718 128.878846285
+32.665298814 128.878857323
+32.665187944 128.878876673
+32.665021597 128.878892632
+32.664833779 128.878908740
+32.664800209 128.878911179
+32.664786185 128.878909218
+32.664785270 128.878891953
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>歩道</type>
+<admOffice>不明</admOffice>
+</RdCompt>
+<RdCompt gml:id="K24_4639511757_6">
+<fid>46395-11757-s-1163</fid>
+<lfSpanFr gml:id="K24_4639511757_6-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K24_4639511757_6-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K24_4639511757_6-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.666078225 128.878697033
+32.666071159 128.878716123
+32.666056880 128.878722576
+32.665461487 128.878826123
+32.665342996 128.878848851
+32.665333685 128.878844214
+32.665330879 128.878831259
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>歩道</type>
+<admOffice>不明</admOffice>
+</RdCompt>
+<RdCompt gml:id="K24_4639511757_7">
+<fid>46395-11757-s-1164</fid>
+<lfSpanFr gml:id="K24_4639511757_7-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K24_4639511757_7-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K24_4639511757_7-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.666183108 128.878677980
+32.666190933 128.878692020
+32.666205264 128.878694043
+32.666666667 128.878610983
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>歩道</type>
+<admOffice>不明</admOffice>
+</RdCompt>
+</Dataset>

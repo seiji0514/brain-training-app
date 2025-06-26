@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>記憶力ゲーム</title>
+  <style>
+    body {
+      background: #e0e5ea;
+      font-family: 'Segoe UI', 'Meiryo', sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+      padding: 20px 16px 16px 16px;
+      max-width: 600px;
+      width: 90vw;
+      text-align: center;
+      position: relative;
+      min-height: 450px;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    .level-select {
+      position: absolute;
+      left: 30px;
+      top: 20px;
+      font-size: 1.1em;
+    }
+    .question-number {
+      font-size: 1.1em;
+      color: #888;
+      margin-bottom: 4px;
+    }
+    .question {
+      font-size: 3.5em;
+      color: #34495e;
+      margin: 10px 0 4px 0;
+      letter-spacing: 0.1em;
+    }
+    .countdown {
+      font-size: 2.2em;
+      color: #e67e22;
+      margin-bottom: 6px;
+      height: 1.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .input-area {
+      margin: 8px 0 12px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+    }
+    .memory-input {
+      font-size: 2em;
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid #bbb;
+      width: 120px;
+      text-align: center;
+    }
+    .judge-btn {
+      background: #3498db;
+      color: #fff;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 28px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .judge-btn:active {
+      background: #217dbb;
+    }
+    .score {
+      font-size: 2em;
+      color: #27ae60;
+      margin-bottom: 0.2em;
+    }
+    .result {
+      font-size: 1.5em;
+      margin: 8px 0 4px 0;
+      color: #333;
+    }
+    .restart-btn {
+      background: #27ae60;
+      color: #fff;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 32px;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s;
+    }
+    .restart-btn:active {
+      background: #1e874b;
+    }
+    .red { color: #e74c3c; font-weight: bold; }
+    #gameResult {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px #b0c4de;
+      padding: 2.5em 1.5em;
+      max-width: 420px;
+      margin: 2em auto;
+    }
+    #gameResult h2 {
+      font-size: 1.8em;
+      color: #2574c7;
+      margin-bottom: 1em;
+    }
+    #gameResult div {
+      font-size: 1.2em;
+      margin: 0.8em 0;
+      color: #555;
+    }
+    #gameResult button {
+      background: #27ae60;
+      color: #fff;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 32px;
+      cursor: pointer;
+      margin: 1.5em 0.5em 0 0;
+      transition: background 0.2s;
+    }
+    #gameResult button:hover {
+      background: #1e874b;
+    }
+    #gameResult a {
+      display: inline-block;
+      background: #3498db;
+      color: #fff;
+      font-size: 1.2em;
+      text-decoration: none;
+      border-radius: 10px;
+      padding: 12px 32px;
+      margin: 1.5em 0 0 0.5em;
+      transition: background 0.2s;
+    }
+    #gameResult a:hover {
+      background: #2980b9;
+    }
+    .usage-box {
+      width: 260px !important;
+      max-width: 260px !important;
+      min-width: 260px !important;
+      box-sizing: border-box;
+      margin: 1em auto 1.2em auto;
+    }
+    .usage-box h2 {
+      margin-top: 0;
+      color: #388e3c;
+      font-size: 1.1em;
+    }
+    .difficulty-title {
+      margin-top: 1em;
+    }
+    .difficulty-row {
+      margin-bottom: 1em;
+    }
+    .container {
+      max-width: 350px;
+      width: 100%;
+      margin: 40px auto;
+      box-sizing: border-box;
+    }
+    .big-number {
+      word-break: break-all;
+      max-width: 100%;
+      font-size: 2.5em;
+      text-align: center;
+    }
+    input, button {
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    #emoji {
+      font-size: 2.5em;
+      margin-bottom: 4px;
+      margin-top: 0px;
+      height: 1.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="modal" id="main-content">
+    <div class="usage-box">
+      <h2>使用方法</h2>
+      <div>
+        表示された内容を覚えて、<br>
+        あとで質問に答えるゲームです。
+      </div>
+    </div>
+    <div class="difficulty-row">
+      <h3 class="difficulty-title">難易度</h3>
+      <div class="level-select">
+        難易度：
+        <select id="levelSelect">
+          <option value="easy">簡単</option>
+          <option value="normal" selected>普通</option>
+          <option value="hard">難しい</option>
+        </select>
+      </div>
+    </div>
+    <div class="question-number" id="questionNumber"></div>
+    <div class="countdown" id="countdown"></div>
+    <div class="question" id="question"></div>
+    <div id="emoji" style="font-size:2.5em; margin-bottom:10px; display:none;">🤔</div>
+    <div class="input-area" id="inputArea" style="display:none;">
+      <input type="text" id="memoryInput" class="memory-input" autocomplete="off" inputmode="numeric" pattern="[0-9]*" maxlength="5">
+      <button class="judge-btn" id="judgeBtn">判定</button>
+    </div>
+    <div class="result" id="result" style="display:none;"></div>
+    <button class="restart-btn" id="restartBtn" style="display:none;">もう一度</button>
+    <div class="score" id="score"></div>
+  </div>
+  <div id="gameResultDetail" style="display:none; text-align:center;">
+    <h2>お疲れ様でした！</h2>
+    <div>正解数：<span id="correctCountDetail"></span> / <span id="totalCountDetail"></span></div>
+    <div>ミス回数：<span id="missCountDetail" class="red"></span></div>
+    <div>正答率：<span id="accuracyDetail"></span>%</div>
+    <div>スコア：<span id="scoreDetail"></span></div>
+    <div>所要時間：<span id="timeDetail"></span>秒</div>
+    <div class="comment">よく頑張りました！</div>
+    <button onclick="restartGame()">もう一度挑戦</button>
+    <a href="brain_training_game.html">トップ画面へ</a>
+  </div>
+  <script src="game_result.js"></script>
+  <script>
+    const MARKS = ['♦','♠','♥','♣','○','▢','△','☆'];
+    const TOTAL_PAIRS = 8;
+    const TOTAL_CARDS = 16;
+
+    let cards = [];
+    let flipped = [];
+    let matched = [];
+    let tries = 0;
+    let startTime = 0;
+    let comboCount = 0;
+    let boardElem = document.getElementById('board');
+    let scoreElem = document.getElementById('score');
+    let resultElem = document.getElementById('result');
+    let restartBtn = document.getElementById('restartBtn');
+
+    // ゲーム設定を取得
+    const gameSettings = getGameSettings('memory');
+    const difficultySettings = getDifficultySettings('memory');
+
+    function startGame() {
+      cards = [];
+      flipped = [];
+      matched = [];
+      tries = 0;
+      comboCount = 0;
+      startTime = Date.now();
+      
+      // 難易度設定に基づいて問題数を設定
+      const totalPairs = Math.min(TOTAL_PAIRS, difficultySettings.totalQuestions / 2);
+      
+      // カードを生成
+      for (let i = 0; i < totalPairs; i++) {
+        cards.push(MARKS[i], MARKS[i]);
+      }
+      cards = shuffle(cards);
+      
+      // ボードを更新
+      updateBoard();
+      updateStats();
+    }
+
+    function checkMatch() {
+      if (flipped.length === 2) {
+        tries++;
+        if (flipped[0].textContent === flipped[1].textContent) {
+          matched.push(...flipped);
+          comboCount++;
+          resultElem.textContent = '正解！';
+          resultElem.style.color = '#27ae60';
+        } else {
+          comboCount = 0;
+          resultElem.textContent = '不正解...';
+          resultElem.style.color = '#e74c3c';
+          setTimeout(() => {
+            flipped.forEach(card => card.classList.remove('flipped'));
+            flipped = [];
+          }, 1000);
+        }
+        
+        flipped = [];
+        updateStats();
+        
+        // ゲーム終了判定
+        if (matched.length === cards.length) {
+          const timeUsed = (Date.now() - startTime) / 1000;
+          const score = calculateScore(
+            matched.length / 2,
+            cards.length / 2,
+            timeUsed,
+            comboCount
+          );
+          onGameEnd(matched.length / 2, cards.length / 2, tries - (matched.length / 2));
+        }
+      }
+    }
+
+    function updateStats() {
+      const timeUsed = (Date.now() - startTime) / 1000;
+      const score = calculateScore(
+        matched.length / 2,
+        cards.length / 2,
+        timeUsed,
+        comboCount
+      );
+      scoreElem.textContent = `スコア: ${score}`;
+    }
+
+    // 設定
+    const LEVELS = {
+      easy: 3,
+      normal: 4,
+      hard: 5
+    };
+    const TOTAL_QUESTIONS = 10;
+    const COUNTDOWN_START = 5;
+
+    // 状態
+    let currentLevel = 'normal';
+    let questionCount = 0;
+    let score = 0;
+    let miss = 0;
+    let answer = '';
+    let isGameOver = false;
+    let countdownTimer = null;
+    let countdownValue = COUNTDOWN_START;
+
+    const levelSelect = document.getElementById('levelSelect');
+    const questionNumber = document.getElementById('questionNumber');
+    const countdownElem = document.getElementById('countdown');
+    const questionElem = document.getElementById('question');
+    const inputArea = document.getElementById('inputArea');
+    const memoryInput = document.getElementById('memoryInput');
+    const judgeBtn = document.getElementById('judgeBtn');
+
+    function getRandomNumber(digits) {
+      const min = Math.pow(10, digits - 1);
+      const max = Math.pow(10, digits) - 1;
+      return String(Math.floor(Math.random() * (max - min + 1)) + min);
+    }
+
+    function setLevel(level) {
+      currentLevel = level;
+      restartGame();
+    }
+
+    function showQuestion() {
+      const digits = LEVELS[currentLevel];
+      answer = getRandomNumber(digits);
+      questionNumber.textContent = `${questionCount + 1} / ${TOTAL_QUESTIONS}`;
+      countdownElem.textContent = '';
+      questionElem.textContent = answer;
+      document.getElementById('emoji').style.display = 'none';
+      inputArea.style.display = 'none';
+      memoryInput.value = '';
+      memoryInput.disabled = false;
+      judgeBtn.disabled = false;
+      resultElem.style.display = 'none';
+      restartBtn.style.display = 'none';
+      scoreElem.textContent = `正解数：${score}`;
+      startCountdown();
+    }
+
+    function startCountdown() {
+      countdownValue = COUNTDOWN_START;
+      countdownElem.textContent = countdownValue;
+      countdownTimer = setInterval(() => {
+        countdownValue--;
+        if (countdownValue > 0) {
+          countdownElem.textContent = countdownValue;
+        } else {
+          clearInterval(countdownTimer);
+          countdownElem.textContent = '';
+          questionElem.textContent = '';
+          document.getElementById('emoji').style.display = 'block';
+          inputArea.style.display = 'flex';
+          memoryInput.focus();
+          memoryInput.disabled = false;
+          judgeBtn.disabled = false;
+        }
+      }, 1000);
+    }
+
+    function handleJudge() {
+      if (isGameOver) return;
+      const userInput = memoryInput.value.trim();
+      if (userInput === answer) {
+        score++;
+        questionCount++;
+        if (questionCount >= TOTAL_QUESTIONS) {
+          endGame();
+        } else {
+          showQuestion();
+        }
+      } else {
+        miss++;
+        memoryInput.value = '';
+        memoryInput.focus();
+      }
+      scoreElem.textContent = `正解数：${score}`;
+    }
+
+    function endGame() {
+      isGameOver = true;
+      questionElem.textContent = '';
+      countdownElem.textContent = '';
+      inputArea.style.display = 'none';
+      questionNumber.textContent = '';
+      scoreElem.textContent = '';
+      resultElem.innerHTML = `ゲーム終了<br>正解数：${score} / ${TOTAL_QUESTIONS}<br>ミス回数：${miss}`;
+      resultElem.style.display = 'block';
+      restartBtn.style.display = 'inline-block';
+      document.getElementById('emoji').style.display = 'none';
+      onGameEnd(score, TOTAL_QUESTIONS, miss);
+    }
+
+    function restartGame() {
+      if (countdownTimer) clearInterval(countdownTimer);
+      questionCount = 0;
+      score = 0;
+      miss = 0;
+      isGameOver = false;
+      document.getElementById('emoji').style.display = 'none';
+      document.getElementById('gameResultDetail').style.display = 'none';
+      showQuestion();
+    }
+
+    function onGameEnd(correct, total, miss) {
+      showGameResult(correct, total, miss);
+    }
+
+    levelSelect.onchange = (e) => setLevel(e.target.value);
+    judgeBtn.onclick = handleJudge;
+    memoryInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') handleJudge();
+    });
+    restartBtn.onclick = restartGame;
+
+    // 初期化
+    restartGame();
+
+    // 結果レイアウト（詳細のみ）
+    function showGameResult(correct, total, miss, time = 0, score = 0) {
+      document.getElementById('gameResultDetail').style.display = 'block';
+      document.getElementById('correctCountDetail').textContent = correct;
+      document.getElementById('totalCountDetail').textContent = total;
+      document.getElementById('missCountDetail').textContent = miss;
+      document.getElementById('accuracyDetail').textContent = total ? Math.round((correct/total)*100) : 0;
+      document.getElementById('scoreDetail').textContent = score;
+      document.getElementById('timeDetail').textContent = time;
+    }
+  </script>
+</body>
+</html> 

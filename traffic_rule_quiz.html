@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>交通ルールクイズ</title>
+  <style>
+    body { font-family: 'Meiryo', sans-serif; background: #f0f2f5; text-align: center; }
+    .container { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px #b0c4de; max-width: 520px; margin: 40px auto; padding: 2.5em; }
+    .question { font-size: 1.3em; margin: 1.7em 0 1.2em 0; color: #2574c7; font-weight: bold; }
+    .choices { margin-bottom: 1.5em; }
+    .choice-btn { background: #1a73e8; color: #fff; border: none; border-radius: 10px; padding: 1em 2.5em; margin: 0.7em; font-size: 1.2em; cursor: pointer; letter-spacing: 0.1em; }
+    .choice-btn:hover { background: #1557b0; }
+    .result { font-size: 1.3em; margin: 1.2em 0; color: #27ae60; }
+    .result.incorrect { color: #e67e22; }
+    .score { font-size: 2em; color: #2574c7; margin-top: 2em; font-weight: bold; }
+    .miss { font-size: 1.3em; color: #e74c3c; margin-top: 1em; font-weight: bold; }
+    .final-comment { font-size: 1.5em; margin-top: 1em; color: #2574c7; font-weight: bold; }
+    .sign-img { width: 70px; height: 70px; vertical-align: middle; margin-right: 14px; }
+    .next-btn { background: #43a047; color: #fff; border: none; border-radius: 10px; padding: 1em 2.5em; margin: 0.7em; font-size: 1.2em; cursor: pointer; letter-spacing: 0.1em; }
+    .next-btn:hover { background: #2e7031; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="quizArea">
+      <div class="question" id="question"></div>
+      <div class="choices" id="choices"></div>
+      <div class="result" id="result"></div>
+    </div>
+    <div class="score" id="score" style="display:none;"></div>
+    <button id="nextBtn" style="display:none;" class="next-btn">次の問題</button>
+  </div>
+  <script>
+    // サンプル問題（標識画像は絵文字で代用。画像ファイルに差し替え可）
+    const questions = [
+      {
+        q: 'この標識の意味は？ 🚫（車の進入禁止）',
+        answer: '車の進入禁止',
+        choices: ['車の進入禁止', '一時停止', '徐行', '駐車禁止']
+      },
+      {
+        q: 'この標識の意味は？ 🅿️（駐車場）',
+        answer: '駐車場',
+        choices: ['駐車場', '駐車禁止', '停車禁止', '徐行']
+      },
+      {
+        q: '横断歩道を渡るとき、信号が青になったらどうしますか？',
+        answer: '左右をよく見てから渡る',
+        choices: ['すぐ渡る', '左右をよく見てから渡る', '走って渡る', '赤でも渡る']
+      },
+      {
+        q: 'この標識の意味は？ ⛔（車両進入禁止）',
+        answer: '車両進入禁止',
+        choices: ['車両進入禁止', '徐行', '駐車禁止', '一方通行']
+      },
+      {
+        q: '踏切を渡るとき、どうしますか？',
+        answer: '一時停止して安全を確認する',
+        choices: ['一時停止して安全を確認する', '急いで渡る', '音楽を聴きながら渡る', '信号だけ見る']
+      },
+      {
+        q: 'この標識の意味は？ 🛑（一時停止）',
+        answer: '一時停止',
+        choices: ['一時停止', '徐行', '駐車禁止', '車両進入禁止']
+      },
+      {
+        q: '自転車はどこを走るのが原則？',
+        answer: '車道の左側',
+        choices: ['車道の左側', '歩道', '車道の右側', 'どこでもよい']
+      },
+      {
+        q: '夜間に歩くとき、気をつけることは？',
+        answer: '明るい服や反射材を身につける',
+        choices: ['明るい服や反射材を身につける', '黒い服を着る', '走って歩く', '信号を無視する']
+      },
+      {
+        q: '信号が点滅しているときはどうしますか？',
+        answer: '安全を確認して渡らない',
+        choices: ['安全を確認して渡らない', '急いで渡る', '走って渡る', '気にせず渡る']
+      },
+      {
+        q: '道路を横断するとき、どこを渡るのが安全？',
+        answer: '横断歩道',
+        choices: ['横断歩道', 'どこでもよい', '車の間', '信号のない場所']
+      }
+    ];
+    let current = 0;
+    let score = 0;
+    let miss = 0;
+
+    function showQuestion() {
+      document.getElementById('result').textContent = '';
+      document.getElementById('nextBtn').style.display = 'none';
+      const q = questions[current];
+      document.getElementById('question').textContent = q.q;
+      const choicesDiv = document.getElementById('choices');
+      choicesDiv.innerHTML = '';
+      q.choices.forEach(choice => {
+        const btn = document.createElement('button');
+        btn.textContent = choice;
+        btn.className = 'choice-btn';
+        btn.onclick = () => checkAnswer(choice);
+        choicesDiv.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(choice) {
+      const q = questions[current];
+      if (choice === q.answer) {
+        document.getElementById('result').textContent = '正解です！交通ルールを守って安全に過ごしましょう。';
+        document.getElementById('result').className = 'result';
+        score++;
+      } else {
+        document.getElementById('result').textContent = `おしいです。正解は「${q.answer}」でした。安全第一でいきましょう。`;
+        document.getElementById('result').className = 'result incorrect';
+        miss++;
+      }
+      document.querySelectorAll('.choice-btn').forEach(btn => btn.disabled = true);
+      document.getElementById('nextBtn').style.display = 'inline-block';
+    }
+
+    document.getElementById('nextBtn').onclick = () => {
+      current++;
+      if (current < questions.length) {
+        showQuestion();
+      } else {
+        document.getElementById('quizArea').style.display = 'none';
+        let comment = '';
+        if (score === questions.length) {
+          comment = '満点です！すばらしいですね！';
+        } else if (score >= Math.floor(questions.length * 0.8)) {
+          comment = 'よくできました！この調子でがんばりましょう。';
+        } else if (score < Math.floor(questions.length * 0.5)) {
+          comment = '次もがんばりましょう！';
+        } else {
+          comment = 'あと少しで満点です。';
+        }
+        document.getElementById('score').innerHTML =
+          `あなたのスコア：${score} / ${questions.length}` +
+          `<div class='miss'>ミス回数：${miss}</div>` +
+          `<div class='final-comment'>${comment}</div>`;
+        document.getElementById('score').style.display = 'block';
+      }
+    };
+
+    // 初期表示
+    showQuestion();
+  </script>
+</body>
+</html>

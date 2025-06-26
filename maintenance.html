@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メンテナンス中 - 脳トレゲームシステム</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: "Segoe UI", "Meiryo", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .maintenance-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 3rem;
+            text-align: center;
+            max-width: 500px;
+            margin: 2rem;
+        }
+        
+        .maintenance-icon {
+            font-size: 4rem;
+            color: #f39c12;
+            margin-bottom: 1rem;
+        }
+        
+        .maintenance-title {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        
+        .maintenance-message {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        
+        .maintenance-info {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .maintenance-info h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        
+        .maintenance-info p {
+            color: #666;
+            margin: 0.5rem 0;
+        }
+        
+        .refresh-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .refresh-btn:hover {
+            background: #2980b9;
+        }
+        
+        .admin-login-link {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .admin-login-link a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .admin-login-link a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .maintenance-container {
+                margin: 1rem;
+                padding: 2rem;
+            }
+            
+            .maintenance-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="maintenance-container">
+        <div class="maintenance-icon">
+            <i class="fas fa-tools"></i>
+        </div>
+        
+        <h1 class="maintenance-title">メンテナンス中</h1>
+        
+        <div class="maintenance-message" id="maintenanceMessage">
+            システムメンテナンス中です。しばらくお待ちください。
+        </div>
+        
+        <div class="maintenance-info">
+            <h3><i class="fas fa-info-circle"></i> メンテナンス情報</h3>
+            <p><strong>開始時刻:</strong> <span id="maintenanceStartTime"></span></p>
+            <p><strong>予定終了:</strong> <span id="maintenanceEndTime"></span></p>
+            <p><strong>作業内容:</strong> システム改善・トラブル対応</p>
+        </div>
+        
+        <button class="refresh-btn" onclick="checkMaintenanceStatus()">
+            <i class="fas fa-sync-alt"></i> 状況を確認
+        </button>
+        
+        <div class="admin-login-link">
+            <p>管理者の方は <a href="admin_login.html">こちら</a> からログインしてください。</p>
+        </div>
+    </div>
+
+    <script>
+        // メンテナンス情報の設定
+        function setMaintenanceInfo() {
+            const now = new Date();
+            const endTime = new Date(now.getTime() + 2 * 60 * 60 * 1000); // 2時間後
+            
+            document.getElementById("maintenanceStartTime").textContent = 
+                now.toLocaleString("ja-JP");
+            document.getElementById("maintenanceEndTime").textContent = 
+                endTime.toLocaleString("ja-JP");
+        }
+        
+        // メンテナンス状況の確認
+        function checkMaintenanceStatus() {
+            // 実際の実装ではサーバーに確認リクエストを送信
+            fetch("game_settings.json")
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.maintenance_mode || !data.maintenance_mode.enabled) {
+                        // メンテナンス終了
+                        window.location.href = "index.html";
+                    } else {
+                        // メンテナンス継続中
+                        alert("メンテナンスはまだ継続中です。しばらくお待ちください。");
+                    }
+                })
+                .catch(error => {
+                    console.error("メンテナンス状況の確認に失敗しました:", error);
+                    alert("メンテナンス状況の確認に失敗しました。");
+                });
+        }
+        
+        // ページ読み込み時の初期化
+        document.addEventListener("DOMContentLoaded", function() {
+            setMaintenanceInfo();
+            
+            // 5分ごとにメンテナンス状況を確認
+            setInterval(checkMaintenanceStatus, 5 * 60 * 1000);
+        });
+    </script>
+</body>
+</html>

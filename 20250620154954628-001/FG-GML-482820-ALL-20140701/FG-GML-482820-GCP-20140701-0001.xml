@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Dataset xsi:schemaLocation="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema FGD_GMLSchema.xsd"
+	xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema"
+	gml:id="Dataset1">
+  <gml:description>基盤地図情報メタデータ ID=fmdid:14-0701</gml:description>
+  <gml:name>基盤地図情報ダウンロードデータ（GML版）</gml:name>
+
+<GCP gml:id="K1_482820_1">
+<fid>10-00100-0-1306-198049</fid>
+<lfSpanFr gml:id="K1_482820_1-1">
+<gml:timePosition>2013-06-19</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K1_482820_1-2">
+<gml:timePosition>2014-06-23</gml:timePosition>
+</devDate>
+<orgGILvl>KJ11</orgGILvl>
+<vis>表示</vis>
+<pos>
+<gml:Point gml:id="K1_482820_1-g" srsName="fguuid:jgd2011.bl">
+<gml:pos>32.248380556 128.107940306</gml:pos>
+</gml:Point>
+</pos>
+<orgName>国土地理院</orgName>
+<type>三角点</type>
+<gcpClass>一等三角点</gcpClass>
+<gcpCode>TR14828209801</gcpCode>
+<name>肥前鳥島北岩</name>
+<B>116094.17</B>
+<L>461188.5851</L>
+<alti>6.93</alti>
+<altiAcc>2</altiAcc>
+</GCP>
+<GCP gml:id="K1_482820_2">
+<fid>10-00100-0-1306-204779</fid>
+<lfSpanFr gml:id="K1_482820_2-1">
+<gml:timePosition>2013-06-19</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K1_482820_2-2">
+<gml:timePosition>2014-06-23</gml:timePosition>
+</devDate>
+<orgGILvl>KJ13</orgGILvl>
+<vis>表示</vis>
+<pos>
+<gml:Point gml:id="K1_482820_2-g" srsName="fguuid:jgd2011.bl">
+<gml:pos>32.243666389 128.104601222</gml:pos>
+</gml:Point>
+</pos>
+<orgName>国土地理院</orgName>
+<type>三角点</type>
+<gcpClass>三等三角点</gcpClass>
+<gcpCode>TR34828209802</gcpCode>
+<name>肥前鳥島南岩</name>
+<B>116077.199</B>
+<L>461176.5644</L>
+<alti>16.39</alti>
+<altiAcc>2</altiAcc>
+</GCP>
+</Dataset>

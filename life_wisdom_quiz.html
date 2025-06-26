@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生活の知恵クイズ</title>
+  <style>
+    body { background: #eef1f5; font-family: 'Segoe UI', 'Meiryo', sans-serif; margin: 0; }
+    .container { max-width: 520px; margin: 40px auto; background: #fff; border-radius: 18px; box-shadow: 0 2px 12px #dbe6f3; padding: 2em; text-align: center; }
+    .title { font-size: 1.5em; color: #2574c7; font-weight: bold; margin-bottom: 0.5em; }
+    .desc { color: #555; margin-bottom: 1.5em; }
+    .question { font-size: 1.1em; margin: 1.5em 0 1em 0; color: #2574c7; }
+    .choices { margin: 1em 0; }
+    .choice-btn {
+      display: block;
+      width: 100%;
+      margin: 0.5em auto;
+      padding: 0.8em 1em;
+      font-size: 1.1em;
+      background: #f5f6fa;
+      border: 1.5px solid #b0c4de;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s, border 0.2s;
+    }
+    .choice-btn.selected { background: #2574c7; color: #fff; border: 2px solid #2574c7; }
+    .choice-btn:disabled { background: #e0e0e0; color: #aaa; cursor: not-allowed; }
+    .btn { background: #2574c7; color: #fff; border: none; border-radius: 6px; padding: 0.7em 1.5em; font-size: 1.1em; cursor: pointer; margin-top: 1em; }
+    .btn:hover { background: #1a5ca8; }
+    .result { font-size: 1.2em; margin-top: 1.5em; color: #2574c7; }
+    .score { color: #27ae60; font-weight: bold; margin-top: 1.5em; font-size: 1.2em; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">生活の知恵クイズ</div>
+    <div class="desc">昔の道具やことわざ、生活の豆知識から出題します。選択肢から答えを選んでください。</div>
+    <div class="question" id="question"></div>
+    <div class="choices" id="choices"></div>
+    <button class="btn" id="checkBtn">判定</button>
+    <button class="btn" id="nextBtn" style="display:none;">次の問題</button>
+    <div class="result" id="result"></div>
+    <div class="score" id="score" style="display:none;"></div>
+  </div>
+  <script>
+    // サンプル問題
+    const questions = [
+      {
+        q: '「たらい」とは何に使う道具？',
+        choices: ['洗濯','料理','釣り'],
+        answer: 0
+      },
+      {
+        q: '「火鉢」は何に使う道具？',
+        choices: ['暖房','料理','洗濯'],
+        answer: 0
+      },
+      {
+        q: '「早起きは三文の徳」とはどんな意味？',
+        choices: ['早起きすると良いことがある','早起きは損をする','三文もらえる'],
+        answer: 0
+      },
+      {
+        q: '「蚊帳（かや）」は何のために使う？',
+        choices: ['虫よけ','雨よけ','日よけ'],
+        answer: 0
+      },
+      {
+        q: '「ぬか漬け」を作るのに必要なものは？',
+        choices: ['ぬか','砂糖','酢','小麦粉'],
+        answer: 0
+      },
+      {
+        q: '「湯たんぽ」は何のために使う？',
+        choices: ['体を温める','料理をする','洗濯をする'],
+        answer: 0
+      },
+      {
+        q: '「風呂敷」はどのように使う？',
+        choices: ['物を包む','掃除をする','料理をする'],
+        answer: 0
+      },
+      {
+        q: '「梅干し」はどんな時に食べるとよい？',
+        choices: ['食欲がない時','運動の前','寝る前'],
+        answer: 0
+      },
+      {
+        q: '「お茶うけ」とは何ですか？',
+        choices: ['お茶と一緒に食べるもの','お茶を入れる道具','お茶を冷ますもの'],
+        answer: 0
+      },
+      {
+        q: '「味噌汁」によく入れる具はどれ？',
+        choices: ['豆腐','りんご','バナナ'],
+        answer: 0
+      }
+    ];
+    let current = 0;
+    let selected = null;
+    let correctCount = 0;
+
+    const questionElem = document.getElementById('question');
+    const choicesElem = document.getElementById('choices');
+    const checkBtn = document.getElementById('checkBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const resultElem = document.getElementById('result');
+    const scoreElem = document.getElementById('score');
+
+    function renderQuestion() {
+      const q = questions[current];
+      questionElem.textContent = `Q${current+1}. ${q.q}`;
+      choicesElem.innerHTML = '';
+      selected = null;
+      resultElem.textContent = '';
+      checkBtn.style.display = '';
+      nextBtn.style.display = 'none';
+      q.choices.forEach((choice, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'choice-btn';
+        btn.textContent = choice;
+        btn.onclick = () => {
+          if(selected!==null) choicesElem.children[selected].classList.remove('selected');
+          selected = idx;
+          btn.classList.add('selected');
+        };
+        choicesElem.appendChild(btn);
+      });
+    }
+
+    checkBtn.onclick = () => {
+      if(selected===null){
+        resultElem.textContent = '選択肢を選んでください。';
+        return;
+      }
+      const q = questions[current];
+      const isCorrect = selected === q.answer;
+      if(isCorrect){
+        resultElem.textContent = '正解です！昔の知恵をよく知っていますね。';
+        correctCount++;
+      }else{
+        resultElem.textContent = `おしいです。正解は「${q.choices[q.answer]}」です。`;
+      }
+      // 選択肢をすべてdisabled
+      Array.from(choicesElem.children).forEach(btn=>btn.disabled=true);
+      checkBtn.style.display = 'none';
+      nextBtn.style.display = '';
+    };
+    nextBtn.onclick = () => {
+      current++;
+      if(current>=questions.length){
+        questionElem.textContent = '';
+        choicesElem.innerHTML = '';
+        checkBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+        resultElem.textContent = '';
+        scoreElem.style.display = 'block';
+        scoreElem.textContent = `あなたのスコア：${correctCount} / ${questions.length}問 正解！`;
+      }else{
+        renderQuestion();
+      }
+    };
+    // 初期表示
+    renderQuestion();
+  </script>
+</body>
+</html>

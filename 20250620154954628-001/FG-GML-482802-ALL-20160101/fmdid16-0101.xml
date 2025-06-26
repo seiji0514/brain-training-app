@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MD_Metadata xsi:schemaLocation="http://zgate.gsi.go.jp/ch/jmp/ http://zgate.gsi.go.jp/ch/jmp/JMP20.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://zgate.gsi.go.jp/ch/jmp/" xmlns:jmp20="http://zgate.gsi.go.jp/ch/jmp/">
+  <identificationInfo>
+    <MD_DataIdentification>
+      <citation>
+        <title>基盤地図情報</title>
+        <date>
+          <date>2016-01-01</date>
+          <dateType>003</dateType>
+        </date>
+      </citation>
+      <abstract>基盤地図情報とは、電子地図上における地理空間情報の位置を定めるための基準となるものの位置を示す情報で、電子地図の骨格をなすものであり、地理空間情報活用推進基本法（平成19年法律第63号）に基づいて整備しています。本データは、都市計画区域内の基盤地図情報項目で縮尺2500分1相当以上、その他の地域や項目では縮尺25000分1相当以上で提供しています。なお、本データの一部に含まれる、都市計画区域内の基盤地図情報項目で縮尺25000分1相当以上のものは参考情報として提供しています。また、行政区画は、利便性を考慮し、所属未確定境界についても便宜的に行政区画界線種別が「不明」等である行政区画界線を用いて面データを整備しておりますが、法的な根拠はなく、当該行政区画の範囲を表すものではありません。街区データは、平成20～21年度に収集した資料により作成されたデータであり、現在はデータの更新を行っていないため、参考情報として提供しています。本データに含まれる北方四島については、地球観測衛星の画像上で判読できた道路、建物等を取得したものであり、北方領土問題に関する我が国の立場にいかなる影響も与えるものではありません。</abstract>
+      <status>001</status>
+      <descriptiveKeywords>
+        <MD_Keywords>
+          <keyword>基盤地図情報</keyword>
+          <type>005</type>
+        </MD_Keywords>
+      </descriptiveKeywords>
+      <spatialRepresentationType>001</spatialRepresentationType>
+      <language>
+        <isoCode>jpn</isoCode>
+      </language>
+      <characterSet>004</characterSet>
+      <topicCategory>013</topicCategory>
+      <extent>
+        <geographicElement>
+          <EX_GeographicBoundingBox>
+            <extentTypeCode>1</extentTypeCode>
+            <extentReferenceSystem>
+              <code>JGD2011 / (B,L)</code>
+            </extentReferenceSystem>
+           <westBoundLongitude>122.000000</westBoundLongitude>
+           <eastBoundLongitude>154.000000</eastBoundLongitude>
+           <southBoundLatitude>20.000000</southBoundLatitude>
+           <northBoundLatitude>46.000000</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <EX_GeographicDescription>
+            <geographicIdentifier>
+              <code>全国</code>
+            </geographicIdentifier>
+          </EX_GeographicDescription>
+        </geographicElement>
+      </extent>
+    </MD_DataIdentification>
+  </identificationInfo>
+  <distributionInfo>
+    <MD_Distribution>
+      <distributionFormat>
+        <MD_Format>
+          <name>JPGIS 附属書8 符号化規則</name>
+          <version>2014</version>
+        </MD_Format>
+        <MD_Format>
+          <name>JIS X7136 地理マーク付け言語（GML）</name>
+          <version>2012</version>
+        </MD_Format>
+      </distributionFormat>
+    </MD_Distribution>
+  </distributionInfo>
+  <referenceSystemInfo>
+    <MD_ReferenceSystem>
+      <referenceSystemIdentifier>
+        <code>JGD2011 / (B, L)</code>
+      </referenceSystemIdentifier>
+    </MD_ReferenceSystem>
+  </referenceSystemInfo>
+  <fileIdentifier>fmdid:16-0101</fileIdentifier>
+  <language>
+    <isoCode>jpn</isoCode>
+  </language>
+  <characterSet>004</characterSet>
+  <hierarchyLevel>005</hierarchyLevel>
+  <contact>
+    <organisationName>国土交通省国土地理院</organisationName>
+    <positionName>企画部 地理空間情報企画室</positionName>
+    <contactInfo>
+      <phone>
+        <voice>029-864-1111</voice>
+      </phone>
+      <address>
+        <deliveryPoint>北郷１番</deliveryPoint>
+        <city>つくば市</city>
+        <administrativeArea>茨城県</administrativeArea>
+        <postalCode>305-0811</postalCode>
+        <country>jpn</country>
+        <electronicMailAddress>gsi-fgd1@gxb.mlit.go.jp</electronicMailAddress>
+      </address>
+    </contactInfo>
+    <role>007</role>
+  </contact>
+  <dateStamp>2016-01-01</dateStamp>
+  <metadataStandardName>JMP</metadataStandardName>
+  <metadataStandardVersion>2.0</metadataStandardVersion>
+</MD_Metadata>

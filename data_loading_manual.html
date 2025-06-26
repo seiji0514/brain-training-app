@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>基盤地図情報 読込・自動解凍マニュアル</title>
+  <style>
+    body { font-family: 'Meiryo', sans-serif; margin: 0; padding: 20px; background: #f4f7f6; color: #333; }
+    .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 15px; padding: 30px; box-shadow: 0 5px 25px rgba(0,0,0,0.1); }
+    h1 { color: #2c3e50; text-align: center; border-bottom: 3px solid #3498db; padding-bottom: 15px; }
+    h2 { color: #34495e; margin-top: 30px; padding-left: 15px; border-left: 5px solid #3498db; }
+    .step-section { margin: 25px 0; padding: 20px; background: #ecf0f1; border-radius: 10px; }
+    .step { display: flex; align-items: center; margin-bottom: 15px; }
+    .step-number { font-size: 24px; font-weight: bold; color: #3498db; margin-right: 20px; background: white; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .step-description { flex: 1; }
+    .diagram { text-align: center; margin: 30px 0; padding: 20px; background: #fff; border: 2px dashed #bdc3c7; border-radius: 10px; }
+    .diagram-arrow { font-size: 24px; color: #3498db; margin: 0 15px; }
+    .icon { font-size: 32px; }
+    .info-box { padding: 15px; border-radius: 8px; margin: 20px 0; }
+    .info-box.success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+    .info-box.warning { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+    code { background: #e8e8e8; padding: 2px 5px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📄 基盤地図情報 読込・自動解凍マニュアル</h1>
+
+    <div class="info-box success">
+      <strong>✅ 手動での解凍は不要です！</strong><br>
+      このシステムは、ダウンロードした基盤地図情報のZIPファイルを直接読み込み、必要なデータを自動で解凍・処理します。
+    </div>
+
+    <div class="info-box success">
+      <strong>🚀 新機能：3D地図自動生成</strong><br>
+      地域を選択するだけで、OSMデータと基盤地図情報を自動で取得し、3D環境を構築できるようになりました！
+    </div>
+
+    <h2>⚙️ 自動処理の仕組み</h2>
+    <div class="diagram">
+      <span class="icon">📁</span>
+      <strong>ZIPファイル</strong>
+      <span class="diagram-arrow">➔</span>
+      <span class="icon">💻</span>
+      <strong>ブラウザ内で自動解凍<br>(JSZip)</strong>
+      <span class="diagram-arrow">➔</span>
+      <span class="icon">📄</span>
+      <strong>GML/XML抽出</strong>
+      <span class="diagram-arrow">➔</span>
+      <span class="icon">🗺️</span>
+      <strong>3D環境生成</strong>
+    </div>
+    <p>ユーザーがZIPファイルを選択すると、システムは以下の処理をすべて自動で行います。</p>
+    <ul>
+      <li><strong>ブラウザ内での高速解凍:</strong> サーバーにファイルをアップロードすることなく、お使いのPCのブラウザ内で安全かつ高速にZIPファイルを展開します。</li>
+      <li><strong>地理空間データの自動抽出:</strong> ZIPファイルの中から、地理情報が含まれるGML(<code>.gml</code>)やXML(<code>.xml</code>)ファイルを自動的に探し出します。</li>
+      <li><strong>データ解析と3Dモデル化:</strong> 抽出したファイルの内容を解析し、道路や建物の3Dモデルをシーン内に生成します。</li>
+    </ul>
+
+    <h2>🚀 3D地図自動生成機能</h2>
+    <p>地域を選択するだけで、OSMデータと基盤地図情報を自動で取得し、3D環境を構築できる新機能です。</p>
+    
+    <div class="step-section">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-description">
+          <h4>地域の選択</h4>
+          <p>画面右下の「3D地図自動生成」セクションで、都道府県を選択します。現在は佐賀県、長崎県、福岡県に対応しています。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-description">
+          <h4>市区町村の選択</h4>
+          <p>都道府県を選択すると、市区町村のドロップダウンが有効になります。対象となる市区町村を選択してください。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-description">
+          <h4>自動生成の実行</h4>
+          <p>「3D地図自動生成」ボタンをクリックします。システムが自動的に以下の処理を実行します：</p>
+          <ul>
+            <li>選択地域のOSMデータをOverpass APIから取得</li>
+            <li>基盤地図情報のシミュレーションデータを生成</li>
+            <li>3D環境の自動構築</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-description">
+          <h4>生成完了</h4>
+          <p>処理が完了すると、選択した地域の3D環境が自動で構築され、運転技能評価を開始できる状態になります。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box warning">
+      <h4>⚠️ 自動生成の制限事項</h4>
+      <ul>
+        <li><strong>対応地域:</strong> 現在は佐賀県、長崎県、福岡県の主要都市のみ対応しています。</li>
+        <li><strong>データ精度:</strong> 自動生成では、実際の基盤地図情報の代わりにシミュレーションデータを使用します。より高精度なデータが必要な場合は、手動で基盤地図情報ファイルを読み込んでください。</li>
+        <li><strong>インターネット接続:</strong> OSMデータの取得にはインターネット接続が必要です。</li>
+      </ul>
+    </div>
+
+    <h2>▶️ 手動操作手順</h2>
+    <p>より高精度なデータや、対応地域外の地域を使用したい場合は、従来の手動操作を行ってください。</p>
+    <div class="step-section">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-description">
+          <h4>操作の選択</h4>
+          <p>システムの右下にあるボタンから、実行したい操作を選択します。</p>
+          <ul>
+            <li><b>データ読込:</b> 国土地理院などからダウンロードしたZIP/GMLファイルを読み込みます。</li>
+            <li><b>OSMデータ取得:</b> 現在2Dマップに表示されている範囲のOpenStreetMapデータをインターネット経由で取得します。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-description">
+          <h4>ファイルの選択（基盤地図情報の場合）</h4>
+          <p>「データ読込」をクリックするとファイル選択ダイアログが開きます。国土地理院などからダウンロードした <strong>ZIPファイルをそのまま選択</strong>します。（複数選択可）</p>
+          <p>※ <code>.gml</code> や <code>.xml</code> ファイルを直接選択することも可能です。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-description">
+          <h4>自動処理の待機</h4>
+          <p>ファイルの読み込み、またはデータの取得が開始されると、解凍、3Dモデルの生成が自動で行われます。画面左上の「リアルタイム評価ログ」に進捗状況が表示されますので、完了までしばらくお待ちください。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-description">
+          <h4>生成完了</h4>
+          <p>処理が完了すると、3Dビューに地図データに基づいたリアルな街並みが、2Dマップにその土地の地図が表示されます。</p>
+        </div>
+      </div>
+    </div>
+
+    <h2>📖 対応データについて</h2>
+    <ul>
+      <li><strong>国土地理院「基盤地図情報」:</strong> 基本項目、縮尺レベル2500、25000など。JPGIS(GML)形式のデータ。</li>
+      <li><strong>Project PLATEAU「3D都市モデル」:</strong> CityGML形式のデータ。建物の高さ情報なども利用できます。</li>
+      <li><strong>OpenStreetMap (OSM):</strong> API経由で取得される道路ネットワークや建物データ。</li>
+      <li><strong>ファイル形式 (読込の場合):</strong> <code>.zip</code>, <code>.gml</code>, <code>.xml</code></li>
+    </ul>
+
+    <h2>🗺️ データソースの選択: 基盤地図情報 vs OpenStreetMap</h2>
+    <p>本システムは、特性の異なる2種類の主要な地理空間データソースに対応しています。それぞれの特徴を理解し、目的に応じて使い分けることが効果的です。</p>
+    <table class="comparison-table" style="font-size: 14px; width: 100%; border-collapse: collapse; margin: 20px 0;">
+      <thead style="background: #34495e; color: white;">
+        <tr>
+          <th style="border: 1px solid #ddd; padding: 12px; text-align: center;">項目</th>
+          <th style="border: 1px solid #ddd; padding: 12px; text-align: center;">基盤地図情報 / PLATEAU</th>
+          <th style="border: 1px solid #ddd; padding: 12px; text-align: center;">OpenStreetMap (OSM)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background: #f8f9fa;">
+          <td style="border: 1px solid #ddd; padding: 12px; font-weight: bold; background: #ecf0f1;">データ提供者</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">国、地方公共団体 (国土地理院など)</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">ボランティアコミュニティ</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 12px; font-weight: bold; background: #ecf0f1;">対象範囲</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">主に日本国内</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">全世界</td>
+        </tr>
+        <tr style="background: #f8f9fa;">
+          <td style="border: 1px solid #ddd; padding: 12px; font-weight: bold; background: #ecf0f1;">更新頻度</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">定期的（年単位など）</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">ほぼリアルタイム</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 12px; font-weight: bold; background: #ecf0f1;">精度</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">測量に基づき高精度</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">場所により変動</td>
+        </tr>
+        <tr style="background: #f8f9fa;">
+          <td style="border: 1px solid #ddd; padding: 12px; font-weight: bold; background: #ecf0f1;">建物の高さ</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">PLATEAUでは標準的に提供</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">含まれないことが多い</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 12px; font-weight: bold; background: #ecf0f1;">利用方法</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">ファイルダウンロードが主流</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">APIによる動的取得が主流</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="info-box success">
+        <h4>🎯 推奨される使い分け</h4>
+        <ul>
+          <li><strong>特定の都市部で、高精度かつ詳細な評価を行いたい場合</strong> ➔ <strong>基盤地図情報 / PLATEAU</strong><br>
+            正確な道路網や建物の高さに基づいた、リアルなシミュレーションと厳密な評価が可能です。</li>
+          <li><strong>手軽に素早く特定のエリアの環境を再現したい場合</strong> ➔ <strong>OSM</strong><br>
+            ファイル準備不要で、即座にデータを取得できるため、プロトタイピングや広域の再現に適しています。</li>
+        </ul>
+    </div>
+
+    <div class="info-box warning">
+      <h4>⚠️ トラブルシューティング</h4>
+      <ul>
+        <li><strong>ファイルを選択しても何も起こらない:</strong> ファイル形式が対応しているか確認してください。また、ブラウザの開発者コンソール（F12キーで開く）にエラーメッセージが表示されていないか確認してください。</li>
+        <li><strong>処理に時間がかかる:</strong> データサイズが大きいファイル（特に広範囲の都市データなど）は、PCの性能によっては処理に数分かかる場合があります。</li>
+        <li><strong>建物や道路が表示されない:</strong> 読み込んだGMLファイルに、システムが対応する形式の建物や道路データが含まれていない可能性があります。別のエリアのデータでお試しください。</li>
+      </ul>
+    </div>
+
+    <h2>🌐 主要な地図データ提供サイト</h2>
+    <p>本システムで利用している、または関連する主要な地図データの提供・生成サイトの一覧です。これらのサイトから元データを手動で入手・確認することができます。</p>
+    <div class="card-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div class="card" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px;">
+            <h4 style="margin-top:0; color: #2e7d32;">OpenStreetMap (OSM)</h4>
+            <p>誰でも自由に編集・利用できる、世界規模の地図データベース。「エクスポート」機能で選択範囲のデータを手動ダウンロードできます。</p>
+            <a href="https://www.openstreetmap.org/" target="_blank">サイトへ移動</a>
+        </div>
+        <div class="card" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px;">
+            <h4 style="margin-top:0; color: #f57f17;">Overpass Turbo</h4>
+            <p>OSMのデータを高度な条件で検索・抽出できるWebツール。本システムの「OSMデータ取得」機能は、この裏側にあるAPIを利用しています。</p>
+            <a href="https://overpass-turbo.eu/" target="_blank">サイトへ移動</a>
+        </div>
+        <div class="card" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px;">
+            <h4 style="margin-top:0; color: #1565c0;">基盤地図情報ダウンロードサービス</h4>
+            <p>国土地理院の公式サイト。本システムで利用する高精度な地図データ（ZIPファイル）はここからダウンロードします。</p>
+            <a href="https://fgd.gsi.go.jp/download/menu.php" target="_blank">サイトへ移動</a>
+        </div>
+        <div class="card" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px;">
+            <h4 style="margin-top:0; color: #8e24aa;">G空間情報センター (PLATEAU)</h4>
+            <p>日本の様々な3D都市モデルや地理空間データが公開されているポータルサイト。CityGML形式の高詳細データを取得できます。</p>
+            <a href="https://www.geospatial.jp/ckan/dataset/plateau" target="_blank">サイトへ移動</a>
+        </div>
+    </div>
+
+  </div>
+</body>
+</html> 

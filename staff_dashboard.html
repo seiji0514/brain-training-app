@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スタッフ管理画面 - 脳トレゲームシステム</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Meiryo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f6fa;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logout-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            background: white;
+            border-radius: 12px 12px 0 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+        
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #666;
+            transition: all 0.3s;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .nav-tab:hover {
+            background: #f8f9fa;
+            color: #333;
+        }
+        
+        .nav-tab.active {
+            color: #3498db;
+            border-bottom-color: #3498db;
+            background: #f8f9fa;
+        }
+        
+        .tab-content {
+            background: white;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 2rem;
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .stat-card.success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+        
+        .stat-card.warning {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .stat-card.info {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .data-table th {
+            background: #f8f9fa;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+            margin: 0.5rem;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+        }
+        
+        .btn-success {
+            background: #27ae60;
+        }
+        
+        .btn-success:hover {
+            background: #229954;
+        }
+        
+        .btn-warning {
+            background: #f39c12;
+        }
+        
+        .btn-warning:hover {
+            background: #e67e22;
+        }
+        
+        .btn-danger {
+            background: #e74c3c;
+        }
+        
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+        
+        .section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-inactive {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+        
+        .filter-section {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .filter-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .filter-group label {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .filter-group select,
+        .filter-group input {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .activity-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: #3498db;
+        }
+        
+        .activity-content {
+            flex: 1;
+        }
+        
+        .activity-time {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* AI機能用スタイル */
+        .ai-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .ai-feature-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .ai-feature-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+        
+        .ai-feature-card h4 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .ai-feature-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn-info {
+            background: #17a2b8;
+        }
+        
+        .btn-info:hover {
+            background: #138496;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .nav-tab {
+                border-bottom: 1px solid #eee;
+                border-right: none;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .filter-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .ai-features {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* デバイス対応のスタイル */
+        .device-warning {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .device-info {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 0.5rem;
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        .performance-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+        
+        .performance-high { background-color: #28a745; }
+        .performance-medium { background-color: #ffc107; }
+        .performance-low { background-color: #dc3545; }
+        
+        /* モバイル対応 */
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .tab-content {
+                padding: 1rem;
+            }
+            
+            .table-responsive {
+                font-size: 0.85rem;
+            }
+            
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .modal-dialog {
+                margin: 1rem;
+                max-width: calc(100% - 2rem);
+            }
+            
+            .ai-settings-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* タブレット対応 */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .ai-settings-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* 低性能デバイス対応 */
+        .low-performance-mode {
+            animation: none !important;
+            transition: none !important;
+            box-shadow: none !important;
+        }
+        
+        .low-performance-mode .dashboard-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .low-performance-mode .table-responsive {
+            overflow-x: auto;
+        }
+        
+        /* デバイス別の最適化 */
+        .mobile-optimized {
+            font-size: 0.9rem;
+        }
+        
+        .mobile-optimized .btn {
+            margin-bottom: 0.5rem;
+            width: 100%;
+        }
+        
+        .mobile-optimized .table-responsive {
+            font-size: 0.8rem;
+        }
+        
+        /* エラー表示の改善 */
+        .error-display {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            color: #721c24;
+        }
+        
+        .error-display .device-info {
+            background: rgba(255,255,255,0.5);
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+        
+        /* ローディング表示の改善 */
+        .loading-optimized {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(5px);
+        }
+        
+        .loading-optimized .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><i class="fas fa-user-tie"></i> スタッフ管理画面</h1>
+        <div class="user-info">
+            <span id="userDisplay">スタッフ</span>
+            <button class="logout-btn" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> ログアウト
+            </button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('overview')">
+                <i class="fas fa-tachometer-alt"></i> 概要
+            </button>
+            <button class="nav-tab" onclick="showTab('usage')">
+                <i class="fas fa-history"></i> 利用履歴
+            </button>
+            <button class="nav-tab" onclick="showTab('progress')">
+                <i class="fas fa-chart-line"></i> 進捗管理
+            </button>
+            <button class="nav-tab" onclick="showTab('games')">
+                <i class="fas fa-gamepad"></i> ゲーム状況
+            </button>
+            <button class="nav-tab" onclick="showTab('ai')">
+                <i class="fas fa-robot"></i> AI分析
+            </button>
+            <button class="nav-tab" onclick="showTab('reports')">
+                <i class="fas fa-file-alt"></i> レポート
+            </button>
+        </div>
+        
+        <!-- 概要 -->
+        <div id="overview" class="tab-content active">
+            <h2><i class="fas fa-tachometer-alt"></i> システム概要</h2>
+            
+            <div class="dashboard-grid">
+                <div class="stat-card success">
+                    <div class="stat-number" id="totalSessions">0</div>
+                    <div class="stat-label">総セッション数</div>
+                </div>
+                <div class="stat-card info">
+                    <div class="stat-number" id="avgSessionTime">0</div>
+                    <div class="stat-label">平均セッション時間（分）</div>
+                </div>
+                <div class="stat-card warning">
+                    <div class="stat-number" id="totalGamesPlayed">0</div>
+                    <div class="stat-label">総ゲームプレイ数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="avgScore">0</div>
+                    <div class="stat-label">平均スコア</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3><i class="fas fa-clock"></i> 最近のアクティビティ</h3>
+                <div id="recentActivity">
+                    <div class="activity-item">
+                        <div class="activity-icon"><i class="fas fa-gamepad"></i></div>
+                        <div class="activity-content">
+                            <div>記憶力ゲームがプレイされました</div>
+                            <div class="activity-time">2024年1月15日 14:25</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon"><i class="fas fa-user"></i></div>
+                        <div class="activity-content">
+                            <div>新しいユーザーがログインしました</div>
+                            <div class="activity-time">2024年1月15日 14:20</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 利用履歴 -->
+        <div id="usage" class="tab-content">
+            <h2><i class="fas fa-history"></i> 利用履歴</h2>
+            
+            <div class="filter-section">
+                <h3>フィルター</h3>
+                <div class="filter-group">
+                    <label for="dateFrom">期間:</label>
+                    <input type="date" id="dateFrom">
+                    <span>〜</span>
+                    <input type="date" id="dateTo">
+                    
+                    <label for="gameFilter">ゲーム:</label>
+                    <select id="gameFilter">
+                        <option value="">すべて</option>
+                        <option value="memory">記憶力ゲーム</option>
+                        <option value="reaction">反応ゲーム</option>
+                        <option value="concentration">集中力ゲーム</option>
+                    </select>
+                    
+                    <button class="btn btn-success" onclick="applyFilter()">
+                        <i class="fas fa-search"></i> 検索
+                    </button>
+                    <button class="btn" onclick="resetFilter()">
+                        <i class="fas fa-undo"></i> リセット
+                    </button>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>利用履歴一覧</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>日時</th>
+                            <th>ユーザー</th>
+                            <th>ゲーム</th>
+                            <th>スコア</th>
+                            <th>プレイ時間</th>
+                            <th>ステータス</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usageTableBody">
+                        <tr>
+                            <td>2024-01-15 14:30</td>
+                            <td>田中太郎</td>
+                            <td>記憶力ゲーム</td>
+                            <td>85</td>
+                            <td>15分</td>
+                            <td><span class="status-badge status-active">完了</span></td>
+                        </tr>
+                        <tr>
+                            <td>2024-01-15 13:45</td>
+                            <td>佐藤花子</td>
+                            <td>反応ゲーム</td>
+                            <td>78</td>
+                            <td>12分</td>
+                            <td><span class="status-badge status-active">完了</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- 進捗管理 -->
+        <div id="progress" class="tab-content">
+            <h2><i class="fas fa-chart-line"></i> 進捗管理</h2>
+            
+            <div class="section">
+                <h3>ユーザー別進捗</h3>
+                <div id="userProgress">
+                    <div class="progress-item">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <strong>田中太郎</strong>
+                            <span>75%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                        <small>完了ゲーム: 15/20</small>
+                    </div>
+                    
+                    <div class="progress-item" style="margin-top: 1rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <strong>佐藤花子</strong>
+                            <span>60%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 60%"></div>
+                        </div>
+                        <small>完了ゲーム: 12/20</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>ゲーム別進捗</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ゲーム名</th>
+                            <th>プレイ回数</th>
+                            <th>平均スコア</th>
+                            <th>完了率</th>
+                            <th>平均時間</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>記憶力ゲーム</td>
+                            <td>45</td>
+                            <td>82.3</td>
+                            <td>95%</td>
+                            <td>12分</td>
+                        </tr>
+                        <tr>
+                            <td>反応ゲーム</td>
+                            <td>38</td>
+                            <td>76.8</td>
+                            <td>88%</td>
+                            <td>8分</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- ゲーム状況 -->
+        <div id="games" class="tab-content">
+            <h2><i class="fas fa-gamepad"></i> ゲーム状況</h2>
+            
+            <div class="dashboard-grid">
+                <div class="stat-card info">
+                    <div class="stat-number" id="activeGames">3</div>
+                    <div class="stat-label">アクティブゲーム</div>
+                </div>
+                <div class="stat-card success">
+                    <div class="stat-number" id="popularGame">記憶力</div>
+                    <div class="stat-label">人気ゲーム</div>
+                </div>
+                <div class="stat-card warning">
+                    <div class="stat-number" id="avgCompletion">85%</div>
+                    <div class="stat-label">平均完了率</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalPlayTime">12.5h</div>
+                    <div class="stat-label">総プレイ時間</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>ゲーム別統計</h3>
+                <div id="gameStats">
+                    <!-- 動的に生成 -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- AI分析 -->
+        <div id="ai" class="tab-content">
+            <h2><i class="fas fa-robot"></i> AI分析</h2>
+            
+            <!-- AI分析ダッシュボード -->
+            <div class="section">
+                <h3><i class="fas fa-brain"></i> AI分析概要</h3>
+                <div class="dashboard-grid">
+                    <div class="stat-card info">
+                        <div class="stat-number" id="aiInsights">12</div>
+                        <div class="stat-label">AI洞察</div>
+                    </div>
+                    <div class="stat-card success">
+                        <div class="stat-number" id="aiPredictions">8</div>
+                        <div class="stat-label">予測結果</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-number" id="aiRecommendations">15</div>
+                        <div class="stat-label">推奨事項</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="aiAccuracy">89%</div>
+                        <div class="stat-label">分析精度</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AI分析機能 -->
+            <div class="section">
+                <h3><i class="fas fa-chart-bar"></i> AI分析機能</h3>
+                <div class="ai-features">
+                    <div class="ai-feature-card">
+                        <h4><i class="fas fa-user-chart"></i> 学習パターン分析</h4>
+                        <p>ユーザーの学習パターンや行動傾向をAIが分析し、個別化されたサポートの提案を行います。</p>
+                        <div class="button-group">
+                            <button class="btn btn-success" onclick="runLearningAnalysis()">
+                                <i class="fas fa-play"></i> 分析実行
+                            </button>
+                            <button class="btn btn-info" onclick="viewLearningInsights()">
+                                <i class="fas fa-eye"></i> 分析結果
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-feature-card">
+                        <h4><i class="fas fa-lightbulb"></i> 改善提案</h4>
+                        <p>学習データを基に、ユーザーの能力向上のための具体的な改善提案をAIが生成します。</p>
+                        <div class="button-group">
+                            <button class="btn btn-success" onclick="generateImprovements()">
+                                <i class="fas fa-play"></i> 提案生成
+                            </button>
+                            <button class="btn btn-info" onclick="viewImprovements()">
+                                <i class="fas fa-eye"></i> 提案一覧
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-feature-card">
+                        <h4><i class="fas fa-exclamation-triangle"></i> リスク検知</h4>
+                        <p>学習の停滞や問題の兆候をAIが早期に検知し、適切な介入のタイミングを提案します。</p>
+                        <div class="button-group">
+                            <button class="btn btn-warning" onclick="runRiskDetection()">
+                                <i class="fas fa-play"></i> リスク検知
+                            </button>
+                            <button class="btn btn-danger" onclick="viewRisks()">
+                                <i class="fas fa-eye"></i> リスク一覧
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-feature-card">
+                        <h4><i class="fas fa-chart-line"></i> 進捗予測</h4>
+                        <p>現在の学習データを基に、将来の進捗や成果を予測し、最適な学習計画を提案します。</p>
+                        <div class="button-group">
+                            <button class="btn btn-success" onclick="runProgressForecast()">
+                                <i class="fas fa-play"></i> 予測実行
+                            </button>
+                            <button class="btn btn-info" onclick="viewForecast()">
+                                <i class="fas fa-eye"></i> 予測結果
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AI分析結果 -->
+            <div class="section">
+                <h3><i class="fas fa-list"></i> 最新のAI分析結果</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>日時</th>
+                            <th>分析タイプ</th>
+                            <th>対象</th>
+                            <th>結果</th>
+                            <th>アクション</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2024-01-15 14:30</td>
+                            <td>学習パターン分析</td>
+                            <td>田中太郎</td>
+                            <td>視覚的学習者、記憶力ゲームが得意</td>
+                            <td><button class="btn btn-info">詳細</button></td>
+                        </tr>
+                        <tr>
+                            <td>2024-01-15 13:45</td>
+                            <td>リスク検知</td>
+                            <td>佐藤花子</td>
+                            <td>集中力の低下を検出</td>
+                            <td><button class="btn btn-warning">対応</button></td>
+                        </tr>
+                        <tr>
+                            <td>2024-01-15 12:20</td>
+                            <td>進捗予測</td>
+                            <td>全体</td>
+                            <td>1週間後 +15% スコア向上予測</td>
+                            <td><button class="btn btn-success">確認</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- レポート -->
+        <div id="reports" class="tab-content">
+            <h2><i class="fas fa-file-alt"></i> レポート</h2>
+            
+            <div class="section">
+                <h3>レポート生成</h3>
+                <div class="filter-group">
+                    <label for="reportType">レポート種類:</label>
+                    <select id="reportType">
+                        <option value="daily">日次レポート</option>
+                        <option value="weekly">週次レポート</option>
+                        <option value="monthly">月次レポート</option>
+                        <option value="custom">カスタム期間</option>
+                    </select>
+                    
+                    <label for="reportDate">対象日:</label>
+                    <input type="date" id="reportDate">
+                    
+                    <button class="btn btn-success" onclick="generateReport()">
+                        <i class="fas fa-download"></i> レポート生成
+                    </button>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>最近のレポート</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>レポート名</th>
+                            <th>生成日</th>
+                            <th>期間</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>日次レポート_2024-01-15</td>
+                            <td>2024-01-15</td>
+                            <td>2024-01-15</td>
+                            <td>
+                                <button class="btn btn-success">ダウンロード</button>
+                                <button class="btn btn-info">表示</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // タブ切り替え機能
+        function showTab(tabName) {
+            // すべてのタブコンテンツを非表示
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // すべてのタブボタンを非アクティブ
+            const tabButtons = document.querySelectorAll('.nav-tab');
+            tabButtons.forEach(button => button.classList.remove('active'));
+            
+            // 選択されたタブを表示
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        // ログアウト機能
+        function logout() {
+            localStorage.removeItem('isAuthenticated');
+            localStorage.removeItem('registeredUser');
+            window.location.href = 'index.html';
+        }
+        
+        // フィルター適用
+        function applyFilter() {
+            const dateFrom = document.getElementById('dateFrom').value;
+            const dateTo = document.getElementById('dateTo').value;
+            const gameFilter = document.getElementById('gameFilter').value;
+            
+            // 実際の実装ではAPI呼び出し
+            console.log('フィルター適用:', { dateFrom, dateTo, gameFilter });
+            alert('フィルターが適用されました。');
+        }
+        
+        // フィルターリセット
+        function resetFilter() {
+            document.getElementById('dateFrom').value = '';
+            document.getElementById('dateTo').value = '';
+            document.getElementById('gameFilter').value = '';
+            alert('フィルターがリセットされました。');
+        }
+        
+        // レポート生成
+        function generateReport() {
+            const reportType = document.getElementById('reportType').value;
+            const reportDate = document.getElementById('reportDate').value;
+            
+            if (!reportDate) {
+                alert('対象日を選択してください。');
+                return;
+            }
+            
+            // 実際の実装ではAPI呼び出し
+            alert(`${reportType}レポートを生成しました。`);
+        }
+        
+        // ダッシュボード統計の更新
+        function updateDashboardStats() {
+            // 実際のデータベースから取得する場合はAPI呼び出し
+            document.getElementById('totalSessions').textContent = '156';
+            document.getElementById('avgSessionTime').textContent = '18';
+            document.getElementById('totalGamesPlayed').textContent = '2,847';
+            document.getElementById('avgScore').textContent = '78.5';
+        }
+        
+        // ページ読み込み時の初期化
+        document.addEventListener('DOMContentLoaded', function() {
+            // デバイス検出を最初に実行
+            detectDevice();
+            
+            // 初期データ読み込み
+            loadUsers();
+            loadUsageHistory();
+            loadSystemLogs();
+            loadAILogs();
+            
+            // AI機能の最適化設定
+            optimizeAISettings();
+            
+            // 統計更新
+            updateStats();
+            updateAIStats();
+            
+            // 定期的な更新
+            setInterval(updateStats, 30000);
+            setInterval(updateAIStats, 60000);
+            
+            // デバイス情報をログに記録
+            addSystemLog('システム', 'デバイス検出完了', `${deviceInfo.type} (${deviceInfo.os}) - ${deviceInfo.browser} - 性能: ${deviceInfo.performance}`);
+        });
+        
+        // AI機能を安全な実行でラップ
+        const safeAnalyzeUserBehavior = safeAIExecution(analyzeUserBehavior, (error) => {
+            console.log('ユーザー行動分析をスキップしました');
+        });
+        
+        const safePredictProgress = safeAIExecution(predictProgress, (error) => {
+            console.log('進捗予測をスキップしました');
+        });
+        
+        const safeGenerateRecommendations = safeAIExecution(generateRecommendations, (error) => {
+            console.log('推奨生成をスキップしました');
+        });
+        
+        const safeDetectAnomalies = safeAIExecution(detectAnomalies, (error) => {
+            console.log('異常検知をスキップしました');
+        });
+        
+        const safeAutoAlert = safeAIExecution(autoAlert, (error) => {
+            console.log('自動アラートをスキップしました');
+        });
+        
+        const safeOptimizeRoutes = safeAIExecution(optimizeRoutes, (error) => {
+            console.log('ルート最適化をスキップしました');
+        });
+        
+        const safeAutoSupport = safeAIExecution(autoSupport, (error) => {
+            console.log('自動サポートをスキップしました');
+        });
+        
+        const safeGenerateReport = safeAIExecution(generateReport, (error) => {
+            console.log('レポート生成をスキップしました');
+        });
+        
+        // AI分析機能
+        function runLearningAnalysis() {
+            showLoadingMessage('学習パターン分析を実行中...');
+            
+            setTimeout(() => {
+                hideLoadingMessage();
+                alert('学習パターン分析が完了しました。\n\n分析結果:\n• 視覚的学習者が多い\n• 記憶力ゲームが人気\n• 反応ゲームで苦戦する傾向\n• 推奨: 個別化された学習プラン');
+            }, 2000);
+        }
+        
+        function viewLearningInsights() {
+            alert('学習パターン分析結果:\n\n📊 学習スタイル分布:\n• 視覚的学習者: 65%\n• 聴覚的学習者: 25%\n• 運動的学習者: 10%\n\n🎯 得意分野:\n• 記憶力ゲーム: 平均スコア 85\n• 集中力ゲーム: 平均スコア 78\n• 反応ゲーム: 平均スコア 72\n\n💡 改善提案:\n• 反応ゲームの難易度調整\n• 個別指導の強化');
+        }
+        
+        function generateImprovements() {
+            showLoadingMessage('改善提案を生成中...');
+            
+            setTimeout(() => {
+                hideLoadingMessage();
+                alert('改善提案の生成が完了しました。\n\n生成された提案:\n• 田中太郎: 反応ゲームの練習頻度を増加\n• 佐藤花子: 記憶力ゲームの難易度を上げる\n• 山田次郎: 集中力トレーニングを強化\n• 鈴木一郎: 学習時間の分散化');
+            }, 2500);
+        }
+        
+        function viewImprovements() {
+            alert('改善提案一覧:\n\n1. 田中太郎\n   - 現在の課題: 反応速度が遅い\n   - 提案: 反応ゲームを1日2回実施\n   - 期待効果: 反応速度 +20%\n\n2. 佐藤花子\n   - 現在の課題: 記憶力ゲームで停滞\n   - 提案: 難易度を上げて挑戦\n   - 期待効果: 記憶力 +15%\n\n3. 山田次郎\n   - 現在の課題: 集中力が続かない\n   - 提案: 短時間集中トレーニング\n   - 期待効果: 集中時間 +30%');
+        }
+        
+        function runRiskDetection() {
+            showLoadingMessage('リスク検知を実行中...');
+            
+            setTimeout(() => {
+                hideLoadingMessage();
+                alert('リスク検知が完了しました。\n\n検出されたリスク:\n• 佐藤花子: 学習意欲の低下\n• 田中太郎: スコアの停滞\n• 山田次郎: 学習時間の減少\n\n推奨アクション:\n• 個別面談の実施\n• 学習プランの見直し\n• モチベーション向上策');
+            }, 1800);
+        }
+        
+        function viewRisks() {
+            alert('検出されたリスク一覧:\n\n🚨 高リスク:\n• 佐藤花子: 学習中断の可能性\n• 田中太郎: スコア低下傾向\n\n⚠️ 中リスク:\n• 山田次郎: 学習時間減少\n• 鈴木一郎: 集中力低下\n\n💡 対応策:\n• 即座の個別サポート\n• 学習環境の改善\n• 家族との連携強化');
+        }
+        
+        function runProgressForecast() {
+            showLoadingMessage('進捗予測を実行中...');
+            
+            setTimeout(() => {
+                hideLoadingMessage();
+                alert('進捗予測が完了しました。\n\n予測結果:\n• 1週間後: 平均スコア +12%\n• 1ヶ月後: 完了率 85%\n• 3ヶ月後: 目標達成率 90%\n\nリスク要因:\n• 学習継続の不安定性\n• 外部要因による中断\n• モチベーションの変動');
+            }, 2200);
+        }
+        
+        function viewForecast() {
+            alert('進捗予測詳細:\n\n📈 短期予測 (1週間):\n• スコア向上: +12%\n• 完了率: 78%\n• 学習時間: 平均45分/日\n\n📊 中期予測 (1ヶ月):\n• スコア向上: +25%\n• 完了率: 85%\n• 継続率: 92%\n\n🎯 長期予測 (3ヶ月):\n• 目標達成率: 90%\n• 総合能力向上: +35%\n• 社会復帰準備度: 85%');
+        }
+        
+        // ローディングメッセージ
+        function showLoadingMessage(message) {
+            const overlay = document.createElement('div');
+            overlay.id = 'loadingOverlay';
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+            `;
+            
+            overlay.innerHTML = `
+                <div style="background: white; padding: 2rem; border-radius: 12px; text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">🤖</div>
+                    <div style="font-weight: bold; margin-bottom: 0.5rem;">AI分析中</div>
+                    <div style="color: #666;">${message}</div>
+                </div>
+            `;
+            
+            document.body.appendChild(overlay);
+        }
+        
+        function hideLoadingMessage() {
+            const overlay = document.getElementById('loadingOverlay');
+            if (overlay) {
+                overlay.remove();
+            }
+        }
+        
+        // AI連携機能
+        let aiSettings = {
+            model: 'gpt-3.5',
+            sensitivity: 'medium',
+            updateInterval: 'daily',
+            apiKey: '',
+            autoAlert: false,
+            autoRoute: false,
+            autoSupport: false,
+            autoReport: false
+        };
+        
+        // デバイス情報
+        let deviceInfo = {
+            type: 'unknown',
+            os: 'unknown',
+            browser: 'unknown',
+            screenSize: { width: 0, height: 0 },
+            memory: 'unknown',
+            performance: 'unknown'
+        };
+        
+        // デバイス検出と性能評価
+        function detectDevice() {
+            const userAgent = navigator.userAgent;
+            const screen = window.screen;
+            
+            // デバイスタイプ判定
+            if (window.innerWidth >= 1024) {
+                deviceInfo.type = 'desktop';
+            } else if (window.innerWidth >= 768) {
+                deviceInfo.type = 'tablet';
+            } else {
+                deviceInfo.type = 'mobile';
+            }
+            
+            // OS判定
+            if (userAgent.includes('Windows')) {
+                deviceInfo.os = 'Windows';
+            } else if (userAgent.includes('Mac')) {
+                deviceInfo.os = 'macOS';
+            } else if (userAgent.includes('Linux')) {
+                deviceInfo.os = 'Linux';
+            } else if (userAgent.includes('Android')) {
+                deviceInfo.os = 'Android';
+            } else if (userAgent.includes('iOS')) {
+                deviceInfo.os = 'iOS';
+            }
+            
+            // ブラウザ判定
+            if (userAgent.includes('Chrome')) {
+                deviceInfo.browser = 'Chrome';
+            } else if (userAgent.includes('Firefox')) {
+                deviceInfo.browser = 'Firefox';
+            } else if (userAgent.includes('Safari')) {
+                deviceInfo.browser = 'Safari';
+            } else if (userAgent.includes('Edge')) {
+                deviceInfo.browser = 'Edge';
+            }
+            
+            // 画面サイズ
+            deviceInfo.screenSize = {
+                width: screen.width,
+                height: screen.height
+            };
+            
+            // 性能評価
+            evaluatePerformance();
+            
+            console.log('デバイス情報:', deviceInfo);
+            return deviceInfo;
+        }
+        
+        // 性能評価
+        function evaluatePerformance() {
+            const startTime = performance.now();
+            
+            // 簡単な計算処理で性能をテスト
+            let result = 0;
+            for (let i = 0; i < 1000000; i++) {
+                result += Math.random();
+            }
+            
+            const endTime = performance.now();
+            const processingTime = endTime - startTime;
+            
+            if (processingTime < 50) {
+                deviceInfo.performance = 'high';
+            } else if (processingTime < 100) {
+                deviceInfo.performance = 'medium';
+            } else {
+                deviceInfo.performance = 'low';
+            }
+            
+            // メモリ情報（利用可能な場合）
+            if (navigator.deviceMemory) {
+                deviceInfo.memory = `${navigator.deviceMemory}GB`;
+            } else if (navigator.hardwareConcurrency) {
+                deviceInfo.memory = `CPU: ${navigator.hardwareConcurrency}コア`;
+            }
+        }
+        
+        // AI機能のデバイス対応チェック
+        function checkAICapability() {
+            const issues = [];
+            
+            // 性能チェック
+            if (deviceInfo.performance === 'low') {
+                issues.push('デバイスの性能が低いため、AI機能の処理速度が遅くなる可能性があります');
+            }
+            
+            // メモリチェック
+            if (deviceInfo.memory && deviceInfo.memory.includes('GB')) {
+                const memoryGB = parseFloat(deviceInfo.memory);
+                if (memoryGB < 4) {
+                    issues.push('メモリが4GB未満のため、AI機能の同時実行に制限があります');
+                }
+            }
+            
+            // ブラウザチェック
+            if (deviceInfo.browser === 'Safari' && deviceInfo.os === 'iOS') {
+                issues.push('iOS Safariでは一部のAI機能に制限があります');
+            }
+            
+            // 画面サイズチェック
+            if (deviceInfo.screenSize.width < 1366) {
+                issues.push('画面幅が狭いため、AI分析結果の表示が最適化されます');
+            }
+            
+            return issues;
+        }
+        
+        // AI機能の最適化設定
+        function optimizeAISettings() {
+            const issues = checkAICapability();
+            
+            if (issues.length > 0) {
+                // 警告メッセージを表示
+                const warningDiv = document.createElement('div');
+                warningDiv.className = 'alert alert-warning';
+                warningDiv.innerHTML = `
+                    <strong>⚠️ デバイス対応の注意事項</strong><br>
+                    ${issues.map(issue => `• ${issue}`).join('<br>')}
+                    <br><br>
+                    <button class="btn btn-info" onclick="applyOptimizations()">
+                        <i class="fas fa-cog"></i> 最適化設定を適用
+                    </button>
+                `;
+                
+                // AIタブの最初に挿入
+                const aiTab = document.getElementById('ai');
+                if (aiTab) {
+                    aiTab.insertBefore(warningDiv, aiTab.firstChild);
+                }
+            }
+            
+            // デバイスに応じた設定調整
+            if (deviceInfo.performance === 'low') {
+                aiSettings.sensitivity = 'low';
+                aiSettings.updateInterval = 'weekly';
+            }
+            
+            if (deviceInfo.type === 'mobile') {
+                // モバイル向けの軽量化設定
+                aiSettings.model = 'gpt-3.5';
+            }
+        }
+        
+        // 最適化設定の適用
+        function applyOptimizations() {
+            const optimizations = [];
+            
+            if (deviceInfo.performance === 'low') {
+                optimizations.push('• 分析感度を「低」に設定');
+                optimizations.push('• 更新間隔を「1週間」に設定');
+                optimizations.push('• 同時実行数を制限');
+            }
+            
+            if (deviceInfo.type === 'mobile') {
+                optimizations.push('• モバイル向け軽量モデルを使用');
+                optimizations.push('• 画面表示を最適化');
+            }
+            
+            if (deviceInfo.screenSize.width < 1366) {
+                optimizations.push('• レスポンシブ表示を強化');
+                optimizations.push('• テーブル表示を簡略化');
+            }
+            
+            alert(`最適化設定を適用しました:\n\n${optimizations.join('\n')}\n\nこれらの設定により、お使いのデバイスでAI機能がより安定して動作します。`);
+            
+            // 設定を適用
+            const aiSensitivity = document.getElementById('aiSensitivity');
+            const aiUpdateInterval = document.getElementById('aiUpdateInterval');
+            const aiModel = document.getElementById('aiModel');
+            
+            if (aiSensitivity) aiSensitivity.value = aiSettings.sensitivity;
+            if (aiUpdateInterval) aiUpdateInterval.value = aiSettings.updateInterval;
+            if (aiModel) aiModel.value = aiSettings.model;
+        }
+        
+        // AI機能のエラーハンドリング強化
+        function safeAIExecution(func, fallback) {
+            return function(...args) {
+                try {
+                    // デバイス性能チェック
+                    if (deviceInfo.performance === 'low') {
+                        showLoadingMessage('処理に時間がかかる場合があります...');
+                    }
+                    
+                    // メモリ使用量チェック
+                    if (performance.memory && performance.memory.usedJSHeapSize > 50000000) {
+                        console.warn('メモリ使用量が高いため、処理を軽量化します');
+                    }
+                    
+                    return func.apply(this, args);
+                } catch (error) {
+                    console.error('AI機能でエラーが発生しました:', error);
+                    
+                    // エラーログに記録
+                    addAILog('エラー', '失敗', '0秒', `エラー: ${error.message}`);
+                    
+                    // フォールバック処理
+                    if (fallback) {
+                        fallback(error);
+                    } else {
+                        alert(`AI機能でエラーが発生しました。\n\nエラー内容: ${error.message}\n\nデバイス情報: ${deviceInfo.type} (${deviceInfo.os})\n\n問題が続く場合は、ページを再読み込みしてください。`);
+                    }
+                }
+            };
+        }
+        
+        // パフォーマンスモニタリング
+        function monitorPerformance() {
+            const startTime = performance.now();
+            
+            // メモリ使用量チェック
+            if (performance.memory) {
+                const memoryUsage = performance.memory.usedJSHeapSize / 1024 / 1024; // MB
+                const memoryLimit = performance.memory.jsHeapSizeLimit / 1024 / 1024; // MB
+                
+                if (memoryUsage > memoryLimit * 0.8) {
+                    console.warn('メモリ使用量が高いため、最適化を実行します');
+                    optimizeMemory();
+                }
+            }
+            
+            // CPU使用率の推定
+            const processingTime = performance.now() - startTime;
+            if (processingTime > 100) {
+                console.warn('処理時間が長いため、軽量化モードを有効にします');
+                enableLowPerformanceMode();
+            }
+        }
+        
+        // メモリ最適化
+        function optimizeMemory() {
+            // 不要なデータをクリア
+            if (window.gc) {
+                window.gc();
+            }
+            
+            // 大きなオブジェクトを削除
+            if (window.aiAnalysisCache) {
+                delete window.aiAnalysisCache;
+            }
+            
+            // ログの古い部分を削除
+            const logs = document.querySelectorAll('.log-entry');
+            if (logs.length > 100) {
+                for (let i = 0; i < logs.length - 100; i++) {
+                    logs[i].remove();
+                }
+            }
+        }
+        
+        // 低性能モードの有効化
+        function enableLowPerformanceMode() {
+            document.body.classList.add('low-performance-mode');
+            
+            // アニメーションを無効化
+            const animatedElements = document.querySelectorAll('[style*="animation"], [style*="transition"]');
+            animatedElements.forEach(el => {
+                el.style.animation = 'none';
+                el.style.transition = 'none';
+            });
+            
+            // 更新間隔を延長
+            clearInterval(window.updateInterval);
+            window.updateInterval = setInterval(updateStats, 60000); // 1分間隔
+            
+            console.log('低性能モードが有効になりました');
+        }
+        
+        // エラー回復機能
+        function recoverFromError(error) {
+            console.log('エラー回復を開始します:', error);
+            
+            // エラー情報を記録
+            const errorInfo = {
+                message: error.message,
+                stack: error.stack,
+                device: deviceInfo,
+                timestamp: new Date().toISOString(),
+                url: window.location.href
+            };
+            
+            // ローカルストレージにエラー履歴を保存
+            const errorHistory = JSON.parse(localStorage.getItem('errorHistory') || '[]');
+            errorHistory.push(errorInfo);
+            
+            // 最新の10件のみ保持
+            if (errorHistory.length > 10) {
+                errorHistory.splice(0, errorHistory.length - 10);
+            }
+            
+            localStorage.setItem('errorHistory', JSON.stringify(errorHistory));
+            
+            // 自動回復を試行
+            try {
+                // ページの状態をリセット
+                resetPageState();
+                
+                // データを再読み込み
+                loadUsers();
+                loadUsageHistory();
+                
+                console.log('エラー回復が完了しました');
+                return true;
+            } catch (recoveryError) {
+                console.error('エラー回復に失敗しました:', recoveryError);
+                return false;
+            }
+        }
+        
+        // ページ状態のリセット
+        function resetPageState() {
+            // モーダルを閉じる
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                modal.style.display = 'none';
+            });
+            
+            // ローディング表示を削除
+            const loadingOverlays = document.querySelectorAll('#loadingOverlay');
+            loadingOverlays.forEach(overlay => overlay.remove());
+            
+            // エラー表示をクリア
+            const errorDisplays = document.querySelectorAll('.error-display');
+            errorDisplays.forEach(display => display.remove());
+            
+            // タブを最初に戻す
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            const tabButtons = document.querySelectorAll('.nav-tab');
+            tabButtons.forEach(button => button.classList.remove('active'));
+            
+            if (tabContents[0]) tabContents[0].classList.add('active');
+            if (tabButtons[0]) tabButtons[0].classList.add('active');
+        }
+        
+        // デバイス情報の表示
+        function showDeviceInfo() {
+            const deviceInfoDiv = document.createElement('div');
+            deviceInfoDiv.className = 'device-info';
+            deviceInfoDiv.innerHTML = `
+                <strong>デバイス情報:</strong><br>
+                📱 タイプ: ${deviceInfo.type}<br>
+                💻 OS: ${deviceInfo.os}<br>
+                🌐 ブラウザ: ${deviceInfo.browser}<br>
+                📐 画面: ${deviceInfo.screenSize.width} × ${deviceInfo.screenSize.height}<br>
+                💾 メモリ: ${deviceInfo.memory}<br>
+                ⚡ 性能: <span class="performance-indicator performance-${deviceInfo.performance}"></span>${deviceInfo.performance}
+            `;
+            
+            // ページの右上に表示
+            deviceInfoDiv.style.cssText = `
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                z-index: 1000;
+                max-width: 250px;
+                font-size: 0.8rem;
+            `;
+            
+            document.body.appendChild(deviceInfoDiv);
+            
+            // 5秒後に自動で非表示
+            setTimeout(() => {
+                if (deviceInfoDiv.parentNode) {
+                    deviceInfoDiv.remove();
+                }
+            }, 5000);
+        }
+        
+        // グローバルエラーハンドラー
+        window.addEventListener('error', function(event) {
+            console.error('グローバルエラーが発生しました:', event.error);
+            
+            // エラー回復を試行
+            if (!recoverFromError(event.error)) {
+                // 回復に失敗した場合はユーザーに通知
+                alert(`システムエラーが発生しました。\n\nエラー: ${event.error.message}\n\nページを再読み込みしてください。`);
+            }
+        });
+        
+        // 未処理のPromiseエラーハンドラー
+        window.addEventListener('unhandledrejection', function(event) {
+            console.error('未処理のPromiseエラーが発生しました:', event.reason);
+            
+            // エラー回復を試行
+            if (!recoverFromError(new Error(event.reason))) {
+                console.error('Promiseエラーの回復に失敗しました');
+            }
+        });
+        
+        // 定期的なパフォーマンスチェック
+        setInterval(monitorPerformance, 30000); // 30秒ごと
+        
+        // デバイス情報表示のショートカット（Ctrl+Shift+D）
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && event.shiftKey && event.key === 'D') {
+                showDeviceInfo();
+            }
+        });
+        
+        // LINE通知機能（スタッフ用）
+        let lineNotificationSettings = {
+            enabled: true,
+            accessToken: '',
+            groupId: '',
+            notifyLevel: 'all',
+            autoNotify: true,
+            manualNotify: true,
+            contactList: [
+                { name: 'システム管理者', lineId: 'admin_line_id', role: 'admin', priority: 'high' },
+                { name: '技術担当者', lineId: 'tech_line_id', role: 'tech', priority: 'high' },
+                { name: 'スタッフA', lineId: 'staff_a_line_id', role: 'staff', priority: 'medium' },
+                { name: 'スタッフB', lineId: 'staff_b_line_id', role: 'staff', priority: 'medium' },
+                { name: '緊急連絡先', lineId: 'emergency_line_id', role: 'emergency', priority: 'critical' }
+            ]
+        };
+        
+        // LINE通知送信（スタッフ用）
+        function sendLineNotification(message, level = 'info', recipients = 'all') {
+            if (!lineNotificationSettings.enabled) {
+                console.log('LINE通知が無効になっています');
+                return;
+            }
+            
+            const notification = {
+                message: message,
+                level: level,
+                timestamp: new Date().toISOString(),
+                device: deviceInfo,
+                recipients: recipients
+            };
+            
+            // LINE APIに送信
+            sendToLineAPI(notification);
+            
+            // 通知履歴に記録
+            addNotificationLog(notification);
+        }
+        
+        // LINE API送信（スタッフ用）
+        function sendToLineAPI(notification) {
+            const lineMessage = formatLineMessage(notification);
+            
+            fetch('https://api.line.me/v2/bot/message/push', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${lineNotificationSettings.accessToken}`
+                },
+                body: JSON.stringify({
+                    to: lineNotificationSettings.groupId,
+                    messages: [{
+                        type: 'text',
+                        text: lineMessage
+                    }]
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('LINE通知送信成功');
+                } else {
+                    console.error('LINE通知送信失敗:', response.status);
+                }
+            })
+            .catch(error => {
+                console.error('LINE通知送信エラー:', error);
+            });
+        }
+        
+        // LINEメッセージフォーマット（スタッフ用）
+        function formatLineMessage(notification) {
+            const levelEmoji = {
+                'critical': '🚨',
+                'error': '❌',
+                'warning': '⚠️',
+                'info': 'ℹ️',
+                'success': '✅'
+            };
+            
+            const emoji = levelEmoji[notification.level] || 'ℹ️';
+            const device = notification.device.type;
+            const time = new Date(notification.timestamp).toLocaleString('ja-JP');
+            
+            return `${emoji} スタッフ通知\n\n📱 デバイス: ${device}\n⏰ 時刻: ${time}\n\n${notification.message}`;
+        }
+        
+        // 緊急通知送信（スタッフ用）
+        function sendEmergencyNotification(message) {
+            sendLineNotification(message, 'critical', 'emergency,admin');
+        }
+        
+        // スタッフ報告送信
+        function sendStaffReport(report) {
+            const message = `スタッフ報告\n\n${report}`;
+            sendLineNotification(message, 'info', 'admin,tech');
+        }
+    </script>
+</body>
+</html> 

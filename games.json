@@ -1,0 +1,138 @@
+{
+  "memory_game": {
+    "title": "記憶力ゲーム",
+    "desc": "表示された内容を覚えて答える脳トレゲームです。",
+    "link": "memory_game.html",
+    "description": "表示された内容を覚えて答える脳トレゲームです。",
+    "questions": [
+      {"q": "1234", "a": "1234"},
+      {"q": "5678", "a": "5678"}
+    ]
+  },
+  "reaction_game": {
+    "title": "反応ゲーム",
+    "desc": "素早い反応で正解を選ぶゲームです。",
+    "link": "reaction_game.html",
+    "description": "素早い反応で正解を選ぶゲームです。",
+    "questions": [
+      {"q": "赤が出たらクリック", "a": "赤"}
+    ]
+  },
+  "letter_game": {
+    "title": "文字ゲーム",
+    "desc": "文字を使った脳トレゲームです。",
+    "link": "letter_game.html",
+    "description": "文字を使った脳トレゲームです。",
+    "questions": [
+      {"q": "AからZまで順番にクリック", "a": "A-Z"}
+    ]
+  },
+  "concentration_game": {
+    "title": "神経衰弱ゲーム",
+    "desc": "同じ絵柄を揃えて記憶力を鍛えるゲームです。",
+    "link": "concentration_game.html",
+    "description": "同じ絵柄を揃えて記憶力を鍛えるゲームです。",
+    "questions": []
+  },
+  "jigsaw_puzzle_game": {
+    "title": "ジグソーパズルゲーム",
+    "desc": "ピースを組み合わせて完成させるパズルです。",
+    "link": "jigsaw_puzzle_game.html",
+    "description": "ピースを組み合わせて完成させるパズルです。",
+    "questions": []
+  },
+  "number_order": {
+    "title": "数字順番探しゲーム",
+    "desc": "数字を正しい順番に並べるゲームです。",
+    "link": "number-order.html",
+    "description": "数字を正しい順番に並べるゲームです。",
+    "questions": []
+  },
+  "color_matching_game": {
+    "title": "色合わせゲーム",
+    "desc": "同じ色を素早く見つけるゲームです。",
+    "link": "color_matching_game.html",
+    "description": "同じ色を素早く見つけるゲームです。",
+    "questions": []
+  },
+  "date_quiz": {
+    "title": "日付クイズ",
+    "desc": "日付に関する問題に答えるゲームです。",
+    "link": "date-quiz.html",
+    "description": "日付に関する問題に答えるゲームです。",
+    "tags": ["life"],
+    "questions": []
+  },
+  "maze_game": {
+    "title": "迷路ゲーム",
+    "desc": "迷路を解いてゴールを目指すゲームです。",
+    "link": "maze_game.html",
+    "description": "迷路を解いてゴールを目指すゲームです。",
+    "questions": []
+  },
+  "mental_math_game": {
+    "title": "暗算ゲーム",
+    "desc": "素早く計算問題を解くゲームです。",
+    "link": "mental_math_game.html",
+    "description": "素早く計算問題を解くゲームです。",
+    "questions": []
+  },
+  "peripheral_vision_game": {
+    "title": "周辺視野ゲーム",
+    "desc": "周辺視野を使って目標を見つけるゲームです。",
+    "link": "peripheral_vision_game.html",
+    "description": "周辺視野を使って目標を見つけるゲームです。",
+    "questions": []
+  },
+  "picture_matching_game": {
+    "title": "絵合わせゲーム",
+    "desc": "同じ絵を素早く見つけるゲームです。",
+    "link": "picture_matching_game.html",
+    "description": "同じ絵を素早く見つけるゲームです。",
+    "questions": []
+  },
+  "quick_judgment_game": {
+    "title": "素早い判断ゲーム",
+    "desc": "素早く正しい判断をするゲームです。",
+    "link": "quick_judgment_game.html",
+    "description": "素早く正しい判断をするゲームです。",
+    "questions": []
+  },
+  "shopping_simulation": {
+    "title": "買い物シミュレーション",
+    "desc": "買い物の計算を練習するゲームです。",
+    "link": "shopping-simulation.html",
+    "description": "買い物の計算を練習するゲームです。",
+    "tags": ["life"],
+    "questions": []
+  },
+  "speed_sort_game": {
+    "title": "素早い並び替えゲーム",
+    "desc": "素早く正しい順序に並び替えるゲームです。",
+    "link": "speed_sort_game.html",
+    "description": "素早く正しい順序に並び替えるゲームです。",
+    "questions": []
+  },
+  "word_chain_game": {
+    "title": "しりとりゲーム",
+    "desc": "言葉をつなげていくゲームです。",
+    "link": "word_chain_game.html",
+    "description": "言葉をつなげていくゲームです。",
+    "tags": ["life"],
+    "questions": []
+  },
+  "word_rearrangement_game": {
+    "title": "文字並び替えゲーム",
+    "desc": "文字を正しい順序に並び替えるゲームです。",
+    "link": "word_rearrangement_game.html",
+    "description": "文字を正しい順序に並び替えるゲームです。",
+    "questions": []
+  },
+  "word_search_game": {
+    "title": "単語探しゲーム",
+    "desc": "隠された単語を見つけるゲームです。",
+    "link": "word_search_game.html",
+    "description": "隠された単語を見つけるゲームです。",
+    "questions": []
+  }
+} 

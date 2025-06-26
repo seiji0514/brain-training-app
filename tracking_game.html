@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>追視（トラッキング）ゲーム</title>
+  <style>
+    body { font-family: 'Meiryo', sans-serif; background: #f0f2f5; text-align: center; }
+    .container { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px #b0c4de; max-width: 400px; margin: 40px auto; padding: 2.5em; }
+    .game-area { position: relative; width: 220px; height: 220px; margin: 0 auto 2em auto; background: #e3eaf6; border-radius: 10px; overflow: hidden; }
+    .tracker { position: absolute; width: 48px; height: 48px; border-radius: 50%; background: #27ae60; display: flex; align-items: center; justify-content: center; font-size: 2.2em; color: #fff; transition: left 0.3s, top 0.3s; }
+    .choices { margin: 2em 0 1em 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 1em; }
+    .choice-btn { background: #1a73e8; color: #fff; border: none; border-radius: 10px; padding: 1.2em 2.5em; margin: 0.7em; font-size: 1.3em; cursor: pointer; letter-spacing: 0.1em; min-width: 120px; }
+    .choice-btn:hover { background: #1557b0; }
+    .result { font-size: 1.4em; margin: 1.2em 0; color: #27ae60; }
+    .result.incorrect { color: #e67e22; }
+    .score { font-size: 2em; color: #2574c7; margin-top: 2em; font-weight: bold; }
+    .miss { font-size: 1.3em; color: #e74c3c; margin-top: 1em; font-weight: bold; }
+    .final-comment { font-size: 1.5em; margin-top: 1em; color: #2574c7; font-weight: bold; }
+    .next-btn { background: #43a047; color: #fff; border: none; border-radius: 10px; padding: 1em 2.5em; margin: 0.7em; font-size: 1.2em; cursor: pointer; letter-spacing: 0.1em; }
+    .next-btn:hover { background: #2e7031; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div style="font-size:1.5em; color:#2574c7; font-weight:bold; margin-bottom:0.5em;">追視（トラッキング）ゲーム</div>
+    <div style="font-size:1.1em; color:#444; margin-bottom:1.5em;">●の動きを目で追い、どこで止まったかを4択から選んでください</div>
+    <div id="quizArea">
+      <div class="game-area" id="gameArea">
+        <div class="tracker" id="tracker" style="display:none;">●</div>
+      </div>
+      <div class="choices" id="choices"></div>
+      <div class="result" id="result"></div>
+      <button id="nextBtn" style="display:none;" class="next-btn">次の問題</button>
+    </div>
+    <div class="score" id="score" style="display:none;"></div>
+  </div>
+  <script>
+    // 4隅の座標とラベル
+    const positions = [
+      { label: '左上', x: 10, y: 10 },
+      { label: '右上', x: 162, y: 10 },
+      { label: '左下', x: 10, y: 162 },
+      { label: '右下', x: 162, y: 162 }
+    ];
+    // 問題データ（start→endのindex）
+    const questions = [
+      { start: 0, end: 3 },
+      { start: 1, end: 2 },
+      { start: 2, end: 0 },
+      { start: 3, end: 1 },
+      { start: 0, end: 1 },
+      { start: 1, end: 0 },
+      { start: 2, end: 3 },
+      { start: 3, end: 2 },
+      { start: 0, end: 2 },
+      { start: 2, end: 1 }
+    ];
+    let current = 0, score = 0, miss = 0;
+    const tracker = document.getElementById('tracker');
+    const gameArea = document.getElementById('gameArea');
+    const choicesDiv = document.getElementById('choices');
+    const resultDiv = document.getElementById('result');
+    const nextBtn = document.getElementById('nextBtn');
+    function showQuestion() {
+      resultDiv.textContent = '';
+      resultDiv.className = 'result';
+      nextBtn.style.display = 'none';
+      tracker.style.display = 'none';
+      choicesDiv.innerHTML = '';
+      // 初期位置
+      const q = questions[current];
+      tracker.style.left = positions[q.start].x + 'px';
+      tracker.style.top = positions[q.start].y + 'px';
+      tracker.style.display = 'flex';
+      // 直線移動
+      setTimeout(() => {
+        tracker.style.left = positions[q.end].x + 'px';
+        tracker.style.top = positions[q.end].y + 'px';
+        setTimeout(() => {
+          tracker.style.display = 'none';
+          showChoices(q);
+        }, 700);
+      }, 700);
+    }
+    function showChoices(q) {
+      choicesDiv.innerHTML = '';
+      positions.forEach((pos, idx) => {
+        const btn = document.createElement('button');
+        btn.textContent = pos.label;
+        btn.className = 'choice-btn';
+        btn.onclick = () => checkAnswer(idx, q);
+        choicesDiv.appendChild(btn);
+      });
+    }
+    function checkAnswer(idx, q) {
+      document.querySelectorAll('.choice-btn').forEach(btn => btn.disabled = true);
+      if(idx === q.end) {
+        resultDiv.textContent = '正解！よく目で追えましたね。';
+        resultDiv.className = 'result';
+        score++;
+      } else {
+        resultDiv.textContent = `不正解… 正解は「${positions[q.end].label}」でした。`;
+        resultDiv.className = 'result incorrect';
+        miss++;
+      }
+      nextBtn.style.display = 'inline-block';
+    }
+    nextBtn.onclick = () => {
+      current++;
+      if(current < questions.length) {
+        showQuestion();
+      } else {
+        document.getElementById('quizArea').style.display = 'none';
+        let comment = '';
+        if (score === questions.length) {
+          comment = '満点です！すばらしいですね！';
+        } else if (score >= Math.floor(questions.length * 0.8)) {
+          comment = 'よくできました！この調子でがんばりましょう。';
+        } else if (score < Math.floor(questions.length * 0.5)) {
+          comment = '次もがんばりましょう！';
+        } else {
+          comment = 'あと少しで満点です。';
+        }
+        document.getElementById('score').innerHTML =
+          `あなたのスコア：${score} / ${questions.length}` +
+          `<div class='miss'>ミス回数：${miss}</div>` +
+          `<div class='final-comment'>${comment}</div>`;
+        document.getElementById('score').style.display = 'block';
+      }
+    };
+    // 初期表示
+    showQuestion();
+  </script>
+</body>
+</html> 

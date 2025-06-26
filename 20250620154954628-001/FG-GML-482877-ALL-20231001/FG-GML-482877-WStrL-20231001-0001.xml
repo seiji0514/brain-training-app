@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Dataset xsi:schemaLocation="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema FGD_GMLSchema.xsd"
+	xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema"
+	gml:id="Dataset1">
+  <gml:description>基盤地図情報メタデータ ID=fmdid:23-1001</gml:description>
+  <gml:name>基盤地図情報ダウンロードデータ（GML版）</gml:name>
+<WStrL gml:id="K27_4639811754_1">
+<fid>46398-11754-s-1186</fid>
+<lfSpanFr gml:id="K27_4639811754_1-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K27_4639811754_1-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K27_4639811754_1-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.656632904 128.885799516
+32.657082495 128.886188784
+32.657931720 128.886924070
+32.657958300 128.886947086
+32.658177932 128.887137262
+32.658142430 128.887196733
+32.656496314 128.885776550
+32.656514454 128.885744360
+32.656532415 128.885712512
+32.656579571 128.885753349
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>防波堤</type>
+</WStrL>
+<WStrL gml:id="K27_4639811757_1">
+<fid>46398-11757-s-223</fid>
+<lfSpanFr gml:id="K27_4639811757_1-1">
+<gml:timePosition>2013-12-10</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K27_4639811757_1-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K27_4639811757_1-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.658977369 128.888874931
+32.658333333 128.889298085
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>防波堤</type>
+</WStrL>
+<WStrL gml:id="K27_4639811757_2">
+<fid>46398-11757-s-224</fid>
+<lfSpanFr gml:id="K27_4639811757_2-1">
+<gml:timePosition>2013-12-10</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K27_4639811757_2-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K27_4639811757_2-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.658333333 128.889136262
+32.658919233 128.888751302
+32.658977369 128.888874931
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>防波堤</type>
+</WStrL>
+<WStrL gml:id="K27_4639811757_3">
+<fid>46398-11757-s-225</fid>
+<lfSpanFr gml:id="K27_4639811757_3-1">
+<gml:timePosition>2013-12-10</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K27_4639811757_3-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K27_4639811757_3-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.660127185 128.889562396
+32.659494355 128.889941833
+32.659450911 128.889840586
+32.660083740 128.889461149
+32.660127185 128.889562396
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>防波堤</type>
+</WStrL>
+<WStrL gml:id="K27_4639811757_4">
+<fid>46398-11757-s-230</fid>
+<lfSpanFr gml:id="K27_4639811757_4-1">
+<gml:timePosition>2013-12-10</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K27_4639811757_4-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K27_4639811757_4-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.660109397 128.884537132
+32.660095821 128.884716612
+32.659788972 128.885238367
+32.659801876 128.885258448
+32.659490211 128.885764017
+32.659443127 128.885798709
+32.659429314 128.885779060
+32.659386519 128.885811079
+32.659031177 128.886943867
+32.658388944 128.887839551
+32.658446481 128.887895574
+32.659090376 128.887003983
+32.659463642 128.885846520
+32.659536730 128.885788901
+32.660168906 128.884724821
+32.660176562 128.884527930
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>防波堤</type>
+</WStrL>
+<WStrL gml:id="K27_4639811757_5">
+<fid>46398-11757-s-392</fid>
+<lfSpanFr gml:id="K27_4639811757_5-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K27_4639811757_5-2">
+<gml:timePosition>2023-09-21</gml:timePosition>
+</devDate>
+<orgGILvl>2500</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K27_4639811757_5-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.658770889 128.885166333
+32.658842417 128.885427667
+32.658821000 128.885436278
+32.658876917 128.885647444
+32.658955528 128.885621528
+32.658901972 128.885407528
+32.658875750 128.885413333
+32.658808528 128.885154056
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>桟橋（鉄，コンクリート）</type>
+</WStrL>
+</Dataset>

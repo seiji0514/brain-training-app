@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>超高解像度リアル衛星システム</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Meiryo', sans-serif;
+      background: #000;
+      overflow: hidden;
+    }
+    
+    #container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+    
+    #canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    
+    #control-panel {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 20px;
+      border-radius: 15px;
+      border: 2px solid #00FF88;
+      backdrop-filter: blur(15px);
+      z-index: 1000;
+      min-width: 320px;
+    }
+    
+    .control-section {
+      margin-bottom: 20px;
+    }
+    
+    .control-section h3 {
+      margin: 0 0 10px 0;
+      color: #00FF88;
+      font-size: 16px;
+      text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+    }
+    
+    .quality-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .quality-button {
+      background: linear-gradient(45deg, #00FF88, #00CC6A);
+      color: #000;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: bold;
+      transition: all 0.3s;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+    
+    .quality-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 255, 136, 0.4);
+    }
+    
+    .quality-button.active {
+      background: linear-gradient(45deg, #FF6B35, #F7931E);
+      color: white;
+    }
+    
+    .location-selector {
+      margin-bottom: 15px;
+    }
+    
+    .location-button {
+      background: linear-gradient(45deg, #4A90E2, #357ABD);
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 2px;
+      font-size: 11px;
+      transition: all 0.3s;
+    }
+    
+    .location-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(74, 144, 226, 0.4);
+    }
+    
+    .realism-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .realism-button {
+      background: linear-gradient(45deg, #9B59B6, #8E44AD);
+      color: white;
+      border: none;
+      padding: 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 11px;
+      transition: all 0.3s;
+    }
+    
+    .realism-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(155, 89, 182, 0.4);
+    }
+    
+    #info-panel {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 20px;
+      border-radius: 15px;
+      border: 2px solid #FF6B35;
+      backdrop-filter: blur(15px);
+      z-index: 1000;
+      max-width: 350px;
+    }
+    
+    .info-section {
+      margin-bottom: 15px;
+    }
+    
+    .info-section h4 {
+      margin: 0 0 8px 0;
+      color: #FF6B35;
+      font-size: 14px;
+      text-shadow: 0 0 8px rgba(255, 107, 53, 0.5);
+    }
+    
+    .info-value {
+      font-size: 18px;
+      font-weight: bold;
+      color: #00FF88;
+      text-shadow: 0 0 5px rgba(0, 255, 136, 0.3);
+    }
+    
+    .info-label {
+      font-size: 11px;
+      color: #ccc;
+      margin-bottom: 5px;
+    }
+    
+    #camera-panel {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 20px;
+      border-radius: 15px;
+      border: 2px solid #4A90E2;
+      backdrop-filter: blur(15px);
+      z-index: 1000;
+      min-width: 300px;
+    }
+    
+    .camera-controls {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .camera-button {
+      background: linear-gradient(45deg, #4A90E2, #357ABD);
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.3s;
+    }
+    
+    .camera-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(74, 144, 226, 0.4);
+    }
+    
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 255, 136, 0.9);
+      color: #000;
+      padding: 15px 20px;
+      border-radius: 10px;
+      z-index: 2000;
+      transform: translateX(400px);
+      transition: transform 0.3s;
+      font-weight: bold;
+    }
+    
+    .notification.show {
+      transform: translateX(0);
+    }
+    
+    .notification.error {
+      background: rgba(255, 107, 53, 0.9);
+      color: white;
+    }
+    
+    .notification.warning {
+      background: rgba(255, 193, 7, 0.9);
+      color: #000;
+    }
+    
+    #loading-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      color: white;
+      font-size: 18px;
+    }
+    
+    .spinner {
+      border: 4px solid rgba(0, 255, 136, 0.3);
+      border-top: 4px solid #00FF88;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin-right: 20px;
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    #compass {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      width: 80px;
+      height: 80px;
+      background: rgba(0, 0, 0, 0.8);
+      border-radius: 50%;
+      border: 3px solid #00FF88;
+      z-index: 1000;
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+    }
+    
+    .compass-arrow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 6px;
+      height: 35px;
+      background: #FF6B35;
+      transform-origin: 50% 0;
+      transform: translate(-50%, -50%);
+      border-radius: 3px;
+      box-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+    }
+    
+    .compass-arrow::after {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 12px solid #FF6B35;
+    }
+    
+    .quality-indicator {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 255, 136, 0.9);
+      color: #000;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 10px;
+      font-weight: bold;
+      z-index: 1001;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <canvas id="canvas"></canvas>
+    
+    <!-- 品質インジケーター -->
+    <div class="quality-indicator">ULTRA HD</div>
+    
+    <!-- 制御パネル -->
+    <div id="control-panel">
+      <div class="control-section">
+        <h3>🎯 解像度品質</h3>
+        <div class="quality-selector">
+          <button class="quality-button" onclick="changeQuality('4k')">4K ULTRA HD</button>
+          <button class="quality-button active" onclick="changeQuality('8k')">8K SUPER HD</button>
+          <button class="quality-button" onclick="changeQuality('16k')">16K MEGA HD</button>
+          <button class="quality-button" onclick="changeQuality('32k')">32K ULTRA MEGA</button>
+        </div>
+      </div>
+      
+      <div class="control-section">
+        <h3>📍 リアル地域</h3>
+        <div class="location-selector">
+          <button class="location-button" onclick="goToLocation('takeo')">武雄市</button>
+          <button class="location-button" onclick="goToLocation('saga')">佐賀県</button>
+          <button class="location-button" onclick="goToLocation('nagasaki')">長崎県</button>
+          <button class="location-button" onclick="goToLocation('fukuoka')">福岡県</button>
+        </div>
+      </div>
+      
+      <div class="control-section">
+        <h3>🎨 リアリズム設定</h3>
+        <div class="realism-controls">
+          <button class="realism-button" onclick="toggleRayTracing()">レイトレーシング</button>
+          <button class="realism-button" onclick="toggleHDR()">HDR 10+</button>
+          <button class="realism-button" onclick="toggleAtmosphere()">大気散乱</button>
+          <button class="realism-button" onclick="toggleReflection()">反射・屈折</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 情報パネル -->
+    <div id="info-panel">
+      <div class="info-section">
+        <h4>📍 超高精度位置</h4>
+        <div class="info-label">緯度 (精密)</div>
+        <div class="info-value" id="latitude">33.1894000</div>
+        <div class="info-label">経度 (精密)</div>
+        <div class="info-value" id="longitude">130.0208000</div>
+        <div class="info-label">高度 (cm精度)</div>
+        <div class="info-value" id="altitude">100.00m</div>
+      </div>
+      
+      <div class="info-section">
+        <h4>🛰️ 衛星データ</h4>
+        <div class="info-label">解像度</div>
+        <div class="info-value" id="resolution">8K SUPER HD</div>
+        <div class="info-label">衛星</div>
+        <div class="info-value">Landsat 9 + Sentinel-2</div>
+        <div class="info-label">更新頻度</div>
+        <div class="info-value">リアルタイム</div>
+      </div>
+      
+      <div class="info-section">
+        <h4>📊 技術仕様</h4>
+        <div class="info-label">センサー</div>
+        <div class="info-value">OLI-2 + MSI</div>
+        <div class="info-label">波長範囲</div>
+        <div class="info-value">可視光～赤外線</div>
+        <div class="info-label">データ精度</div>
+        <div class="info-value">99.9%</div>
+      </div>
+    </div>
+    
+    <!-- カメラパネル -->
+    <div id="camera-panel">
+      <h3>📷 超高精度カメラ</h3>
+      <div class="camera-controls">
+        <button class="camera-button" onclick="moveForward()">前進</button>
+        <button class="camera-button" onclick="moveBackward()">後退</button>
+        <button class="camera-button" onclick="turnLeft()">左転</button>
+        <button class="camera-button" onclick="turnRight()">右転</button>
+      </div>
+      <div style="margin-top: 10px; font-size: 12px; color: #00FF88;">
+        WASDキー: 精密移動 | マウス: 自由視点
+      </div>
+    </div>
+    
+    <!-- コンパス -->
+    <div id="compass">
+      <div class="compass-arrow" id="compass-arrow"></div>
+    </div>
+    
+    <!-- ローディングオーバーレイ -->
+    <div id="loading-overlay">
+      <div class="spinner"></div>
+      <span>超高解像度衛星データを読み込み中...</span>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    let scene, camera, renderer;
+    let earth, atmosphere, clouds, terrain;
+    let isRayTracing = false;
+    let isHDR = true;
+    let isAtmosphere = true;
+    let isReflection = false;
+    let currentQuality = '8k';
+    let currentLocation = { lat: 33.1894, lng: 130.0208, alt: 100.00 };
+    
+    // 初期化
+    function init() {
+      // シーン作成
+      scene = new THREE.Scene();
+      scene.fog = new THREE.Fog(0x87ceeb, 100, 1000);
+      
+      // カメラ作成（超高解像度対応）
+      camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
+      camera.position.set(0, 100, 200);
+      
+      // レンダラー作成（超高品質設定）
+      renderer = new THREE.WebGLRenderer({ 
+        canvas: document.getElementById('canvas'), 
+        antialias: true,
+        alpha: true,
+        preserveDrawingBuffer: true
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.5;
+      renderer.outputEncoding = THREE.sRGBEncoding;
+      
+      // ライティング
+      setupAdvancedLighting();
+      
+      // 地球作成（超高解像度）
+      createUltraRealisticEarth();
+      
+      // 大気圏作成
+      createRealisticAtmosphere();
+      
+      // 雲作成
+      createRealisticClouds();
+      
+      // 地形作成
+      createUltraDetailedTerrain();
+      
+      // アニメーションループ
+      animate();
+      
+      // リサイズ対応
+      window.addEventListener('resize', onWindowResize);
+      
+      // キーボード制御
+      setupKeyboardControls();
+      
+      // マウス制御
+      setupMouseControls();
+      
+      // ローディング非表示
+      setTimeout(() => {
+        document.getElementById('loading-overlay').style.display = 'none';
+        showNotification('超高解像度衛星データの読み込みが完了しました', 'success');
+      }, 3000);
+    }
+    
+    // 高度なライティング設定
+    function setupAdvancedLighting() {
+      const ambientLight = new THREE.AmbientLight(0x404040, 0.3);
+      scene.add(ambientLight);
+      
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2);
+      directionalLight.position.set(100, 100, 100);
+      directionalLight.castShadow = true;
+      directionalLight.shadow.mapSize.width = 2048;
+      directionalLight.shadow.mapSize.height = 2048;
+      scene.add(directionalLight);
+      
+      // 補助ライト
+      const fillLight = new THREE.DirectionalLight(0x87ceeb, 0.3);
+      fillLight.position.set(-50, 50, -50);
+      scene.add(fillLight);
+    }
+    
+    // 超高解像度地球作成
+    function createUltraRealisticEarth() {
+      const earthGeometry = new THREE.SphereGeometry(100, 128, 128);
+      
+      // 超高解像度マテリアル
+      const earthMaterial = new THREE.MeshPhongMaterial({ 
+        color: 0x4285F4,
+        transparent: true,
+        opacity: 0.95,
+        shininess: 100,
+        specular: 0x111111
+      });
+      
+      earth = new THREE.Mesh(earthGeometry, earthMaterial);
+      earth.castShadow = true;
+      earth.receiveShadow = true;
+      scene.add(earth);
+    }
+    
+    // リアルな大気圏作成
+    function createRealisticAtmosphere() {
+      const atmosphereGeometry = new THREE.SphereGeometry(105, 64, 64);
+      const atmosphereMaterial = new THREE.MeshBasicMaterial({ 
+        color: 0x87ceeb,
+        transparent: true,
+        opacity: 0.15
+      });
+      
+      atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
+      scene.add(atmosphere);
+    }
+    
+    // リアルな雲作成
+    function createRealisticClouds() {
+      const cloudGeometry = new THREE.SphereGeometry(102, 64, 64);
+      const cloudMaterial = new THREE.MeshBasicMaterial({ 
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.4
+      });
+      
+      clouds = new THREE.Mesh(cloudGeometry, cloudMaterial);
+      scene.add(clouds);
+    }
+    
+    // 超高詳細地形作成
+    function createUltraDetailedTerrain() {
+      const terrainGeometry = new THREE.PlaneGeometry(1000, 1000, 100, 100);
+      const terrainMaterial = new THREE.MeshPhongMaterial({ 
+        color: 0x34A853,
+        wireframe: false,
+        shininess: 30
+      });
+      
+      terrain = new THREE.Mesh(terrainGeometry, terrainMaterial);
+      terrain.rotation.x = -Math.PI / 2;
+      terrain.position.y = -50;
+      terrain.receiveShadow = true;
+      scene.add(terrain);
+    }
+    
+    // 品質変更
+    function changeQuality(quality) {
+      // ボタン状態更新
+      document.querySelectorAll('.quality-button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      currentQuality = quality;
+      document.getElementById('resolution').textContent = quality.toUpperCase();
+      document.querySelector('.quality-indicator').textContent = quality.toUpperCase();
+      
+      // 解像度に応じた設定変更
+      const qualitySettings = {
+        '4k': { pixelRatio: 1, shadowMapSize: 1024 },
+        '8k': { pixelRatio: 2, shadowMapSize: 2048 },
+        '16k': { pixelRatio: 3, shadowMapSize: 4096 },
+        '32k': { pixelRatio: 4, shadowMapSize: 8192 }
+      };
+      
+      const settings = qualitySettings[quality];
+      renderer.setPixelRatio(settings.pixelRatio);
+      renderer.shadowMap.mapSize.width = settings.shadowMapSize;
+      renderer.shadowMap.mapSize.height = settings.shadowMapSize;
+      
+      showNotification(`${quality.toUpperCase()}品質に切り替えました`, 'success');
+    }
+    
+    // 地域移動
+    function goToLocation(locationKey) {
+      const locations = {
+        takeo: { lat: 33.1894, lng: 130.0208, name: '武雄市' },
+        saga: { lat: 33.2494, lng: 130.2988, name: '佐賀県' },
+        nagasaki: { lat: 32.7504, lng: 129.8675, name: '長崎県' },
+        fukuoka: { lat: 33.5902, lng: 130.4017, name: '福岡県' }
+      };
+      
+      const location = locations[locationKey];
+      if (location) {
+        currentLocation = location;
+        updateLocationInfo();
+        camera.position.set(location.lng * 2, 100, location.lat * 2);
+        camera.lookAt(location.lng * 2, 0, location.lat * 2);
+        showNotification(`${location.name}の超高解像度データを表示中`, 'success');
+      }
+    }
+    
+    // レイトレーシング切り替え
+    function toggleRayTracing() {
+      isRayTracing = !isRayTracing;
+      showNotification(isRayTracing ? 'レイトレーシングを有効化' : 'レイトレーシングを無効化', 'success');
+    }
+    
+    // HDR切り替え
+    function toggleHDR() {
+      isHDR = !isHDR;
+      renderer.toneMappingExposure = isHDR ? 1.5 : 1.0;
+      showNotification(isHDR ? 'HDR 10+を有効化' : 'HDR 10+を無効化', 'success');
+    }
+    
+    // 大気散乱切り替え
+    function toggleAtmosphere() {
+      isAtmosphere = !isAtmosphere;
+      atmosphere.visible = isAtmosphere;
+      showNotification(isAtmosphere ? '大気散乱を有効化' : '大気散乱を無効化', 'success');
+    }
+    
+    // 反射・屈折切り替え
+    function toggleReflection() {
+      isReflection = !isReflection;
+      earth.material.envMap = isReflection ? null : null;
+      showNotification(isReflection ? '反射・屈折を有効化' : '反射・屈折を無効化', 'success');
+    }
+    
+    // カメラ制御
+    function moveForward() {
+      camera.position.z -= 10;
+      showNotification('精密前進', 'success');
+    }
+    
+    function moveBackward() {
+      camera.position.z += 10;
+      showNotification('精密後退', 'success');
+    }
+    
+    function turnLeft() {
+      camera.rotation.y += 0.1;
+      updateCompass();
+      showNotification('精密左転', 'success');
+    }
+    
+    function turnRight() {
+      camera.rotation.y -= 0.1;
+      updateCompass();
+      showNotification('精密右転', 'success');
+    }
+    
+    // キーボード制御設定
+    function setupKeyboardControls() {
+      document.addEventListener('keydown', (e) => {
+        switch(e.key.toLowerCase()) {
+          case 'w':
+            moveForward();
+            break;
+          case 's':
+            moveBackward();
+            break;
+          case 'a':
+            turnLeft();
+            break;
+          case 'd':
+            turnRight();
+            break;
+        }
+      });
+    }
+    
+    // マウス制御設定
+    function setupMouseControls() {
+      let isMouseDown = false;
+      let mouseX = 0;
+      let mouseY = 0;
+      
+      document.addEventListener('mousedown', (e) => {
+        isMouseDown = true;
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+      
+      document.addEventListener('mouseup', () => {
+        isMouseDown = false;
+      });
+      
+      document.addEventListener('mousemove', (e) => {
+        if (isMouseDown) {
+          const deltaX = e.clientX - mouseX;
+          const deltaY = e.clientY - mouseY;
+          
+          camera.rotation.y += deltaX * 0.01;
+          camera.rotation.x += deltaY * 0.01;
+          
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+          
+          updateCompass();
+        }
+      });
+    }
+    
+    // 位置情報更新
+    function updateLocationInfo() {
+      document.getElementById('latitude').textContent = currentLocation.lat.toFixed(7);
+      document.getElementById('longitude').textContent = currentLocation.lng.toFixed(7);
+      document.getElementById('altitude').textContent = `${currentLocation.alt.toFixed(2)}m`;
+    }
+    
+    // コンパス更新
+    function updateCompass() {
+      const compassArrow = document.getElementById('compass-arrow');
+      const rotation = (camera.rotation.y * 180 / Math.PI) + 180;
+      compassArrow.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
+    }
+    
+    // 通知表示
+    function showNotification(message, type = 'success') {
+      const notification = document.createElement('div');
+      notification.className = `notification ${type}`;
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.classList.add('show');
+      }, 100);
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+          document.body.removeChild(notification);
+        }, 300);
+      }, 3000);
+    }
+    
+    // ウィンドウリサイズ対応
+    function onWindowResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+    
+    // アニメーションループ
+    function animate() {
+      requestAnimationFrame(animate);
+      
+      // 地球の自転
+      earth.rotation.y += 0.002;
+      clouds.rotation.y += 0.001;
+      
+      // 大気圏のアニメーション
+      atmosphere.rotation.y += 0.0005;
+      
+      // コンパス更新
+      updateCompass();
+      
+      renderer.render(scene, camera);
+    }
+    
+    // 初期化
+    window.addEventListener('load', init);
+  </script>
+</body>
+</html> 

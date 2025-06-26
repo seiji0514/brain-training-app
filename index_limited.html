@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>脳トレゲーム（期間限定公開）</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+      body {
+          background: #eef1f5;
+          font-family: 'Segoe UI', 'Meiryo', sans-serif;
+          margin: 0;
+      }
+      .header {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+          padding: 2em 1em 1em 1em;
+      }
+      .header-title {
+          font-size: 2.2em;
+          font-weight: bold;
+          color: #2574c7;
+          letter-spacing: 2px;
+          text-align: center;
+          flex: 0 1 auto;
+          margin: 0;
+      }
+      .menu-btn {
+          position: absolute;
+          right: 9em;
+          top: 2em;
+          background: #2574c7;
+          color: white;
+          border: none;
+          padding: 0.5em;
+          border-radius: 6px;
+          cursor: pointer;
+          font-size: 1.2em;
+          transition: all 0.3s;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+      }
+      .menu-btn:hover {
+          background: #1a5ca8;
+          transform: translateY(-1px);
+      }
+      .menu-btn:active {
+          transform: translateY(1px);
+      }
+      .menu {
+          position: fixed;
+          top: 0;
+          right: -300px;
+          width: 300px;
+          height: 100vh;
+          background: white;
+          box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+          transition: none;
+          z-index: 1000;
+          padding: 2em 1em;
+          overflow-y: auto;
+          display: none;
+      }
+      .menu.show {
+          right: 0;
+          display: block;
+      }
+      .menu-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1em;
+          padding-bottom: 1em;
+          border-bottom: 1px solid #eee;
+      }
+      .menu-title {
+          font-size: 1.2em;
+          color: #2574c7;
+          font-weight: bold;
+      }
+      .menu-close {
+          background: none;
+          border: none;
+          font-size: 1.5em;
+          color: #666;
+          cursor: pointer;
+          padding: 0.2em;
+          transition: color 0.3s;
+      }
+      .menu-close:hover {
+          color: #2574c7;
+      }
+      .menu-item {
+          display: flex;
+          align-items: center;
+          padding: 1em;
+          color: #333;
+          text-decoration: none;
+          border-bottom: 1px solid #eee;
+          transition: all 0.3s;
+          gap: 0.5em;
+      }
+      .menu-item:hover {
+          background: #f5f6fa;
+          color: #2574c7;
+          transform: translateX(5px);
+      }
+      .menu-item::before {
+          font-size: 1.2em;
+      }
+      .menu-item[href="index.html"]::before { content: '🏠'; }
+      .menu-item[onclick*="showInstructions"]::before { content: '❓'; }
+      .menu-item[onclick*="showSettings"]::before { content: '⚙️'; }
+      .menu-item[onclick*="showProgress"]::before { content: '📊'; }
+      .menu-item[href="login.html"]::before { content: '🚪'; }
+      .menu-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0,0,0,0.5);
+          display: none;
+          z-index: 999;
+      }
+      .menu-overlay.show {
+          display: block;
+      }
+      .card-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 2em;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 2em 1em 3em 1em;
+      }
+      .card {
+          background: #fff;
+          border-radius: 18px;
+          box-shadow: 0 2px 12px #dbe6f3;
+          padding: 2em 1em 1.5em 1em;
+          text-align: center;
+          transition: transform 0.15s, box-shadow 0.15s;
+          cursor: pointer;
+          min-height: 200px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          text-decoration: none;
+          color: inherit;
+          width: 320px;
+          max-width: 100%;
+          margin-left: auto;
+          margin-right: auto;
+      }
+      .card:hover {
+          transform: translateY(-6px) scale(1.03);
+          box-shadow: 0 8px 24px #b0c4de;
+      }
+      .card-emoji {
+          font-size: 2.2em;
+          margin-bottom: 0.5em;
+      }
+      .card-title {
+          font-size: 1.2em;
+          font-weight: bold;
+          color: #2574c7;
+          margin-bottom: 0.3em;
+      }
+      .card-desc {
+          color: #555;
+          font-size: 0.98em;
+      }
+      @media (max-width: 700px) {
+          .header-title { font-size: 1.3em; }
+          .card-grid { grid-template-columns: 1fr; }
+      }
+      /* ログイン画面のスタイル */
+      .login-container {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+          z-index: 2000;
+          justify-content: center;
+          align-items: center;
+      }
+      .login-form {
+          background: white;
+          padding: 2rem;
+          border-radius: 10px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          width: 100%;
+          max-width: 400px;
+      }
+      .login-header {
+          text-align: center;
+          margin-bottom: 2rem;
+      }
+      .login-header h1 {
+          color: #2c3e50;
+          margin: 0;
+          font-size: 1.5rem;
+      }
+      .form-group {
+          margin-bottom: 1rem;
+      }
+      .form-group label {
+          display: block;
+          margin-bottom: 0.5rem;
+          color: #34495e;
+      }
+      .form-group input {
+          width: 100%;
+          padding: 0.5rem;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          box-sizing: border-box;
+      }
+      .login-btn {
+          width: 100%;
+          padding: 0.75rem;
+          background: #3498db;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 1rem;
+      }
+      .login-btn:hover {
+          background: #2980b9;
+      }
+      .error-message {
+          color: #e74c3c;
+          margin-top: 1rem;
+          text-align: center;
+          display: none;
+      }
+      .success-message {
+          color: #27ae60;
+          margin-top: 1rem;
+          text-align: center;
+          display: none;
+      }
+  </style>
+</head>
+<body>
+  <script>
+    // 有効期間の設定
+    const start = new Date('2025-06-19T00:00:00');
+    const end = new Date('2025-10-31T23:59:59');
+    const now = new Date();
+    if (now < start || now > end) {
+      document.body.innerHTML = '<h2>このサイトの公開期間は終了しました。<br>管理者にご連絡ください。</h2>';
+    }
+  </script>
+  
+  <!-- ログイン画面 -->
+  <div class="login-container" id="loginContainer">
+    <div class="login-form">
+      <div class="login-header">
+        <h1>脳トレゲームversion2 ログイン認証</h1>
+      </div>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="username">ユーザー名</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">パスワード</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit" class="login-btn">ログイン</button>
+      </form>
+      <div id="errorMessage" class="error-message"></div>
+      <div id="successMessage" class="success-message"></div>
+    </div>
+  </div>
+  
+  <!-- メインコンテンツ（ログイン後に表示） -->
+  <div id="mainContent" style="display: none;">
+    <div class="header">
+      <h1 class="header-title">脳トレゲームversion2　生活面編</h1>
+      <a href="brain_training_game.html" target="_blank" rel="noopener">
+        <button style="background: #2574c7; color: white; border: none; padding: 0.7em 1.2em; border-radius: 8px; font-size: 1em; font-weight: bold; cursor: pointer; box-shadow: 0 2px 8px #c8e6c9; transition: background 0.3s; margin-left: 14px;">脳トレゲームへ</button>
+      </a>
+      <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    </div>
+    
+    <div class="menu" id="gameMenu">
+      <div class="menu-header">
+        <div class="menu-title">メニュー</div>
+        <button class="menu-close" onclick="toggleMenu()">×</button>
+      </div>
+      <a href="index_limited.html" class="menu-item">ホーム</a>
+      <a href="https://line.me/R/ti/p/@440cqgno" class="menu-item" target="_blank" rel="noopener">LINEで問い合わせる</a>
+      <a href="#" class="menu-item" onclick="logout(); return false;">ログアウト</a>
+    </div>
+    
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+    
+    <div class="card-grid" id="gameGrid">
+      <a href="./memory_game.html" class="card">
+        <div class="card-emoji">🧠</div>
+        <div class="card-title">記憶力ゲーム</div>
+        <div class="card-desc">表示された内容を覚えて答える<br>記憶力トレーニング</div>
+      </a>
+      <a href="./reaction_game.html" class="card">
+        <div class="card-emoji">⚡</div>
+        <div class="card-title">反応ゲーム</div>
+        <div class="card-desc">素早い反応で正解を選ぶ<br>反射神経トレーニング</div>
+      </a>
+      <a href="./letter_game.html" class="card">
+        <div class="card-emoji">🔤</div>
+        <div class="card-title">文字ゲーム</div>
+        <div class="card-desc">文字を使った脳トレゲーム</div>
+      </a>
+      <a href="./concentration_game.html" class="card">
+        <div class="card-emoji">🃏</div>
+        <div class="card-title">神経衰弱ゲーム</div>
+        <div class="card-desc">同じ絵柄を揃えて記憶力を鍛える</div>
+      </a>
+      <a href="./jigsaw_puzzle_game.html" class="card">
+        <div class="card-emoji">🧩</div>
+        <div class="card-title">ジグソーパズルゲーム</div>
+        <div class="card-desc">ピースを組み合わせて完成させるパズル</div>
+      </a>
+      <a href="./number-order.html" class="card">
+        <div class="card-emoji">🔢</div>
+        <div class="card-title">数字順番探しゲーム</div>
+        <div class="card-desc">数字を正しい順番に並べるゲーム</div>
+      </a>
+      <a href="./date-quiz.html" class="card">
+        <div class="card-emoji">📅</div>
+        <div class="card-title">日付・曜日クイズ</div>
+        <div class="card-desc">日付や曜日に関するクイズで脳を活性化</div>
+      </a>
+      <a href="./shopping-simulation.html" class="card">
+        <div class="card-emoji">🛒</div>
+        <div class="card-title">買い物シミュレーション</div>
+        <div class="card-desc">買い物体験で計算力や判断力を鍛える</div>
+      </a>
+      <div class="card" style="border:2px solid #e67e22; box-shadow:0 4px 16px #fbeee0; cursor:pointer;" onclick="window.location.href='eye_training_index.html'">
+        <div class="card-emoji" style="font-size:2.2em;">👁️</div>
+        <div class="card-title" style="color:#e67e22;">眼の訓練</div>
+        <div class="card-desc">追視・周辺視野・動体視力・反応速度など<br>眼のリハビリ・運転技能向け</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ログイン状態チェック
+    function checkLoginStatus() {
+      const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+      const loginContainer = document.getElementById('loginContainer');
+      const mainContent = document.getElementById('mainContent');
+      
+      if (isLoggedIn === 'true') {
+        loginContainer.style.display = 'none';
+        mainContent.style.display = 'block';
+      } else {
+        loginContainer.style.display = 'flex';
+        mainContent.style.display = 'none';
+      }
+    }
+
+    // ログイン処理
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const errorMessage = document.getElementById('errorMessage');
+      const successMessage = document.getElementById('successMessage');
+      
+      try {
+        const response = await fetch('http://localhost:3000/api/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include',
+          body: JSON.stringify({ username, password })
+        });
+
+        const data = await response.json();
+        
+        if (response.ok) {
+          sessionStorage.setItem('isLoggedIn', 'true');
+          sessionStorage.setItem('token', data.token);
+          successMessage.textContent = 'ログイン成功！';
+          successMessage.style.display = 'block';
+          errorMessage.style.display = 'none';
+          
+          setTimeout(() => {
+            checkLoginStatus();
+          }, 1000);
+        } else {
+          throw new Error(data.error || 'ログイン失敗');
+        }
+      } catch (error) {
+        console.error('Login error:', error);
+        errorMessage.textContent = 'ユーザー名またはパスワードが正しくありません。';
+        errorMessage.style.display = 'block';
+        successMessage.style.display = 'none';
+      }
+    });
+
+    // ログアウト処理
+    function logout() {
+      sessionStorage.removeItem('isLoggedIn');
+      sessionStorage.removeItem('token');
+      checkLoginStatus();
+    }
+
+    // メニュー制御
+    function toggleMenu() {
+      const menu = document.getElementById('gameMenu');
+      const overlay = document.getElementById('menuOverlay');
+      const isOpen = menu.classList.contains('show');
+      
+      if (isOpen) {
+        menu.classList.remove('show');
+        overlay.classList.remove('show');
+        document.body.style.overflow = '';
+      } else {
+        menu.classList.add('show');
+        overlay.classList.add('show');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    // ESCキーでメニューを閉じる
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const menu = document.getElementById('gameMenu');
+        if (menu.classList.contains('show')) {
+          toggleMenu();
+        }
+      }
+    });
+
+    // 初期化
+    checkLoginStatus();
+  </script>
+</body>
+</html> 

@@ -1,0 +1,507 @@
+{
+  "system_settings": {
+    "session_time_limit": {
+      "enabled": true,
+      "default_minutes": 30,
+      "max_minutes": 120,
+      "warning_minutes": 5
+    },
+    "daily_time_limit": {
+      "enabled": true,
+      "default_minutes": 120,
+      "max_minutes": 240
+    },
+    "break_reminder": {
+      "enabled": true,
+      "interval_minutes": 15,
+      "break_minutes": 5
+    }
+  },
+  "memory_games": {
+    "memory_game": {
+      "name": "記憶力ゲーム",
+      "file": "memory_game.html",
+      "icon": "🧠",
+      "description": "表示された内容を覚えて答える記憶力トレーニング",
+      "visible": true,
+      "category": "memory"
+    },
+    "eye_training_index": {
+      "name": "眼の訓練ゲーム一覧",
+      "file": "eye_training_index.html",
+      "icon": "🔍",
+      "description": "視力と眼の機能を鍛えるトレーニング",
+      "visible": true,
+      "category": "memory"
+    },
+    "integrated_driving_system": {
+      "name": "統合運転システム",
+      "file": "integrated_driving_system.html",
+      "icon": "🚗",
+      "description": "総合的な運転技術をトレーニング",
+      "visible": true,
+      "category": "memory"
+    },
+    "concentration_game": {
+      "name": "神経衰弱ゲーム",
+      "file": "concentration_game.html",
+      "icon": "🃏",
+      "description": "同じ絵柄を揃えて記憶力を鍛える",
+      "visible": true,
+      "category": "memory"
+    },
+    "click_training_game": {
+      "name": "指先運動・クリック練習ゲーム",
+      "file": "click_training_game.html",
+      "icon": "🖱️",
+      "description": "クリック操作で指先の運動や反応速度を鍛える",
+      "visible": true,
+      "category": "memory"
+    },
+    "number_order": {
+      "name": "数字順番探しゲーム",
+      "file": "number-order.html",
+      "icon": "🔢",
+      "description": "数字を正しい順番に並べるゲーム",
+      "visible": true,
+      "category": "memory"
+    },
+    "date_quiz": {
+      "name": "日付・曜日クイズ",
+      "file": "date-quiz.html",
+      "icon": "📅",
+      "description": "日付や曜日に関するクイズで脳を活性化",
+      "visible": true,
+      "category": "memory"
+    },
+    "reaction_game": {
+      "name": "反応ゲーム",
+      "file": "reaction_game.html",
+      "icon": "⚡",
+      "description": "素早い反応で正解を選ぶ反射神経トレーニング",
+      "visible": true,
+      "category": "memory"
+    },
+    "letter_game": {
+      "name": "文字ゲーム",
+      "file": "letter_game.html",
+      "icon": "🔤",
+      "description": "文字を使った脳トレゲーム",
+      "visible": true,
+      "category": "memory"
+    }
+  },
+  "life_games": {
+    "shopping_simulation": {
+      "name": "買い物シミュレーション",
+      "file": "shopping-simulation.html",
+      "icon": "🛒",
+      "description": "買い物体験で計算力や判断力を鍛える",
+      "visible": true,
+      "category": "life"
+    },
+    "daily_life_simulation": {
+      "name": "日常生活シミュレーション",
+      "file": "daily_life_simulation.html",
+      "icon": "🏠",
+      "description": "家事や生活習慣のシミュレーションで実践力を鍛える",
+      "visible": true,
+      "category": "life"
+    },
+    "conversation_simulation": {
+      "name": "会話シミュレーション",
+      "file": "conversation_simulation.html",
+      "icon": "💬",
+      "description": "日常会話やコミュニケーション能力をトレーニング",
+      "visible": true,
+      "category": "life"
+    },
+    "manner_game": {
+      "name": "マナー・礼儀ゲーム",
+      "file": "manner_game.html",
+      "icon": "🤝",
+      "description": "社会でのマナーや礼儀作法を学ぶゲーム",
+      "visible": true,
+      "category": "life"
+    },
+    "life_wisdom_quiz": {
+      "name": "生活知恵クイズ",
+      "file": "life_wisdom_quiz.html",
+      "icon": "💡",
+      "description": "日常生活に役立つ知恵や知識をクイズ形式で学習",
+      "visible": true,
+      "category": "life"
+    },
+    "disaster_prevention_quiz": {
+      "name": "防災・安全クイズ",
+      "file": "disaster_prevention_quiz.html",
+      "icon": "🚨",
+      "description": "災害時の対応や安全知識を学ぶクイズ",
+      "visible": true,
+      "category": "life"
+    },
+    "traffic_rule_quiz": {
+      "name": "交通ルールクイズ",
+      "file": "traffic_rule_quiz.html",
+      "icon": "🚦",
+      "description": "交通安全や交通ルールに関するクイズ",
+      "visible": true,
+      "category": "life"
+    },
+    "trouble_response_simulation": {
+      "name": "トラブル対応シミュレーション",
+      "file": "trouble_response_simulation.html",
+      "icon": "⚠️",
+      "description": "日常生活で起こりうるトラブルへの対応を練習",
+      "visible": true,
+      "category": "life"
+    },
+    "face_expression_quiz": {
+      "name": "表情読み取りクイズ",
+      "file": "face_expression_quiz.html",
+      "icon": "😊",
+      "description": "表情から感情を読み取るクイズ",
+      "visible": true,
+      "category": "life"
+    }
+  },
+  "maintenance_mode": {
+    "enabled": false,
+    "message": "システムメンテナンス中です。しばらくお待ちください。"
+  },
+  "last_updated": "2024-01-15T15:30:00Z",
+  "games": [
+    {
+      "name": "脳トレゲーム",
+      "description": "認知機能向上のための脳トレゲーム",
+      "url": "brain_training_game.html",
+      "category": "brain_training",
+      "difficulty": "medium"
+    },
+    {
+      "name": "記憶力ゲーム",
+      "description": "記憶力を鍛えるゲーム",
+      "url": "memory_game.html",
+      "category": "brain_training",
+      "difficulty": "medium"
+    },
+    {
+      "name": "反応速度ゲーム",
+      "description": "反応速度を向上させるゲーム",
+      "url": "reaction_game.html",
+      "category": "brain_training",
+      "difficulty": "easy"
+    },
+    {
+      "name": "集中力ゲーム",
+      "description": "集中力を高めるゲーム",
+      "url": "concentration_game.html",
+      "category": "brain_training",
+      "difficulty": "medium"
+    },
+    {
+      "name": "視覚トレーニング",
+      "description": "視覚機能を向上させるゲーム",
+      "url": "eye_training_index.html",
+      "category": "visual_training",
+      "difficulty": "easy"
+    },
+    {
+      "name": "運転知識クイズ",
+      "description": "運転に関する知識を学ぶクイズ",
+      "url": "driving_basic_knowledge.html",
+      "category": "education",
+      "difficulty": "medium"
+    },
+    {
+      "name": "交通ルールクイズ",
+      "description": "交通ルールを学ぶクイズ",
+      "url": "traffic_rule_quiz.html",
+      "category": "education",
+      "difficulty": "medium"
+    },
+    {
+      "name": "生活技能シミュレーション",
+      "description": "日常生活の技能を練習するシミュレーション",
+      "url": "daily_life_simulation.html",
+      "category": "life_skills",
+      "difficulty": "easy"
+    },
+    {
+      "name": "買い物シミュレーション",
+      "description": "買い物の練習をするシミュレーション",
+      "url": "shopping-simulation.html",
+      "category": "life_skills",
+      "difficulty": "easy"
+    },
+    {
+      "name": "会話シミュレーション",
+      "description": "対人コミュニケーションを練習するシミュレーション",
+      "url": "conversation_simulation.html",
+      "category": "social_skills",
+      "difficulty": "medium"
+    },
+    {
+      "name": "危険予測シミュレーション",
+      "description": "危険を予測する能力を向上させるシミュレーション",
+      "url": "danger_prediction_simulation.html",
+      "category": "safety_training",
+      "difficulty": "medium"
+    },
+    {
+      "name": "災害予防クイズ",
+      "description": "災害予防に関する知識を学ぶクイズ",
+      "url": "disaster_prevention_quiz.html",
+      "category": "safety_training",
+      "difficulty": "medium"
+    },
+    {
+      "name": "人生の知恵クイズ",
+      "description": "人生の知恵を学ぶクイズ",
+      "url": "life_wisdom_quiz.html",
+      "category": "education",
+      "difficulty": "easy"
+    },
+    {
+      "name": "日付クイズ",
+      "description": "日付に関する記憶力を鍛えるクイズ",
+      "url": "date-quiz.html",
+      "category": "brain_training",
+      "difficulty": "easy"
+    },
+    {
+      "name": "文字ゲーム",
+      "description": "文字を使った脳トレゲーム",
+      "url": "letter_game.html",
+      "category": "brain_training",
+      "difficulty": "medium"
+    },
+    {
+      "name": "単語並び替えゲーム",
+      "description": "単語を正しい順序に並び替えるゲーム",
+      "url": "word_rearrangement_game.html",
+      "category": "brain_training",
+      "difficulty": "medium"
+    },
+    {
+      "name": "単語探しゲーム",
+      "description": "文字列から単語を見つけるゲーム",
+      "url": "word_search_game.html",
+      "category": "brain_training",
+      "difficulty": "medium"
+    },
+    {
+      "name": "しりとりゲーム",
+      "description": "しりとりで言葉を繋げるゲーム",
+      "url": "word_chain_game.html",
+      "category": "brain_training",
+      "difficulty": "easy"
+    },
+    {
+      "name": "数字順序ゲーム",
+      "description": "数字を正しい順序に並べるゲーム",
+      "url": "number-order.html",
+      "category": "brain_training",
+      "difficulty": "easy"
+    },
+    {
+      "name": "色合わせゲーム",
+      "description": "色を合わせるゲーム",
+      "url": "color_matching_game.html",
+      "category": "brain_training",
+      "difficulty": "easy"
+    },
+    {
+      "name": "ピクチャーマッチングゲーム",
+      "description": "同じ絵を合わせるゲーム",
+      "url": "picture_matching_game.html",
+      "category": "brain_training",
+      "difficulty": "easy"
+    },
+    {
+      "name": "ジグソーパズル",
+      "description": "パズルを完成させるゲーム",
+      "url": "jigsaw_puzzle_game.html",
+      "category": "brain_training",
+      "difficulty": "medium"
+    },
+    {
+      "name": "迷路ゲーム",
+      "description": "迷路を解くゲーム",
+      "url": "maze_game.html",
+      "category": "brain_training",
+      "difficulty": "medium"
+    },
+    {
+      "name": "追跡ゲーム",
+      "description": "動くターゲットを追跡するゲーム",
+      "url": "tracking_game.html",
+      "category": "brain_training",
+      "difficulty": "medium"
+    },
+    {
+      "name": "動体視力ゲーム",
+      "description": "動体視力を鍛えるゲーム",
+      "url": "dynamic_vision_game.html",
+      "category": "visual_training",
+      "difficulty": "medium"
+    },
+    {
+      "name": "周辺視野ゲーム",
+      "description": "周辺視野を鍛えるゲーム",
+      "url": "peripheral_vision_game.html",
+      "category": "visual_training",
+      "difficulty": "medium"
+    },
+    {
+      "name": "動き予測ゲーム",
+      "description": "動きを予測するゲーム",
+      "url": "movement_prediction_game.html",
+      "category": "brain_training",
+      "difficulty": "medium"
+    },
+    {
+      "name": "動く標識クリックゲーム",
+      "description": "動く標識をクリックするゲーム",
+      "url": "moving_sign_click_game.html",
+      "category": "brain_training",
+      "difficulty": "medium"
+    },
+    {
+      "name": "危険発見ゲーム",
+      "description": "危険を発見するゲーム",
+      "url": "danger_spotting_game.html",
+      "category": "safety_training",
+      "difficulty": "medium"
+    },
+    {
+      "name": "信号標識ゲーム",
+      "description": "信号と標識を学ぶゲーム",
+      "url": "signal_sign_game.html",
+      "category": "education",
+      "difficulty": "easy"
+    },
+    {
+      "name": "交通信号ゲーム",
+      "description": "交通信号を学ぶゲーム",
+      "url": "traffic_signal_game.html",
+      "category": "education",
+      "difficulty": "easy"
+    },
+    {
+      "name": "ブレーキ反応ゲーム",
+      "description": "ブレーキの反応速度を鍛えるゲーム",
+      "url": "brake_reaction_game.html",
+      "category": "driving_training",
+      "difficulty": "medium"
+    },
+    {
+      "name": "速度並び替えゲーム",
+      "description": "速度を正しく並び替えるゲーム",
+      "url": "speed_sort_game.html",
+      "category": "brain_training",
+      "difficulty": "easy"
+    },
+    {
+      "name": "クイック判断ゲーム",
+      "description": "素早い判断力を鍛えるゲーム",
+      "url": "quick_judgment_game.html",
+      "category": "brain_training",
+      "difficulty": "medium"
+    },
+    {
+      "name": "表情クイズ",
+      "description": "表情を読み取るクイズ",
+      "url": "face_expression_quiz.html",
+      "category": "social_skills",
+      "difficulty": "medium"
+    },
+    {
+      "name": "マナージェーム",
+      "description": "マナーを学ぶゲーム",
+      "url": "manner_game.html",
+      "category": "social_skills",
+      "difficulty": "easy"
+    },
+    {
+      "name": "トラブル対応シミュレーション",
+      "description": "トラブル対応を練習するシミュレーション",
+      "url": "trouble_response_simulation.html",
+      "category": "life_skills",
+      "difficulty": "medium"
+    },
+    {
+      "name": "心算ゲーム",
+      "description": "暗算力を鍛えるゲーム",
+      "url": "mental_math_game.html",
+      "category": "brain_training",
+      "difficulty": "medium"
+    },
+    {
+      "name": "クリックトレーニングゲーム",
+      "description": "クリックの正確性を鍛えるゲーム",
+      "url": "click_training_game.html",
+      "category": "brain_training",
+      "difficulty": "easy"
+    }
+  ],
+  "categories": {
+    "brain_training": {
+      "name": "脳トレゲーム",
+      "description": "認知機能を向上させるゲーム群",
+      "color": "#4CAF50"
+    },
+    "driving_simulation": {
+      "name": "運転シミュレーション",
+      "description": "運転技能を練習するシミュレーション",
+      "color": "#2196F3"
+    },
+    "visual_training": {
+      "name": "視覚トレーニング",
+      "description": "視覚機能を向上させるトレーニング",
+      "color": "#FF9800"
+    },
+    "education": {
+      "name": "学習・教育",
+      "description": "知識を学ぶコンテンツ",
+      "color": "#9C27B0"
+    },
+    "life_skills": {
+      "name": "生活技能",
+      "description": "日常生活の技能を練習するコンテンツ",
+      "color": "#607D8B"
+    },
+    "social_skills": {
+      "name": "社会技能",
+      "description": "対人関係やコミュニケーションを練習するコンテンツ",
+      "color": "#E91E63"
+    },
+    "safety_training": {
+      "name": "安全訓練",
+      "description": "安全性を向上させるトレーニング",
+      "color": "#F44336"
+    },
+    "driving_training": {
+      "name": "運転訓練",
+      "description": "運転に関する技能を練習するコンテンツ",
+      "color": "#3F51B5"
+    }
+  },
+  "difficulty_levels": {
+    "easy": {
+      "name": "初級",
+      "description": "初心者向け",
+      "color": "#4CAF50"
+    },
+    "medium": {
+      "name": "中級",
+      "description": "中級者向け",
+      "color": "#FF9800"
+    },
+    "hard": {
+      "name": "上級",
+      "description": "上級者向け",
+      "color": "#F44336"
+    }
+  }
+} 

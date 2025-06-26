@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Dataset xsi:schemaLocation="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema FGD_GMLSchema.xsd"
+	xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema"
+	gml:id="Dataset1">
+  <gml:description>基盤地図情報メタデータ ID=fmdid:19-0701</gml:description>
+  <gml:name>基盤地図情報ダウンロードデータ（GML版）</gml:name>
+<GCP gml:id="K1_482865_1">
+<fid>10-00100-0-1906-158709</fid>
+<lfSpanFr gml:id="K1_482865_1-1">
+<gml:timePosition>2019-06-20</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K1_482865_1-2">
+<gml:timePosition>2019-06-26</gml:timePosition>
+</devDate>
+<orgGILvl>KJ13</orgGILvl>
+<vis>表示</vis>
+<pos>
+<gml:Point gml:id="K1_482865_1-g" srsName="fguuid:jgd2011.bl">
+<gml:pos>32.581176472 128.717684472</gml:pos>
+</gml:Point>
+</pos>
+<orgName>国土地理院</orgName>
+<type>三角点</type>
+<gcpClass>三等三角点</gcpClass>
+<gcpCode>TR34828659701</gcpCode>
+<name>津多良</name>
+<B>117292.2353</B>
+<L>463383.6641</L>
+<alti>114.21</alti>
+<altiAcc>2</altiAcc>
+</GCP>
+</Dataset>

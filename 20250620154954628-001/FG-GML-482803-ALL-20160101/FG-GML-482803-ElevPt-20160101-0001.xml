@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Dataset xsi:schemaLocation="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema FGD_GMLSchema.xsd"
+	xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema"
+	gml:id="Dataset1">
+  <gml:description>基盤地図情報メタデータ ID=fmdid:16-0101</gml:description>
+  <gml:name>基盤地図情報ダウンロードデータ（GML版）</gml:name>
+<ElevPt gml:id="K2_4621511529_1">
+<fid>46215-11529-i-40</fid>
+<lfSpanFr gml:id="K2_4621511529_1-1">
+<gml:timePosition>2013-12-09</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K2_4621511529_1-2">
+<gml:timePosition>2015-12-21</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<pos>
+<gml:Point gml:id="K2_4621511529_1-g" srsName="fguuid:jgd2011.bl">
+<gml:pos>32.031707667 128.378874917</gml:pos>
+</gml:Point>
+</pos>
+<type>標高点（測点）</type>
+<alti>104</alti>
+</ElevPt>
+<ElevPt gml:id="K2_4621511532_1">
+<fid>46215-11532-i-54</fid>
+<lfSpanFr gml:id="K2_4621511532_1-1">
+<gml:timePosition>2013-12-09</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K2_4621511532_1-2">
+<gml:timePosition>2015-12-21</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<pos>
+<gml:Point gml:id="K2_4621511532_1-g" srsName="fguuid:jgd2011.bl">
+<gml:pos>32.040037472 128.382623750</gml:pos>
+</gml:Point>
+</pos>
+<type>標高点（測点）</type>
+<alti>115</alti>
+</ElevPt>
+<ElevPt gml:id="K2_4621811532_1">
+<fid>46218-11532-i-57</fid>
+<lfSpanFr gml:id="K2_4621811532_1-1">
+<gml:timePosition>2013-12-09</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K2_4621811532_1-2">
+<gml:timePosition>2015-12-21</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<pos>
+<gml:Point gml:id="K2_4621811532_1-g" srsName="fguuid:jgd2011.bl">
+<gml:pos>32.040907972 128.391131944</gml:pos>
+</gml:Point>
+</pos>
+<type>標高点（測点）</type>
+<alti>149</alti>
+</ElevPt>
+<ElevPt gml:id="K2_4622111538_1">
+<fid>46221-11538-i-65</fid>
+<lfSpanFr gml:id="K2_4622111538_1-1">
+<gml:timePosition>2013-12-09</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K2_4622111538_1-2">
+<gml:timePosition>2015-12-21</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<pos>
+<gml:Point gml:id="K2_4622111538_1-g" srsName="fguuid:jgd2011.bl">
+<gml:pos>32.051555556 128.394212417</gml:pos>
+</gml:Point>
+</pos>
+<type>標高点（測点）</type>
+<alti>149</alti>
+</ElevPt>
+<ElevPt gml:id="K2_4622411532_1">
+<fid>46224-11532-i-32</fid>
+<lfSpanFr gml:id="K2_4622411532_1-1">
+<gml:timePosition>2013-12-09</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K2_4622411532_1-2">
+<gml:timePosition>2015-12-21</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<pos>
+<gml:Point gml:id="K2_4622411532_1-g" srsName="fguuid:jgd2011.bl">
+<gml:pos>32.036517306 128.405339833</gml:pos>
+</gml:Point>
+</pos>
+<type>標高点（測点）</type>
+<alti>22</alti>
+</ElevPt>
+<ElevPt gml:id="K2_4622411535_1">
+<fid>46224-11535-i-48</fid>
+<lfSpanFr gml:id="K2_4622411535_1-1">
+<gml:timePosition>2013-12-09</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K2_4622411535_1-2">
+<gml:timePosition>2015-12-21</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<pos>
+<gml:Point gml:id="K2_4622411535_1-g" srsName="fguuid:jgd2011.bl">
+<gml:pos>32.046364444 128.402331611</gml:pos>
+</gml:Point>
+</pos>
+<type>標高点（測点）</type>
+<alti>225</alti>
+</ElevPt>
+<ElevPt gml:id="K2_4622711535_1">
+<fid>46227-11535-i-71</fid>
+<lfSpanFr gml:id="K2_4622711535_1-1">
+<gml:timePosition>2013-12-09</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K2_4622711535_1-2">
+<gml:timePosition>2015-12-21</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<pos>
+<gml:Point gml:id="K2_4622711535_1-g" srsName="fguuid:jgd2011.bl">
+<gml:pos>32.046640611 128.409810833</gml:pos>
+</gml:Point>
+</pos>
+<type>標高点（測点）</type>
+<alti>162</alti>
+</ElevPt>
+<ElevPt gml:id="K2_4622711538_1">
+<fid>46227-11538-i-51</fid>
+<lfSpanFr gml:id="K2_4622711538_1-1">
+<gml:timePosition>2013-12-09</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K2_4622711538_1-2">
+<gml:timePosition>2015-12-21</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<pos>
+<gml:Point gml:id="K2_4622711538_1-g" srsName="fguuid:jgd2011.bl">
+<gml:pos>32.051469694 128.413246139</gml:pos>
+</gml:Point>
+</pos>
+<type>標高点（測点）</type>
+<alti>130</alti>
+</ElevPt>
+</Dataset>

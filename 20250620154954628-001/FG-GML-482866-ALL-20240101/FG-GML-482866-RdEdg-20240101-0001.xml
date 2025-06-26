@@ -1,0 +1,3348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Dataset xsi:schemaLocation="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema FGD_GMLSchema.xsd"
+	xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns="http://fgd.gsi.go.jp/spec/2008/FGD_GMLSchema"
+	gml:id="Dataset1">
+  <gml:description>基盤地図情報メタデータ ID=fmdid:24-0101</gml:description>
+  <gml:name>基盤地図情報ダウンロードデータ（GML版）</gml:name>
+<RdEdg gml:id="K19_4635011727_1">
+<fid>46350-11727-s-388</fid>
+<lfSpanFr gml:id="K19_4635011727_1-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635011727_1-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635011727_1-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.583333333 128.757963389
+32.582949472 128.758333333
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635011727_2">
+<fid>46350-11727-s-389</fid>
+<lfSpanFr gml:id="K19_4635011727_2-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635011727_2-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635011727_2-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582806750 128.758333333
+32.583262528 128.757894111
+32.583333333 128.757825806
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635011727_3">
+<fid>46350-11727-s-679</fid>
+<lfSpanFr gml:id="K19_4635011727_3-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635011727_3-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635011727_3-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578854873 128.757484288
+32.578855406 128.757452437
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635011727_4">
+<fid>46350-11727-s-683</fid>
+<lfSpanFr gml:id="K19_4635011727_4-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635011727_4-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635011727_4-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578855406 128.757452437
+32.578894279 128.757453395
+32.578989763 128.757465921
+32.579068149 128.757484660
+32.579113711 128.757488119
+32.579135427 128.757485277
+32.579205974 128.757459240
+32.579345686 128.757387046
+32.579494837 128.757340124
+32.579517249 128.757333016
+32.579583910 128.757305519
+32.579631244 128.757273283
+32.579658758 128.757244405
+32.579735392 128.757134387
+32.579749976 128.757114882
+32.579797468 128.757063578
+32.579843727 128.757032628
+32.579885485 128.757018118
+32.579929988 128.757010295
+32.580063173 128.757008664
+32.580120536 128.757010215
+32.580175788 128.757020623
+32.580208091 128.757039102
+32.580219884 128.757050828
+32.580244471 128.757091206
+32.580279848 128.757202431
+32.580297920 128.757254366
+32.580321881 128.757295707
+32.580343366 128.757314596
+32.580350150 128.757318161
+32.580380135 128.757325796
+32.580397903 128.757326288
+32.580456539 128.757314302
+32.580577491 128.757272085
+32.580611513 128.757260940
+32.580715811 128.757223653
+32.580794971 128.757190088
+32.580853454 128.757182789
+32.580885936 128.757185823
+32.580918918 128.757196948
+32.580986951 128.757249111
+32.580996179 128.757254147
+32.581032497 128.757265351
+32.581070034 128.757269089
+32.581109500 128.757263544
+32.581119309 128.757260055
+32.581154360 128.757239955
+32.581197138 128.757199660
+32.581238724 128.757140949
+32.581270415 128.757071028
+32.581295199 128.756992218
+32.581315938 128.756946034
+32.581327110 128.756929113
+32.581365012 128.756887899
+32.581408358 128.756852286
+32.581525032 128.756757593
+32.581631004 128.756683331
+32.581689502 128.756632681
+32.581703302 128.756617869
+32.581747959 128.756575215
+32.581778884 128.756558876
+32.581813109 128.756551564
+32.581850927 128.756557110
+32.581879243 128.756572320
+32.581905109 128.756584888
+32.581912331 128.756586214
+32.581941534 128.756583629
+32.581987433 128.756568019
+32.582030265 128.756552221
+32.582075565 128.756541942
+32.582106582 128.756541153
+32.582165253 128.756550361
+32.582241621 128.756548027
+32.582328539 128.756545499
+32.582415700 128.756538176
+32.582555531 128.756501446
+32.582597335 128.756494817
+32.582724543 128.756488867
+32.582789017 128.756488015
+32.582853728 128.756496854
+32.582895047 128.756515047
+32.582944449 128.756557884
+32.582992501 128.756601371
+32.583006078 128.756609780
+32.583053974 128.756626853
+32.583093850 128.756629719
+32.583110614 128.756628089
+32.583164195 128.756615292
+32.583333121 128.756542426
+32.583333333 128.756542335
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635011727_5">
+<fid>46350-11727-s-684</fid>
+<lfSpanFr gml:id="K19_4635011727_5-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635011727_5-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635011727_5-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.583333333 128.756576429
+32.583333142 128.756576511
+32.583171502 128.756646121
+32.583114318 128.756659800
+32.583094130 128.756661778
+32.583049201 128.756658527
+32.582995793 128.756639582
+32.582977962 128.756628439
+32.582928187 128.756583474
+32.582882049 128.756543487
+32.582847420 128.756528221
+32.582787583 128.756519981
+32.582725273 128.756520815
+32.582599688 128.756526645
+32.582560317 128.756532934
+32.582419584 128.756569884
+32.582329811 128.756577442
+32.582242261 128.756579976
+32.582163819 128.756582327
+32.582105058 128.756573226
+32.582078459 128.756573872
+32.582036852 128.756583269
+32.581995189 128.756598631
+32.581946230 128.756615225
+32.581911168 128.756618283
+32.581897717 128.756615838
+32.581868414 128.756601594
+32.581843446 128.756588167
+32.581813932 128.756583937
+32.581787002 128.756589591
+32.581762280 128.756602683
+32.581720941 128.756642221
+32.581706692 128.756657463
+32.581645951 128.756709943
+32.581539620 128.756784527
+32.581423754 128.756878468
+32.581382024 128.756912896
+32.581347078 128.756950889
+32.581338766 128.756963420
+32.581319986 128.757005328
+32.581295112 128.757084245
+32.581261285 128.757158976
+32.581216121 128.757222617
+32.581168860 128.757267209
+32.581129225 128.757289903
+32.581115006 128.757294920
+32.581070495 128.757301251
+32.581027814 128.757296917
+32.580987069 128.757284365
+32.580973861 128.757277231
+32.580907548 128.757226333
+32.580881163 128.757217390
+32.580853824 128.757214846
+32.580801108 128.757221459
+32.580724287 128.757254046
+32.580618999 128.757291660
+32.580584887 128.757302806
+32.580462675 128.757345459
+32.580399896 128.757358225
+32.580376896 128.757357669
+32.580341854 128.757348692
+32.580329733 128.757342508
+32.580302085 128.757318238
+32.580273932 128.757269582
+32.580254666 128.757214035
+32.580220483 128.757106422
+32.580199903 128.757072721
+32.580193281 128.757066065
+32.580167583 128.757051472
+32.580118109 128.757042081
+32.580063001 128.757040619
+32.579932069 128.757042124
+32.579891351 128.757049384
+32.579854363 128.757062257
+32.579813493 128.757089541
+32.579769317 128.757137303
+32.579756076 128.757155199
+32.579678278 128.757266611
+32.579647179 128.757299353
+32.579595265 128.757334716
+32.579525276 128.757363625
+32.579501782 128.757370955
+32.579354613 128.757417328
+32.579215440 128.757489304
+32.579141113 128.757516651
+32.579114351 128.757520279
+32.579064549 128.757516429
+32.578985621 128.757497482
+32.578892573 128.757485255
+32.578854873 128.757484288
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635011727_6">
+<fid>46350-11727-i-146</fid>
+<lfSpanFr gml:id="K19_4635011727_6-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635011727_6-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635011727_6-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581121111 128.757475833
+32.580951944 128.757828611
+32.580608056 128.758307778
+32.580586361 128.758333333
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>徒歩道</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635011727_7">
+<fid>46350-11727-i-149</fid>
+<lfSpanFr gml:id="K19_4635011727_7-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635011727_7-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635011727_7-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578855166 128.757468316
+32.578833538 128.757475517
+32.578719034 128.757510118
+32.578648261 128.757513044
+32.578530084 128.757506030
+32.578458790 128.757512475
+32.578355416 128.757538250
+32.578254177 128.757574339
+32.578115818 128.757631396
+32.578017673 128.757687482
+32.577986786 128.757710317
+32.577907874 128.757770505
+32.577880083 128.757783089
+32.577839539 128.757789387
+32.577799203 128.757784927
+32.577737386 128.757762324
+32.577717671 128.757752901
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>徒歩道</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635011727_8">
+<fid>46350-11727-i-151</fid>
+<lfSpanFr gml:id="K19_4635011727_8-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635011727_8-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635011727_8-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581124255 128.757274983
+32.581129016 128.757376712
+32.581126997 128.757431689
+32.581121111 128.757475833
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>徒歩道</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635311727_1">
+<fid>46353-11727-s-621</fid>
+<lfSpanFr gml:id="K19_4635311727_1-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635311727_1-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635311727_1-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581497476 128.759884974
+32.581418167 128.760033222
+32.581276222 128.760314861
+32.581248500 128.760354389
+32.580982694 128.760901389
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635311727_2">
+<fid>46353-11727-s-622</fid>
+<lfSpanFr gml:id="K19_4635311727_2-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635311727_2-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635311727_2-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581951778 128.762268333
+32.581986056 128.762273944
+32.582043778 128.762276083
+32.582441417 128.762279667
+32.582767472 128.762299972
+32.583224667 128.762413444
+32.583333333 128.762423167
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635311727_3">
+<fid>46353-11727-s-623</fid>
+<lfSpanFr gml:id="K19_4635311727_3-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635311727_3-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635311727_3-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582866173 128.761583268
+32.582857194 128.761587722
+32.582607694 128.761607806
+32.582261417 128.761726417
+32.582166861 128.761769667
+32.582121306 128.761841306
+32.581964472 128.762230778
+32.581951778 128.762268333
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635311727_4">
+<fid>46353-11727-s-624</fid>
+<lfSpanFr gml:id="K19_4635311727_4-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635311727_4-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635311727_4-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579333639 128.763554972
+32.579333639 128.763548444
+32.579344250 128.763410167
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635311727_5">
+<fid>46353-11727-s-625</fid>
+<lfSpanFr gml:id="K19_4635311727_5-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635311727_5-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635311727_5-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579434389 128.763412306
+32.579423583 128.763553278
+32.579423583 128.763559944
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635311727_6">
+<fid>46353-11727-s-1102</fid>
+<lfSpanFr gml:id="K19_4635311727_6-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635311727_6-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635311727_6-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.583333333 128.761877279
+32.583318402 128.761862307
+32.583207839 128.761769694
+32.583119668 128.761697134
+32.583063814 128.761660845
+32.582945668 128.761613030
+32.582866173 128.761583268
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635311727_7">
+<fid>46353-11727-s-1103</fid>
+<lfSpanFr gml:id="K19_4635311727_7-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635311727_7-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635311727_7-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582904617 128.761564196
+32.582954147 128.761582710
+32.583074823 128.761631463
+32.583133937 128.761669963
+32.583223466 128.761743469
+32.583333333 128.761835613
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635311727_8">
+<fid>46353-11727-s-1104</fid>
+<lfSpanFr gml:id="K19_4635311727_8-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635311727_8-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635311727_8-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.583333333 128.759824714
+32.583264811 128.759834498
+32.583150887 128.759860465
+32.583014019 128.759895355
+32.582877124 128.759910220
+32.582797523 128.759914922
+32.582729960 128.759911749
+32.582671907 128.759915528
+32.582614607 128.759924733
+32.582324232 128.759986553
+32.582070149 128.760039766
+32.581882266 128.760079122
+32.581770872 128.760106026
+32.581710484 128.760111422
+32.581689188 128.760109147
+32.581652416 128.760097413
+32.581620283 128.760077226
+32.581589519 128.760044354
+32.581563600 128.760007394
+32.581497476 128.759884974
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635311727_9">
+<fid>46353-11727-s-1105</fid>
+<lfSpanFr gml:id="K19_4635311727_9-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635311727_9-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635311727_9-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581513510 128.759855003
+32.581585493 128.759988574
+32.581609048 128.760022252
+32.581635909 128.760050896
+32.581662430 128.760067507
+32.581693962 128.760077580
+32.581710656 128.760079360
+32.581767078 128.760074316
+32.581876401 128.760047962
+32.582064521 128.760002959
+32.582319775 128.759949416
+32.582612708 128.759893327
+32.582671630 128.759883896
+32.582729772 128.759879903
+32.582798146 128.759882856
+32.582875223 128.759878388
+32.583009955 128.759863647
+32.583145472 128.759829195
+32.583260657 128.759802898
+32.583333333 128.759792545
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635311727_10">
+<fid>46353-11727-s-1106</fid>
+<lfSpanFr gml:id="K19_4635311727_10-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635311727_10-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635311727_10-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579503031 128.766666667
+32.579473892 128.766471715
+32.579379799 128.765955908
+32.579333861 128.765702789
+32.579295483 128.765446946
+32.579277608 128.765273907
+32.579271887 128.765190024
+32.579265175 128.764936799
+32.579266396 128.764821758
+32.579282230 128.764476324
+32.579319664 128.764015896
+32.579333639 128.763554972
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635311727_11">
+<fid>46353-11727-s-1107</fid>
+<lfSpanFr gml:id="K19_4635311727_11-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635311727_11-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635311727_11-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579423583 128.763559944
+32.579355581 128.764020076
+32.579318230 128.764479439
+32.579302476 128.764823168
+32.579301245 128.764936398
+32.579307854 128.765187600
+32.579313474 128.765269674
+32.579331247 128.765440583
+32.579369254 128.765694619
+32.579415097 128.765946994
+32.579509285 128.766463545
+32.579539630 128.766666667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635311727_12">
+<fid>46353-11727-s-1108</fid>
+<lfSpanFr gml:id="K19_4635311727_12-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635311727_12-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635311727_12-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582949472 128.758333333
+32.582769861 128.758506417
+32.581910972 128.759326639
+32.581761500 128.759483444
+32.581590972 128.759710667
+32.581533306 128.759818000
+32.581513510 128.759855003
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635311727_13">
+<fid>46353-11727-s-1116</fid>
+<lfSpanFr gml:id="K19_4635311727_13-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635311727_13-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635311727_13-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579344250 128.763410167
+32.579374500 128.763183556
+32.579406361 128.763093528
+32.579489278 128.762939694
+32.580032556 128.762212722
+32.580147722 128.762095583
+32.580185500 128.762044472
+32.580532222 128.761562833
+32.580884722 128.760889250
+32.581174278 128.760293389
+32.581202667 128.760252917
+32.581342389 128.759975667
+32.581452028 128.759770750
+32.581519028 128.759646000
+32.581697917 128.759407667
+32.581852917 128.759245028
+32.582708472 128.758428028
+32.582806750 128.758333333
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635311727_14">
+<fid>46353-11727-s-1117</fid>
+<lfSpanFr gml:id="K19_4635311727_14-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635311727_14-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635311727_14-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581875222 128.762353111
+32.581855528 128.762344278
+32.581805417 128.762310750
+32.581761833 128.762267528
+32.581728944 128.762211500
+32.581576306 128.761717972
+32.581463333 128.761501833
+32.581283722 128.761296167
+32.580936167 128.760993278
+32.580605056 128.761626000
+32.580252278 128.762116056
+32.580211167 128.762171639
+32.580095778 128.762288944
+32.579561278 128.763004194
+32.579486417 128.763143139
+32.579461611 128.763213139
+32.579444806 128.763339056
+32.579471528 128.763317306
+32.579649611 128.763174917
+32.579963639 128.763006528
+32.580164528 128.762952194
+32.580341972 128.762931917
+32.581014861 128.762938583
+32.581308139 128.762971917
+32.581460917 128.762971917
+32.581543556 128.762935194
+32.581673500 128.762807389
+32.581744139 128.762685639
+32.581861306 128.762395694
+32.581875222 128.762353111
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635311727_15">
+<fid>46353-11727-s-1118</fid>
+<lfSpanFr gml:id="K19_4635311727_15-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635311727_15-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635311727_15-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.583333333 128.761342278
+32.583159917 128.761419333
+32.583070028 128.761477194
+32.583024167 128.761504889
+32.582904617 128.761564196
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635311727_16">
+<fid>46353-11727-s-1119</fid>
+<lfSpanFr gml:id="K19_4635311727_16-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635311727_16-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635311727_16-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580982694 128.760901389
+32.581341833 128.761214389
+32.581533889 128.761434278
+32.581657611 128.761670972
+32.581809361 128.762161778
+32.581828750 128.762194778
+32.581856722 128.762222528
+32.581893917 128.762247389
+32.581908222 128.762253806
+32.581923250 128.762209389
+32.582082639 128.761813583
+32.582138694 128.761725333
+32.582247139 128.761675750
+32.582599611 128.761554944
+32.582846694 128.761535083
+32.583016944 128.761450611
+32.583141194 128.761370667
+32.583333333 128.761285278
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635311727_17">
+<fid>46353-11727-s-1120</fid>
+<lfSpanFr gml:id="K19_4635311727_17-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635311727_17-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635311727_17-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.583333333 128.762530222
+32.583212000 128.762519333
+32.582755861 128.762406139
+32.582438611 128.762386417
+32.582041306 128.762382806
+32.581978361 128.762380500
+32.581930056 128.762372500
+32.581918222 128.762369194
+32.581902667 128.762416833
+32.581783056 128.762712750
+32.581707028 128.762843778
+32.581566444 128.762982028
+32.581469083 128.763025306
+32.581306306 128.763025306
+32.581012917 128.762991972
+32.580343917 128.762985306
+32.580171583 128.763005028
+32.579977917 128.763057417
+32.579671500 128.763221750
+32.579500139 128.763358806
+32.579434389 128.763412306
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635311727_18">
+<fid>46353-11727-i-349</fid>
+<lfSpanFr gml:id="K19_4635311727_18-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635311727_18-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635311727_18-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.583333333 128.763637111
+32.583308611 128.763677222
+32.583122500 128.763956944
+32.583043611 128.764030000
+32.582716389 128.764256389
+32.582716247 128.764256557
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>徒歩道</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635311727_19">
+<fid>46353-11727-i-350</fid>
+<lfSpanFr gml:id="K19_4635311727_19-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635311727_19-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635311727_19-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580586361 128.758333333
+32.580517778 128.758414167
+32.580331667 128.758567222
+32.580145556 128.758693611
+32.579936944 128.758853333
+32.579716944 128.758979722
+32.579613333 128.759072222
+32.579592222 128.759117222
+32.579598056 128.759151944
+32.579626944 128.759172778
+32.580021389 128.759492222
+32.580145556 128.759558611
+32.580275278 128.759558611
+32.580444444 128.759538611
+32.581002778 128.759545278
+32.581121111 128.759578611
+32.581329722 128.759698333
+32.581479799 128.759818426
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>徒歩道</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635311727_20">
+<fid>46353-11727-i-351</fid>
+<lfSpanFr gml:id="K19_4635311727_20-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635311727_20-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635311727_20-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.576142778 128.763631667
+32.576286667 128.763503333
+32.576413056 128.763365000
+32.576469444 128.763325000
+32.576542778 128.763277778
+32.576638611 128.763238333
+32.577010833 128.763171944
+32.577213889 128.763171944
+32.577377222 128.763231667
+32.577574722 128.763365000
+32.577839722 128.763551111
+32.577969444 128.763611111
+32.578101389 128.763649167
+32.578240000 128.763664444
+32.578499167 128.763670833
+32.578886667 128.763658889
+32.579147500 128.763624167
+32.579328056 128.763570833
+32.579378611 128.763557500
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>徒歩道</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635311727_21">
+<fid>46353-11727-i-356</fid>
+<lfSpanFr gml:id="K19_4635311727_21-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635311727_21-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635311727_21-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582716247 128.764256557
+32.582558891 128.764365849
+32.582505522 128.764399518
+32.582486271 128.764407663
+32.582459869 128.764411181
+32.582441670 128.764398761
+32.582425775 128.764379399
+32.582384514 128.764340219
+32.582346060 128.764318378
+32.582305766 128.764305819
+32.582249472 128.764302019
+32.582191991 128.764311116
+32.582133490 128.764330873
+32.582072819 128.764365132
+32.582030303 128.764404251
+32.582006968 128.764438738
+32.582000821 128.764451570
+32.581987644 128.764496094
+32.581980674 128.764568579
+32.581979848 128.764643145
+32.581973804 128.764766110
+32.581960763 128.764864528
+32.581939404 128.764959393
+32.581899006 128.765083277
+32.581858964 128.765206200
+32.581844607 128.765280131
+32.581845202 128.765335619
+32.581856287 128.765396134
+32.581880554 128.765459311
+32.581909033 128.765502643
+32.581942572 128.765532087
+32.581980265 128.765547117
+32.582041085 128.765553757
+32.582105951 128.765558341
+32.582165838 128.765575108
+32.582202864 128.765599624
+32.582212123 128.765609880
+32.582231087 128.765645407
+32.582246166 128.765710364
+32.582257482 128.765779399
+32.582285807 128.765904428
+32.582287016 128.765957036
+32.582284136 128.765973356
+32.582266817 128.766019084
+32.582259867 128.766033414
+32.582231485 128.766113134
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>徒歩道</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635311727_22">
+<fid>46353-11727-i-357</fid>
+<lfSpanFr gml:id="K19_4635311727_22-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635311727_22-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635311727_22-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582231485 128.766113134
+32.582180833 128.766212500
+32.582182056 128.766310594
+32.582168171 128.766367083
+32.582104917 128.766481882
+32.582081776 128.766552949
+32.582086398 128.766666667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>徒歩道</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611724_1">
+<fid>46356-11724-s-258</fid>
+<lfSpanFr gml:id="K19_4635611724_1-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611724_1-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611724_1-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.575000000 128.772851583
+32.574955722 128.772825111
+32.574690361 128.772725250
+32.574612333 128.772675611
+32.574522944 128.772570056
+32.574474833 128.772457083
+32.574435361 128.772250500
+32.574322944 128.771985222
+32.574287778 128.771852972
+32.574287778 128.771606556
+32.574299667 128.771537806
+32.574327861 128.771376639
+32.574446417 128.770903250
+32.574496750 128.770646333
+32.574536000 128.770348250
+32.574564194 128.769940389
+32.574599611 128.769808250
+32.574680806 128.769643833
+32.574911778 128.769317917
+32.575000000 128.769139111
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611724_2">
+<fid>46356-11724-s-259</fid>
+<lfSpanFr gml:id="K19_4635611724_2-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611724_2-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611724_2-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.575000000 128.769244833
+32.574948722 128.769348806
+32.574717528 128.769675056
+32.574640917 128.769830139
+32.574608583 128.769950722
+32.574580667 128.770355083
+32.574541056 128.770655694
+32.574489639 128.770918139
+32.574371583 128.771389528
+32.574341444 128.771561778
+32.574332778 128.771611833
+32.574332778 128.771844806
+32.574364778 128.771965250
+32.574477972 128.772232278
+32.574517389 128.772438528
+32.574559861 128.772538333
+32.574639333 128.772632167
+32.574707972 128.772675861
+32.574972611 128.772775444
+32.575000000 128.772791806
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611724_3">
+<fid>46356-11724-i-23</fid>
+<lfSpanFr gml:id="K19_4635611724_3-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611724_3-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611724_3-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.574320556 128.771549722
+32.574452222 128.771523611
+32.574625833 128.771456111
+32.575000000 128.771262722
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>徒歩道</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_1">
+<fid>46356-11727-s-526</fid>
+<lfSpanFr gml:id="K19_4635611727_1-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_1-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_1-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580077297 128.767288683
+32.580095111 128.767290972
+32.580363806 128.767338000
+32.580582583 128.767412861
+32.580750417 128.767479139
+32.580887917 128.767524333
+32.581000167 128.767543306
+32.581287472 128.767543306
+32.581697333 128.767483556
+32.582256528 128.767416722
+32.582332111 128.767413139
+32.583254306 128.767370083
+32.583333333 128.767359611
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_2">
+<fid>46356-11727-s-527</fid>
+<lfSpanFr gml:id="K19_4635611727_2-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_2-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_2-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.583333333 128.767467028
+32.583261250 128.767476583
+32.582338556 128.767519667
+32.582262917 128.767523278
+32.581706556 128.767589778
+32.581293083 128.767650028
+32.580993722 128.767650028
+32.580869306 128.767629000
+32.580724583 128.767581417
+32.580554667 128.767514361
+32.580344694 128.767442583
+32.580083222 128.767396806
+32.580069321 128.767395018
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_3">
+<fid>46356-11727-s-528</fid>
+<lfSpanFr gml:id="K19_4635611727_3-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_3-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_3-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.583333333 128.768336250
+32.583331306 128.768338028
+32.583221944 128.768399389
+32.583101611 128.768459944
+32.582923750 128.768521028
+32.582808083 128.768534722
+32.582336167 128.768541389
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_4">
+<fid>46356-11727-s-529</fid>
+<lfSpanFr gml:id="K19_4635611727_4-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_4-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_4-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582329944 128.768488056
+32.582805528 128.768481361
+32.582915139 128.768468417
+32.583086722 128.768409500
+32.583203611 128.768350611
+32.583308139 128.768291972
+32.583333333 128.768269722
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_5">
+<fid>46356-11727-s-530</fid>
+<lfSpanFr gml:id="K19_4635611727_5-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_5-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_5-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581147250 128.771710472
+32.581857389 128.771402028
+32.582432056 128.771162444
+32.582840917 128.770977583
+32.583333333 128.770730750
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_6">
+<fid>46356-11727-s-531</fid>
+<lfSpanFr gml:id="K19_4635611727_6-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_6-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_6-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.583333333 128.770962528
+32.582907972 128.771175750
+32.582493500 128.771363111
+32.581918167 128.771602972
+32.581218861 128.771906750
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_7">
+<fid>46356-11727-s-532</fid>
+<lfSpanFr gml:id="K19_4635611727_7-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_7-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_7-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578479148 128.773804109
+32.578437194 128.773866111
+32.578377833 128.773946722
+32.578309250 128.773983139
+32.578122611 128.774036639
+32.578042250 128.774074694
+32.577963972 128.774140556
+32.577946389 128.774150861
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_8">
+<fid>46356-11727-s-533</fid>
+<lfSpanFr gml:id="K19_4635611727_8-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_8-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_8-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.577892917 128.774122694
+32.577941028 128.774094444
+32.578020611 128.774027472
+32.578109056 128.773985583
+32.578294639 128.773932417
+32.578350444 128.773902806
+32.578403056 128.773831306
+32.578443913 128.773770930
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_9">
+<fid>46356-11727-s-534</fid>
+<lfSpanFr gml:id="K19_4635611727_9-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_9-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_9-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.575000000 128.769139111
+32.575011778 128.769115250
+32.575056111 128.768990750
+32.575256056 128.768338139
+32.575383083 128.768412750
+32.575545694 128.768585361
+32.575588917 128.768608028
+32.575658972 128.768608028
+32.575953167 128.768477056
+32.576286000 128.768290639
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_10">
+<fid>46356-11727-s-535</fid>
+<lfSpanFr gml:id="K19_4635611727_10-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_10-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_10-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.575000000 128.772791806
+32.575386833 128.773023083
+32.575781361 128.773309056
+32.575959694 128.773414333
+32.576523139 128.773667028
+32.576841111 128.773834556
+32.576983417 128.773948528
+32.577178472 128.774093361
+32.577237667 128.774118833
+32.577353056 128.774164250
+32.577562750 128.774170778
+32.577835306 128.774144500
+32.577892917 128.774122694
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_11">
+<fid>46356-11727-s-536</fid>
+<lfSpanFr gml:id="K19_4635611727_11-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_11-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_11-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.576303444 128.768339917
+32.575970722 128.768526278
+32.575667139 128.768661417
+32.575579417 128.768661417
+32.575521000 128.768630750
+32.575357611 128.768457361
+32.575281167 128.768412417
+32.575097972 128.769010361
+32.575052111 128.769139167
+32.575000000 128.769244833
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_12">
+<fid>46356-11727-s-537</fid>
+<lfSpanFr gml:id="K19_4635611727_12-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_12-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_12-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.577946389 128.774150861
+32.577951556 128.774587361
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_13">
+<fid>46356-11727-s-538</fid>
+<lfSpanFr gml:id="K19_4635611727_13-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_13-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_13-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578424404 128.774678549
+32.578140083 128.774683333
+32.577952194 128.774694167
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_14">
+<fid>46356-11727-s-539</fid>
+<lfSpanFr gml:id="K19_4635611727_14-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_14-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_14-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.577951556 128.774587361
+32.578137139 128.774576667
+32.578439567 128.774571543
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_15">
+<fid>46356-11727-s-540</fid>
+<lfSpanFr gml:id="K19_4635611727_15-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_15-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_15-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.577952194 128.774694167
+32.577952194 128.775000000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_16">
+<fid>46356-11727-s-541</fid>
+<lfSpanFr gml:id="K19_4635611727_16-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_16-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_16-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580133833 128.775000000
+32.579874361 128.774673444
+32.579754028 128.774464056
+32.579699917 128.774343056
+32.579712417 128.774112167
+32.579603118 128.773864801
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_17">
+<fid>46356-11727-s-542</fid>
+<lfSpanFr gml:id="K19_4635611727_17-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_17-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_17-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579640873 128.773835317
+32.579758139 128.774100667
+32.579745639 128.774331389
+32.579792639 128.774436500
+32.579909583 128.774639972
+32.580195611 128.775000000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_18">
+<fid>46356-11727-s-837</fid>
+<lfSpanFr gml:id="K19_4635611727_18-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_18-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_18-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.576286000 128.768290639
+32.576342640 128.768275865
+32.576504032 128.768208946
+32.576590810 128.768182148
+32.576680247 128.768163102
+32.576839680 128.768146789
+32.576977302 128.768132678
+32.577174146 128.768114037
+32.577216061 128.768110714
+32.577341954 128.768095739
+32.577359700 128.768092293
+32.577413527 128.768075134
+32.577452073 128.768050857
+32.577486861 128.768016279
+32.577517878 128.767968951
+32.577541271 128.767913376
+32.577560853 128.767838129
+32.577582760 128.767759668
+32.577590049 128.767741396
+32.577616728 128.767692612
+32.577645574 128.767659679
+32.577658050 128.767649566
+32.577698053 128.767627726
+32.577756040 128.767612557
+32.577855607 128.767598647
+32.577879911 128.767590994
+32.577954179 128.767553112
+32.578004305 128.767519794
+32.578149086 128.767403374
+32.578249876 128.767320756
+32.578363405 128.767242081
+32.578381979 128.767226167
+32.578436656 128.767169166
+32.578504861 128.767081381
+32.578548709 128.767023083
+32.578597096 128.766969861
+32.578634173 128.766941228
+32.578651611 128.766931394
+32.578702722 128.766912339
+32.578820651 128.766892420
+32.578965694 128.766867382
+32.578991008 128.766862809
+32.579065808 128.766854425
+32.579087814 128.766854779
+32.579229244 128.766875143
+32.579432170 128.766894367
+32.579531492 128.766915606
+32.579521559 128.766805236
+32.579511242 128.766721603
+32.579503031 128.766666667
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_19">
+<fid>46356-11727-s-838</fid>
+<lfSpanFr gml:id="K19_4635611727_19-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_19-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_19-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579539630 128.766666667
+32.579546823 128.766714816
+32.579557330 128.766799939
+32.579571309 128.766954798
+32.579573244 128.767008143
+32.579568646 128.767162940
+32.579559021 128.767260049
+32.580077297 128.767288683
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_20">
+<fid>46356-11727-s-839</fid>
+<lfSpanFr gml:id="K19_4635611727_20-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_20-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_20-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580069321 128.767395018
+32.579555870 128.767291815
+32.579543522 128.767416745
+32.579518925 128.767698984
+32.579498557 128.767979697
+32.579441621 128.768717528
+32.579425368 128.769055084
+32.579423491 128.769166508
+32.579426375 128.769367789
+32.579439483 128.769574951
+32.579453002 128.769697754
+32.579485560 128.769900072
+32.579541027 128.770149602
+32.579562061 128.770231018
+32.579643484 128.770508883
+32.579694023 128.770484509
+32.579728770 128.770473789
+32.579794176 128.770462609
+32.579869208 128.770463173
+32.579923065 128.770466464
+32.579976166 128.770463904
+32.579997331 128.770459259
+32.580062485 128.770435832
+32.580318168 128.770346635
+32.580365121 128.770325911
+32.580404628 128.770296194
+32.580422469 128.770278156
+32.580473826 128.770208188
+32.580526321 128.770116908
+32.580551469 128.770083793
+32.580575057 128.770061554
+32.580651156 128.770012687
+32.580695631 128.769984634
+32.580822685 128.769889767
+32.580983352 128.769760012
+32.581064342 128.769699496
+32.581107927 128.769657709
+32.581136735 128.769618173
+32.581175464 128.769547774
+32.581185219 128.769534913
+32.581218670 128.769502901
+32.581301952 128.769448863
+32.581360541 128.769413133
+32.581444179 128.769389128
+32.581492418 128.769372440
+32.581504102 128.769365742
+32.581537749 128.769336284
+32.581546786 128.769324069
+32.581570045 128.769276269
+32.581592601 128.769200782
+32.581648470 128.768991883
+32.581663697 128.768927532
+32.581684874 128.768862921
+32.581696813 128.768838006
+32.581741884 128.768772774
+32.581786986 128.768728418
+32.581833774 128.768694806
+32.581885673 128.768671698
+32.581904223 128.768667074
+32.581957762 128.768662165
+32.582015473 128.768661590
+32.582027184 128.768659471
+32.582065148 128.768643719
+32.582082118 128.768630906
+32.582133739 128.768575526
+32.582177593 128.768533736
+32.582196106 128.768522615
+32.582251735 128.768505121
+32.582329944 128.768488056
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_21">
+<fid>46356-11727-s-840</fid>
+<lfSpanFr gml:id="K19_4635611727_21-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_21-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_21-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582336167 128.768541389
+32.582256068 128.768536827
+32.582205840 128.768552679
+32.582192360 128.768560777
+32.582151285 128.768599775
+32.582098679 128.768656441
+32.582077040 128.768672700
+32.582033678 128.768690627
+32.582017553 128.768693527
+32.581958939 128.768694110
+32.581908015 128.768698784
+32.581893247 128.768702419
+32.581845665 128.768723575
+32.581802739 128.768754492
+32.581761224 128.768795411
+32.581719283 128.768856144
+32.581709393 128.768876675
+32.581689366 128.768937549
+32.581674404 128.769000939
+32.581618271 128.769210905
+32.581594741 128.769289596
+32.581568898 128.769342742
+32.581556192 128.769359887
+32.581518150 128.769393215
+32.581502151 128.769402291
+32.581451122 128.769420067
+32.581370095 128.769443198
+32.581314651 128.769477093
+32.581233884 128.769529512
+32.581203931 128.769558194
+32.581197039 128.769567197
+32.581158400 128.769637382
+32.581126909 128.769680775
+32.581080185 128.769725569
+32.580998297 128.769786732
+32.580837539 128.769916488
+32.580709229 128.770012323
+32.580664034 128.770040808
+32.580590093 128.770088379
+32.580570092 128.770107181
+32.580547628 128.770136653
+32.580495311 128.770227718
+32.580441539 128.770301008
+32.580420739 128.770321946
+32.580377192 128.770354678
+32.580326731 128.770377028
+32.580070238 128.770466444
+32.580003734 128.770490415
+32.579979236 128.770495726
+32.579922890 128.770498525
+32.579868402 128.770495132
+32.579795984 128.770494547
+32.579734092 128.770505060
+32.579702586 128.770514901
+32.579653216 128.770538733
+32.579675975 128.770606716
+32.579753018 128.770813787
+32.579837151 128.771015156
+32.579954302 128.771265254
+32.579996251 128.771345543
+32.580075234 128.771483049
+32.580146563 128.771591433
+32.580223349 128.771692210
+32.580326363 128.771806196
+32.580434754 128.771914174
+32.580632551 128.772106746
+32.580674132 128.772061356
+32.580696018 128.772041048
+32.580763253 128.771987675
+32.580798829 128.771964274
+32.580909673 128.771904265
+32.581147250 128.771710472
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_22">
+<fid>46356-11727-s-841</fid>
+<lfSpanFr gml:id="K19_4635611727_22-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_22-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_22-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579360889 128.775000000
+32.579366391 128.774955041
+32.579208599 128.774661918
+32.579053798 128.774527897
+32.578990556 128.774445222
+32.579027618 128.774195053
+32.579019338 128.774197995
+32.578625545 128.774279878
+32.578582871 128.774292151
+32.578571077 128.774311098
+32.578562729 128.774333532
+32.578469299 128.774629527
+32.578470369 128.775000000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_23">
+<fid>46356-11727-s-842</fid>
+<lfSpanFr gml:id="K19_4635611727_23-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_23-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_23-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579603118 128.773864801
+32.579525924 128.773925082
+32.579472756 128.773962789
+32.579308506 128.774066362
+32.579252416 128.774097915
+32.579127337 128.774160379
+32.579066227 128.774181641
+32.579029167 128.774432130
+32.579078054 128.774496175
+32.579235391 128.774632306
+32.579403941 128.774945472
+32.579397268 128.775000000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_24">
+<fid>46356-11727-s-843</fid>
+<lfSpanFr gml:id="K19_4635611727_24-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_24-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_24-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578425302 128.775000000
+32.578424404 128.774678549
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_25">
+<fid>46356-11727-s-844</fid>
+<lfSpanFr gml:id="K19_4635611727_25-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_25-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_25-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578439567 128.774571543
+32.578520951 128.774313525
+32.578531694 128.774284362
+32.578549653 128.774255459
+32.578567429 128.774241683
+32.578616316 128.774227763
+32.579009028 128.774145995
+32.579036478 128.774136507
+32.579034652 128.774101480
+32.579005383 128.774061349
+32.578974569 128.774034970
+32.578936850 128.774015250
+32.578915888 128.774008177
+32.578843854 128.773995976
+32.578743432 128.773986986
+32.578681579 128.773973213
+32.578620724 128.773944839
+32.578564739 128.773900769
+32.578492832 128.773816994
+32.578479148 128.773804109
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_26">
+<fid>46356-11727-s-845</fid>
+<lfSpanFr gml:id="K19_4635611727_26-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_26-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_26-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581218861 128.771906750
+32.580927181 128.771953332
+32.580819214 128.772011721
+32.580786873 128.772033071
+32.580722600 128.772084184
+32.580703314 128.772101914
+32.580653580 128.772156423
+32.580613903 128.772219053
+32.580588536 128.772276668
+32.580569772 128.772337850
+32.580554379 128.772420521
+32.580551466 128.772446959
+32.580548193 128.772535923
+32.580549699 128.772562326
+32.580571167 128.772703386
+32.580579176 128.772794069
+32.580571746 128.772881469
+32.580565697 128.772911341
+32.580547479 128.772973371
+32.580521840 128.773030987
+32.580475619 128.773100486
+32.580456809 128.773122579
+32.580390810 128.773187125
+32.580267370 128.773298999
+32.580104870 128.773439945
+32.579842598 128.773668928
+32.579680965 128.773804008
+32.579640873 128.773835317
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_27">
+<fid>46356-11727-s-871</fid>
+<lfSpanFr gml:id="K19_4635611727_27-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_27-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_27-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578443913 128.773770930
+32.578413765 128.773742543
+32.578376675 128.773706842
+32.578357739 128.773675787
+32.578349139 128.773639004
+32.578349814 128.773599697
+32.578354366 128.773575909
+32.578378536 128.773513939
+32.578388345 128.773494689
+32.578422388 128.773440201
+32.578457581 128.773397314
+32.578490875 128.773353589
+32.578498108 128.773341176
+32.578518487 128.773294254
+32.578537824 128.773222844
+32.578547580 128.773178883
+32.578563552 128.773133914
+32.578570871 128.773120861
+32.578597825 128.773087945
+32.578642631 128.773054459
+32.578691632 128.773029034
+32.578737196 128.773001933
+32.578755230 128.772986024
+32.578808698 128.772922219
+32.578908311 128.772806918
+32.579006661 128.772707177
+32.579061742 128.772641548
+32.579073638 128.772624730
+32.579104880 128.772569199
+32.579120654 128.772521249
+32.579127923 128.772452811
+32.579132177 128.772393131
+32.579142918 128.772332547
+32.579153113 128.772302216
+32.579194931 128.772219866
+32.579230957 128.772165361
+32.579260026 128.772139564
+32.579264522 128.772137291
+32.579267859 128.772059512
+32.579281882 128.771942770
+32.579281048 128.771907842
+32.579272144 128.771865203
+32.579250568 128.771814573
+32.579241732 128.771799200
+32.579175892 128.771704406
+32.579145834 128.771637229
+32.579138213 128.771613752
+32.579109038 128.771512377
+32.579096970 128.771484037
+32.579066317 128.771438699
+32.579055249 128.771427392
+32.578980241 128.771368779
+32.578940826 128.771321062
+32.578929641 128.771304963
+32.578811039 128.771162348
+32.578787535 128.771121425
+32.578781666 128.771104644
+32.578777295 128.771066230
+32.578780416 128.771029033
+32.578795927 128.770935818
+32.578797147 128.770866258
+32.578739809 128.770837964
+32.578694884 128.770804245
+32.578681092 128.770789552
+32.578656625 128.770753644
+32.578638534 128.770713104
+32.578619773 128.770634865
+32.578605530 128.770558081
+32.578587469 128.770491659
+32.578571587 128.770412119
+32.578552829 128.770256661
+32.578537557 128.770189151
+32.578530860 128.770169502
+32.578502367 128.770108064
+32.578466919 128.770029108
+32.578490819 128.770014110
+32.578526177 128.770092959
+32.578555309 128.770155777
+32.578563290 128.770179037
+32.578579395 128.770250268
+32.578598246 128.770406151
+32.578613572 128.770483140
+32.578631724 128.770549774
+32.578645971 128.770627091
+32.578663805 128.770701183
+32.578679338 128.770735992
+32.578700803 128.770767558
+32.578711329 128.770778763
+32.578752359 128.770809531
+32.578824529 128.770845161
+32.578822911 128.770939328
+32.578807136 128.771033716
+32.578804526 128.771065690
+32.578808040 128.771096230
+32.578811525 128.771106214
+32.578832023 128.771142048
+32.578949807 128.771283604
+32.578960993 128.771299703
+32.578997592 128.771344035
+32.579071604 128.771401910
+32.579085847 128.771416387
+32.579119866 128.771466704
+32.579134037 128.771500033
+32.579163671 128.771602895
+32.579170467 128.771624035
+32.579198515 128.771686649
+32.579263354 128.771779960
+32.579273920 128.771798194
+32.579297690 128.771854026
+32.579307987 128.771903470
+32.579308946 128.771944575
+32.579294841 128.772062596
+32.579291977 128.772128761
+32.579313415 128.772124434
+32.579362900 128.772135964
+32.579551658 128.772184711
+32.579598697 128.772194237
+32.579645325 128.772195138
+32.579660008 128.772192250
+32.579710837 128.772171177
+32.579733577 128.772158105
+32.579799757 128.772109321
+32.579883626 128.772031849
+32.579949990 128.771968152
+32.580021520 128.771908887
+32.580048018 128.771890779
+32.580132801 128.771846531
+32.580205090 128.771824857
+32.580283955 128.771817616
+32.580197550 128.771722029
+32.580118856 128.771618817
+32.580046071 128.771508102
+32.579965904 128.771368688
+32.579923134 128.771286702
+32.579805252 128.771034906
+32.579720297 128.770831733
+32.579642704 128.770623174
+32.579611318 128.770529380
+32.579527690 128.770244291
+32.579506285 128.770161173
+32.579450354 128.769909411
+32.579417331 128.769704540
+32.579403526 128.769579290
+32.579390315 128.769369785
+32.579387419 128.769166481
+32.579389287 128.769053459
+32.579405621 128.768714412
+32.579462643 128.767975941
+32.579483010 128.767694909
+32.579507694 128.767412137
+32.579532645 128.767159718
+32.579537173 128.767008330
+32.579535346 128.766957966
+32.579534481 128.766948707
+32.579428658 128.766926136
+32.579226544 128.766907011
+32.579086016 128.766886746
+32.579066897 128.766886476
+32.578994349 128.766894522
+32.578969756 128.766898982
+32.578824532 128.766924022
+32.578708765 128.766943497
+32.578661524 128.766961242
+32.578647412 128.766969132
+32.578613836 128.766995074
+32.578568138 128.767045398
+32.578525006 128.767102838
+32.578455637 128.767192018
+32.578398989 128.767251165
+32.578378261 128.767268907
+32.578264462 128.767347691
+32.578164480 128.767429663
+32.578018531 128.767546944
+32.577966160 128.767581772
+32.577888745 128.767621277
+32.577860750 128.767630025
+32.577760642 128.767644046
+32.577706797 128.767658223
+32.577671469 128.767677469
+32.577662673 128.767684570
+32.577637769 128.767712997
+32.577613766 128.767756966
+32.577607989 128.767771498
+32.577586701 128.767847824
+32.577566501 128.767925313
+32.577540973 128.767986017
+32.577506469 128.768038486
+32.577467378 128.768077466
+32.577423531 128.768105088
+32.577365383 128.768123561
+32.577345476 128.768127450
+32.577218320 128.768142542
+32.577176136 128.768145973
+32.576979562 128.768164505
+32.576842030 128.768178616
+32.576683769 128.768194812
+32.576596673 128.768213306
+32.576511966 128.768239556
+32.576352013 128.768305824
+32.576303444 128.768339917
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_28">
+<fid>46356-11727-s-872</fid>
+<lfSpanFr gml:id="K19_4635611727_28-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_28-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_28-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580608477 128.772138574
+32.580411677 128.771946953
+32.580311541 128.771847110
+32.580209511 128.771856455
+32.580141724 128.771876921
+32.580060267 128.771919225
+32.580036105 128.771935823
+32.579966370 128.771993689
+32.579900454 128.772056850
+32.579815239 128.772135504
+32.579746724 128.772186011
+32.579721379 128.772200701
+32.579666861 128.772223296
+32.579647404 128.772227181
+32.579596176 128.772226104
+32.579546519 128.772216067
+32.579357400 128.772167216
+32.579313062 128.772156923
+32.579281536 128.772163249
+32.579273804 128.772167358
+32.579250029 128.772188426
+32.579217220 128.772238006
+32.579177454 128.772316398
+32.579168943 128.772341710
+32.579158987 128.772397814
+32.579154816 128.772456216
+32.579147032 128.772529131
+32.579129043 128.772584022
+32.579095392 128.772643833
+32.579081796 128.772663114
+32.579025103 128.772730566
+32.578926664 128.772830521
+32.578827767 128.772944859
+32.578773046 128.773010271
+32.578751512 128.773029190
+32.578703071 128.773057913
+32.578655419 128.773082688
+32.578615104 128.773112942
+32.578592000 128.773141034
+32.578587447 128.773149059
+32.578573250 128.773189114
+32.578563757 128.773231794
+32.578543538 128.773306514
+32.578521379 128.773357604
+32.578512182 128.773373441
+32.578477366 128.773419095
+32.578443069 128.773460910
+32.578410903 128.773512507
+32.578402431 128.773528977
+32.578380127 128.773586246
+32.578376800 128.773603634
+32.578376260 128.773634952
+32.578382547 128.773661741
+32.578396568 128.773684741
+32.578430665 128.773717590
+32.578510819 128.773792991
+32.578581909 128.773875921
+32.578633365 128.773916299
+32.578689066 128.773942371
+32.578747036 128.773955324
+32.578846827 128.773964212
+32.578921569 128.773976924
+32.578946055 128.773985140
+32.578988115 128.774007062
+32.579023823 128.774037662
+32.579061092 128.774088806
+32.579063117 128.774127239
+32.579112167 128.774110122
+32.579233919 128.774049389
+32.579288121 128.774018810
+32.579450485 128.773916530
+32.579501856 128.773880009
+32.579655551 128.773760118
+32.579816197 128.773625791
+32.580078109 128.773397024
+32.580240250 128.773256400
+32.580362614 128.773145493
+32.580426461 128.773083095
+32.580441867 128.773064971
+32.580483887 128.773001896
+32.580506053 128.772952083
+32.580522414 128.772896459
+32.580527146 128.772872562
+32.580533816 128.772794116
+32.580526481 128.772710883
+32.580504827 128.772568759
+32.580503017 128.772536501
+32.580506530 128.772442316
+32.580509958 128.772411400
+32.580526309 128.772322970
+32.580547200 128.772255273
+32.580575592 128.772190605
+32.580608477 128.772138574
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_29">
+<fid>46356-11727-s-873</fid>
+<lfSpanFr gml:id="K19_4635611727_29-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_29-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_29-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.577862250 128.775000000
+32.577862250 128.774643333
+32.577856944 128.774192333
+32.577844139 128.774197167
+32.577563917 128.774224222
+32.577345278 128.774217417
+32.577223444 128.774169500
+32.577158750 128.774141639
+32.576958889 128.773993333
+32.576819417 128.773881556
+32.576505750 128.773716306
+32.575941972 128.773463444
+32.575759750 128.773355944
+32.575364611 128.773069556
+32.575000000 128.772851583
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_30">
+<fid>46356-11727-s-874</fid>
+<lfSpanFr gml:id="K19_4635611727_30-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_30-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_30-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.583333333 128.774393747
+32.583331156 128.774395028
+32.583288700 128.774413904
+32.583201381 128.774456361
+32.583175687 128.774473291
+32.583129656 128.774513391
+32.583088535 128.774560376
+32.583033616 128.774638574
+32.582949651 128.774777825
+32.582898417 128.774853969
+32.582861493 128.774893676
+32.582815692 128.774926851
+32.582768140 128.774953330
+32.582756611 128.774924451
+32.582802815 128.774898729
+32.582845112 128.774867925
+32.582878632 128.774832080
+32.582927987 128.774758614
+32.583012131 128.774619041
+32.583068660 128.774538594
+32.583112110 128.774488928
+32.583161013 128.774446354
+32.583189581 128.774427484
+32.583278789 128.774384160
+32.583320255 128.774365718
+32.583333333 128.774357898
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_31">
+<fid>46356-11727-i-361</fid>
+<lfSpanFr gml:id="K19_4635611727_31-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_31-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_31-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.575000000 128.771262722
+32.575037500 128.771243333
+32.575296944 128.771130000
+32.575401658 128.771081451
+32.575599742 128.770993743
+32.575697137 128.771003464
+32.575804134 128.770962961
+32.575917990 128.770969441
+32.576056538 128.771056927
+32.576147074 128.771099050
+32.576187513 128.771203340
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>徒歩道</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_32">
+<fid>46356-11727-i-362</fid>
+<lfSpanFr gml:id="K19_4635611727_32-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_32-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_32-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582086398 128.766666667
+32.582103374 128.766791660
+32.582132681 128.766890848
+32.582200561 128.766993508
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>徒歩道</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_33">
+<fid>46356-11727-i-363</fid>
+<lfSpanFr gml:id="K19_4635611727_33-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_33-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_33-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.576928056 128.772270278
+32.577016389 128.772134722
+32.577180000 128.771848611
+32.577366111 128.771442778
+32.577563333 128.770996944
+32.577648056 128.770850556
+32.577743889 128.770737500
+32.577818056 128.770708611
+32.577884722 128.770704167
+32.578070833 128.770770833
+32.578335833 128.770910278
+32.578364167 128.770916944
+32.578533333 128.771010000
+32.578803611 128.771203056
+32.579009558 128.771372982
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>徒歩道</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_34">
+<fid>46356-11727-i-364</fid>
+<lfSpanFr gml:id="K19_4635611727_34-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_34-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_34-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582200561 128.766993508
+32.582254043 128.767022663
+32.582363749 128.767098789
+32.582447399 128.767142521
+32.582579046 128.767218647
+32.582651696 128.767285963
+32.582738089 128.767446313
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>徒歩道</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_35">
+<fid>46356-11727-i-365</fid>
+<lfSpanFr gml:id="K19_4635611727_35-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_35-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_35-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.581727444 128.775000000
+32.581673611 128.774902778
+32.581543889 128.774789722
+32.581442500 128.774763056
+32.581200000 128.774763056
+32.581025278 128.774776389
+32.580929444 128.774743056
+32.580574167 128.774523611
+32.580309167 128.774456944
+32.580128611 128.774383611
+32.579993333 128.774323889
+32.579829722 128.774177500
+32.579735278 128.774106389
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>徒歩道</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_36">
+<fid>46356-11727-i-366</fid>
+<lfSpanFr gml:id="K19_4635611727_36-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_36-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_36-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.576928056 128.772270278
+32.577033611 128.772385000
+32.577131667 128.772429167
+32.577236389 128.772440833
+32.577732500 128.772387500
+32.577845278 128.772434167
+32.577969444 128.772527222
+32.578290833 128.772926389
+32.578415556 128.773020000
+32.578498056 128.773084167
+32.578571262 128.773150910
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>徒歩道</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635611727_37">
+<fid>46356-11727-i-372</fid>
+<lfSpanFr gml:id="K19_4635611727_37-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635611727_37-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635611727_37-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.576928056 128.772270278
+32.576828340 128.772297030
+32.576712589 128.772303823
+32.576586918 128.772310696
+32.576550532 128.772303214
+32.576510606 128.772260508
+32.576284398 128.771802654
+32.576277581 128.771715587
+32.576282799 128.771635665
+32.576308391 128.771554620
+32.576326679 128.771473634
+32.576314019 128.771405466
+32.576273759 128.771336243
+32.576231881 128.771283648
+32.576187513 128.771203340
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>徒歩道</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635911727_1">
+<fid>46359-11727-s-313</fid>
+<lfSpanFr gml:id="K19_4635911727_1-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635911727_1-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635911727_1-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.577952194 128.775000000
+32.577952194 128.775167806
+32.578425739 128.775156760
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635911727_2">
+<fid>46359-11727-s-314</fid>
+<lfSpanFr gml:id="K19_4635911727_2-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635911727_2-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635911727_2-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578471128 128.775262477
+32.577862250 128.775276639
+32.577862250 128.775000000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635911727_3">
+<fid>46359-11727-s-315</fid>
+<lfSpanFr gml:id="K19_4635911727_3-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635911727_3-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635911727_3-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582652406 128.777614549
+32.582447694 128.777475222
+32.581734528 128.777143806
+32.581403861 128.777044722
+32.581129472 128.776991778
+32.580868000 128.776964889
+32.580787250 128.776928472
+32.580723667 128.776853306
+32.580698444 128.776763944
+32.580681500 128.775932222
+32.580672083 128.775899222
+32.580335833 128.775284444
+32.580213167 128.775099861
+32.580133833 128.775000000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635911727_4">
+<fid>46359-11727-s-316</fid>
+<lfSpanFr gml:id="K19_4635911727_4-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635911727_4-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635911727_4-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.580195611 128.775000000
+32.580247389 128.775065167
+32.580372389 128.775253222
+32.580712944 128.775875833
+32.580726278 128.775922806
+32.580743222 128.776754444
+32.580762972 128.776824472
+32.580812167 128.776882611
+32.580878111 128.776912333
+32.581134972 128.776938778
+32.581413111 128.776992417
+32.581748250 128.777092861
+32.582467167 128.777426917
+32.582663659 128.777560643
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635911727_5">
+<fid>46359-11727-s-463</fid>
+<lfSpanFr gml:id="K19_4635911727_5-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635911727_5-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635911727_5-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578470369 128.775000000
+32.578471128 128.775262477
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635911727_6">
+<fid>46359-11727-s-464</fid>
+<lfSpanFr gml:id="K19_4635911727_6-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635911727_6-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635911727_6-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.578425739 128.775156760
+32.578425302 128.775000000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635911727_7">
+<fid>46359-11727-s-465</fid>
+<lfSpanFr gml:id="K19_4635911727_7-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635911727_7-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635911727_7-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.583333333 128.778793751
+32.583301014 128.778777390
+32.583262721 128.778751707
+32.583224251 128.778726664
+32.583200066 128.778708111
+32.583143183 128.778648706
+32.583107786 128.778609153
+32.583080208 128.778565064
+32.583066344 128.778537801
+32.582751717 128.777754567
+32.582713369 128.777672433
+32.582705267 128.777659183
+32.582683409 128.777637523
+32.582652406 128.777614549
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635911727_8">
+<fid>46359-11727-s-466</fid>
+<lfSpanFr gml:id="K19_4635911727_8-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635911727_8-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635911727_8-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582663659 128.777560643
+32.582687245 128.777583171
+32.582703596 128.777603703
+32.582720063 128.777628815
+32.582736266 128.777655207
+32.582775801 128.777739994
+32.583090155 128.778522698
+32.583102741 128.778547309
+32.583128044 128.778587901
+32.583161444 128.778625126
+32.583216513 128.778682629
+32.583238161 128.778699179
+32.583275998 128.778723800
+32.583313024 128.778748748
+32.583333333 128.778759035
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635911727_9">
+<fid>46359-11727-s-482</fid>
+<lfSpanFr gml:id="K19_4635911727_9-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635911727_9-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635911727_9-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.579397268 128.775000000
+32.579245217 128.776242548
+32.579209561 128.776236444
+32.579360889 128.775000000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>真幅道路</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635911727_10">
+<fid>46359-11727-i-60</fid>
+<lfSpanFr gml:id="K19_4635911727_10-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635911727_10-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635911727_10-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582586944 128.775907222
+32.582439722 128.775683056
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>徒歩道</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635911727_11">
+<fid>46359-11727-i-61</fid>
+<lfSpanFr gml:id="K19_4635911727_11-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635911727_11-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635911727_11-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.582439722 128.775683056
+32.582305278 128.775534722
+32.581961111 128.775321667
+32.581859722 128.775215556
+32.581769444 128.775075833
+32.581727444 128.775000000
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>徒歩道</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+<RdEdg gml:id="K19_4635911727_12">
+<fid>46359-11727-i-62</fid>
+<lfSpanFr gml:id="K19_4635911727_12-1">
+<gml:timePosition>2015-11-17</gml:timePosition>
+</lfSpanFr>
+<devDate gml:id="K19_4635911727_12-2">
+<gml:timePosition>2023-12-01</gml:timePosition>
+</devDate>
+<orgGILvl>25000</orgGILvl>
+<vis>表示</vis>
+<loc>
+<gml:Curve gml:id="K19_4635911727_12-g" srsName="fguuid:jgd2011.bl">
+<gml:segments>
+<gml:LineStringSegment>
+<gml:posList>
+32.583333333 128.776828028
+32.583303056 128.776845556
+32.582958889 128.777271389
+32.582812500 128.777417778
+32.582789722 128.777417778
+32.582705278 128.777311389
+32.582631944 128.777185000
+32.582581389 128.777018611
+32.582581389 128.776832222
+32.582671389 128.776579444
+32.582693889 128.776433056
+32.582693889 128.776260000
+32.582643333 128.776020278
+32.582586944 128.775907222
+</gml:posList>
+</gml:LineStringSegment>
+</gml:segments>
+</gml:Curve>
+</loc>
+<type>徒歩道</type>
+<admOffice>不明</admOffice>
+</RdEdg>
+</Dataset>

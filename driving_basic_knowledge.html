@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>運転に必要な基礎知識</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Meiryo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 1.5em;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.2em;
+            font-weight: bold;
+        }
+        
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1em;
+        }
+        
+        .back-button:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2em;
+        }
+        
+        .knowledge-section {
+            background: white;
+            margin-bottom: 2em;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section-header i {
+            font-size: 2em;
+        }
+        
+        .section-header h2 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+        
+        .section-content {
+            padding: 2em;
+        }
+        
+        .rule-item {
+            background: #f8f9fa;
+            margin-bottom: 1em;
+            padding: 1.5em;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .rule-item h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            font-size: 1.3em;
+        }
+        
+        .rule-item p {
+            margin: 0.5em 0;
+            line-height: 1.6;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1em;
+            margin: 1em 0;
+        }
+        
+        .warning-box h4 {
+            color: #856404;
+            margin-top: 0;
+        }
+        
+        .tip-box {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 8px;
+            padding: 1em;
+            margin: 1em 0;
+        }
+        
+        .tip-box h4 {
+            color: #0c5460;
+            margin-top: 0;
+        }
+        
+        .checklist {
+            background: #e8f5e8;
+            border-radius: 8px;
+            padding: 1.5em;
+            margin: 1em 0;
+        }
+        
+        .checklist h4 {
+            color: #155724;
+            margin-top: 0;
+        }
+        
+        .checklist ul {
+            margin: 0.5em 0;
+            padding-left: 1.5em;
+        }
+        
+        .checklist li {
+            margin-bottom: 0.5em;
+            line-height: 1.5;
+        }
+        
+        .emergency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5em;
+            margin-top: 1em;
+        }
+        
+        .emergency-item {
+            background: #fff5f5;
+            border: 1px solid #fed7d7;
+            border-radius: 8px;
+            padding: 1.5em;
+        }
+        
+        .emergency-item h4 {
+            color: #c53030;
+            margin-top: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1em;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .section-header h2 {
+                font-size: 1.5em;
+            }
+            
+            .emergency-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="integrated_driving_system.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> 戻る
+        </a>
+        <h1><i class="fas fa-book"></i> 運転に必要な基礎知識</h1>
+    </div>
+
+    <div class="container">
+      <div id="quiz-section" style="max-width:600px;margin:2em auto;background:#fff;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1);padding:2em;">
+        <h2 style="text-align:center;color:#3498db;margin-bottom:1em;">運転に必要な基礎知識クイズ</h2>
+        <div id="quiz-content"></div>
+        <div id="quiz-controls" style="text-align:center;margin-top:2em;"></div>
+        <div id="quiz-result" style="margin-top:2em;"></div>
+            </div>
+      <script>
+      // クイズデータ
+      const quizData = [
+        {
+          type: "choice",
+          question: "この標識の意味は？",
+          image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Japanese_Road_sign_330_Stop.svg/120px-Japanese_Road_sign_330_Stop.svg.png",
+          choices: ["一時停止", "徐行", "進入禁止", "駐車禁止"],
+          answer: 0,
+          explanation: "この標識は「一時停止」を意味します。"
+        },
+        {
+          type: "ox",
+          question: "信号が黄色のときは必ず止まらなければならない。",
+          choices: ["○", "×"],
+          answer: 1,
+          explanation: "黄色信号は「止まれ」が原則ですが、急停止が危険な場合は進行できます。"
+        },
+        {
+          type: "fill",
+          question: "車両は___側通行が原則です。",
+          answer: "左",
+          explanation: "日本では左側通行が原則です。"
+        },
+        {
+          type: "choice",
+          question: "運転中に最も注意すべき歩行者は？",
+          choices: ["大人", "高齢者", "子ども", "自転車"],
+          answer: 2,
+          explanation: "子どもは予測不能な動きをするため特に注意が必要です。"
+        },
+        {
+          type: "ox",
+          question: "運転中にスマートフォンを操作してもよい。",
+          choices: ["○", "×"],
+          answer: 1,
+          explanation: "運転中のスマートフォン操作は法律で禁止されています。"
+        }
+      ];
+      
+      // 問題をシャッフルする関数
+      function shuffleArray(array) {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+      }
+      
+      // シャッフルされた問題データ
+      let shuffledQuizData = shuffleArray(quizData);
+      
+      let current = 0, score = 0, userAnswers = [];
+      const quizContent = document.getElementById('quiz-content');
+      const quizControls = document.getElementById('quiz-controls');
+      const quizResult = document.getElementById('quiz-result');
+      
+      function renderQuiz() {
+        quizResult.innerHTML = '';
+        if (current >= shuffledQuizData.length) {
+          // 結果表示
+          const percent = Math.round(score / shuffledQuizData.length * 100);
+          const pass = percent >= 80;
+          quizContent.innerHTML = `<h3>クイズ終了！</h3>
+            <p>スコア：<b>${score} / ${shuffledQuizData.length}</b>（${percent}%）</p>
+            <p style='color:${pass ? '#27ae60':'#c00'};font-size:1.2em;'><b>${pass ? '合格！':'不合格'}</b></p>
+            <ul style='text-align:left;margin:1em auto;max-width:400px;'>
+              <li>80%以上で合格</li>
+              <li>間違えた問題は復習しましょう</li>
+            </ul>`;
+          quizControls.innerHTML = `<button onclick='restartQuiz()' style='padding:0.7em 2em;font-size:1em;border-radius:5px;background:#3498db;color:#fff;border:none;'>もう一度挑戦</button>`;
+          return;
+        }
+        const q = shuffledQuizData[current];
+        let html = `<div style='font-size:1.1em;margin-bottom:1em;text-align:center;'>Q${current+1}. ${q.question}</div>`;
+        if(q.image) html += `<img src='${q.image}' alt='' style='max-width:120px;display:block;margin:0 auto 1em auto;'>`;
+        if(q.type==="choice"||q.type==="ox") {
+          html += '<div style="display:flex;flex-direction:column;gap:0.7em;max-width:350px;margin:0 auto;">';
+          q.choices.forEach((c,i)=>{
+            html += `<label style='border:1px solid #ccc;border-radius:5px;padding:0.7em;cursor:pointer;'><input type='radio' name='quiz' value='${i}' style='margin-right:0.7em;'>${c}</label>`;
+          });
+          html += '</div>';
+        } else if(q.type==="fill") {
+          html += `<input type='text' id='fill-answer' style='width:200px;font-size:1.1em;padding:0.5em;margin:1em auto;display:block;text-align:center;'>`;
+        }
+        quizContent.innerHTML = html;
+        quizControls.innerHTML = `<button onclick='checkAnswer()' style='padding:0.7em 2em;font-size:1em;border-radius:5px;background:#27ae60;color:#fff;border:none;'>解答</button>`;
+      }
+      
+      window.checkAnswer = function() {
+        const q = shuffledQuizData[current];
+        let correct = false, userAns;
+        if(q.type==="choice"||q.type==="ox") {
+          const radios = document.getElementsByName('quiz');
+          for(let r of radios) { if(r.checked) userAns = parseInt(r.value); }
+          if(userAns===undefined) { alert('選択肢を選んでください'); return; }
+          correct = userAns===q.answer;
+        } else if(q.type==="fill") {
+          userAns = document.getElementById('fill-answer').value.trim();
+          if(!userAns) { alert('答えを入力してください'); return; }
+          correct = userAns===q.answer;
+        }
+        userAnswers.push({q:current, userAns, correct});
+        if(correct) score++;
+        quizResult.innerHTML = `<div style='margin:1em 0;'><b style='color:${correct?'#27ae60':'#c00'};'>${correct?'正解！':'不正解'}</b><br><span style='font-size:0.95em;'>${q.explanation}</span></div>`;
+        quizControls.innerHTML = `<button onclick='nextQuiz()' style='padding:0.7em 2em;font-size:1em;border-radius:5px;background:#3498db;color:#fff;border:none;'>次の問題へ</button>`;
+      }
+      
+      window.nextQuiz = function() {
+        current++;
+        renderQuiz();
+      }
+      
+      window.restartQuiz = function() {
+        // 問題を再シャッフルしてリスタート
+        shuffledQuizData = shuffleArray(quizData);
+        current = 0;
+        score = 0;
+        userAnswers = [];
+        renderQuiz();
+      }
+      
+      renderQuiz();
+      </script>
+      <!-- 既存の読み物型セクションは一旦非表示 -->
+      <style>.knowledge-section{display:none;}</style>
+    </div>
+
+    <script>
+        // ページ読み込み時の認証チェック
+        document.addEventListener('DOMContentLoaded', function() {
+            const isAuthenticated = localStorage.getItem("isAuthenticated");
+            if (!isAuthenticated || isAuthenticated !== "true") {
+                sessionStorage.setItem('returnUrl', window.location.href);
+                window.location.href = "pin_login.html";
+                return;
+            }
+        });
+    </script>
+</body>
+</html>

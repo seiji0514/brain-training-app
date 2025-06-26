@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>神経衰弱ゲーム</title>
+  <style>
+    body {
+      background: #e0e5ea;
+      font-family: 'Segoe UI', 'Meiryo', sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+      padding: 40px 30px 30px 30px;
+      max-width: 480px;
+      width: 96vw;
+      text-align: center;
+      position: relative;
+    }
+    .title {
+      font-size: 1.5em;
+      font-weight: bold;
+      margin-bottom: 18px;
+      color: #222;
+    }
+    .desc {
+      font-size: 1.1em;
+      color: #333;
+      margin-bottom: 18px;
+    }
+    .board {
+      display: grid;
+      grid-template-columns: repeat(4, 60px);
+      grid-template-rows: repeat(4, 60px);
+      gap: 16px;
+      justify-content: center;
+      margin: 0 auto 24px auto;
+    }
+    .card {
+      width: 60px;
+      height: 60px;
+      background: #f3f3f3;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+      cursor: pointer;
+      user-select: none;
+      border: 2px solid #e0e5ea;
+      transition: background 0.2s, border 0.2s;
+    }
+    .card.flipped, .card.matched {
+      background: #fff;
+      border: 2px solid #3498db;
+      cursor: default;
+    }
+    .card.matched {
+      background: #eafbe7;
+      border: 2px solid #27ae60;
+    }
+    .score {
+      font-size: 1.2em;
+      color: #27ae60;
+      margin-bottom: 0.5em;
+    }
+    .result {
+      font-size: 1.3em;
+      margin: 18px 0 10px 0;
+      color: #333;
+    }
+    .restart-btn {
+      background: #27ae60;
+      color: #fff;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 32px;
+      cursor: pointer;
+      margin-top: 18px;
+      transition: background 0.2s;
+    }
+    .restart-btn:active {
+      background: #1e874b;
+    }
+    .red { color: #e74c3c; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="modal" id="gameModal">
+    <div class="title">神経衰弱ゲーム</div>
+    <div class="desc">2枚めくって同じマークのペアを揃えましょう（全16枚）</div>
+    <div class="score" id="score"></div>
+    <div class="board" id="board"></div>
+    <div class="result" id="result" style="display:none;"></div>
+    <button class="restart-btn" id="restartBtn" style="display:none;">もう一度</button>
+  </div>
+  <div id="gameResult" style="display:none; text-align:center;">
+    <h2>お疲れ様でした！</h2>
+    <div>正解数：<span id="correctCount"></span> / <span id="totalCount"></span></div>
+    <div>ミス回数：<span id="missCount" class="red"></span></div>
+    <button onclick="restartGame()">もう一度挑戦</button>
+    <a href="brain_training_game.html">トップ画面へ</a>
+  </div>
+  <script src="game_result.js"></script>
+  <script>
+    const MARKS = ['♦','♠','♥','♣','○','▢','△','☆'];
+    function getTotalPairs() {
+      return 8; // 通常モードは8ペア（16枚）
+    }
+    function getTotalCards() {
+      return getTotalPairs() * 2;
+    }
+
+    let cards = [];
+    let flipped = [];
+    let matched = [];
+    let tries = 0;
+    let boardElem = document.getElementById('board');
+    let scoreElem = document.getElementById('score');
+    let resultElem = document.getElementById('result');
+    let restartBtn = document.getElementById('restartBtn');
+
+    let isGameActive = false;
+    let score = 0;
+    let startTime = 0;
+    let comboCount = 0;
+    let correctCount = 0;
+    let incorrectCount = 0;
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function setupGame() {
+      // カード生成
+      cards = [];
+      flipped = [];
+      matched = [];
+      tries = 0;
+      let totalPairs = getTotalPairs();
+      let marks = [...MARKS.slice(0, totalPairs), ...MARKS.slice(0, totalPairs)];
+      shuffle(marks);
+      for (let i = 0; i < getTotalCards(); i++) {
+        cards.push({
+          id: i,
+          mark: marks[i],
+          flipped: false,
+          matched: false
+        });
+      }
+      renderBoard();
+      scoreElem.textContent = `試行回数：${tries}`;
+      resultElem.style.display = 'none';
+      restartBtn.style.display = 'none';
+    }
+
+    function renderBoard() {
+      boardElem.innerHTML = '';
+      cards.forEach((card, idx) => {
+        const div = document.createElement('div');
+        div.className = 'card';
+        if (card.flipped || card.matched) div.classList.add('flipped');
+        if (card.matched) div.classList.add('matched');
+        div.dataset.idx = idx;
+        div.onclick = () => handleFlip(idx);
+        div.textContent = (card.flipped || card.matched) ? card.mark : '';
+        boardElem.appendChild(div);
+      });
+      // グリッドの列数を調整
+      const cols = getTotalPairs() <= 4 ? 4 : 4;
+      boardElem.style.gridTemplateColumns = `repeat(${cols}, 60px)`;
+      boardElem.style.gridTemplateRows = `repeat(${getTotalCards()/cols}, 60px)`;
+    }
+
+    function handleFlip(idx) {
+      if (cards[idx].flipped || cards[idx].matched || flipped.length === 2) return;
+      cards[idx].flipped = true;
+      flipped.push(idx);
+      renderBoard();
+      if (flipped.length === 2) {
+        tries++;
+        scoreElem.textContent = `試行回数：${tries}`;
+        setTimeout(checkPair, 700);
+      }
+    }
+
+    function checkPair() {
+      const [i, j] = flipped;
+      if (cards[i].mark === cards[j].mark) {
+        cards[i].matched = true;
+        cards[j].matched = true;
+        matched.push(i, j);
+      } else {
+        cards[i].flipped = false;
+        cards[j].flipped = false;
+      }
+      flipped = [];
+      renderBoard();
+      if (matched.length === getTotalCards()) {
+        endGame();
+      }
+    }
+
+    function endGame() {
+      resultElem.innerHTML = `ゲーム終了<br>全ペア揃いました！<br>試行回数：${tries}`;
+      resultElem.style.display = 'block';
+      restartBtn.style.display = 'inline-block';
+      onGameEnd(tries, getTotalPairs(), 0);
+    }
+
+    function onGameEnd(correct, total, miss) {
+      document.getElementById('correctCount').textContent = correct;
+      document.getElementById('totalCount').textContent = total;
+      document.getElementById('missCount').textContent = miss;
+    }
+
+    function restartGame() {
+      setupGame();
+    }
+
+    // 初期化
+    setupGame();
+  </script>
+</body>
+</html> 

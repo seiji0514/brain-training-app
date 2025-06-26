@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日付・曜日クイズ</title>
+    <style>
+        body { background: #eef1f5; font-family: 'Segoe UI', 'Meiryo', sans-serif; margin: 0; }
+        .container { max-width: 420px; margin: 40px auto; background: #fff; border-radius: 18px; box-shadow: 0 2px 12px #dbe6f3; padding: 2em; text-align: center; }
+        .title { font-size: 1.5em; color: #2574c7; font-weight: bold; margin-bottom: 0.5em; }
+        .desc { color: #555; margin-bottom: 1.5em; }
+        .question { font-size: 1.2em; margin: 1.5em 0 1em 0; }
+        .input-area { margin-bottom: 1em; }
+        .input-area input, .input-area select { font-size: 1.1em; padding: 0.5em; border-radius: 6px; border: 1.5px solid #b0c4de; }
+        .btn { background: #2574c7; color: #fff; border: none; border-radius: 6px; padding: 0.7em 1.5em; font-size: 1.1em; cursor: pointer; margin-left: 1em; }
+        .btn:hover { background: #1a5ca8; }
+        .result { font-size: 1.1em; margin-top: 1em; }
+        .score { color: #27ae60; font-weight: bold; margin-top: 1.5em; }
+        .usage { background: #f5f6fa; border-radius: 8px; padding: 1em; margin-bottom: 1em; color: #2574c7; }
+        .red { color: #e74c3c; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">日付・曜日クイズ</div>
+        <div class="usage">
+            <b>【遊び方】</b><br>
+            表示された日付が何曜日か、または今日の日付を答えてください。<br>
+            答えは選択肢から選ぶか、数字を入力してください。
+        </div>
+        <div id="quiz-area">
+            <div class="question" id="question"></div>
+            <div class="input-area" id="input-area"></div>
+            <button class="btn" onclick="checkAnswer()">判定</button>
+            <div class="result" id="result"></div>
+            <div class="score" id="score"></div>
+        </div>
+        <div id="gameResult" style="display:none; text-align:center;">
+            <h2>お疲れ様でした！</h2>
+            <div>正解数：<span id="correctCount"></span> / <span id="totalCount"></span></div>
+            <div>ミス回数：<span id="missCount" class="red"></span></div>
+            <button onclick="restartGame()">もう一度挑戦</button>
+            <a href="brain_training_game.html">トップ画面へ</a>
+        </div>
+    </div>
+    <div class="modal" id="main-content">
+    <script src="game_result.js"></script>
+    <script>
+        let isGameActive = false;
+        let score = 0;
+        let startTime = 0;
+        let comboCount = 0;
+        let correctCount = 0;
+        let incorrectCount = 0;
+        let questionCount = 10;
+        let current = 0;
+        let questions = [];
+
+        // ゲーム設定を取得
+        const gameSettings = getGameSettings('datequiz');
+        const difficultySettings = getDifficultySettings('datequiz');
+
+        function startGame() {
+            isGameActive = true;
+            score = 0;
+            correctCount = 0;
+            incorrectCount = 0;
+            comboCount = 0;
+            startTime = Date.now();
+            questionCount = 10;
+            current = 0;
+            generateQuestions();
+            showQuestion();
+            updateStats();
+        }
+
+        function generateQuestions() {
+            questions = [];
+            for(let i=0; i<questionCount; i++) {
+                if(Math.random() < 0.5) {
+                    // 曜日クイズ
+                    let y = 2024, m = Math.floor(Math.random()*12)+1, d = Math.floor(Math.random()*28)+1;
+                    let date = new Date(y, m-1, d);
+                    questions.push({
+                        type: 'weekday',
+                        text: `${y}年${m}月${d}日は何曜日？`,
+                        answer: week[date.getDay()]
+                    });
+                } else {
+                    // 今日の日付クイズ
+                    let now = new Date();
+                    questions.push({
+                        type: 'date',
+                        text: `今日は何日ですか？（数字で答えてください）`,
+                        answer: (now.getDate()).toString()
+                    });
+                }
+            }
+        }
+
+        function showQuestion() {
+            document.getElementById('result').textContent = '';
+            document.getElementById('score').textContent = `（${current+1} / ${questionCount}問目） 正解数：${correctCount}`;
+            if(current >= questionCount) {
+                document.getElementById('question').textContent = 'お疲れさまでした！';
+                document.getElementById('input-area').innerHTML = '';
+                document.getElementById('score').textContent = `最終スコア：${correctCount} / ${questionCount}`;
+                showPreview();
+                return;
+            }
+            let q = questions[current];
+            document.getElementById('question').textContent = q.text;
+            if(q.type === 'weekday') {
+                let sel = '<select id="answer">';
+                for(let w of week) sel += `<option value="${w}">${w}</option>`;
+                sel += '</select>';
+                document.getElementById('input-area').innerHTML = sel;
+            } else {
+                document.getElementById('input-area').innerHTML = '<input id="answer" type="number" min="1" max="31" style="width:80px;">';
+            }
+        }
+
+        function checkAnswer() {
+            if(current >= questionCount) return;
+            let q = questions[current];
+            let ans = document.getElementById('answer').value;
+            if(ans == q.answer) {
+                document.getElementById('result').textContent = '正解！';
+                document.getElementById('result').style.color = '#27ae60';
+                correctCount++;
+                comboCount++;
+            } else {
+                document.getElementById('result').textContent = `不正解… 正解は「${q.answer}」`;
+                document.getElementById('result').style.color = '#e74c3c';
+                incorrectCount++;
+                comboCount = 0;
+            }
+            current++;
+            updateStats();
+            setTimeout(showQuestion, 1200);
+        }
+
+        function updateStats() {
+            document.getElementById('score').textContent = `（${current+1} / ${questionCount}問目） 正解数：${correctCount}`;
+        }
+
+        function showPreview() {
+            document.getElementById('gameResult').style.display = 'block';
+            document.getElementById('correctCount').textContent = correctCount;
+            document.getElementById('totalCount').textContent = questionCount;
+            document.getElementById('missCount').textContent = incorrectCount;
+            showGameResult(correctCount, questionCount, incorrectCount);
+        }
+
+        function restartGame() {
+            document.getElementById('gameResult').style.display = 'none';
+            startGame();
+        }
+
+        const week = ['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日'];
+        
+        // 初期化
+        startGame();
+    </script>
+    </div>
+</body>
+</html> 

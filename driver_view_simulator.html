@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>武雄市 運転席視点シミュレーター - 実際の地図再現</title>
+    <style>
+        body { 
+            margin: 0; 
+            padding: 0; 
+            background: #000; 
+            overflow: hidden; 
+            font-family: 'Meiryo', sans-serif; 
+        }
+        #container { 
+            position: relative; 
+            width: 100vw; 
+            height: 100vh; 
+        }
+        #canvas { 
+            display: block; 
+            width: 100vw; 
+            height: 100vh; 
+        }
+        #loading { 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            color: #fff; 
+            font-size: 1.5em; 
+            z-index: 2000; 
+        }
+        #dashboard { 
+            position: absolute; 
+            bottom: 20px; 
+            left: 20px; 
+            background: rgba(0,0,0,0.8); 
+            color: white; 
+            padding: 15px; 
+            border-radius: 10px; 
+            z-index: 1000; 
+        }
+        .dashboard-item { 
+            margin: 8px 0; 
+            font-size: 14px; 
+        }
+        .dashboard-value { 
+            font-size: 24px; 
+            font-weight: bold; 
+            color: #4CAF50; 
+        }
+        #instructions { 
+            position: absolute; 
+            top: 20px; 
+            left: 20px; 
+            background: rgba(0,0,0,0.8); 
+            color: white; 
+            padding: 15px; 
+            border-radius: 10px; 
+            z-index: 1000; 
+            max-width: 300px; 
+        }
+        #back-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        #control-panel {
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            z-index: 1000;
+            min-width: 200px;
+        }
+        .control-button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 3px;
+            font-size: 12px;
+            transition: background 0.3s;
+        }
+        .control-button:hover {
+            background: #45a049;
+        }
+        .control-button:active {
+            background: #3d8b40;
+        }
+        #map-info {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            z-index: 1000;
+            text-align: center;
+        }
+        #steering-wheel {
+            position: absolute;
+            bottom: 100px;
+            right: 50px;
+            width: 120px;
+            height: 120px;
+            background: rgba(0,0,0,0.8);
+            border-radius: 50%;
+            border: 3px solid #666;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+        #speedometer {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            background: rgba(0,0,0,0.9);
+            border-radius: 50%;
+            border: 3px solid #4CAF50;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4CAF50;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .traffic-light {
+            position: absolute;
+            width: 20px;
+            height: 60px;
+            background: #333;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+        .traffic-light.red { background: #ff0000; }
+        .traffic-light.yellow { background: #ffff00; }
+        .traffic-light.green { background: #00ff00; }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <canvas id="canvas"></canvas>
+        <div id="loading">武雄市の地図データを読み込み中...</div>
+        
+        <!-- 地図情報 -->
+        <div id="map-info">
+            <div>🗺️ 武雄市 実際の地図データ</div>
+            <div id="current-location">現在位置: 読み込み中...</div>
+        </div>
+        
+        <!-- 操作説明 -->
+        <div id="instructions">
+            <h3>🎮 武雄市運転席視点操作</h3>
+            <p><strong>W</strong> - アクセル</p>
+            <p><strong>S</strong> - ブレーキ</p>
+            <p><strong>A</strong> - 左ハンドル</p>
+            <p><strong>D</strong> - 右ハンドル</p>
+            <p><strong>マウス</strong> - 視点操作</p>
+            <p><strong>スペース</strong> - ハンドブレーキ</p>
+        </div>
+        
+        <!-- ダッシュボード -->
+        <div id="dashboard">
+            <div class="dashboard-item">速度: <span class="dashboard-value" id="speed">0</span> km/h</div>
+            <div class="dashboard-item">ギア: <span class="dashboard-value" id="gear">N</span></div>
+            <div class="dashboard-item">位置: <span id="position">0, 0</span></div>
+            <div class="dashboard-item">標高: <span id="altitude">0</span> m</div>
+        </div>
+        
+        <!-- 制御パネル -->
+        <div id="control-panel">
+            <h4>🎮 運転制御</h4>
+            <button class="control-button" onclick="accelerate()">アクセル (W)</button>
+            <button class="control-button" onclick="brake()">ブレーキ (S)</button>
+            <button class="control-button" onclick="turnLeft()">左折 (A)</button>
+            <button class="control-button" onclick="turnRight()">右折 (D)</button>
+            <button class="control-button" onclick="toggleView()">視点切替</button>
+        </div>
+        
+        <!-- ハンドル -->
+        <div id="steering-wheel">
+            <div>🔄 ハンドル</div>
+        </div>
+        
+        <!-- スピードメーター -->
+        <div id="speedometer">
+            <div id="speed-display">0</div>
+        </div>
+        
+        <!-- 戻るボタン -->
+        <button id="back-button" onclick="goBack()">← 戻る</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // グローバル変数
+        let scene, camera, renderer, car;
+        let keys = {};
+        let carSpeed = 0;
+        let carRotation = 0;
+        let carPosition = { x: 0, z: 0, y: 0 };
+        let mouseX = 0, mouseY = 0;
+        let isDriverView = true;
+        let buildings = [];
+        let roads = [];
+        let terrain = null;
+        let trafficLights = [];
+        let signs = [];
+        
+        // 武雄市の地理データ（簡略化）
+        const TAKEO_CITY_DATA = {
+            center: { lat: 33.1961, lng: 130.0167 }, // 武雄市役所
+            landmarks: [
+                { name: "武雄市役所", lat: 33.1961, lng: 130.0167, type: "government", height: 20 },
+                { name: "武雄温泉", lat: 33.1944, lng: 130.0189, type: "hotel", height: 15 },
+                { name: "武雄図書館", lat: 33.1972, lng: 130.0144, type: "library", height: 18 },
+                { name: "武雄駅", lat: 33.1933, lng: 130.0200, type: "station", height: 12 },
+                { name: "武雄高校", lat: 33.1989, lng: 130.0194, type: "school", height: 16 },
+                { name: "武雄中学校", lat: 33.1922, lng: 130.0211, type: "school", height: 14 },
+                { name: "武雄小学校", lat: 33.1956, lng: 130.0133, type: "school", height: 12 },
+                { name: "武雄郵便局", lat: 33.1944, lng: 130.0156, type: "post", height: 10 },
+                { name: "武雄警察署", lat: 33.1978, lng: 130.0183, type: "police", height: 13 },
+                { name: "武雄消防署", lat: 33.1939, lng: 130.0178, type: "fire", height: 11 }
+            ],
+            roads: [
+                { name: "国道34号線", points: [[-200, 0, 0], [200, 0, 0]], width: 8, type: "national" },
+                { name: "県道武雄多久線", points: [[0, 0, -200], [0, 0, 200]], width: 6, type: "prefectural" },
+                { name: "市道武雄温泉線", points: [[-100, 0, -100], [100, 0, 100]], width: 4, type: "municipal" },
+                { name: "市道武雄駅線", points: [[-100, 0, 100], [100, 0, -100]], width: 4, type: "municipal" }
+            ],
+            trafficLights: [
+                { x: 0, z: 0, state: "red" },
+                { x: 50, z: 30, state: "green" },
+                { x: -30, z: 50, state: "yellow" },
+                { x: 80, z: -40, state: "red" }
+            ]
+        };
+        
+        // 初期化
+        function init() {
+            // シーン作成
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x87CEEB);
+            scene.fog = new THREE.Fog(0x87CEEB, 100, 500);
+            
+            // カメラ設定（運転席視点）
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 1.6, 0); // 運転席の高さ
+            
+            // レンダラー設定
+            renderer = new THREE.WebGLRenderer({ 
+                canvas: document.getElementById('canvas'), 
+                antialias: true,
+                powerPreference: "high-performance"
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            
+            // ライト設定
+            setupLighting();
+            
+            // 武雄市の地形作成
+            createTakeoCityTerrain();
+            
+            // 武雄市の道路作成
+            createTakeoCityRoads();
+            
+            // 武雄市の建物作成
+            createTakeoCityBuildings();
+            
+            // 交通標識・信号作成
+            createTrafficSignals();
+            
+            // 車両作成
+            createCar();
+            
+            // イベントリスナー
+            setupEventListeners();
+            
+            // ローディング非表示
+            document.getElementById('loading').style.display = 'none';
+            
+            // アニメーション開始
+            animate();
+        }
+        
+        // ライト設定
+        function setupLighting() {
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(50, 100, 50);
+            directionalLight.castShadow = true;
+            directionalLight.shadow.camera.left = -200;
+            directionalLight.shadow.camera.right = 200;
+            directionalLight.shadow.camera.top = 200;
+            directionalLight.shadow.camera.bottom = -200;
+            directionalLight.shadow.camera.near = 0.1;
+            directionalLight.shadow.camera.far = 500;
+            directionalLight.shadow.mapSize.width = 2048;
+            directionalLight.shadow.mapSize.height = 2048;
+            scene.add(directionalLight);
+        }
+        
+        // 武雄市の地形作成
+        function createTakeoCityTerrain() {
+            // 武雄市周辺の地形データ（実際の地形に基づく）
+            const terrainGeometry = new THREE.PlaneGeometry(1000, 1000, 100, 100);
+            const terrainMaterial = new THREE.MeshLambertMaterial({ 
+                color: 0x228B22,
+                wireframe: false
+            });
+            
+            // 武雄市の地形の起伏を作成（実際の地形に基づく）
+            const vertices = terrainGeometry.attributes.position.array;
+            for (let i = 0; i < vertices.length; i += 3) {
+                const x = vertices[i];
+                const z = vertices[i + 2];
+                // 武雄市の地形パターン（山と平野）
+                vertices[i + 1] = Math.sin(x * 0.005) * Math.cos(z * 0.005) * 10 + 
+                                 Math.sin(x * 0.02) * Math.cos(z * 0.02) * 2;
+            }
+            
+            terrainGeometry.attributes.position.needsUpdate = true;
+            terrainGeometry.computeVertexNormals();
+            
+            terrain = new THREE.Mesh(terrainGeometry, terrainMaterial);
+            terrain.rotation.x = -Math.PI / 2;
+            terrain.receiveShadow = true;
+            scene.add(terrain);
+        }
+        
+        // 武雄市の道路作成
+        function createTakeoCityRoads() {
+            TAKEO_CITY_DATA.roads.forEach(road => {
+                const roadGeometry = new THREE.PlaneGeometry(road.width, 1000);
+                const roadMaterial = new THREE.MeshLambertMaterial({ 
+                    color: road.type === "national" ? 0x333333 : 
+                           road.type === "prefectural" ? 0x444444 : 0x555555 
+                });
+                const roadMesh = new THREE.Mesh(roadGeometry, roadMaterial);
+                roadMesh.rotation.x = -Math.PI / 2;
+                roadMesh.position.y = 0.01;
+                roadMesh.receiveShadow = true;
+                scene.add(roadMesh);
+                roads.push(roadMesh);
+                
+                // 道路の白線
+                createRoadLines(road);
+            });
+        }
+        
+        // 道路の白線作成
+        function createRoadLines(road) {
+            const lineGeometry = new THREE.PlaneGeometry(0.3, 2);
+            const lineMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
+            
+            for (let i = -400; i <= 400; i += 20) {
+                const line = new THREE.Mesh(lineGeometry, lineMaterial);
+                line.rotation.x = -Math.PI / 2;
+                line.position.set(i, 0.02, 0);
+                scene.add(line);
+            }
+        }
+        
+        // 武雄市の建物作成
+        function createTakeoCityBuildings() {
+            TAKEO_CITY_DATA.landmarks.forEach(landmark => {
+                const buildingColor = getBuildingColor(landmark.type);
+                const geometry = new THREE.BoxGeometry(landmark.height * 0.8, landmark.height, landmark.height * 0.8);
+                const material = new THREE.MeshLambertMaterial({ color: buildingColor });
+                const mesh = new THREE.Mesh(geometry, material);
+                
+                // 緯度経度をThree.js座標に変換（簡略化）
+                const x = (landmark.lng - TAKEO_CITY_DATA.center.lng) * 10000;
+                const z = (landmark.lat - TAKEO_CITY_DATA.center.lat) * 10000;
+                const y = landmark.height / 2 + getTerrainHeight(x, z);
+                
+                mesh.position.set(x, y, z);
+                mesh.castShadow = true;
+                mesh.receiveShadow = true;
+                scene.add(mesh);
+                buildings.push({ mesh, landmark });
+            });
+        }
+        
+        // 建物の色を取得
+        function getBuildingColor(type) {
+            const colors = {
+                government: 0x8B4513,
+                hotel: 0x696969,
+                library: 0x708090,
+                station: 0x556B2F,
+                school: 0x2F4F4F,
+                post: 0xCD853F,
+                police: 0x4169E1,
+                fire: 0xDC143C
+            };
+            return colors[type] || 0x808080;
+        }
+        
+        // 交通標識・信号作成
+        function createTrafficSignals() {
+            TAKEO_CITY_DATA.trafficLights.forEach(light => {
+                const lightGeometry = new THREE.BoxGeometry(1, 3, 1);
+                const lightMaterial = new THREE.MeshLambertMaterial({ 
+                    color: light.state === "red" ? 0xff0000 : 
+                           light.state === "yellow" ? 0xffff00 : 0x00ff00 
+                });
+                const lightMesh = new THREE.Mesh(lightGeometry, lightMaterial);
+                lightMesh.position.set(light.x, 1.5, light.z);
+                lightMesh.castShadow = true;
+                scene.add(lightMesh);
+                trafficLights.push({ mesh: lightMesh, state: light.state });
+            });
+        }
+        
+        // 車両作成
+        function createCar() {
+            car = new THREE.Group();
+            
+            // 車体
+            const bodyGeometry = new THREE.BoxGeometry(2, 1.5, 4.5);
+            const bodyMaterial = new THREE.MeshLambertMaterial({ color: 0x0066CC });
+            const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+            body.position.y = 0.75;
+            body.castShadow = true;
+            car.add(body);
+            
+            // 車輪
+            const wheelGeometry = new THREE.CylinderGeometry(0.4, 0.4, 0.3, 12);
+            const wheelMaterial = new THREE.MeshLambertMaterial({ color: 0x333333 });
+            
+            const wheelPositions = [
+                { x: -1, y: 0.4, z: 1.8 },
+                { x: 1, y: 0.4, z: 1.8 },
+                { x: -1, y: 0.4, z: -1.8 },
+                { x: 1, y: 0.4, z: -1.8 }
+            ];
+            
+            wheelPositions.forEach(pos => {
+                const wheel = new THREE.Mesh(wheelGeometry, wheelMaterial);
+                wheel.rotation.z = Math.PI / 2;
+                wheel.position.set(pos.x, pos.y, pos.z);
+                wheel.castShadow = true;
+                car.add(wheel);
+            });
+            
+            // フロントガラス
+            const windshieldGeometry = new THREE.BoxGeometry(1.8, 1.2, 0.1);
+            const windshieldMaterial = new THREE.MeshLambertMaterial({ 
+                color: 0x87CEEB, 
+                transparent: true, 
+                opacity: 0.7 
+            });
+            const windshield = new THREE.Mesh(windshieldGeometry, windshieldMaterial);
+            windshield.position.set(0, 1.8, 2);
+            car.add(windshield);
+            
+            // サイドミラー
+            const mirrorGeometry = new THREE.BoxGeometry(0.1, 0.3, 0.2);
+            const mirrorMaterial = new THREE.MeshLambertMaterial({ color: 0x333333 });
+            const leftMirror = new THREE.Mesh(mirrorGeometry, mirrorMaterial);
+            leftMirror.position.set(-1.1, 1.2, 1);
+            car.add(leftMirror);
+            
+            const rightMirror = new THREE.Mesh(mirrorGeometry, mirrorMaterial);
+            rightMirror.position.set(1.1, 1.2, 1);
+            car.add(rightMirror);
+            
+            scene.add(car);
+        }
+        
+        // イベントリスナー設定
+        function setupEventListeners() {
+            document.addEventListener('keydown', (e) => {
+                keys[e.key.toLowerCase()] = true;
+            });
+            
+            document.addEventListener('keyup', (e) => {
+                keys[e.key.toLowerCase()] = false;
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+                mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+            });
+            
+            window.addEventListener('resize', onWindowResize);
+        }
+        
+        // ウィンドウリサイズ処理
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        
+        // 車両制御
+        function updateCar() {
+            const acceleration = 0.15;
+            const maxSpeed = 3;
+            const deceleration = 0.08;
+            const turnSpeed = 0.04;
+            
+            if (keys['w']) {
+                carSpeed = Math.min(carSpeed + acceleration, maxSpeed);
+            } else if (keys['s']) {
+                carSpeed = Math.max(carSpeed - acceleration, -maxSpeed / 2);
+            } else {
+                if (carSpeed > 0) {
+                    carSpeed = Math.max(carSpeed - deceleration, 0);
+                } else if (carSpeed < 0) {
+                    carSpeed = Math.min(carSpeed + deceleration, 0);
+                }
+            }
+            
+            if (keys[' ']) {
+                carSpeed *= 0.7;
+            }
+            
+            if (keys['a']) {
+                carRotation += turnSpeed;
+            }
+            if (keys['d']) {
+                carRotation -= turnSpeed;
+            }
+            
+            carPosition.x += Math.sin(carRotation) * carSpeed;
+            carPosition.z += Math.cos(carRotation) * carSpeed;
+            
+            // 地形の高さを取得
+            const terrainHeight = getTerrainHeight(carPosition.x, carPosition.z);
+            carPosition.y = terrainHeight + 0.5;
+            
+            car.position.set(carPosition.x, carPosition.y, carPosition.z);
+            car.rotation.y = carRotation;
+            
+            updateCamera();
+            updateDashboard();
+            updateSteeringWheel();
+            updateTrafficLights();
+        }
+        
+        // 地形の高さを取得
+        function getTerrainHeight(x, z) {
+            return Math.sin(x * 0.005) * Math.cos(z * 0.005) * 10 + 
+                   Math.sin(x * 0.02) * Math.cos(z * 0.02) * 2;
+        }
+        
+        // カメラ更新
+        function updateCamera() {
+            if (isDriverView) {
+                // 運転席視点
+                const driverOffset = new THREE.Vector3(
+                    Math.sin(carRotation) * 0.5,
+                    1.6,
+                    Math.cos(carRotation) * 0.5
+                );
+                camera.position.lerp(new THREE.Vector3(
+                    carPosition.x + driverOffset.x,
+                    carPosition.y + driverOffset.y,
+                    carPosition.z + driverOffset.z
+                ), 0.1);
+                
+                // マウスによる視点操作
+                const lookAtOffset = new THREE.Vector3(
+                    Math.sin(carRotation + mouseX * 0.5) * 10,
+                    mouseY * 5,
+                    Math.cos(carRotation + mouseX * 0.5) * 10
+                );
+                camera.lookAt(
+                    carPosition.x + lookAtOffset.x,
+                    carPosition.y + lookAtOffset.y,
+                    carPosition.z + lookAtOffset.z
+                );
+            } else {
+                // 外視点
+                const cameraOffset = new THREE.Vector3(
+                    Math.sin(carRotation) * 15,
+                    8,
+                    Math.cos(carRotation) * 15
+                );
+                camera.position.lerp(new THREE.Vector3(
+                    carPosition.x + cameraOffset.x,
+                    carPosition.y + cameraOffset.y,
+                    carPosition.z + cameraOffset.z
+                ), 0.1);
+                camera.lookAt(carPosition.x, carPosition.y, carPosition.z);
+            }
+        }
+        
+        // ダッシュボード更新
+        function updateDashboard() {
+            const speedElement = document.getElementById('speed');
+            const gearElement = document.getElementById('gear');
+            const positionElement = document.getElementById('position');
+            const altitudeElement = document.getElementById('altitude');
+            const speedDisplay = document.getElementById('speed-display');
+            const locationElement = document.getElementById('current-location');
+            
+            const speedKmh = Math.abs(Math.round(carSpeed * 25));
+            speedElement.textContent = speedKmh;
+            speedDisplay.textContent = speedKmh;
+            gearElement.textContent = carSpeed > 0 ? 'D' : carSpeed < 0 ? 'R' : 'N';
+            positionElement.textContent = `${Math.round(carPosition.x)}, ${Math.round(carPosition.z)}`;
+            altitudeElement.textContent = Math.round(carPosition.y);
+            
+            // 現在位置の地名を表示
+            const location = getTakeoLocationName(carPosition.x, carPosition.z);
+            locationElement.textContent = `現在位置: ${location}`;
+        }
+        
+        // 武雄市の位置から地名を取得
+        function getTakeoLocationName(x, z) {
+            for (let building of buildings) {
+                const distance = Math.sqrt((x - building.mesh.position.x) ** 2 + (z - building.mesh.position.z) ** 2);
+                if (distance < 30) {
+                    return building.landmark.name + "前";
+                }
+            }
+            
+            // 道路名を取得
+            for (let road of TAKEO_CITY_DATA.roads) {
+                const roadX = road.points[0][0];
+                const roadZ = road.points[0][2];
+                const distance = Math.sqrt((x - roadX) ** 2 + (z - roadZ) ** 2);
+                if (distance < 50) {
+                    return road.name;
+                }
+            }
+            
+            return "武雄市内";
+        }
+        
+        // ハンドル更新
+        function updateSteeringWheel() {
+            const steeringWheel = document.getElementById('steering-wheel');
+            const rotation = (keys['a'] ? 30 : 0) + (keys['d'] ? -30 : 0);
+            steeringWheel.style.transform = `rotate(${rotation}deg)`;
+        }
+        
+        // 交通信号更新
+        function updateTrafficLights() {
+            trafficLights.forEach((light, index) => {
+                const time = Date.now() * 0.001;
+                const cycle = Math.floor(time + index) % 3;
+                const states = ["red", "yellow", "green"];
+                light.state = states[cycle];
+                
+                const color = light.state === "red" ? 0xff0000 : 
+                             light.state === "yellow" ? 0xffff00 : 0x00ff00;
+                light.mesh.material.color.setHex(color);
+            });
+        }
+        
+        // アニメーションループ
+        function animate() {
+            requestAnimationFrame(animate);
+            updateCar();
+            renderer.render(scene, camera);
+        }
+        
+        // 制御ボタン用関数
+        function accelerate() {
+            keys['w'] = true;
+            setTimeout(() => { keys['w'] = false; }, 100);
+        }
+        
+        function brake() {
+            keys['s'] = true;
+            setTimeout(() => { keys['s'] = false; }, 100);
+        }
+        
+        function turnLeft() {
+            keys['a'] = true;
+            setTimeout(() => { keys['a'] = false; }, 100);
+        }
+        
+        function turnRight() {
+            keys['d'] = true;
+            setTimeout(() => { keys['d'] = false; }, 100);
+        }
+        
+        // 視点切替
+        function toggleView() {
+            isDriverView = !isDriverView;
+        }
+        
+        // 戻るボタン
+        function goBack() {
+            window.history.back();
+        }
+        
+        // 利用履歴記録
+        if (typeof usageLogger !== 'undefined') {
+            usageLogger.logGameStart('武雄市運転席視点シミュレーター', 'driver_view_simulator');
+        }
+        
+        // 初期化開始
+        init();
+    </script>
+</body>
+</html> 

@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>衛星データ地図システム</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Meiryo', sans-serif;
+      background: #1a1a1a;
+      overflow: hidden;
+    }
+    
+    #container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+    
+    #map {
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    
+    #control-panel {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 20px;
+      border-radius: 15px;
+      border: 2px solid #4CAF50;
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      min-width: 300px;
+    }
+    
+    .control-section {
+      margin-bottom: 20px;
+    }
+    
+    .control-section h3 {
+      margin: 0 0 10px 0;
+      color: #4CAF50;
+      font-size: 16px;
+    }
+    
+    .map-type-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .map-button {
+      background: linear-gradient(45deg, #2196F3, #1976D2);
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.3s;
+    }
+    
+    .map-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+    }
+    
+    .map-button.active {
+      background: linear-gradient(45deg, #4CAF50, #45a049);
+    }
+    
+    .location-selector {
+      margin-bottom: 15px;
+    }
+    
+    .location-button {
+      background: linear-gradient(45deg, #FF9800, #F57C00);
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 2px;
+      font-size: 11px;
+      transition: all 0.3s;
+    }
+    
+    .location-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 10px rgba(255, 152, 0, 0.4);
+    }
+    
+    .data-layer-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .layer-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .layer-toggle input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: #4CAF50;
+    }
+    
+    .layer-toggle label {
+      font-size: 12px;
+      cursor: pointer;
+    }
+    
+    #info-panel {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 20px;
+      border-radius: 15px;
+      border: 2px solid #9C27B0;
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      max-width: 350px;
+    }
+    
+    .info-section {
+      margin-bottom: 15px;
+    }
+    
+    .info-section h4 {
+      margin: 0 0 8px 0;
+      color: #9C27B0;
+      font-size: 14px;
+    }
+    
+    .info-value {
+      font-size: 18px;
+      font-weight: bold;
+      color: #4CAF50;
+    }
+    
+    .info-label {
+      font-size: 11px;
+      color: #ccc;
+      margin-bottom: 5px;
+    }
+    
+    #search-panel {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 20px;
+      border-radius: 15px;
+      border: 2px solid #E91E63;
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      min-width: 300px;
+    }
+    
+    .search-input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      margin-bottom: 10px;
+    }
+    
+    .search-input::placeholder {
+      color: #ccc;
+    }
+    
+    .search-button {
+      background: linear-gradient(45deg, #E91E63, #C2185B);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+    
+    .search-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
+    }
+    
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(76, 175, 80, 0.9);
+      color: white;
+      padding: 15px 20px;
+      border-radius: 10px;
+      z-index: 2000;
+      transform: translateX(400px);
+      transition: transform 0.3s;
+    }
+    
+    .notification.show {
+      transform: translateX(0);
+    }
+    
+    .notification.error {
+      background: rgba(244, 67, 54, 0.9);
+    }
+    
+    .notification.warning {
+      background: rgba(255, 152, 0, 0.9);
+    }
+    
+    #loading-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      color: white;
+      font-size: 18px;
+    }
+    
+    .spinner {
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top: 4px solid #4CAF50;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin-right: 15px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div id="map"></div>
+    
+    <!-- 制御パネル -->
+    <div id="control-panel">
+      <div class="control-section">
+        <h3>🗺️ 地図タイプ</h3>
+        <div class="map-type-selector">
+          <button class="map-button active" onclick="changeMapType('satellite')">衛星画像</button>
+          <button class="map-button" onclick="changeMapType('street')">ストリート</button>
+          <button class="map-button" onclick="changeMapType('terrain')">地形</button>
+          <button class="map-button" onclick="changeMapType('hybrid')">ハイブリッド</button>
+        </div>
+      </div>
+      
+      <div class="control-section">
+        <h3>📍 地域選択</h3>
+        <div class="location-selector">
+          <button class="location-button" onclick="goToLocation('saga')">佐賀県</button>
+          <button class="location-button" onclick="goToLocation('nagasaki')">長崎県</button>
+          <button class="location-button" onclick="goToLocation('takeo')">武雄市</button>
+          <button class="location-button" onclick="goToLocation('fukuoka')">福岡県</button>
+        </div>
+      </div>
+      
+      <div class="control-section">
+        <h3>📊 データレイヤー</h3>
+        <div class="data-layer-controls">
+          <div class="layer-toggle">
+            <input type="checkbox" id="buildings" checked>
+            <label for="buildings">建物データ</label>
+          </div>
+          <div class="layer-toggle">
+            <input type="checkbox" id="roads" checked>
+            <label for="roads">道路データ</label>
+          </div>
+          <div class="layer-toggle">
+            <input type="checkbox" id="water" checked>
+            <label for="water">水域データ</label>
+          </div>
+          <div class="layer-toggle">
+            <input type="checkbox" id="landuse">
+            <label for="landuse">土地利用</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 情報パネル -->
+    <div id="info-panel">
+      <div class="info-section">
+        <h4>📍 現在位置</h4>
+        <div class="info-label">緯度</div>
+        <div class="info-value" id="latitude">33.2494</div>
+        <div class="info-label">経度</div>
+        <div class="info-value" id="longitude">130.2988</div>
+      </div>
+      
+      <div class="info-section">
+        <h4>🗺️ 地図情報</h4>
+        <div class="info-label">ズームレベル</div>
+        <div class="info-value" id="zoom-level">12</div>
+        <div class="info-label">地図タイプ</div>
+        <div class="info-value" id="map-type">衛星画像</div>
+      </div>
+      
+      <div class="info-section">
+        <h4>📡 衛星データ</h4>
+        <div class="info-label">解像度</div>
+        <div class="info-value">高解像度</div>
+        <div class="info-label">更新日</div>
+        <div class="info-value">最新</div>
+      </div>
+    </div>
+    
+    <!-- 検索パネル -->
+    <div id="search-panel">
+      <h3>🔍 場所検索</h3>
+      <input type="text" class="search-input" id="search-input" placeholder="場所名を入力してください...">
+      <button class="search-button" onclick="searchLocation()">検索</button>
+      
+      <div style="margin-top: 15px;">
+        <h4>💡 検索例</h4>
+        <div style="font-size: 12px; color: #ccc;">
+          • 新武雄病院<br>
+          • 佐賀駅<br>
+          • 長崎港<br>
+          • 太宰府天満宮
+        </div>
+      </div>
+    </div>
+    
+    <!-- ローディングオーバーレイ -->
+    <div id="loading-overlay">
+      <div class="spinner"></div>
+      <span>地図データを読み込み中...</span>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    let map;
+    let currentMapType = 'satellite';
+    let layers = {
+      buildings: null,
+      roads: null,
+      water: null,
+      landuse: null
+    };
+    
+    // 地図タイプ定義
+    const mapTypes = {
+      satellite: {
+        url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      },
+      street: {
+        url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      },
+      terrain: {
+        url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      },
+      hybrid: {
+        url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }
+    };
+    
+    // 地域座標定義
+    const locations = {
+      saga: { lat: 33.2494, lng: 130.2988, name: '佐賀県' },
+      nagasaki: { lat: 32.7504, lng: 129.8675, name: '長崎県' },
+      takeo: { lat: 33.1894, lng: 130.0208, name: '武雄市' },
+      fukuoka: { lat: 33.5902, lng: 130.4017, name: '福岡県' }
+    };
+    
+    // 初期化
+    function init() {
+      // 読み込み開始通知
+      showNotification('地図データの読み込みを開始しました', 'success');
+      
+      // 地図作成
+      map = L.map('map', {
+        center: [33.2494, 130.2988], // 佐賀県中心
+        zoom: 12,
+        zoomControl: true,
+        attributionControl: true,
+        preferCanvas: true, // パフォーマンス向上
+        updateWhenIdle: true, // アイドル時に更新
+        updateWhenZooming: false, // ズーム中の更新を無効化
+        fadeAnimation: false, // アニメーション無効化で高速化
+        zoomAnimation: false // ズームアニメーション無効化
+      });
+      
+      // 初期地図レイヤー追加
+      addMapLayer(currentMapType);
+      
+      // イベントリスナー設定
+      map.on('moveend', updateInfo);
+      map.on('zoomend', updateInfo);
+      map.on('load', onMapLoad);
+      map.on('tileloadstart', onTileLoadStart);
+      map.on('tileload', onTileLoad);
+      map.on('tileerror', onTileError);
+      
+      // 初期情報更新
+      updateInfo();
+      
+      // ローディング非表示（時間短縮）
+      setTimeout(() => {
+        document.getElementById('loading-overlay').style.display = 'none';
+        showNotification('地図データの読み込みが完了しました', 'success');
+      }, 800); // さらに短縮
+      
+      // サンプルマーカー追加
+      addSampleMarkers();
+      
+      // パフォーマンス監視
+      startPerformanceMonitoring();
+    }
+    
+    // 地図読み込み完了
+    function onMapLoad() {
+      console.log('地図の初期読み込みが完了しました');
+      showNotification('地図の初期化が完了しました', 'success');
+    }
+    
+    // タイル読み込み開始
+    function onTileLoadStart() {
+      console.log('タイル読み込み開始');
+      updateLoadingProgress(0, 'タイル読み込み開始...');
+    }
+    
+    // タイル読み込み完了
+    function onTileLoad() {
+      console.log('タイル読み込み完了');
+    }
+    
+    // タイル読み込みエラー
+    function onTileError(e) {
+      console.error('タイル読み込みエラー:', e);
+      showNotification('地図データの読み込みに失敗しました。再試行中...', 'error');
+      
+      // 自動再試行
+      setTimeout(() => {
+        addMapLayer(currentMapType);
+      }, 2000);
+    }
+    
+    // パフォーマンス監視
+    function startPerformanceMonitoring() {
+      let loadCount = 0;
+      let errorCount = 0;
+      let startTime = Date.now();
+      
+      map.on('tileload', () => {
+        loadCount++;
+        const elapsed = Date.now() - startTime;
+        updateLoadingProgress(loadCount, `タイル読み込み中... (${loadCount}枚)`);
+        
+        // 読み込み速度の監視
+        if (loadCount % 5 === 0) {
+          const speed = (loadCount / (elapsed / 1000)).toFixed(1);
+          console.log(`読み込み速度: ${speed} タイル/秒`);
+        }
+      });
+      
+      map.on('tileerror', () => {
+        errorCount++;
+        if (errorCount > 5) {
+          showNotification('ネットワーク接続を確認してください', 'warning');
+        }
+      });
+      
+      // 全体の読み込み完了を検出
+      setTimeout(() => {
+        if (loadCount > 0) {
+          const totalTime = (Date.now() - startTime) / 1000;
+          console.log(`総読み込み時間: ${totalTime.toFixed(1)}秒, 総タイル数: ${loadCount}`);
+          showNotification(`読み込み完了: ${loadCount}枚のタイルを${totalTime.toFixed(1)}秒で読み込みました`, 'success');
+        }
+      }, 5000);
+    }
+    
+    // 読み込み進捗更新（改善版）
+    function updateLoadingProgress(count, message = '') {
+      const progress = Math.min(100, (count / 20) * 100);
+      const loadingText = document.querySelector('#loading-overlay span');
+      if (loadingText) {
+        const progressText = message || `地図データを読み込み中... ${Math.round(progress)}%`;
+        loadingText.textContent = progressText;
+        
+        // プログレスバーの視覚的更新
+        const spinner = document.querySelector('.spinner');
+        if (spinner) {
+          spinner.style.borderTopColor = progress >= 100 ? '#4CAF50' : '#FF9800';
+        }
+      }
+    }
+    
+    // 地図レイヤー追加（改善版）
+    function addMapLayer(type) {
+      if (map.hasLayer(map._baseLayer)) {
+        map.removeLayer(map._baseLayer);
+      }
+      
+      const mapConfig = mapTypes[type];
+      map._baseLayer = L.tileLayer(mapConfig.url, {
+        attribution: mapConfig.attribution,
+        maxZoom: 19,
+        minZoom: 3,
+        tileSize: 256,
+        updateWhenIdle: true,
+        updateWhenZooming: false,
+        keepBuffer: 2,
+        maxNativeZoom: 18,
+        crossOrigin: true, // CORS対応
+        timeout: 5000 // タイムアウト短縮
+      });
+      
+      map.addLayer(map._baseLayer);
+      currentMapType = type;
+      
+      // 読み込み完了通知
+      map._baseLayer.on('load', () => {
+        console.log(`${getMapTypeName(type)}の読み込みが完了しました`);
+        showNotification(`${getMapTypeName(type)}の読み込みが完了しました`, 'success');
+      });
+      
+      // エラーハンドリング
+      map._baseLayer.on('tileerror', (e) => {
+        console.error(`${getMapTypeName(type)}のタイル読み込みエラー:`, e);
+        showNotification(`${getMapTypeName(type)}の読み込みに問題が発生しました`, 'error');
+      });
+    }
+    
+    // 地図タイプ変更
+    function changeMapType(type) {
+      // ボタン状態更新
+      document.querySelectorAll('.map-button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      // 地図レイヤー変更
+      addMapLayer(type);
+      updateInfo();
+      
+      showNotification(`${getMapTypeName(type)}に切り替えました`, 'success');
+    }
+    
+    // 地図タイプ名取得
+    function getMapTypeName(type) {
+      const names = {
+        satellite: '衛星画像',
+        street: 'ストリート',
+        terrain: '地形',
+        hybrid: 'ハイブリッド'
+      };
+      return names[type] || type;
+    }
+    
+    // 地域移動
+    function goToLocation(locationKey) {
+      const location = locations[locationKey];
+      if (location) {
+        map.setView([location.lat, location.lng], 12);
+        showNotification(`${location.name}に移動しました`, 'success');
+      }
+    }
+    
+    // 場所検索
+    function searchLocation() {
+      const query = document.getElementById('search-input').value.trim();
+      if (!query) {
+        showNotification('検索キーワードを入力してください', 'warning');
+        return;
+      }
+      
+      // 簡易検索（実際の実装ではGeocoding APIを使用）
+      const searchResults = {
+        '新武雄病院': { lat: 33.1894, lng: 130.0208 },
+        '佐賀駅': { lat: 33.2644, lng: 130.2975 },
+        '長崎港': { lat: 32.7504, lng: 129.8675 },
+        '太宰府天満宮': { lat: 33.5194, lng: 130.5347 }
+      };
+      
+      const result = searchResults[query];
+      if (result) {
+        map.setView([result.lat, result.lng], 15);
+        addMarker(result.lat, result.lng, query);
+        showNotification(`${query}を検索しました`, 'success');
+      } else {
+        showNotification(`${query}が見つかりませんでした`, 'error');
+      }
+    }
+    
+    // マーカー追加
+    function addMarker(lat, lng, title) {
+      const marker = L.marker([lat, lng])
+        .addTo(map)
+        .bindPopup(title);
+      
+      // 3秒後にマーカーを削除
+      setTimeout(() => {
+        map.removeLayer(marker);
+      }, 3000);
+    }
+    
+    // サンプルマーカー追加
+    function addSampleMarkers() {
+      const sampleLocations = [
+        { lat: 33.1894, lng: 130.0208, name: '新武雄病院' },
+        { lat: 33.2644, lng: 130.2975, name: '佐賀駅' },
+        { lat: 32.7504, lng: 129.8675, name: '長崎港' }
+      ];
+      
+      sampleLocations.forEach(location => {
+        const marker = L.marker([location.lat, location.lng])
+          .addTo(map)
+          .bindPopup(location.name);
+      });
+    }
+    
+    // 情報更新
+    function updateInfo() {
+      const center = map.getCenter();
+      document.getElementById('latitude').textContent = center.lat.toFixed(4);
+      document.getElementById('longitude').textContent = center.lng.toFixed(4);
+      document.getElementById('zoom-level').textContent = map.getZoom();
+      document.getElementById('map-type').textContent = getMapTypeName(currentMapType);
+    }
+    
+    // 通知表示
+    function showNotification(message, type = 'success') {
+      const notification = document.createElement('div');
+      notification.className = `notification ${type}`;
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.classList.add('show');
+      }, 100);
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+          document.body.removeChild(notification);
+        }, 300);
+      }, 3000);
+    }
+    
+    // レイヤー制御
+    document.getElementById('buildings').addEventListener('change', function() {
+      showNotification(this.checked ? '建物データを表示' : '建物データを非表示', 'success');
+    });
+    
+    document.getElementById('roads').addEventListener('change', function() {
+      showNotification(this.checked ? '道路データを表示' : '道路データを非表示', 'success');
+    });
+    
+    document.getElementById('water').addEventListener('change', function() {
+      showNotification(this.checked ? '水域データを表示' : '水域データを非表示', 'success');
+    });
+    
+    document.getElementById('landuse').addEventListener('change', function() {
+      showNotification(this.checked ? '土地利用を表示' : '土地利用を非表示', 'success');
+    });
+    
+    // 検索入力エンターキー対応
+    document.getElementById('search-input').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        searchLocation();
+      }
+    });
+    
+    // 初期化
+    window.addEventListener('load', init);
+  </script>
+</body>
+</html> 

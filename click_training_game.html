@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>指先運動・クリック練習ゲーム</title>
+  <style>
+    body { background: #eef1f5; font-family: 'Segoe UI', 'Meiryo', sans-serif; margin: 0; }
+    .container { max-width: 480px; margin: 40px auto; background: #fff; border-radius: 18px; box-shadow: 0 2px 12px #dbe6f3; padding: 2em; text-align: center; }
+    .title { font-size: 1.5em; color: #2574c7; font-weight: bold; margin-bottom: 0.5em; }
+    .desc { color: #555; margin-bottom: 1.5em; }
+    .game-area { position: relative; width: 320px; height: 320px; margin: 0 auto 1.5em auto; background: #f5f6fa; border-radius: 12px; border: 1.5px solid #b0c4de; }
+    .target {
+      position: absolute;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.2s, width 0.2s, height 0.2s;
+      box-shadow: 0 2px 8px #b0c4de;
+      border: 2px solid #fff;
+    }
+    .score { color: #27ae60; font-weight: bold; margin-top: 1.5em; font-size: 1.2em; }
+    .timer { color: #e67e22; font-weight: bold; font-size: 1.2em; margin-bottom: 1em; }
+    .btn { background: #2574c7; color: #fff; border: none; border-radius: 6px; padding: 0.7em 1.5em; font-size: 1.1em; cursor: pointer; margin: 0.5em; }
+    .btn:hover { background: #1a5ca8; }
+    .btn.restart { background: #27ae60; }
+    .btn.restart:hover { background: #1e874b; }
+    .btn.menu { background: #e67e22; }
+    .btn.menu:hover { background: #d35400; }
+    .result { font-size: 1.2em; margin-top: 1.5em; color: #2574c7; }
+    .result-detail {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 1.5em;
+      margin: 1em 0;
+      text-align: left;
+    }
+    .result-detail h3 {
+      color: #2574c7;
+      margin-top: 0;
+      font-size: 1.3em;
+    }
+    .result-detail div {
+      margin: 0.5em 0;
+      display: flex;
+      justify-content: space-between;
+    }
+    .result-detail .label {
+      font-weight: bold;
+      color: #555;
+    }
+    .result-detail .value {
+      color: #27ae60;
+      font-weight: bold;
+    }
+    .performance-rating {
+      font-size: 1.4em;
+      font-weight: bold;
+      margin: 1em 0;
+      padding: 0.5em;
+      border-radius: 8px;
+    }
+    .rating-excellent { background: #d4edda; color: #155724; }
+    .rating-good { background: #d1ecf1; color: #0c5460; }
+    .rating-average { background: #fff3cd; color: #856404; }
+    .rating-poor { background: #f8d7da; color: #721c24; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">指先運動・クリック練習ゲーム</div>
+    <div class="desc">30秒間でできるだけ多くターゲットをクリックしましょう！<br>ターゲットはランダムな場所・大きさ・色で出現します。</div>
+    <div class="timer" id="timer">30</div>
+    <div class="game-area" id="gameArea"></div>
+    <div class="score" id="score">クリック数：0</div>
+    <button class="btn" id="startBtn">スタート</button>
+    <div class="result" id="result" style="display:none;"></div>
+    <div class="result-detail" id="resultDetail" style="display:none;">
+      <h3>詳細結果</h3>
+      <div>
+        <span class="label">総クリック数:</span>
+        <span class="value" id="totalClicks">0</span>
+      </div>
+      <div>
+        <span class="label">制限時間:</span>
+        <span class="value" id="timeLimit">30秒</span>
+      </div>
+      <div>
+        <span class="label">1秒あたりのクリック数:</span>
+        <span class="value" id="clicksPerSecond">0</span>
+      </div>
+      <div>
+        <span class="label">平均クリック間隔:</span>
+        <span class="value" id="avgClickInterval">0秒</span>
+      </div>
+      <div>
+        <span class="label">最大連続クリック:</span>
+        <span class="value" id="maxConsecutive">0</span>
+      </div>
+    </div>
+    <div class="performance-rating" id="performanceRating" style="display:none;"></div>
+    <div id="resultButtons" style="display:none;">
+      <button class="btn restart" onclick="restartGame()">もう一度挑戦</button>
+      <button class="btn menu" onclick="window.location.href='brain_training_game.html'">メニューに戻る</button>
+    </div>
+  </div>
+  <script>
+    const gameArea = document.getElementById('gameArea');
+    const timerElem = document.getElementById('timer');
+    const scoreElem = document.getElementById('score');
+    const resultElem = document.getElementById('result');
+    const resultDetail = document.getElementById('resultDetail');
+    const performanceRating = document.getElementById('performanceRating');
+    const resultButtons = document.getElementById('resultButtons');
+    const startBtn = document.getElementById('startBtn');
+    
+    let score = 0;
+    let timeLeft = 30;
+    let timerId = null;
+    let isPlaying = false;
+    let clickTimes = [];
+    let consecutiveClicks = 0;
+    let maxConsecutive = 0;
+    let lastClickTime = 0;
+
+    function randomColor() {
+      const colors = ['#e74c3c','#27ae60','#2980b9','#f1c40f','#8e44ad','#16a085','#e67e22'];
+      return colors[Math.floor(Math.random()*colors.length)];
+    }
+    
+    function randomInt(min, max) {
+      return Math.floor(Math.random()*(max-min+1))+min;
+    }
+    
+    function spawnTarget() {
+      gameArea.innerHTML = '';
+      const size = randomInt(36, 72);
+      const x = randomInt(0, 320-size);
+      const y = randomInt(0, 320-size);
+      const target = document.createElement('div');
+      target.className = 'target';
+      target.style.width = size+'px';
+      target.style.height = size+'px';
+      target.style.left = x+'px';
+      target.style.top = y+'px';
+      target.style.background = randomColor();
+      target.onclick = () => {
+        if (!isPlaying) return;
+        const currentTime = Date.now();
+        clickTimes.push(currentTime);
+        
+        // 連続クリックの計算
+        if (currentTime - lastClickTime < 1000) {
+          consecutiveClicks++;
+          maxConsecutive = Math.max(maxConsecutive, consecutiveClicks);
+        } else {
+          consecutiveClicks = 1;
+        }
+        lastClickTime = currentTime;
+        
+        score++;
+        scoreElem.textContent = 'クリック数：'+score;
+        spawnTarget();
+      };
+      gameArea.appendChild(target);
+    }
+    
+    function startGame() {
+      score = 0;
+      timeLeft = 30;
+      isPlaying = true;
+      clickTimes = [];
+      consecutiveClicks = 0;
+      maxConsecutive = 0;
+      lastClickTime = 0;
+      
+      scoreElem.textContent = 'クリック数：0';
+      resultElem.style.display = 'none';
+      resultDetail.style.display = 'none';
+      performanceRating.style.display = 'none';
+      resultButtons.style.display = 'none';
+      startBtn.style.display = 'none';
+      timerElem.textContent = timeLeft;
+      spawnTarget();
+      
+      timerId = setInterval(()=>{
+        timeLeft--;
+        timerElem.textContent = timeLeft;
+        if(timeLeft<=0){
+          endGame();
+        }
+      },1000);
+    }
+    
+    function endGame() {
+      isPlaying = false;
+      clearInterval(timerId);
+      gameArea.innerHTML = '';
+      
+      // 結果計算
+      const clicksPerSecond = (score / 30).toFixed(2);
+      const avgClickInterval = score > 0 ? (30 / score).toFixed(2) : 0;
+      
+      // パフォーマンス評価
+      let rating, ratingClass, ratingText;
+      if (score >= 45) {
+        rating = 'excellent';
+        ratingClass = 'rating-excellent';
+        ratingText = '優秀！素晴らしい反応速度です！';
+      } else if (score >= 30) {
+        rating = 'good';
+        ratingClass = 'rating-good';
+        ratingText = '良好！良い反応速度です！';
+      } else if (score >= 15) {
+        rating = 'average';
+        ratingClass = 'rating-average';
+        ratingText = '普通！もう少し練習しましょう！';
+      } else {
+        rating = 'poor';
+        ratingClass = 'rating-poor';
+        ratingText = '要改善！もっと練習が必要です！';
+      }
+      
+      // 結果表示
+      resultElem.textContent = `結果：${score}回クリックできました！`;
+      resultElem.style.display = 'block';
+      
+      // 詳細結果
+      document.getElementById('totalClicks').textContent = score;
+      document.getElementById('clicksPerSecond').textContent = clicksPerSecond;
+      document.getElementById('avgClickInterval').textContent = avgClickInterval + '秒';
+      document.getElementById('maxConsecutive').textContent = maxConsecutive;
+      resultDetail.style.display = 'block';
+      
+      // パフォーマンス評価
+      performanceRating.textContent = ratingText;
+      performanceRating.className = `performance-rating ${ratingClass}`;
+      performanceRating.style.display = 'block';
+      
+      // ボタン表示
+      resultButtons.style.display = 'block';
+      
+      // ゲーム結果記録
+      if (typeof onGameEnd === 'function') {
+        onGameEnd(score, 30, 0);
+      }
+    }
+    
+    function restartGame() {
+      startBtn.style.display = '';
+      startGame();
+    }
+    
+    startBtn.onclick = startGame;
+  </script>
+</body>
+</html> 

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>反応ゲーム</title>
+  <style>
+    body {
+      background: #e0e5ea;
+      font-family: 'Segoe UI', 'Meiryo', sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+      padding: 40px 30px 30px 30px;
+      max-width: 420px;
+      width: 90vw;
+      text-align: center;
+      position: relative;
+    }
+    .title {
+      font-size: 1.5em;
+      font-weight: bold;
+      margin-bottom: 18px;
+      color: #222;
+    }
+    .desc {
+      font-size: 1.1em;
+      color: #333;
+      margin-bottom: 18px;
+    }
+    .reaction-btn, .start-btn {
+      background: #3498db;
+      color: #fff;
+      font-size: 2em;
+      border: none;
+      border-radius: 14px;
+      padding: 18px 48px;
+      cursor: pointer;
+      margin: 20px 0 0 0;
+      transition: background 0.2s;
+      outline: none;
+      display: inline-block;
+    }
+    .reaction-btn:active, .start-btn:active {
+      background: #217dbb;
+    }
+    .wait {
+      font-size: 1.5em;
+      color: #34495e;
+      margin: 30px 0 0 0;
+    }
+    .result {
+      font-size: 1.3em;
+      margin: 18px 0 10px 0;
+      color: #333;
+    }
+    .warning {
+      color: #e74c3c;
+      font-size: 1.2em;
+      margin: 18px 0 0 0;
+    }
+    .restart-btn {
+      background: #27ae60;
+      color: #fff;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 32px;
+      cursor: pointer;
+      margin-top: 18px;
+      transition: background 0.2s;
+    }
+    .restart-btn:active {
+      background: #1e874b;
+    }
+    .back-btn {
+      background: #95a5a6;
+      color: #fff;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 32px;
+      cursor: pointer;
+      margin-top: 18px;
+      margin-left: 10px;
+      transition: background 0.2s;
+    }
+    .back-btn:active {
+      background: #7f8c8d;
+    }
+    .red { color: #e74c3c; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="modal" id="main-content">
+    <div class="title">反応ゲーム</div>
+    <div class="desc" id="desc">"スタート"ボタンを押して、画面が変わったらすぐに"今だ！"を押してください。5回計測します。</div>
+    <div class="wait" id="waitMsg" style="display:none;"></div>
+    <button class="start-btn" id="startBtn">スタート</button>
+    <button class="reaction-btn" id="reactionBtn" style="display:none;">今だ！</button>
+    <div class="result" id="result" style="display:none;"></div>
+    <div class="warning" id="warning" style="display:none;"></div>
+    <div style="display: flex; justify-content: center; gap: 10px;">
+      <button class="restart-btn" id="restartBtn" style="display:none;">もう一度</button>
+      <button class="back-btn" id="backBtn" style="display:none;" onclick="window.location.href='quick-judgment-game.html'">次のゲームへ</button>
+    </div>
+  </div>
+  <div id="gameResult" style="display:none; text-align:center;">
+    <h2>お疲れ様でした！</h2>
+    <div>正解数：<span id="correctCount"></span> / <span id="totalCount"></span></div>
+    <div>ミス回数：<span id="missCount" class="red"></span></div>
+    <div id="detailedResults" style="display:none;">
+      <div style="background: #f8f9fa; border-radius: 10px; padding: 1.5em; margin: 1em 0; text-align: left;">
+        <h3 style="color: #2574c7; margin-top: 0; font-size: 1.3em;">詳細結果</h3>
+        <div style="margin: 0.5em 0; display: flex; justify-content: space-between;">
+          <span style="font-weight: bold; color: #555;">平均反応時間:</span>
+          <span style="color: #27ae60; font-weight: bold;" id="avgReactionTime">0秒</span>
+        </div>
+        <div style="margin: 0.5em 0; display: flex; justify-content: space-between;">
+          <span style="font-weight: bold; color: #555;">最速反応時間:</span>
+          <span style="color: #27ae60; font-weight: bold;" id="fastestTime">0秒</span>
+        </div>
+        <div style="margin: 0.5em 0; display: flex; justify-content: space-between;">
+          <span style="font-weight: bold; color: #555;">最遅反応時間:</span>
+          <span style="color: #e74c3c; font-weight: bold;" id="slowestTime">0秒</span>
+        </div>
+        <div style="margin: 0.5em 0; display: flex; justify-content: space-between;">
+          <span style="font-weight: bold; color: #555;">反応時間のばらつき:</span>
+          <span style="color: #f39c12; font-weight: bold;" id="reactionVariance">0秒</span>
+        </div>
+      </div>
+      <div id="performanceRating" style="font-size: 1.4em; font-weight: bold; margin: 1em 0; padding: 0.5em; border-radius: 8px;"></div>
+      <div style="background: #f8f9fa; border-radius: 10px; padding: 1.5em; margin: 1em 0; text-align: left;">
+        <h3 style="color: #2574c7; margin-top: 0; font-size: 1.3em;">各試行の結果</h3>
+        <div id="trialResults"></div>
+      </div>
+    </div>
+    <button onclick="restartGame()">もう一度挑戦</button>
+    <a href="brain_training_game.html">トップ画面へ</a>
+  </div>
+  <script src="game_result.js"></script>
+  <script>
+    const TOTAL_TRIALS = 5;
+    const MIN_WAIT = 1500; // ms
+    const MAX_WAIT = 5000; // ms
+
+    let trial = 0;
+    let results = [];
+    let waiting = false;
+    let canReact = false;
+    let startTime = 0;
+    let waitTimer = null;
+    let isGameActive = false;
+    let score = 0;
+    let comboCount = 0;
+    let correctCount = 0;
+    let incorrectCount = 0;
+
+    // ゲーム設定を取得
+    const gameSettings = getGameSettings('reaction');
+    const difficultySettings = getDifficultySettings('reaction');
+
+    const startBtn = document.getElementById('startBtn');
+    const reactionBtn = document.getElementById('reactionBtn');
+    const waitMsg = document.getElementById('waitMsg');
+    const resultElem = document.getElementById('result');
+    const warningElem = document.getElementById('warning');
+    const restartBtn = document.getElementById('restartBtn');
+    const backBtn = document.getElementById('backBtn');
+    const descElem = document.getElementById('desc');
+
+    function resetGame() {
+      trial = 0;
+      results = [];
+      waiting = false;
+      canReact = false;
+      startTime = 0;
+      if (waitTimer) clearTimeout(waitTimer);
+      startBtn.style.display = '';
+      reactionBtn.style.display = 'none';
+      waitMsg.style.display = 'none';
+      resultElem.style.display = 'none';
+      warningElem.style.display = 'none';
+      restartBtn.style.display = 'none';
+      backBtn.style.display = 'none';
+      descElem.style.display = '';
+    }
+
+    function startTrial() {
+      waiting = true;
+      canReact = false;
+      warningElem.style.display = 'none';
+      startBtn.style.display = 'none';
+      reactionBtn.style.display = 'none';
+      resultElem.style.display = 'none';
+      const totalTrials = TOTAL_TRIALS;
+      waitMsg.textContent = `反応ゲーム (${trial + 1} / ${totalTrials})\n"今だ！"が出るまで待ってください…`;
+      waitMsg.style.display = '';
+      descElem.style.display = 'none';
+      // ランダム待機
+      const waitTime = Math.floor(Math.random() * (MAX_WAIT - MIN_WAIT + 1)) + MIN_WAIT;
+      waitTimer = setTimeout(() => {
+        waiting = false;
+        canReact = true;
+        waitMsg.textContent = '';
+        reactionBtn.style.display = '';
+        startTime = performance.now();
+      }, waitTime);
+    }
+
+    function handleReaction() {
+      if (!canReact) {
+        // フライング
+        warningElem.textContent = 'フライング！もう一度やり直してください。';
+        warningElem.style.display = '';
+        if (waitTimer) clearTimeout(waitTimer);
+        setTimeout(() => {
+          warningElem.style.display = 'none';
+          startTrial();
+        }, 1200);
+        return;
+      }
+      const reactionTime = ((performance.now() - startTime) / 1000).toFixed(2);
+      results.push(Number(reactionTime));
+      reactionBtn.style.display = 'none';
+      waitMsg.textContent = `反応時間：${reactionTime} 秒`;
+      waitMsg.style.display = '';
+      canReact = false;
+      setTimeout(() => {
+        waitMsg.style.display = 'none';
+        trial++;
+        const totalTrials = TOTAL_TRIALS;
+        if (trial < totalTrials) {
+          startTrial();
+        } else {
+          showResult();
+        }
+      }, 1200);
+    }
+
+    function showResult() {
+      let html = '<b>結果</b><br>';
+      let sum = 0;
+      results.forEach((t, i) => {
+        html += `${i + 1}回目：${t} 秒<br>`;
+        sum += t;
+      });
+      const avg = (sum / results.length).toFixed(2);
+      html += `<br>平均反応時間：<b>${avg} 秒</b>`;
+      resultElem.innerHTML = html;
+      resultElem.style.display = '';
+      restartBtn.style.display = '';
+      backBtn.style.display = '';
+      document.getElementById('main-content').style.display = 'none';
+      document.getElementById('gameResult').style.display = 'block';
+    }
+
+    function onGameEnd(correct, total, miss) {
+      document.getElementById('correctCount').textContent = correct;
+      document.getElementById('totalCount').textContent = total;
+      document.getElementById('missCount').textContent = miss;
+      
+      // 詳細結果の計算と表示
+      if (results.length > 0) {
+        const avgTime = (results.reduce((a, b) => a + b, 0) / results.length).toFixed(3);
+        const fastestTime = Math.min(...results).toFixed(3);
+        const slowestTime = Math.max(...results).toFixed(3);
+        
+        // 分散の計算
+        const mean = results.reduce((a, b) => a + b, 0) / results.length;
+        const variance = Math.sqrt(results.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / results.length).toFixed(3);
+        
+        // パフォーマンス評価
+        let ratingText, ratingClass;
+        if (avgTime < 0.3) {
+          ratingText = '優秀！素晴らしい反応速度です！';
+          ratingClass = 'background: #d4edda; color: #155724;';
+        } else if (avgTime < 0.5) {
+          ratingText = '良好！良い反応速度です！';
+          ratingClass = 'background: #d1ecf1; color: #0c5460;';
+        } else if (avgTime < 0.8) {
+          ratingText = '普通！もう少し練習しましょう！';
+          ratingClass = 'background: #fff3cd; color: #856404;';
+        } else {
+          ratingText = '要改善！もっと練習が必要です！';
+          ratingClass = 'background: #f8d7da; color: #721c24;';
+        }
+        
+        // 詳細結果の表示
+        document.getElementById('avgReactionTime').textContent = avgTime + '秒';
+        document.getElementById('fastestTime').textContent = fastestTime + '秒';
+        document.getElementById('slowestTime').textContent = slowestTime + '秒';
+        document.getElementById('reactionVariance').textContent = variance + '秒';
+        
+        // パフォーマンス評価の表示
+        const ratingElem = document.getElementById('performanceRating');
+        ratingElem.textContent = ratingText;
+        ratingElem.style = ratingClass;
+        
+        // 各試行の結果表示
+        const trialResultsElem = document.getElementById('trialResults');
+        let trialHtml = '';
+        results.forEach((time, index) => {
+          const timeClass = time === parseFloat(fastestTime) ? 'color: #27ae60; font-weight: bold;' : 
+                           time === parseFloat(slowestTime) ? 'color: #e74c3c; font-weight: bold;' : '';
+          trialHtml += `<div style="margin: 0.3em 0; display: flex; justify-content: space-between;">
+            <span>${index + 1}回目:</span>
+            <span style="${timeClass}">${time.toFixed(3)}秒</span>
+          </div>`;
+        });
+        trialResultsElem.innerHTML = trialHtml;
+        
+        document.getElementById('detailedResults').style.display = 'block';
+      }
+      
+      document.getElementById('gameResult').style.display = 'block';
+    }
+
+    function startGame() {
+      isGameActive = true;
+      score = 0;
+      correctCount = 0;
+      incorrectCount = 0;
+      comboCount = 0;
+      startTime = Date.now();
+      // 難易度設定に基づいて問題数を設定
+      questionCount = difficultySettings.totalQuestions;
+      updateStats();
+      document.getElementById('gameMessage').textContent = '光ったらすぐクリック！';
+    }
+
+    function checkAnswer(isCorrect) {
+      if (!isGameActive) return;
+      const timeUsed = (Date.now() - startTime) / 1000;
+      if (isCorrect) {
+        correctCount++;
+        comboCount++;
+        document.getElementById('gameMessage').textContent = '正解！';
+        score = calculateScore(correctCount, questionCount, timeUsed, comboCount);
+      } else {
+        incorrectCount++;
+        comboCount = 0;
+        document.getElementById('gameMessage').textContent = '不正解...';
+      }
+      questionCount--;
+      updateStats();
+      if (questionCount <= 0) {
+        isGameActive = false;
+        showPreview();
+      }
+    }
+
+    function updateStats() {
+      document.getElementById('questionCount').textContent = questionCount;
+      document.getElementById('score').textContent = score;
+    }
+
+    function showPreview() {
+      const gameArea = document.getElementById('gameArea');
+      gameArea.innerHTML = '';
+      showGameResult(correctCount, gameSettings.totalQuestions, incorrectCount);
+    }
+
+    startBtn.onclick = startTrial;
+    reactionBtn.onclick = handleReaction;
+    restartBtn.onclick = resetGame;
+    // フライング対策：待機中に「今だ！」ボタン以外のクリックも無効
+    document.addEventListener('keydown', (e) => {
+      if (reactionBtn.style.display !== 'none' && canReact && (e.key === ' ' || e.key === 'Enter')) {
+        handleReaction();
+      }
+    });
+
+    // 初期化
+    resetGame();
+  </script>
+</body>
+</html> 

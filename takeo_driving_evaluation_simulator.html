@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Three.js地図＋道路重ね合わせテスト</title>
+  <style>body { margin: 0; }
+    #map-switch-panel { position:absolute;top:20px;left:20px;z-index:10; }
+    #map-switch-panel button { font-size:18px; margin:2px; padding:6px 18px; }
+  </style>
+</head>
+<body>
+  <div id="map-switch-panel">
+    <button onclick="switchMap('localmap_vector.png')">標準地図</button>
+    <button onclick="switchMap('localmap_photo.png')">航空写真</button>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    let currentMapImage = 'localmap_vector.png';
+    let scene, camera, renderer, plane, textureLoader;
+    let roadLines = [];
+
+    function init() {
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+      renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+      textureLoader = new THREE.TextureLoader();
+      loadMapImage(currentMapImage);
+      loadRoads();
+    }
+
+    function loadMapImage(filename) {
+      if (plane) { scene.remove(plane); plane.geometry.dispose(); plane.material.dispose(); plane = null; }
+      textureLoader.load(filename, function(texture) {
+        const geometry = new THREE.PlaneGeometry(800, 800);
+        const material = new THREE.MeshBasicMaterial({ map: texture });
+        plane = new THREE.Mesh(geometry, material);
+        scene.add(plane);
+        camera.position.set(0, 0, 900);
+        camera.lookAt(0, 0, 0);
+        renderer.render(scene, camera);
+      });
+    }
+
+    window.switchMap = function(filename) {
+      currentMapImage = filename;
+      loadMapImage(currentMapImage);
+      // 再描画（道路も上書き）
+      setTimeout(() => { renderer.render(scene, camera); }, 100);
+    }
+
+    function loadRoads() {
+      fetch('takeo_roads.geojson')
+        .then(res => res.json())
+        .then(geojson => {
+          // 既存の道路線を削除
+          roadLines.forEach(line => scene.remove(line));
+          roadLines = [];
+          // 画像の中心を原点(0,0)に合わせて描画
+          const scale = 20000; // スケール値を調整
+          // 画像の中心座標（例：武雄市中心）
+          const centerLon = 130.0350491;
+          const centerLat = 33.1979126;
+          geojson.features.forEach((feature, idx) => {
+            if (feature.geometry.type === 'LineString') {
+              const coords = feature.geometry.coordinates;
+              if (idx < 3) {
+                console.log('LineString元座標:', coords.slice(0, 5));
+              }
+              const points = coords.map(c => {
+                const x = (c[0] - centerLon) * scale;
+                const y = 0.1;
+                const z = -(c[1] - centerLat) * scale;
+                if (idx < 3) {
+                  console.log('LineString変換後:', { x, y, z });
+                }
+                return new THREE.Vector3(x, y, z);
+              });
+              const geometry = new THREE.BufferGeometry().setFromPoints(points);
+              const line = new THREE.Line(geometry, new THREE.LineBasicMaterial({ color: 0x0066ff, linewidth: 2 }));
+              scene.add(line);
+              roadLines.push(line);
+            } else if (feature.geometry.type === 'MultiLineString') {
+              feature.geometry.coordinates.forEach((coords, subIdx) => {
+                if (idx < 3 && subIdx < 1) {
+                  console.log('MultiLineString元座標:', coords.slice(0, 5));
+                }
+                const points = coords.map(c => {
+                  const x = (c[0] - centerLon) * scale;
+                  const y = 0.1;
+                  const z = -(c[1] - centerLat) * scale;
+                  if (idx < 3 && subIdx < 1) {
+                    console.log('MultiLineString変換後:', { x, y, z });
+                  }
+                  return new THREE.Vector3(x, y, z);
+                });
+                const geometry = new THREE.BufferGeometry().setFromPoints(points);
+                const line = new THREE.Line(geometry, new THREE.LineBasicMaterial({ color: 0x0066ff, linewidth: 2 }));
+                scene.add(line);
+                roadLines.push(line);
+              });
+            }
+          });
+          renderer.render(scene, camera);
+        });
+    }
+
+    init();
+  </script>
+</body>
+</html> 

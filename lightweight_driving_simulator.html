@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>運転シミュレーター</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', 'Meiryo', sans-serif;
+      background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+      margin: 0;
+      min-height: 100vh;
+    }
+    .simulator-layout {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 40px;
+      max-width: 1500px;
+      margin: 2em auto 2em auto;
+    }
+    .simulator-main {
+      flex: 1 1 900px;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px #b0c4de;
+      padding: 2em 2em 2.5em 2em;
+      min-width: 600px;
+      max-width: 1000px;
+    }
+    .status-panel {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2em;
+      margin-bottom: 1.5em;
+      font-size: 1.25em;
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 1em 0.5em;
+      box-shadow: 0 2px 8px #dbe6f3;
+    }
+    .status-item {
+      min-width: 140px;
+      text-align: center;
+      color: #2574c7;
+      font-weight: bold;
+    }
+    .status-icon {
+      font-size: 1.3em;
+      margin-right: 0.2em;
+      vertical-align: middle;
+    }
+    #simCanvas {
+      display: block;
+      width: 100%;
+      max-width: 900px;
+      height: 380px;
+      background: #222;
+      border-radius: 12px;
+      margin: 0 auto 1.5em auto;
+    }
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 2em;
+      margin-bottom: 1.5em;
+    }
+    .ctrl-btn {
+      background: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.2em;
+      font-weight: bold;
+      padding: 0.3em 1em;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #dbe6f3;
+      transition: background 0.2s;
+      min-width: 90px;
+      min-height: 20px;
+      line-height: 1.2;
+    }
+    .ctrl-btn:hover { background: #217dbb; }
+    .sim-hint {
+      text-align: center;
+      color: #e67e22;
+      font-size: 1.15em;
+      margin: 1em 0 0.5em 0;
+    }
+    .howto-guide {
+      width: 340px;
+      background: #f8f9fa;
+      border-radius: 14px;
+      box-shadow: 0 2px 8px #dbe6f3;
+      color: #333;
+      font-size: 1.05em;
+      padding: 1.5em 1.5em;
+      text-align: left;
+      min-height: 220px;
+      flex-shrink: 0;
+    }
+    .howto-guide strong { font-size: 1.1em; }
+    @media (max-width: 1200px) {
+      .simulator-layout { flex-direction: column; align-items: stretch; gap: 0; }
+      .howto-guide { width: 100%; min-height: unset; margin-top: 1.5em; }
+      .simulator-main { min-width: unset; }
+    }
+  </style>
+</head>
+<body>
+  <div class="simulator-layout">
+    <div class="simulator-main">
+      <div class="status-panel">
+        <div class="status-item"><span class="status-icon">🚗</span>速度: <span id="simSpeed">0</span> km/h</div>
+        <div class="status-item"><span class="status-icon">📏</span>距離: <span id="simDistance">0</span> m</div>
+        <div class="status-item"><span class="status-icon">⏰</span>残り: <span id="simTime">30</span> 秒</div>
+        <div class="status-item"><span class="status-icon">🛑</span>急ブレーキ: <span id="simBrake">0</span> 回</div>
+        <div class="status-item"><span class="status-icon">💥</span>衝突: <span id="simCrash">0</span> 回</div>
+      </div>
+      <canvas id="simCanvas" width="900" height="380"></canvas>
+      <div class="controls">
+        <button class="ctrl-btn" onclick="simAccelerate()">↑<br>加速</button>
+        <button class="ctrl-btn" onclick="simBrake()">↓<br>ブレーキ</button>
+        <button class="ctrl-btn" onclick="simLeft()">←<br>左</button>
+        <button class="ctrl-btn" onclick="simRight()">→<br>右</button>
+      </div>
+      <div class="sim-hint">安全運転を心がけましょう！</div>
+      <button class="ctrl-btn" style="background:#27ae60;margin-top:1em;" onclick="endGame()">運転終了</button>
+    </div>
+    <div class="howto-guide">
+      <strong>【遊び方】</strong><br>
+      ・「加速」「ブレーキ」「左」「右」ボタンやキーボード（↑↓←→/WASD）で車を操作します。<br>
+      ・道路標識や他車両に注意しながら安全運転を心がけましょう。<br>
+      ・急ブレーキや衝突は減点対象です。<br>
+      ・運転終了後、自動で技能評価（得点・ランク・コメント・アドバイス）が表示されます。
+    </div>
+  </div>
+  <script>
+    // ゲーム状態
+    let sim = {
+      speed: 0,
+      distance: 0,
+      time: 30,
+      score: 0,
+      running: true,
+      timer: null,
+      brake: 0,
+      crash: 0
+    };
+    function updateSimInfo() {
+      document.getElementById('simSpeed').textContent = sim.speed;
+      document.getElementById('simDistance').textContent = sim.distance;
+      document.getElementById('simTime').textContent = sim.time;
+      document.getElementById('simBrake').textContent = sim.brake;
+      document.getElementById('simCrash').textContent = sim.crash;
+    }
+    function gameTick() {
+      if (!sim.running) return;
+      sim.time--;
+      sim.distance += Math.max(1, Math.floor(sim.speed / 5));
+      updateSimInfo();
+      if (sim.time <= 0) {
+        endGame();
+      }
+    }
+    function simAccelerate() { if (sim.running) sim.speed = Math.min(sim.speed + 10, 120); updateSimInfo(); drawSim(); }
+    function simBrake() {
+      if (sim.running) {
+        if (sim.speed >= 40) sim.brake++;
+        sim.speed = Math.max(sim.speed - 15, 0);
+        updateSimInfo(); drawSim();
+      }
+    }
+    function simLeft() { if (sim.running) sim.distance = Math.max(sim.distance - 2, 0); updateSimInfo(); drawSim(); }
+    function simRight() { if (sim.running) sim.distance += 2; updateSimInfo(); drawSim(); }
+    // 衝突判定（例: 速度が0で左/右を押したら衝突とみなす）
+    function simCrashCheck(event) {
+      if (sim.running && sim.speed === 0 && (event && (event.type === 'keydown' && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')))) {
+        sim.crash++;
+        updateSimInfo();
+      }
+    }
+    document.addEventListener('keydown', simCrashCheck);
+    function endGame() {
+      sim.running = false;
+      clearInterval(sim.timer);
+      sim.score = sim.distance + sim.speed * 2 - sim.brake * 10 - sim.crash * 20;
+      alert('運転終了！\nスコア: ' + sim.score + '\n急ブレーキ: ' + sim.brake + '回\n衝突: ' + sim.crash + '回');
+    }
+    function drawSim() {
+      const canvas = document.getElementById('simCanvas');
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // 道路
+      ctx.fillStyle = '#444';
+      ctx.fillRect(canvas.width/2-80, 0, 160, canvas.height);
+      // 車
+      ctx.fillStyle = '#e67e22';
+      ctx.fillRect(canvas.width/2-30, canvas.height-80, 60, 70);
+      // 距離目盛り
+      ctx.fillStyle = '#fff';
+      for(let i=0;i<12;i++) ctx.fillRect(canvas.width/2-2, i*32, 4, 16);
+    }
+    // 初期化
+    updateSimInfo();
+    sim.timer = setInterval(gameTick, 1000);
+    drawSim();
+  </script>
+</body>
+</html> 
