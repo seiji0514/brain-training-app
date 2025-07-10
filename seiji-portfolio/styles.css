@@ -1,0 +1,2427 @@
+:root {
+  --primary-color: #ff8c00;
+  --secondary-color: #fff3e0;
+  --text-color: #333333;
+  --gold-accent: #d4af37;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", serif;
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+header {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo img {
+  height: 35px;
+  width: auto;
+  object-fit: contain;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+}
+
+.nav-links li a {
+  color: var(--text-color);
+  text-decoration: none;
+  padding: 0.5rem 0;
+  margin: 0 1.5rem;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav-links li a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold-accent);
+  transition: width 0.3s ease;
+}
+
+.nav-links li a:hover::after {
+  width: 100%;
+}
+
+.section {
+  padding: 5rem 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h2 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  padding: 0 4rem;
+  margin: 0 auto 3rem;
+}
+
+h2::before,
+h2::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 3rem;
+  height: 1px;
+  background: var(--gold-accent);
+}
+
+h2::before {
+  left: 0;
+}
+
+h2::after {
+  right: 0;
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem;
+  background-color: rgba(255, 243, 224, 0.7);
+  border: 1px solid rgba(255, 140, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.contact-form label {
+  font-size: 1.1rem;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 1.2rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.contact-form textarea {
+  min-height: 200px;
+  resize: vertical;
+}
+
+.contact-form button {
+  margin-top: 1rem;
+  padding: 1.2rem 2.5rem;
+  font-size: 1.1rem;
+}
+
+button {
+  background: linear-gradient(135deg, var(--primary-color), #ffa500);
+  box-shadow: 0 4px 15px rgba(255, 140, 0, 0.2);
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #ff7000;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .logo img {
+    height: 30px;
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.site-title {
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--text-color);
+  border-left: 1px solid var(--gold-accent);
+  padding-left: 0.8rem;
+}
+
+@media (max-width: 768px) {
+  .site-title {
+    font-size: 0.8rem;
+    padding-left: 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-title {
+    display: none;
+  }
+
+  .logo img {
+    height: 25px;
+  }
+}
+
+.hero-image {
+  width: 100%;
+  height: 100vh;
+  margin-top: 60px;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+  padding: 0 2rem;
+  z-index: 2;
+}
+
+.hero-title {
+  color: white;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  display: inline-block;
+  margin: 0;
+}
+
+.hero-title::before,
+.hero-title::after {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+    padding: 0.8rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.5rem;
+    padding: 0.6rem 1rem;
+  }
+}
+
+/* メインコンテンツの開始位置を調整 */
+#about {
+  margin-top: 2rem;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .hero-image {
+    height: 60vh; /* タブレットでは少し小さく */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-image {
+    height: 40vh; /* モバイルではさらに小さく */
+  }
+}
+
+.skills-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.skill-category {
+  flex: none;
+  width: 100%;
+  min-width: 0;
+  margin: 0 0 1rem 0;
+  padding: 2rem;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.skill-category h3 {
+  color: var(--primary-color);
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--gold-accent);
+  text-align: center;
+}
+
+.skill-category h4 {
+  color: var(--primary-color);
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  padding-left: 1rem;
+  padding-right: 0;
+  width: 100%;
+}
+
+.skill-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.skill-list li {
+  margin-bottom: 1.5rem;
+  text-align: left;
+  padding: 0;
+}
+
+.skill-list li:last-child {
+  margin-bottom: 0;
+}
+
+.skill-list li::before {
+  content: "•";
+  color: var(--gold-accent);
+  position: absolute;
+  left: 0;
+  font-size: 1.4em;
+}
+
+.skill-list strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+  font-size: 1.3rem;
+}
+
+.skill-list p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-color);
+  line-height: 1.4;
+}
+
+.skill-name {
+  font-weight: bold;
+  color: var(--primary-color);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.experience {
+  color: var(--text-color);
+  font-size: 0.9rem;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.cert-list {
+  list-style: none;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.cert-list li {
+  margin-bottom: 1rem;
+  padding-left: 1.2rem;
+  position: relative;
+  color: var(--primary-color);
+  font-size: 0.95rem;
+}
+
+.cert-list li::before {
+  content: "•";
+  color: var(--gold-accent);
+  position: absolute;
+  left: 0;
+  font-size: 1.2em;
+}
+
+/* プロフィール見出しのスタイル更新 */
+.about-intro h3 {
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  text-align: center; /* 中央寄せに変更 */
+  position: relative;
+  padding-bottom: 0;
+}
+
+/* 下線装飾を削除 */
+.about-intro h3::after {
+  display: none;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .about-intro h3 {
+    font-size: 1.6rem;
+    padding-left: 1rem;
+    padding-right: 0;
+  }
+
+  .skill-category h4 {
+    font-size: 1.4rem;
+    padding-left: 0.5rem;
+    padding-right: 0;
+  }
+}
+
+.about-section {
+  margin-top: 120px; /* ヘッダーとの間隔を確保 */
+}
+
+.about-section h2 {
+  font-size: 2rem;
+  padding: 0 2rem;
+  max-width: 90%;
+  margin: 2rem auto 3rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+
+.about-section h2::before,
+.about-section h2::after {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  .about-section h2 {
+    font-size: 1.8rem;
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-section h2 {
+    font-size: 1.6rem;
+    padding: 0 1rem;
+    white-space: normal;
+  }
+}
+
+/* スキルグリッドの幅を調整 */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1200px) {
+  .content {
+    margin: 0 2rem;
+    padding: 2rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    margin: 0 1rem;
+    padding: 1.5rem;
+  }
+}
+
+.profile-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  text-align: left;
+}
+
+.profile-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.profile-list > li {
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  text-align: left;
+  padding-left: 0;
+}
+
+.profile-list > li:last-child {
+  margin-bottom: 0;
+}
+
+.profile-list ul {
+  list-style: none;
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+  text-align: left;
+}
+
+.profile-list ul ul {
+  padding-left: 1.2rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.profile-list ul li {
+  font-size: 0.95rem;
+  font-weight: normal;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 1rem;
+  text-align: left;
+  line-height: 1.4;
+}
+
+.profile-list ul li::before {
+  content: "•";
+  color: var(--gold-accent);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.profile-list > li:last-child,
+.profile-list ul li:last-child {
+  margin-bottom: 0;
+}
+
+/* スキルカテゴリーの見出しスタイル更新 */
+.skill-category h4 {
+  color: var(--primary-color);
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  padding-left: 1rem;
+  padding-right: 0;
+  width: 100%;
+}
+
+/* スキルセクションの見出しスタイル更新 */
+.skills-section h3 {
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  text-align: left;
+  position: relative;
+  padding-left: 2rem;
+  padding-right: 0;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .about-intro h3,
+  .skills-section h3 {
+    font-size: 1.6rem;
+    padding-left: 1rem;
+    padding-right: 0;
+  }
+
+  .skill-category h4 {
+    font-size: 1.4rem;
+    padding-left: 0.5rem;
+    padding-right: 0;
+  }
+}
+
+/* サブリストの中のサブリストのスタイル */
+.profile-list ul ul {
+  padding-left: 1.2rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+/* サブリストの中のサブリストのアイテムのスタイル */
+.profile-list ul ul li {
+  font-size: 0.9rem;
+  padding-left: 1rem;
+  margin-bottom: 0.3rem;
+  text-align: left;
+}
+
+/* サブリストの中のサブリストのバレットポイント */
+.profile-list ul ul li::before {
+  content: "-";
+  color: var(--gold-accent);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* 特技カテゴリーのスタイル調整 */
+.profile-list > li:nth-child(2) ul {
+  margin-left: 0;
+  padding-left: 1.5rem;
+}
+
+/* プロフィールセクションとスキルセクションの間隔を調整 */
+.about-intro {
+  margin-bottom: 4rem; /* プロフィールセクションの下部マージンを増やす */
+}
+
+/* スキルセクションの上部マージンを追加 */
+.skills-section {
+  margin-top: 4rem; /* スキルセクションの上部マージンを追加 */
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .about-intro {
+    margin-bottom: 3rem; /* モバイル表示での余白を調整 */
+  }
+
+  .profile-content {
+    padding: 2rem; /* モバイル表示での内部余白を調整 */
+  }
+
+  .skills-section {
+    margin-top: 3rem; /* モバイル表示での余白を調整 */
+  }
+}
+
+/* その他カテゴリーのスタイル調整 */
+.skill-category:last-child .skill-list {
+  text-align: left; /* 左揃えに変更 */
+  padding-left: 0;
+}
+
+.skill-category:last-child .skill-list li {
+  margin-bottom: 1rem;
+  padding-left: 0;
+  position: relative;
+  text-align: left; /* 左揃えに変更 */
+}
+
+.skill-category:last-child .skill-name {
+  display: block;
+  margin-right: 0;
+  text-align: left; /* 左揃えに変更 */
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+}
+
+.skill-category:last-child .experience {
+  display: block;
+  color: var(--text-color);
+  font-size: 0.9rem;
+  text-align: left; /* 左揃えに変更 */
+  margin: 0.3rem 0;
+}
+
+.skill-category:last-child p {
+  margin-top: 0.3rem;
+  font-size: 0.95rem;
+  color: var(--text-color);
+  text-align: left; /* 左揃えに変更 */
+}
+
+/* バレットポイントを非表示に */
+.skill-category:last-child .skill-list li::before {
+  display: none;
+}
+
+/* その他カテゴリーの見出しスタイル調整 */
+.skill-category:last-child h4 {
+  text-align: center; /* 中央寄せに変更 */
+  padding-left: 0; /* 左パディングを削除 */
+  padding-right: 0; /* 右パディングを削除 */
+  margin-bottom: 2rem; /* 下マージンを調整 */
+  font-size: 1.6rem;
+  color: var(--primary-color);
+  width: 100%;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .skill-category:last-child h4 {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* 資格・認定セクションのスタイル調整 */
+.certifications h3 {
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  text-align: center; /* 中央寄せに変更 */
+  position: relative;
+  padding: 0; /* パディングをリセット */
+}
+
+.cert-list {
+  list-style: none;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.cert-list li {
+  margin-bottom: 1rem;
+  padding-left: 1.2rem;
+  position: relative;
+  color: var(--primary-color); /* テキストをオレンジ色に */
+  font-size: 0.95rem;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .certifications h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* 制作物セクションのスタイル */
+.works-section {
+  margin-top: 120px;
+}
+
+.work-item {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 3rem;
+}
+
+.work-item h3 {
+  color: var(--primary-color);
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9のアスペクト比 */
+  margin-bottom: 2rem;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+}
+
+.work-description {
+  padding: 1.5rem;
+  background: var(--secondary-color);
+  border-radius: 8px;
+}
+
+.work-description h4 {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.work-description p {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.work-description p:last-child {
+  margin-bottom: 0;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .work-item {
+    padding: 1.5rem;
+  }
+
+  .work-item h3 {
+    font-size: 1.4rem;
+  }
+
+  .work-description {
+    padding: 1rem;
+  }
+}
+
+/* 制作実績の見出しスタイル */
+.works-section h2 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  text-align: center;
+  position: relative;
+  margin: 0 auto 3rem;
+  padding: 0 4rem;
+  display: block; /* インラインブロックからブロックに変更 */
+  width: fit-content;
+}
+
+/* 見出しの装飾線のスタイル */
+.works-section h2::before,
+.works-section h2::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 3rem;
+  height: 1px;
+  background: var(--gold-accent);
+}
+
+.works-section h2::before {
+  left: 0;
+}
+
+.works-section h2::after {
+  right: 0;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .works-section h2 {
+    font-size: 2rem;
+    padding: 0 2rem;
+  }
+}
+
+/* 制作実績の説明文スタイル */
+.works-intro {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 0 2rem;
+}
+
+.works-intro p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.works-intro p:last-child {
+  margin-bottom: 0;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .works-intro {
+    padding: 0 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .works-intro p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
+
+/* 画像ギャラリーのスタイル */
+.image-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.gallery-item {
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+.gallery-item figcaption {
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover figcaption {
+  transform: translateY(0);
+}
+
+.gallery-item figcaption h4 {
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.gallery-item figcaption p {
+  font-size: 0.9rem;
+  margin: 0;
+  color: var(--text-color);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .image-gallery {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+}
+
+/* お問い合わせセクションのスタイル */
+.contact-section {
+  margin-top: 120px; /* ヘッダーとの間隔を追加 */
+  padding-top: 2rem; /* 上部の内部余白を追加 */
+}
+
+/* お問い合わせセクションの見出しスタイル */
+.contact-section h2 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  text-align: center;
+  position: relative;
+  margin: 0 auto 4rem; /* 下部マージンを増やす */
+  padding: 2rem 4rem; /* 上下のパディングを追加 */
+  display: block;
+  width: fit-content;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .contact-section {
+    margin-top: 80px; /* モバイル表示での余白を調整 */
+    padding-top: 1.5rem;
+  }
+
+  .contact-section h2 {
+    font-size: 2rem;
+    padding: 1.5rem 2rem;
+    margin-bottom: 3rem;
+  }
+}
+
+/* 障害についてセクションの基本スタイルのみ残す */
+.disability-section {
+  margin-top: 120px;
+}
+
+.disability-section h2 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  text-align: center;
+  position: relative;
+  margin: 0 auto 4rem;
+  padding: 2rem 4rem;
+  display: block;
+  width: fit-content;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .disability-section {
+    margin-top: 80px;
+  }
+
+  .disability-section h2 {
+    font-size: 2rem;
+    padding: 1.5rem 2rem;
+  }
+}
+
+/* 障害等についてのセクションスタイル */
+.disability-details {
+  margin-bottom: 2rem;
+}
+
+.disability-details h4 {
+  color: var(--text-color);
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.disability-details ul {
+  list-style: none;
+  padding-left: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.disability-details li {
+  margin-bottom: 0.5rem;
+  position: relative;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.disability-details li::before {
+  content: "•";
+  color: var(--gold-accent);
+  position: absolute;
+  left: -1.2rem;
+}
+
+.disability-status p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+/* 障害特性のリストスタイル */
+.disability-characteristics ul {
+  list-style: none;
+  padding-left: 1.2rem;
+}
+
+.disability-characteristics li {
+  margin-bottom: 1rem;
+  position: relative;
+  line-height: 1.6;
+}
+
+.disability-characteristics li::before {
+  content: "•";
+  color: var(--gold-accent);
+  position: absolute;
+  left: -1.2rem;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .disability-details h4 {
+    font-size: 0.95rem;
+  }
+
+  .disability-details li {
+    font-size: 1rem;
+  }
+}
+
+/* 障害等についてのリストスタイル */
+.disability-list {
+  list-style: none;
+  padding-left: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.disability-list li {
+  margin-bottom: 1rem;
+  position: relative;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-color); /* 黒色に変更 */
+}
+
+.disability-list li::before {
+  content: "•";
+  color: var(--gold-accent);
+  position: absolute;
+  left: -1.2rem;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .disability-list li {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+  }
+}
+
+/* 脊髄刺激療法セクションのスタイル */
+.scs-therapy {
+  margin-top: 3rem;
+}
+
+.scs-therapy h3 {
+  color: var(--text-color); /* 黒色に変更 */
+  font-size: 1.1rem; /* フォントサイズを小さく */
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.scs-therapy h4 {
+  color: var(--text-color);
+  font-size: 1.1rem;
+  margin: 2rem 0 1rem;
+}
+
+.mechanism-list {
+  padding-left: 2rem;
+  margin-bottom: 2rem;
+  font-size: 1rem; /* リストの文字サイズを小さく */
+}
+
+.mechanism-list li {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.caution-note {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.caution-list,
+.other-list {
+  list-style: none;
+  padding-left: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.caution-list li,
+.other-list li {
+  position: relative;
+  margin-bottom: 0.8rem;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.caution-list li::before,
+.other-list li::before {
+  content: "•";
+  color: var(--gold-accent);
+  position: absolute;
+  left: -1.2rem;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .scs-therapy h3 {
+    font-size: 1rem;
+  }
+
+  .mechanism-list {
+    font-size: 0.95rem;
+  }
+}
+
+/* 動画セクションのスタイル */
+.video-section {
+  margin-top: 3rem;
+  padding: 3rem 5%;
+}
+
+.video-section h2 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  text-align: center; /* 中央寄せに設定 */
+  position: relative;
+  margin: 0 auto 3rem; /* 上下マージンを調整 */
+  padding: 0 4rem;
+  display: block;
+  width: fit-content;
+}
+
+/* 見出しの装飾線のスタイル */
+.video-section h2::before,
+.video-section h2::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 3rem;
+  height: 1px;
+  background: var(--gold-accent);
+}
+
+.video-section h2::before {
+  left: 0;
+}
+
+.video-section h2::after {
+  right: 0;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .video-section h2 {
+    font-size: 2rem;
+    padding: 0 2rem;
+  }
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9のアスペクト比 */
+  margin-bottom: 2rem;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.video-description {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--secondary-color);
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+
+.video-description h3 {
+  color: var(--primary-color);
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.video-description p {
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .video-section {
+    margin-top: 2rem;
+    padding: 2rem 5%;
+  }
+
+  .video-description h3 {
+    font-size: 1.2rem;
+  }
+}
+
+/* ロゴ作成カテゴリーの特別なスタイル */
+.skill-category:nth-child(2) .skill-list li {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%; /* 親要素の幅を超えないようにする */
+}
+
+/* 事務関係のスキルリストスタイル */
+.skill-category:nth-child(3) {
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.skill-category:nth-child(3) .skill-list {
+  width: 100%;
+  padding: 1rem;
+  background: var(--secondary-color);
+  border-radius: 6px;
+  margin-top: 1rem;
+}
+
+.skill-category:nth-child(3) .skill-list li {
+  white-space: normal; /* 改行を許可 */
+  overflow: visible; /* はみ出しを表示 */
+  text-overflow: clip; /* 省略記号を表示しない */
+  padding: 0.8rem;
+  margin-bottom: 0.8rem;
+  font-size: 1.1rem;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .skill-category:nth-child(3) {
+    padding: 1.5rem;
+  }
+
+  .skill-category:nth-child(3) .skill-list {
+    padding: 0.8rem;
+  }
+
+  .skill-category:nth-child(3) .skill-list li {
+    font-size: 1rem;
+    padding: 0.6rem;
+  }
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .skill-category h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.2rem;
+  }
+}
+
+/* お問い合わせフォームのスタイル */
+.contact-section {
+  margin-top: 120px;
+  padding: 4rem 5%;
+}
+
+.contact-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  padding: 3rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.contact-info h3 {
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-info p {
+  color: var(--text-color);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  margin-bottom: 2rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.8rem;
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+.required {
+  color: #ff4444;
+  margin-left: 0.3rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.submit-button {
+  background: var(--primary-color);
+  color: white;
+  padding: 1rem 3rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+.submit-button:hover {
+  background-color: #ff7000;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .contact-container {
+    padding: 2rem;
+  }
+
+  .contact-info h3 {
+    font-size: 1.6rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.contact-methods {
+  margin: 2rem 0;
+  padding: 1rem;
+  background: var(--secondary-color);
+  border-radius: 8px;
+}
+
+.phone-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: opacity 0.3s;
+}
+
+.phone-link:hover {
+  opacity: 0.8;
+}
+
+.phone-link img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.phone-link span {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .phone-link span {
+    font-size: 1rem;
+  }
+}
+
+.contact-methods {
+  margin: 2rem 0;
+  padding: 2rem;
+  background: var(--secondary-color);
+  border-radius: 8px;
+}
+
+.contact-method {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.contact-method:last-child {
+  margin-bottom: 0;
+}
+
+.contact-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 1rem;
+}
+
+.contact-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.contact-link:hover {
+  color: #ff7000;
+}
+
+.contact-note {
+  font-size: 0.9rem;
+  color: #666;
+  margin-left: 1rem;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .contact-method {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .contact-icon {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  .contact-note {
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+}
+
+/* フッターのスタイル */
+.footer {
+  background-color: var(--secondary-color); /* 薄いオレンジ色の背景に変更 */
+  color: var(--text-color); /* テキストの色を通常の文字色に変更 */
+  padding: 4rem 0 0;
+  margin-top: 6rem;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+}
+
+.footer-info h3 {
+  color: var(--primary-color); /* オレンジ色に変更 */
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.footer-info p {
+  color: var(--text-color); /* 通常の文字色に変更 */
+  line-height: 1.6;
+}
+
+.footer-links h4,
+.footer-contact h4 {
+  color: var(--primary-color); /* オレンジ色に変更 */
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links ul li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-links ul li a {
+  color: var(--text-color); /* 通常の文字色に変更 */
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links ul li a:hover {
+  color: var(--primary-color); /* ホバー時はオレンジ色に */
+}
+
+.footer-contact p {
+  color: var(--text-color); /* 通常の文字色に変更 */
+  line-height: 1.6;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 2rem;
+  margin-top: 4rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1); /* 薄い黒のボーダーに変更 */
+}
+
+.footer-bottom p {
+  color: var(--text-color); /* 通常の文字色に変更 */
+  opacity: 0.7; /* 透明度を設定 */
+  font-size: 0.9rem;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .footer-links ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .footer-links ul li {
+    margin: 0;
+  }
+}
+
+/* ハンバーガーメニューのスタイル */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.menu-toggle span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: var(--primary-color);
+  transition: all 0.3s ease;
+}
+
+/* モバイルナビゲーションのスタイル */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.98);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links li {
+    margin: 1.5rem 0;
+  }
+
+  .nav-links li a {
+    font-size: 1.2rem;
+    padding: 0.8rem 1.5rem;
+  }
+
+  /* メニューが開いているときのハンバーガーアイコン */
+  .menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+  }
+
+  /* コンテンツのレスポンシブ調整 */
+  .content {
+    padding: 2rem 1rem;
+  }
+
+  .hero-title {
+    font-size: 1.8rem;
+    padding: 1rem;
+  }
+
+  .section {
+    padding: 3rem 1rem;
+  }
+}
+
+/* さらに小さい画面サイズの対応 */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.5rem;
+  }
+
+  .section h2 {
+    font-size: 1.8rem;
+  }
+
+  .content {
+    padding: 1.5rem 0.8rem;
+  }
+}
+
+.hero-slider {
+  width: 100%;
+  height: 797px;
+  margin-top: 60px;
+  margin-bottom: 2rem;
+  max-width: 1620px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-slider .swiper-slide {
+  position: relative;
+  width: 1620px;
+  height: 797px;
+}
+
+.hero-slider .swiper-slide img {
+  width: 1620px;
+  height: 797px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 140, 0, 0.8); /* オレンジ色の背景 */
+  border-radius: 50%;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: rgba(255, 140, 0, 1);
+  transform: scale(1.1);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* 矢印の位置調整 */
+.swiper-button-next {
+  right: 20px;
+}
+
+.swiper-button-prev {
+  left: 20px;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 40px;
+    height: 40px;
+  }
+
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 18px;
+  }
+}
+
+/* ページネーションのスタイルも更新 */
+.swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 140, 0, 0.7);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  background: rgba(255, 140, 0, 1);
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1620px) {
+  .hero-slider .swiper-slide img {
+    width: 100%;
+    height: 797px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-slider,
+  .hero-slider .swiper-slide {
+    height: 797px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-slider,
+  .hero-slider .swiper-slide {
+    height: 797px;
+  }
+}
+
+/* リハビリシステム専用スタイル */
+.rehabilitation-system {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 15px;
+  padding: 30px;
+  margin: 20px 0;
+  color: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.rehabilitation-system h3 {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.system-overview {
+  margin-bottom: 30px;
+}
+
+.system-highlight {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  border-left: 5px solid #e74c3c;
+  backdrop-filter: blur(10px);
+}
+
+.system-highlight h4 {
+  color: #fff;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.system-highlight p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.rehabilitation-system .work-description {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+}
+
+.rehabilitation-system .work-description h4 {
+  color: #fff;
+  font-size: 1.2rem;
+  margin: 20px 0 10px 0;
+  padding-bottom: 5px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.rehabilitation-system .work-description h4:first-child {
+  margin-top: 0;
+}
+
+.rehabilitation-system .work-description ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.rehabilitation-system .work-description li {
+  color: rgba(255, 255, 255, 0.9);
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  padding-left: 20px;
+}
+
+.rehabilitation-system .work-description li::before {
+  content: "✓";
+  color: #27ae60;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  top: 8px;
+}
+
+.rehabilitation-system .work-description li:last-child {
+  border-bottom: none;
+}
+
+  .rehabilitation-system .work-description p {
+    color: rgba(255, 255, 255, 0.9);
+    margin: 10px 0;
+    font-size: 1rem;
+  }
+
+  /* プロジェクト状況表示 */
+  .project-status {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .status-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+
+  .status-badge.cancelled {
+    background: rgba(231, 76, 60, 0.8);
+    color: white;
+    border: 2px solid rgba(231, 76, 60, 0.6);
+  }
+
+  .status-note {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    font-style: italic;
+    margin: 0;
+  }
+
+  .project-status-mini {
+    margin-top: 15px;
+    text-align: center;
+  }
+
+  .status-badge-mini {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 0.8rem;
+  }
+
+  .status-badge-mini.cancelled {
+    background: rgba(231, 76, 60, 0.8);
+    color: white;
+    border: 1px solid rgba(231, 76, 60, 0.6);
+  }
+
+  .quick-link.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+    .quick-link.disabled:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* ゲームコレクション用スタイル */
+  .games-quick {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  }
+
+  .simulator-quick {
+    background: linear-gradient(135deg, #4834d4 0%, #686de0 100%);
+  }
+
+  .games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+  }
+
+  .game-category {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+  }
+
+  .game-category h5 {
+    color: #fff;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .game-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .game-link {
+    display: block;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .game-link:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  /* ゲームコレクション詳細ページ用 */
+  .games-collection {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+    border-radius: 15px;
+    padding: 30px;
+    margin: 20px 0;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .games-collection h3 {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .games-overview {
+    margin-bottom: 30px;
+  }
+
+  .games-highlight {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 5px solid #ff6b6b;
+    backdrop-filter: blur(10px);
+  }
+
+  .games-highlight h4 {
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+
+  .games-highlight p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .games-collection .work-description {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 25px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+  }
+
+  .games-collection .work-description h4 {
+    color: #fff;
+    font-size: 1.2rem;
+    margin: 20px 0 10px 0;
+    padding-bottom: 5px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .games-collection .work-description h4:first-child {
+    margin-top: 0;
+  }
+
+  .games-collection .work-description ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+  }
+
+  .games-collection .work-description li {
+    color: rgba(255, 255, 255, 0.9);
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    padding-left: 20px;
+  }
+
+  .games-collection .work-description li::before {
+    content: "🎮";
+    position: absolute;
+    left: 0;
+    top: 8px;
+  }
+
+  .games-collection .work-description li:last-child {
+    border-bottom: none;
+  }
+
+  .games-collection .work-description a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+
+  .games-collection .work-description a:hover {
+    color: #ffd700;
+    text-decoration: underline;
+  }
+
+  /* 外部URL表示用スタイル */
+  .external-url {
+    color: #3498db;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .external-url:hover {
+    color: #2980b9;
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+  }
+
+  .external-url:active {
+    transform: translateY(0);
+  }
+
+  .external-url::after {
+    content: " ↗";
+    font-size: 0.8em;
+    opacity: 0.7;
+  }
+
+  .external-url:hover::after {
+    opacity: 1;
+  }
+
+  /* レスポンシブ対応 */
+  @media (max-width: 768px) {
+  .rehabilitation-system {
+    padding: 20px;
+    margin: 15px 0;
+  }
+
+  .rehabilitation-system h3 {
+    font-size: 1.6rem;
+  }
+
+  .system-highlight {
+    padding: 15px;
+  }
+
+  .system-highlight h4 {
+    font-size: 1.1rem;
+  }
+
+  .system-highlight p {
+    font-size: 1rem;
+  }
+
+  .rehabilitation-system .work-description {
+    padding: 20px;
+  }
+
+  .rehabilitation-system .work-description h4 {
+    font-size: 1.1rem;
+  }
+
+  .rehabilitation-system .work-description li {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .rehabilitation-system {
+    padding: 15px;
+  }
+
+  .rehabilitation-system h3 {
+    font-size: 1.4rem;
+  }
+
+  .system-highlight {
+    padding: 10px;
+  }
+
+  .rehabilitation-system .work-description {
+    padding: 15px;
+  }
+
+  .games-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .game-category {
+    padding: 10px;
+  }
+
+  .game-category h5 {
+    font-size: 0.9rem;
+  }
+
+  .game-link {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+
+  .games-collection {
+    padding: 15px;
+  }
+
+  .games-collection h3 {
+    font-size: 1.4rem;
+  }
+
+  .games-highlight {
+    padding: 10px;
+  }
+
+  .games-collection .work-description {
+    padding: 15px;
+  }
+
+  .games-collection .work-description h4 {
+    font-size: 1.1rem;
+  }
+
+  .games-collection .work-description li {
+    font-size: 0.9rem;
+  }
+}
+
+/* クイックアクセスセクション */
+.quick-access-section {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 40px 0;
+}
+
+.quick-access-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.quick-access-item {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.quick-access-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.rehabilitation-quick {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.rehabilitation-quick h3 {
+  color: white;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.quick-access-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.system-brief {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+}
+
+.system-brief h4 {
+  color: #fff;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.system-brief p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.quick-access-links {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.quick-link {
+  display: inline-block;
+  padding: 12px 25px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.quick-link:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .quick-access-item {
+    padding: 20px;
+  }
+
+  .rehabilitation-quick h3 {
+    font-size: 1.5rem;
+  }
+
+  .system-brief {
+    padding: 15px;
+  }
+
+  .system-brief h4 {
+    font-size: 1.1rem;
+  }
+
+  .quick-access-links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .quick-link {
+    width: 100%;
+    max-width: 200px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .quick-access-item {
+    padding: 15px;
+  }
+
+  .rehabilitation-quick h3 {
+    font-size: 1.3rem;
+  }
+
+  .system-brief {
+    padding: 10px;
+  }
+}
+
+.system-link {
+  color: #111 !important;
+  text-decoration: underline !important;
+  font-weight: bold;
+  background: transparent;
+  transition: color 0.2s;
+}
+
+.section-purple .system-link {
+  color: #fff !important;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.25);
+}
+
+.system-link:hover {
+  color: #007bff !important;
+  background: #fff2;
+}
